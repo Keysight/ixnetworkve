@@ -1,6 +1,17 @@
 # ixnetworkve
 IxNetwork Virtual Edition
 
+## Ansible
+Ansible scripts compatible with VMware ESXi, KVM and Openstack environments are posted under ansible folder. 
+Scripts can be executed from a Linux (prior installing ansible) using the following command: 
+
+```
+    ansible-playbook create_vm_on_vmware_host.yaml
+```
+
+Scripts are expecting certain locations for the VM images (ova, qcow2) so they will have to be changed accordingly to your own setup locations. 
+
+
 ## OpenStack Heat Templates
     openstack stack create -t  <template name> <stack name>
 
