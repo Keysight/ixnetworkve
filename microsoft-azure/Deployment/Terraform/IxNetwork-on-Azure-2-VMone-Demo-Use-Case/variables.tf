@@ -5,17 +5,17 @@ variable "AzureSubscriptionId" {
 
 variable "AzureResourceGroupName" {
 	type = string
-	default = "Ixia_VE_Azure_9.10"
+	default = "ixvm920"
 }
 
 variable "ImageResourceGroupName" {
 	type = string
-	default = "Ixia_VE_Azure_9.10"
+	default = "ixvm920"
 }
 
 variable "PageBlobsStorageAccountName" {
 	type = string
-	default = "Ixia_VE_Page_Blobs"
+	default = "ixvm920"
 }
 
 variable "DiagnosticsStorageAccountName" {
@@ -30,7 +30,7 @@ variable "MgmtSecurityRuleSourceIpPrefix" {
 
 variable "IxiaClientPageBlobName" {
 	type = string
-	default = "IxLoad_VE_Client_9.10.vhd"
+	default = "ixload-ve-client-9-20.vhd"
 }
 
 variable "IxiaClientVmSize" {
@@ -44,7 +44,7 @@ variable "IxiaClientVmSize" {
 
 variable  "VirtualTestApplianceImageName" {
 	type = string
-	default = "Ixia_Virtual_Test_Appliance_9.10"
+	default = "Ixia_Virtual_Test_Appliance_9.20"
 }
 
 variable "VirtualTestApplianceVmSize" {
