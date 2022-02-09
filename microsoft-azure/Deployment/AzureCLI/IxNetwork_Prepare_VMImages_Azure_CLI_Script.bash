@@ -30,20 +30,20 @@ then
 fi
 
 #source
-source_ixload_ve_client_blob=ixload-ve-client-9-20.vhd
+source_ixnetwork_ve_client_blob=ixnetwork-ve-client-9-20.vhd
 source_virtual_test_appliance_blob=Ixia_Virtual_Test_Appliance_9.20.vhd
-source_ixloadve_account_name=ixvm920
-source_ixload_ve_client_container=ixloadveclient920
+source_ixnetworkve_account_name=ixvm920
+source_ixnetwork_ve_client_container=ixnetworkveclient920
 source_virtual_test_appliance_container=virtualtestappliance920
-source_ixloadve_account_key=MBdR1Y5wYn8rArs9JJ5YIbC3zTSLzeN3kJ8Mnt4hgLlYbTE4cPbI8YOflJy5ZmISuiuPlkSnYde8RHpAbAgjNw==
+source_ixnetworkve_account_key=MBdR1Y5wYn8rArs9JJ5YIbC3zTSLzeN3kJ8Mnt4hgLlYbTE4cPbI8YOflJy5ZmISuiuPlkSnYde8RHpAbAgjNw==
 
 #destination
 destination_resource_group_name=$1
 destination_account_name=$2
-destination_container_name=ixloadve920
-destination_ixload_ve_client_blob=ixload-ve-client-9-20.vhd
+destination_container_name=ixnetworkve920
+destination_ixnetwork_ve_client_blob=ixnetwork-ve-client-9-20.vhd
 destination_virtual_test_appliance_blob=Ixia_Virtual_Test_Appliance_9.20.vhd
-destination_ixload_ve_client_vmImage=$(basename $destination_ixload_ve_client_blob .vhd)
+destination_ixnetwork_ve_client_vmImage=$(basename $destination_ixnetwork_ve_client_blob .vhd)
 destination_virtual_test_appliance_vmImage=$(basename $destination_virtual_test_appliance_blob .vhd)
 
 echo "Checking that the destination resource group already exists"
@@ -88,16 +88,16 @@ if [ "$dest_container_exists" == "false" ];then
 fi
 
 
-echo "Copying IxLoad VE Client blob to destination container"
+echo "Copying IxNetwork VE Client blob to destination container"
 az storage blob copy start \
     --account-name $destination_account_name \
     --account-key $account_key \
     --destination-container $destination_container_name \
-    --destination-blob $destination_ixload_ve_client_blob \
-    --source-account-name $source_ixloadve_account_name \
-    --source-account-key $source_ixloadve_account_key \
-    --source-container $source_ixload_ve_client_container \
-    --source-blob $source_ixload_ve_client_blob
+    --destination-blob $destination_ixnetwork_ve_client_blob \
+    --source-account-name $source_ixnetworkve_account_name \
+    --source-account-key $source_ixnetworkve_account_key \
+    --source-container $source_ixnetwork_ve_client_container \
+    --source-blob $source_ixnetwork_ve_client_blob
 
     
 echo "Copying Virtual Test Appliance blob to destination container"
@@ -106,17 +106,17 @@ az storage blob copy start \
     --account-key $account_key \
     --destination-container $destination_container_name \
     --destination-blob $destination_virtual_test_appliance_blob \
-    --source-account-name $source_ixloadve_account_name \
-    --source-account-key $source_ixloadve_account_key \
+    --source-account-name $source_ixnetworkve_account_name \
+    --source-account-key $source_ixnetworkve_account_key \
     --source-container $source_virtual_test_appliance_container \
     --source-blob $source_virtual_test_appliance_blob
 
 
-echo "Waiting for Ixia IxLoad VE Client image copy to finish"
-copy_status=`az storage blob show --account-key $account_key --account-name $destination_account_name --container-name $destination_container_name --name $destination_ixload_ve_client_blob --query properties.copy.status`
+echo "Waiting for Ixia IxNetwork VE Client image copy to finish"
+copy_status=`az storage blob show --account-key $account_key --account-name $destination_account_name --container-name $destination_container_name --name $destination_ixnetwork_ve_client_blob --query properties.copy.status`
 while [ $copy_status != "\"success\"" ]; do
     sleep 1;
-    copy_status=`az storage blob show --account-key $account_key --account-name $destination_account_name --container-name $destination_container_name --name $destination_ixload_ve_client_blob --query properties.copy.status`
+    copy_status=`az storage blob show --account-key $account_key --account-name $destination_account_name --container-name $destination_container_name --name $destination_ixnetwork_ve_client_blob --query properties.copy.status`
     echo $copy_status
 done
 
