@@ -5,7 +5,7 @@ if [ -z $1 ]; then
     echo "Ixia_Azure.bash <destination-resource-group-name> <destination-storage-account-name>"
     echo "<destination-resource-group-name> must be preexistent and will store the virtual machine images. Rule is to be alphanumeric, underscore, parentheses, hyphen, period (except at end)"
     echo "<destination-storage-account-name> length 3 to 24 chars, numbers and lower-case letters only."
-    echo "ex: ./Ixia_Azure.bash Ixia_Images_RG ixiavhds9x10"
+    echo "ex: ./Ixia_Azure.bash Ixia_Images_RG ixiavhds9x20"
     exit 1
 fi
 
@@ -14,7 +14,7 @@ if [ -z $2 ]; then
     echo "Ixia_Azure.bash <destination-resource-group-name> <destination-storage-account-name>"
     echo "<destination-resource-group-name> must be preexistent and will store the virtual machine images"
     echo "<destination-storage-account-name> length 3 to 24 alphanumeric lowercase only and unique across azure universe. Needed for storing the vhd files."
-    echo "./Ixia_Azure.bash Ixia_Images_RG ixiavhds9x10"
+    echo "./Ixia_Azure.bash Ixia_Images_RG ixiavhds9x20"
     exit 1
 fi
 
@@ -30,19 +30,19 @@ then
 fi
 
 #source
-source_ixload_ve_client_blob=IxLoad_VE_Client_9.10.vhd
-source_virtual_test_appliance_blob=Ixia_Virtual_Test_Appliance_9.10.vhd
-source_ixloadve_account_name=ixloadve910
-source_ixload_ve_client_container=ixloadveclient910
-source_virtual_test_appliance_container=vta910
-source_ixloadve_account_key=dJXRv4ijLZvtrAlDZEHt1nE2TX+NO+SkOtPf07R39dROOFyrrhbNB3uKCZcskT6YJZRiUC8mmuFgp4oVYrLHfA==
+source_ixload_ve_client_blob=ixload-ve-client-9-20.vhd
+source_virtual_test_appliance_blob=Ixia_Virtual_Test_Appliance_9.20.vhd
+source_ixloadve_account_name=ixvm920
+source_ixload_ve_client_container=ixloadveclient920
+source_virtual_test_appliance_container=virtualtestappliance920
+source_ixloadve_account_key=MBdR1Y5wYn8rArs9JJ5YIbC3zTSLzeN3kJ8Mnt4hgLlYbTE4cPbI8YOflJy5ZmISuiuPlkSnYde8RHpAbAgjNw==
 
 #destination
 destination_resource_group_name=$1
 destination_account_name=$2
-destination_container_name=ixloadve910
-destination_ixload_ve_client_blob=IxLoad_VE_Client_9.10.vhd
-destination_virtual_test_appliance_blob=Ixia_Virtual_Test_Appliance_9.10.vhd
+destination_container_name=ixloadve920
+destination_ixload_ve_client_blob=ixload-ve-client-9-20.vhd
+destination_virtual_test_appliance_blob=Ixia_Virtual_Test_Appliance_9.20.vhd
 destination_ixload_ve_client_vmImage=$(basename $destination_ixload_ve_client_blob .vhd)
 destination_virtual_test_appliance_vmImage=$(basename $destination_virtual_test_appliance_blob .vhd)
 
