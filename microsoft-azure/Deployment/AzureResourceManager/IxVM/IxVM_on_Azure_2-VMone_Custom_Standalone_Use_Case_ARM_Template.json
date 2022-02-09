@@ -3,7 +3,7 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
 		"ImageResourceGroupName": {
-			"defaultValue": "Ixia_VE_Azure_9.10",
+			"defaultValue": "ixvm920",
 			"type": "String"
 		},
 		"DiagnosticsStorageAccountName": {
@@ -47,7 +47,7 @@
 			"type": "Array"
 		},
         "VirtualTestApplianceImageName": {
-			"defaultValue": "Ixia_Virtual_Test_Appliance_9.10",
+			"defaultValue": "Ixia_Virtual_Test_Appliance_9.20.vhd",
 			"type": "String"
 		},
 		"VirtualTestApplianceVmSize": {
