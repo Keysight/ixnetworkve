@@ -130,4 +130,7 @@ done
 
 echo "Creating  Ixia Virtual Test Appliance image"
 az image create -g $destination_resource_group_name -n $destination_virtual_test_appliance_vmImage --os-type Linux --source https://$destination_account_name.blob.core.windows.net/$destination_container_name/$destination_virtual_test_appliance_blob
+
+echo "Creating  IxNetwork Virtual Edition Windows Client image"
+az image create -g $destination_resource_group_name -n $destination_ixnetwork_ve_client_vmImage --os-type Windows --source https://$destination_account_name.blob.core.windows.net/$destination_container_name/$destination_ixnetwork_ve_client_blob
 echo "End of script"
