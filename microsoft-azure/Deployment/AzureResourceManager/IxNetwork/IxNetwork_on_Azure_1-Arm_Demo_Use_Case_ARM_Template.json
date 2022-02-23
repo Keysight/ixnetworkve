@@ -97,7 +97,7 @@
 		"IxiaClientDiskSizeGB": "127",
         "VirtualTestAppliance1Name": "[concat(variables('OptionalVMPrefix'), '-', 'IXIA-AZURE-IXLOAD-VIRTUALTESTAPPLIANCE1')]",
 		"VirtualTestAppliance1DnsLabel": "[concat(toLower(replace(resourceGroup().name, '_', '-')), '-', 'ixia-ixload-vmone-1', '-', substring(uniqueString(resourceGroup().id),0,6))]",
-        "VirtualTestApplianceEnableAcceleratedNetworking": true,
+        "VirtualTestApplianceEnableAcceleratedNetworking": false,
         "VirtualTestApplianceEnableIPForwarding": true,
 		"VirtualTestApplianceDisablePasswordAuthentication": true,
 		"VirtualTestApplianceProvisionVMAgent": false,
