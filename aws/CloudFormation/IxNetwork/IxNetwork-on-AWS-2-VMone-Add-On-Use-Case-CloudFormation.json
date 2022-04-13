@@ -4,113 +4,97 @@
 	"Mappings" : {
 		"RegionMap" : {
 			"us-east-1" : {
-				"AMIxCLIENT" : "ami-0bbae33c2c8166bad",
-				"AMIxVMONE" : "ami-08568607c9983cdb4",
+				"AMIxVMONE" : "ami-090d578a6e27b0137",
 				"EC2xCONNECTxCIDR" : "18.206.107.24/29",
 				"EC2xREGION" : "US East (N. Virginia)",
 				"REGIONxTAG" : "US_EAST_1"
 			},
 			"us-east-2" : {
-				"AMIxCLIENT" : "ami-0f6dcfde1b08e40cc",
-				"AMIxVMONE" : "ami-0dbfe202fa2ad6756",
+				"AMIxVMONE" : "ami-0eaf5111b3a4a2a16",
 				"EC2xCONNECTxCIDR" : "3.16.146.0/29",
 				"EC2xREGION" : "US East (Ohio)",
 				"REGIONxTAG" : "US_EAST_2"
 			},
 			"us-west-1" : {
-				"AMIxCLIENT" : "ami-00d09c3939c222ac7",
-				"AMIxVMONE" : "ami-05fe678fcfff2b77c",
+				"AMIxVMONE" : "ami-047a7546bd907ef76",
 				"EC2xCONNECTxCIDR" : "13.52.6.112/29",
 				"EC2xREGION" : "US West (N. California)",
 				"REGIONxTAG" : "US_WEST_1"
 			},
 			"us-west-2" : {
-				"AMIxCLIENT" : "ami-012c118ecac4465bf",
-				"AMIxVMONE" : "ami-09a1841e30dd94c8b",
+				"AMIxVMONE" : "ami-0e0eec6e228f2262b",
 				"EC2xCONNECTxCIDR" : "18.237.140.160/29",
 				"EC2xREGION" : "US West (Oregon)",
 				"REGIONxTAG" : "US_WEST_2"
 			},
 			"ap-south-1" : {
-				"AMIxCLIENT" : "ami-02f5d2d0e33380540",
-				"AMIxVMONE" : "ami-0f813857de9948fb9",
+				"AMIxVMONE" : "ami-0e5073ab8e9cd5c54",
 				"EC2xCONNECTxCIDR" : "13.233.177.0/29",
 				"EC2xREGION" : "Asia Pacific (Mumbai)",
 				"REGIONxTAG" : "AP_SOUTH_1"
 			},
 			"ap-northeast-2" : {
-				"AMIxCLIENT" : "ami-017c68d912bfa67ae",
-				"AMIxVMONE" : "ami-038182dd705515018",
+				"AMIxVMONE" : "ami-0df3ca99452bf8b2c",
 				"EC2xCONNECTxCIDR" : "13.209.1.56/29",
 				"EC2xREGION" : "Asia Pacific (Seoul)",
 				"REGIONxTAG" : "AP_NORTHEAST_2"
 			},
 			"ap-southeast-1" : {
-				"AMIxCLIENT" : "ami-011c6bfd2b925e7d5",
-				"AMIxVMONE" : "ami-0516c91d0b39fbb64",
+				"AMIxVMONE" : "ami-048474a97abf5fd91",
 				"EC2xCONNECTxCIDR" : "3.0.5.32/29",
 				"EC2xREGION" : "Asia Pacific (Singapore)",
 				"REGIONxTAG" : "AP_SOUTHEAST_1"
 			},
 			"ap-southeast-2" : {
-				"AMIxCLIENT" : "ami-05c2b42ed1fc59ee2",
-				"AMIxVMONE" : "ami-0ca10802f7d012fe5",
+				"AMIxVMONE" : "ami-08812be0a466de7e0",
 				"EC2xCONNECTxCIDR" : "13.239.158.0/29",
 				"EC2xREGION" : "Asia Pacific (Sydney)",
 				"REGIONxTAG" : "AP_SOUTHEAST_2"
 			},
 			"ap-northeast-1" : {
-				"AMIxCLIENT" : "ami-0fba4e3be39b5f82e",
-				"AMIxVMONE" : "ami-0a46a7735034f935f",
+				"AMIxVMONE" : "ami-0b3da68a637f46bb1",
 				"EC2xCONNECTxCIDR" : "3.112.23.0/29",
 				"EC2xREGION" : "Asia Pacific (Tokyo)",
 				"REGIONxTAG" : "AP_NORTHEAST_1"
 			},
 			"ca-central-1" : {
-				"AMIxCLIENT" : "ami-09f68ac5e0ab8da36",
-				"AMIxVMONE" : "ami-0a89d661df576f630",
+				"AMIxVMONE" : "ami-046b5a69f8fbf6935",
 				"EC2xCONNECTxCIDR" : "35.183.92.176/29",
 				"EC2xREGION" : "Canada (Central)",
 				"REGIONxTAG" : "CA_CENTRAL_1"
 			},
 			"eu-central-1" : {
-				"AMIxCLIENT" : "ami-04df2f08e52a19dc8",
-				"AMIxVMONE" : "ami-0408a170bdeda9240",
+				"AMIxVMONE" : "ami-06666b2de27b62cb1",
 				"EC2xCONNECTxCIDR" : "3.120.181.40/29",
 				"EC2xREGION" : "EU (Frankfurt)",
 				"REGIONxTAG" : "EU_CENTRAL_1"
 			},
 			"eu-west-1" : {
-				"AMIxCLIENT" : "ami-05e397a3bc2e50585",
-				"AMIxVMONE" : "ami-0238ae37588bae4a3",
+				"AMIxVMONE" : "ami-0a4947328b6579deb",
 				"EC2xCONNECTxCIDR" : "18.202.216.48/29",
 				"EC2xREGION" : "EU (Ireland)",
 				"REGIONxTAG" : "EU_WEST_1"
 			},
 			"eu-west-2" : {
-				"AMIxCLIENT" : "ami-0785fc4f44c36e51a",
-				"AMIxVMONE" : "ami-09e3ee23cdf23b054",
+				"AMIxVMONE" : "ami-0fefdfa679aee2886",
 				"EC2xCONNECTxCIDR" : "3.8.37.24/29",
 				"EC2xREGION" : "EU (London)",
 				"REGIONxTAG" : "EU_WEST_2"
 			},
 			"eu-west-3" : {
-				"AMIxCLIENT" : "ami-04e0e9dd6c775ec7a",
-				"AMIxVMONE" : "ami-0738396a7fa7bb5ae",
+				"AMIxVMONE" : "ami-0a1edf93cb7a7e572",
 				"EC2xCONNECTxCIDR" : "35.180.112.80/29",
 				"EC2xREGION" : "EU (Paris)",
 				"REGIONxTAG" : "EU_WEST_3"
 			},
 			"eu-north-1" : {
-				"AMIxCLIENT" : "ami-0a89fa92489e76683",
-				"AMIxVMONE" : "ami-0d39eead46da683b1",
+				"AMIxVMONE" : "ami-0d0bf0d094c25ff55",
 				"EC2xCONNECTxCIDR" : "13.48.4.200/30",
 				"EC2xREGION" : "EU (Stockholm)",
 				"REGIONxTAG" : "EU_NORTH_1"
 			},
 			"sa-east-1" : {
-				"AMIxCLIENT" : "ami-096261644370e8d14",
-				"AMIxVMONE" : "ami-0aec1fd542232cf2c",
+				"AMIxVMONE" : "ami-051972d52245cd6a4",
 				"EC2xCONNECTxCIDR" : "13.48.4.200/30",
 				"EC2xREGION" : "South America (Sao Paulo)",
 				"REGIONxTAG" : "SA_EAST_1"
@@ -129,8 +113,8 @@
 				"INSTANCExEBSxDELETExONxTERMINATION" : true,
 				"INSTANCExEBSxVOLUMExTYPE" : "gp2",
 				"APPxTAG" : "IXNETWORK",
-				"APPxVERSION" : "9.20",
-				"CLIENTxIMGxSIZE" : "70"
+				"APPxVERSION" : "9.20SU1",
+				"CLIENTxIMGxSIZE" : "100"
 			}
 		}
 	},
@@ -678,7 +662,7 @@
 			"Properties": {
 				"DisableApiTermination": { "Fn::FindInMap" : [ "VariableMap", "local", "INSTANCExDISABLExAPIxTERMINATION"] },
 				"InstanceInitiatedShutdownBehavior": { "Fn::FindInMap" : [ "VariableMap", "local", "INSTANCExINSTANCExINITIATEDxSHUTDOWNxBEHAVIOR"] },
-				"ImageId": { "Fn::FindInMap" : [ "RegionMap", { "Ref" : "AWS::Region" }, "AMIxCLIENT"] },
+				"ImageId": { "Fn::Sub" : "resolve:ssm:${IxClientAmiAlias}" },
 				"InstanceType": { "Ref" : "IxClientInstanceType" },
 				"Monitoring": { "Fn::FindInMap" : [ "VariableMap", "local", "INSTANCExMONITORING"] },
                 "KeyName" : { "Ref" : "IxClientSSHKey" },
@@ -858,6 +842,7 @@
                         "default": "Ixia Client Instance Configuration"
                     },
                     "Parameters": [
+						"IxClientAmiAlias",
                         "IxClientInstanceType",
 						"IxClientSSHKey"
                     ]
@@ -940,6 +925,11 @@
         "MinLength": "4",
         "Type" : "String"
       },
+        "IxClientAmiAlias" : {
+        "Description" : "Ami Alias of Ixia Client VM",
+        "Type" : "String",	
+        "Default" : "/aws/service/marketplace/prod-v4qpodk5prgfg/9.20-security-update-1"
+      },
 	    "VpcId" : {
         "Description" : "Virtual Private Cloud ID",
         "Type" : "AWS::EC2::VPC::Id"
@@ -960,11 +950,14 @@
         "Description" : "Instance type of Ixia Client VM",
         "Type" : "String",
         "AllowedValues": [
-			"m4.xlarge",
-			"m4.large",
-			"t2.xlarge"
+			"t3.xlarge",
+			"t3.2xlarge",
+			"t3a.xlarge",
+			"t3a.2xlarge",
+			"m5.xlarge",
+			"m5.2xlarge"
         ],		
-        "Default" : "m4.xlarge"
+        "Default" : "t3.xlarge"
       },
         "IxClientSSHKey" : {
         "Description" : "Name of an existing EC2 KeyPair to enable SSH access",
@@ -974,10 +967,70 @@
         "Description" : "Instance type of VMONE Appliance VM",
         "Type" : "String",
         "AllowedValues": [
-			"c5n.18xlarge",
-			"c5n.9xlarge",
+			"t3.xlarge",
+			"t3.2xlarge",
+			"t3a.xlarge",
+			"t3a.2xlarge",
+			"m5.xlarge",
+			"m5.2xlarge",
+			"m5.4xlarge",
+			"m5.8xlarge",
+			"m5.12xlarge",
+			"m5.16xlarge",
+			"m5.24xlarge",
+			"m5a.xlarge",
+			"m5a.2xlarge",
+			"m5a.4xlarge",
+			"m5a.8xlarge",
+			"m5a.12xlarge",
+			"m5a.16xlarge",
+			"m5a.24xlarge",
+			"m5n.xlarge",
+			"m5n.2xlarge",
+			"m5n.4xlarge",
+			"m5n.8xlarge",
+			"m5n.12xlarge",
+			"m5n.16xlarge",
+			"m5n.24xlarge",
+			"m6i.xlarge",
+			"m6i.2xlarge",
+			"m6i.4xlarge",
+			"m6i.8xlarge",
+			"m6i.12xlarge",
+			"m6i.16xlarge",
+			"m6i.24xlarge",
+			"m6i.32xlarge",
+			"c4.xlarge",
+			"c4.2xlarge",
+			"c4.4xlarge",
+			"c4.8xlarge",
+			"c5.xlarge",
+			"c5.2xlarge",
+			"c5.4xlarge",
+			"c5.9xlarge",
+			"c5.12xlarge",
+			"c5.18xlarge",
+			"c5.24xlarge",
+			"c5a.xlarge",
+			"c5a.2xlarge",
+			"c5a.4xlarge",
+			"c5a.8xlarge",
+			"c5a.12xlarge",
+			"c5a.16xlarge",
+			"c5a.24xlarge",
 			"c5n.xlarge",
-			"c5.xlarge"
+			"c5n.2xlarge",
+			"c5n.4xlarge",
+			"c5n.9xlarge",
+			"c5n.18xlarge",
+			"c6i.xlarge",
+			"c6i.2xlarge",
+			"c6i.4xlarge",
+			"c6i.8xlarge",
+			"c6i.12xlarge",
+			"c6i.16xlarge",
+			"c6i.24xlarge",
+			"c6i.32xlarge"
         ],
         "Default" : "c5n.xlarge"
       },
