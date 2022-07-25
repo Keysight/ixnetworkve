@@ -1,2 +1,2 @@
-# gcp-ixload
-Deployment examples for Ixia IxLoad on Google Cloud Platform
+# gcp-ixnetwork
+Deployment examples for Ixia IxNetwork on Google Cloud Platform
