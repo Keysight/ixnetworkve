@@ -1,14 +1,14 @@
 ---
 info:
-  title: ixnetwork-on-GCP-2-VMone-Demo-Use-Case-DM-Template.jinja.schema
+  title: IxNetwork-on-GCP-2-VMone-Demo-Use-Case-DM-Template.jinja.schema
 
 imports:
-- path: ixnetwork-on-GCP-2-VMone-Demo-Use-Case-DM-Template.jinja
+- path: IxNetwork-on-GCP-2-VMone-Demo-Use-Case-DM-Template.jinja
 
 properties:
   GCP_PROJECT_NAME:
     type: string
-    default: open-ixia
+    default: ixnetwork-ve-gcp
     
   GCP_REGION_NAME:
     type: string
@@ -227,11 +227,11 @@ properties:
 
   GCP_CLIENT_CUSTOM_IMAGE_PROJECT_NAME:
     type: string
-    default: ixnetwork-ve-gcp
+    default: ixvm-261016
 
   GCP_CLIENT_CUSTOM_IMAGE_FAMILY_NAME:
     type: string
-    default: ixnetwork-cloud-gcp-9-20-2112-6
+    default: ixia-ixnetwork-cloud-gcp-9-20-2112-6
 
   GCP_CLIENT_MACHINE_TYPE:
     type: string
@@ -264,7 +264,7 @@ properties:
 
   GCP_VMONE_CUSTOM_IMAGE_PROJECT_NAME:
     type: string
-    default: ixnetwork-ve-gcp
+    default: ixvm-261016
 
   GCP_VMONE_CUSTOM_IMAGE_FAMILY_NAME:
     type: string
