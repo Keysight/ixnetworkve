@@ -4,7 +4,7 @@ terraform {
 
 variable "GCP_PROJECT_NAME" {
 	type = string
-	default = "ixload-ve-gcp"
+	default = "ixnetwork-ve-gcp"
 }
 
 variable "GCP_REGION_NAME" {
@@ -19,17 +19,17 @@ variable "GCP_ZONE_NAME" {
 
 variable "GCP_OWNER_TAG" {
 	type = string
-	default = "gcp-ixload@google.com"
+	default = "gcp-ixnetwork@google.com"
 }
 
 variable "GCP_LOGIN_ID_TAG" {
 	type = string
-	default = "gcp-ixload"
+	default = "gcp-ixnetwork"
 }
 
 variable "GCP_PROJECT_TAG" {
 	type = string
-	default = "ixload-ve-gcp-gcp-ixload"
+	default = "open-ixia-gcp-ixnetwork"
 }
 
 variable "GCP_MGMT_FIREWALL_RULE_SOURCE_IP_RANGES" {
