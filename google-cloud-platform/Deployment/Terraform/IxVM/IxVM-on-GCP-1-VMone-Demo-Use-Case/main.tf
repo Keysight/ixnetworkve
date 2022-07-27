@@ -25,8 +25,8 @@ locals {
 		"3389"
 	]
 	GCP_MGMT_FIREWALL_RULE_NETWORK_TARGET_TAGS = [
-		"ixload-client",
-		"ixload-vmone"
+		"ixnetwork-client",
+		"ixnetwork-vmone"
 	]
 	GCP_MGMT_FIREWALL_RULE_SOURCE_IP_RANGES = var.GCP_MGMT_FIREWALL_RULE_SOURCE_IP_RANGES
 	GCP_CONSOLE_FIREWALL_RULE_NAME = "gcp-console-firewall-rule"
@@ -36,8 +36,8 @@ locals {
 		"22"
 	]
 	GCP_CONSOLE_FIREWALL_RULE_NETWORK_TARGET_TAGS = [
-		"ixload-client",
-		"ixload-vmone"
+		"ixnetwork-client",
+		"ixnetwork-vmone"
 	]
 	GCP_CONSOLE_FIREWALL_RULE_SOURCE_IP_RANGES = [
 		"35.190.247.111/32"
@@ -47,12 +47,12 @@ locals {
 	GCP_CONTROL_FIREWALL_RULE_PRIORITY = "1003"
 	GCP_CONTROL_FIREWALL_RULE_PORTS = "all"
 	GCP_CONTROL_FIREWALL_RULE_SOURCE_TAGS = [
-		"ixload-client",
-		"ixload-vmone"
+		"ixnetwork-client",
+		"ixnetwork-vmone"
 	]
 	GCP_CONTROL_FIREWALL_RULE_TARGET_TAGS = [
-		"ixload-client",
-		"ixload-vmone"
+		"ixnetwork-client",
+		"ixnetwork-vmone"
 	]
 	GCP_TEST1_VPC_NETWORK_NAME = "test-01-vpc-network"
 	GCP_TEST1_SUBNET_NAME = "test-01-subnet"
@@ -66,22 +66,22 @@ locals {
 		"10.0.3.0/24"
 	]
 	GCP_TEST1_FIREWALL_RULE_SOURCE_TAGS = [
-		"ixload-vmone"
+		"ixnetwork-vmone"
 	]
 	GCP_TEST1_FIREWALL_RULE_TARGET_TAGS = [
-		"ixload-vmone"
+		"ixnetwork-vmone"
 	]
-	GCP_VMONE1_INSTANCE_NAME = "ixload-vmone-01"
+	GCP_VMONE1_INSTANCE_NAME = "ixnetwork-vmone-01"
 	GCP_VMONE_SERIAL_PORT_ENABLE = "true"
-	GCP_VMONE_CUSTOM_IMAGE_PROJECT_NAME = "ixload-ve-gcp"
+	GCP_VMONE_CUSTOM_IMAGE_PROJECT_NAME = "ixvm-261016"
 	GCP_VMONE_CUSTOM_IMAGE_FAMILY_NAME = "ixia-virtual-test-appliance-9-20-0-271"
 	GCP_VMONE_MACHINE_TYPE = var.GCP_VMONE_MACHINE_TYPE
-	GCP_VMONE1_IFACE_ETH0_PUBLIC_IP_ADDRESS_NAME = "ixload-vmone-01-eth0-ip-addr"
+	GCP_VMONE1_IFACE_ETH0_PUBLIC_IP_ADDRESS_NAME = "ixnetwork-vmone-01-eth0-ip-addr"
 	GCP_VMONE1_IFACE_ETH0_PRIVATE_IP_ADDRESS = "10.0.10.11"
 	GCP_VMONE1_IFACE_ETH1_PRIVATE_IP_ADDRESS = "10.0.2.15"
 	GCP_VMONE1_IFACE_ETH1_PRIVATE_IP_ALIASES = "/28"
 	GCP_VMONE_NETWORK_TARGET_TAGS = [
-		"ixload-vmone"
+		"ixnetwork-vmone"
 	]
 }
 
