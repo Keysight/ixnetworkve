@@ -1,14 +1,14 @@
 ---
 info:
-  title: IxLoad-on-GCP-2-VMone-Demo-Use-Case-DM-Template.jinja.schema
+  title: IxNetwork-on-GCP-2-VMone-Demo-Use-Case-DM-Template.jinja.schema
 
 imports:
-- path: IxLoad-on-GCP-2-VMone-Demo-Use-Case-DM-Template.jinja
+- path: IxNetwork-on-GCP-2-VMone-Demo-Use-Case-DM-Template.jinja
 
 properties:
   GCP_PROJECT_NAME:
     type: string
-    default: open-ixia
+    default: ixnetwork-ve-gcp
     
   GCP_REGION_NAME:
     type: string
@@ -20,15 +20,15 @@ properties:
 
   GCP_OWNER_TAG:
     type: string
-    default: gcp-ixload@google.com
+    default: gcp-ixnetwork@google.com
 
   GCP_LOGIN_ID_TAG:
     type: string
-    default: gcp-ixload
+    default: gcp-ixnetwork
 
   GCP_PROJECT_TAG:
     type: string
-    default: open-ixia-gcp-ixload
+    default: open-ixia-gcp-ixnetwork
 
   GCP_OPTIONS_TAG:
     type: string
@@ -69,8 +69,8 @@ properties:
   GCP_MGMT_FIREWALL_RULE_NETWORK_TARGET_TAGS:
     type: array
     default:
-    - ixload-client
-    - ixload-vmone
+    - ixnetwork-client
+    - ixnetwork-vmone
 
   GCP_MGMT_FIREWALL_RULE_SOURCE_IP_RANGES:
     type: array
@@ -97,8 +97,8 @@ properties:
   GCP_CONSOLE_FIREWALL_RULE_NETWORK_TARGET_TAGS:
     type: array
     default:
-    - ixload-client
-    - ixload-vmone
+    - ixnetwork-client
+    - ixnetwork-vmone
 
   GCP_CONSOLE_FIREWALL_RULE_SOURCE_IP_RANGES:
     type: array
@@ -124,14 +124,14 @@ properties:
   GCP_CONTROL_FIREWALL_RULE_SOURCE_TAGS:
     type: array
     default:
-    - ixload-client
-    - ixload-vmone
+    - ixnetwork-client
+    - ixnetwork-vmone
 
   GCP_CONTROL_FIREWALL_RULE_TARGET_TAGS:
     type: array
     default:
-    - ixload-client
-    - ixload-vmone
+    - ixnetwork-client
+    - ixnetwork-vmone
     
   GCP_TEST1_VPC_NETWORK_NAME:
     type: string
@@ -170,12 +170,12 @@ properties:
   GCP_TEST1_FIREWALL_RULE_SOURCE_TAGS:
     type: array
     default:
-    - ixload-vmone
+    - ixnetwork-vmone
 
   GCP_TEST1_FIREWALL_RULE_TARGET_TAGS:
     type: array
     default:
-    - ixload-vmone
+    - ixnetwork-vmone
 
   GCP_TEST2_VPC_NETWORK_NAME:
     type: string
@@ -206,12 +206,12 @@ properties:
   GCP_TEST2_FIREWALL_RULE_SOURCE_TAGS:
     type: array
     default:
-    - ixload-vmone
+    - ixnetwork-vmone
 
   GCP_TEST2_FIREWALL_RULE_TARGET_TAGS:
     type: array
     default:
-    - ixload-vmone
+    - ixnetwork-vmone
 
   GCP_TEST2_SUBNET_NAME:
     type: string
@@ -223,11 +223,11 @@ properties:
 
   GCP_VMONE1_INSTANCE_NAME:
     type: string
-    default: ixload-vmone-01
+    default: ixnetwork-vmone-01
 
   GCP_VMONE2_INSTANCE_NAME:
     type: string
-    default: ixload-vmone-02
+    default: ixnetwork-vmone-02
     
   GCP_VMONE_SERIAL_PORT_ENABLE:
     type: string
@@ -235,7 +235,7 @@ properties:
 
   GCP_VMONE_CUSTOM_IMAGE_PROJECT_NAME:
     type: string
-    default: ixload-ve-gcp
+    default: ixvm-261016
 
   GCP_VMONE_CUSTOM_IMAGE_FAMILY_NAME:
     type: string
@@ -247,7 +247,7 @@ properties:
 
   GCP_VMONE1_IFACE_ETH0_PUBLIC_IP_ADDRESS_NAME:
     type: string
-    default: ixload-vmone-01-eth0-ip-addr
+    default: ixnetwork-vmone-01-eth0-ip-addr
 
   GCP_VMONE1_IFACE_ETH0_PRIVATE_IP_ADDRESS:
     type: string
@@ -263,7 +263,7 @@ properties:
 
   GCP_VMONE2_IFACE_ETH0_PUBLIC_IP_ADDRESS_NAME:
     type: string
-    default: ixload-vmone-02-eth0-ip-addr
+    default: ixnetwork-vmone-02-eth0-ip-addr
 
   GCP_VMONE2_IFACE_ETH0_PRIVATE_IP_ADDRESS:
     type: string
@@ -280,5 +280,5 @@ properties:
   GCP_VMONE_NETWORK_TARGET_TAGS:
     type: array
     default:
-    - ixload-vmone
+    - ixnetwork-vmone
 #eof
