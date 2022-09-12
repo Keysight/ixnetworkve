@@ -33,91 +33,84 @@
 			},
 			"ap-south-1" : {
 				"AMIxVMONE" : "ami-0af781a81816bc1f1",
-				"AMIxDUT" : "ami-0a89fa92489e76683",
+				"AMIxDUT" : "ami-0cba1bdaeec2004ec",
 				"EC2xCONNECTxCIDR" : "13.233.177.0/29",
 				"EC2xREGION" : "Asia Pacific (Mumbai)",
 				"REGIONxTAG" : "AP_SOUTH_1"
 			},
 			"ap-northeast-2" : {
 				"AMIxVMONE" : "ami-0f19889b925842d44",
-				"AMIxDUT" : "ami-0a89fa92489e76683",
+				"AMIxDUT" : "ami-0cba1bdaeec2004ec",
 				"EC2xCONNECTxCIDR" : "13.209.1.56/29",
 				"EC2xREGION" : "Asia Pacific (Seoul)",
 				"REGIONxTAG" : "AP_NORTHEAST_2"
 			},
 			"ap-southeast-1" : {
 				"AMIxVMONE" : "ami-084e88fe113ad6991",
-				"AMIxDUT" : "ami-0a89fa92489e76683",
+				"AMIxDUT" : "ami-0cba1bdaeec2004ec",
 				"EC2xCONNECTxCIDR" : "3.0.5.32/29",
 				"EC2xREGION" : "Asia Pacific (Singapore)",
 				"REGIONxTAG" : "AP_SOUTHEAST_1"
 			},
 			"ap-southeast-2" : {
 				"AMIxVMONE" : "ami-08376ccea5693111c",
-				"AMIxDUT" : "ami-0a89fa92489e76683",
+				"AMIxDUT" : "ami-0cba1bdaeec2004ec",
 				"EC2xCONNECTxCIDR" : "13.239.158.0/29",
 				"EC2xREGION" : "Asia Pacific (Sydney)",
 				"REGIONxTAG" : "AP_SOUTHEAST_2"
 			},
 			"ap-northeast-1" : {
 				"AMIxVMONE" : "ami-0301f66000e31724d",
-				"AMIxDUT" : "ami-0a89fa92489e76683",
+				"AMIxDUT" : "ami-0cba1bdaeec2004ec",
 				"EC2xCONNECTxCIDR" : "3.112.23.0/29",
 				"EC2xREGION" : "Asia Pacific (Tokyo)",
 				"REGIONxTAG" : "AP_NORTHEAST_1"
 			},
 			"ca-central-1" : {
 				"AMIxVMONE" : "ami-0cf2db0e86b985e62",
-				"AMIxDUT" : "ami-0a89fa92489e76683",
+				"AMIxDUT" : "ami-0cba1bdaeec2004ec",
 				"EC2xCONNECTxCIDR" : "35.183.92.176/29",
 				"EC2xREGION" : "Canada (Central)",
 				"REGIONxTAG" : "CA_CENTRAL_1"
 			},
 			"eu-central-1" : {
 				"AMIxVMONE" : "ami-03affb83698f679f7",
-				"AMIxDUT" : "ami-0a89fa92489e76683",
+				"AMIxDUT" : "ami-0cba1bdaeec2004ec",
 				"EC2xCONNECTxCIDR" : "3.120.181.40/29",
 				"EC2xREGION" : "EU (Frankfurt)",
 				"REGIONxTAG" : "EU_CENTRAL_1"
 			},
 			"eu-west-1" : {
 				"AMIxVMONE" : "ami-07273e361412a0fbe",
-				"AMIxDUT" : "ami-0a89fa92489e76683",
+				"AMIxDUT" : "ami-0cba1bdaeec2004ec",
 				"EC2xCONNECTxCIDR" : "18.202.216.48/29",
 				"EC2xREGION" : "EU (Ireland)",
 				"REGIONxTAG" : "EU_WEST_1"
 			},
 			"eu-west-2" : {
 				"AMIxVMONE" : "ami-01c8afed8efdeda3a",
-				"AMIxDUT" : "ami-0a89fa92489e76683",
+				"AMIxDUT" : "ami-0cba1bdaeec2004ec",
 				"EC2xCONNECTxCIDR" : "3.8.37.24/29",
 				"EC2xREGION" : "EU (London)",
 				"REGIONxTAG" : "EU_WEST_2"
 			},
 			"eu-west-3" : {
 				"AMIxVMONE" : "ami-0991590f5f4acb2b9",
-				"AMIxDUT" : "ami-0a89fa92489e76683",
+				"AMIxDUT" : "ami-0cba1bdaeec2004ec",
 				"EC2xCONNECTxCIDR" : "35.180.112.80/29",
 				"EC2xREGION" : "EU (Paris)",
 				"REGIONxTAG" : "EU_WEST_3"
 			},
 			"eu-north-1" : {
 				"AMIxVMONE" : "ami-0d899b2be60c74181",
-				"AMIxDUT" : "ami-0a89fa92489e76683",
+				"AMIxDUT" : "ami-0cba1bdaeec2004ec",
 				"EC2xCONNECTxCIDR" : "13.48.4.200/30",
 				"EC2xREGION" : "EU (Stockholm)",
 				"REGIONxTAG" : "EU_NORTH_1"
 			},
-			"me-south-1" : {
-				"AMIxVMONE" : "ami-09e4efb6c7cd43117",
-				"AMIxDUT" : "ami-0a89fa92489e76683",
-				"EC2xCONNECTxCIDR" : "18.206.107.24/29",
-				"EC2xREGION" : "Middle East (Bahrain)",		
-				"REGIONxTAG" : "ME_SOUTH_1"
-			},
 			"sa-east-1" : {
 				"AMIxVMONE" : "ami-0daf0859e3e0466ef",
-				"AMIxDUT" : "ami-0a89fa92489e76683",
+				"AMIxDUT" : "ami-0cba1bdaeec2004ec",
 				"EC2xCONNECTxCIDR" : "13.48.4.200/30",
 				"EC2xREGION" : "South America (Sao Paulo)",
 				"REGIONxTAG" : "SA_EAST_1"
