@@ -93,12 +93,6 @@
 				"EC2xREGION" : "EU (Stockholm)",
 				"REGIONxTAG" : "EU_NORTH_1"
 			},
-			"me-south-1" : {
-				"AMIxVMONE" : "ami-09e4efb6c7cd43117",
-				"EC2xCONNECTxCIDR" : "18.206.107.24/29",
-				"EC2xREGION" : "Middle East (Bahrain)",		
-				"REGIONxTAG" : "ME_SOUTH_1"
-			},
 			"sa-east-1" : {
 				"AMIxVMONE" : "ami-0daf0859e3e0466ef",
 				"EC2xCONNECTxCIDR" : "13.48.4.200/30",
