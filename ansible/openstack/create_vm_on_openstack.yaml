@@ -1,0 +1,374 @@
+---
+- hosts: localhost
+  become: no
+  gather_facts: False
+  vars:
+      web_ui_new_password: TestAnsible1234*
+      auth_url: http://openstack_hostname:5000/v3/
+      user_domain_name: Default
+      project_domain_name: Default
+      username: admin
+      password: admin
+      project_name: admin
+      chassis_name: Ansible_Chassis
+      vlm_name: Ansible_VLM
+      vta_name: Ansible_VTA
+      internal_management_network: ixia-internal-network
+      external_management_network: ixia-external-network
+      test_network: test-network-1
+      chassis_flavor: virtual.chassis
+      vlm_flavor: virtual.load.module.usstream
+      vta_flavor: virtual.test.appliance.usstream	
+      chassis_image_name: virtual-chassis-9.30
+      vlm_image_name: virtual-load-module-9.30
+      vta_image_name: virtual-test-appliance-9.30
+      chassis_disk_location: /home/ixia/Ixia_Virtual_Chassis_9.30_KVM.qcow2
+      vlm_disk_location: /home/ixia/Ixia_Virtual_Load_Module_IXN_9.30_KVM.qcow2
+      virtual_test_appliance_disk_location: /home/ixia/Ixia_Virtual_Test_Appliance_IXN_9.30_KVM.qcow2
+
+  tasks:
+  - name: Upload the VIRTUAL CHASSIS IMAGE
+    openstack.cloud.image:
+       auth:
+         auth_url: '{{auth_url}}'
+         user_domain_name: '{{user_domain_name}}'
+         project_domain_name: '{{project_domain_name}}'
+         username: '{{username}}'
+         password: '{{password}}'
+         project_name: '{{project_name}}'
+       name: '{{chassis_image_name}}'
+       container_format: bare
+       disk_format: qcow2
+       state: present
+       filename: '{{chassis_disk_location}}'
+       validate_certs: no
+       protected: yes
+       is_public: yes
+       properties:
+        cpu_arch: x86_64
+        distro: centos
+       
+  - name: Upload the VIRTUAL LOAD MODULE IMAGE
+    openstack.cloud.image:
+       auth:
+         auth_url: '{{auth_url}}'
+         user_domain_name: '{{user_domain_name}}'
+         project_domain_name: '{{project_domain_name}}'
+         username: '{{username}}'
+         password: '{{password}}'
+         project_name: '{{project_name}}'
+       name: '{{vlm_image_name}}'
+       disk_format: qcow2
+       state: present
+       filename: '{{vlm_disk_location}}'       
+    
+  - name: Upload the VIRTUAL TEST APPLIANCE IMAGE
+    openstack.cloud.image:
+       auth:
+         auth_url: '{{auth_url}}'
+         user_domain_name: '{{user_domain_name}}'
+         project_domain_name: '{{project_domain_name}}'
+         username: '{{username}}'
+         password: '{{password}}'
+         project_name: '{{project_name}}'
+       name: '{{virtual_test_applaince_image_name}}'
+       disk_format: qcow2
+       state: present
+       filename: '{{virtual_test_appliance_disk_location}}'       
+
+  - name: Create a new VIRTUAL TEST APPLIANCE instance
+    openstack.cloud.server:
+       state: present
+       auth:
+         auth_url: '{{auth_url}}'
+         user_domain_name: '{{user_domain_name}}'
+         project_domain_name: '{{project_domain_name}}'
+         username: '{{username}}'
+         password: '{{password}}'
+         project_name: '{{project_name}}'
+       name: '{{vta_name}}'
+       image: '{{vta_image_name}}'
+       timeout: 200
+       flavor: '{{vta_flavor}}'
+       nics:
+         - net-name: '{{internal_management_network}}'
+         - net-name: '{{test_network}}'
+         - net-name: '{{test_network}}'
+       auto_ip: no       
+    
+  - name: Create a new VIRTUAL CHASSIS instance
+    openstack.cloud.server:
+       state: present
+       auth:
+         auth_url: '{{auth_url}}'
+         user_domain_name: '{{user_domain_name}}'
+         project_domain_name: '{{project_domain_name}}'
+         username: '{{username}}'
+         password: '{{password}}'
+         project_name: '{{project_name}}'
+       name: '{{chassis_name}}'
+       image: '{{chassis_image_name}}'
+       timeout: 200
+       flavor: '{{chassis_flavor}}'
+       nics:
+         - net-name: '{{internal_management_network}}'
+       auto_ip: no
+
+  - name: Setting FLOATING IP to VIRTUAL CHASSIS instance       
+    openstack.cloud.floating_ip:
+       state: present
+       auth:
+         auth_url: '{{auth_url}}'
+         user_domain_name: '{{user_domain_name}}'
+         project_domain_name: '{{project_domain_name}}'
+         username: '{{username}}'
+         password: '{{password}}'
+         project_name: '{{project_name}}'
+       server: '{{chassis_name}}'
+       network: '{{external_management_network}}'
+       nat_destination: '{{internal_management_network}}'
+       wait: true
+       timeout: 180
+       
+  - name: Setting FLOATING IP to VIRTUAL TEST APPLIANCE instance       
+    openstack.cloud.floating_ip:
+       state: present
+       auth:
+         auth_url: '{{auth_url}}'
+         user_domain_name: '{{user_domain_name}}'
+         project_domain_name: '{{project_domain_name}}'
+         username: '{{username}}'
+         password: '{{password}}'
+         project_name: '{{project_name}}'
+       server: '{{vta_name}}'
+       network: '{{external_management_network}}'
+       nat_destination: '{{internal_management_network}}'
+       wait: true
+       timeout: 180       
+       
+  - name: Create a new VLM instance (NO 1)
+    openstack.cloud.server:
+       state: present
+       auth:
+         auth_url: '{{auth_url}}'
+         user_domain_name: '{{user_domain_name}}'
+         project_domain_name: '{{project_domain_name}}'
+         username: '{{username}}'
+         password: '{{password}}'
+         project_name: '{{project_name}}'
+       name: '{{vlm_name}}_1'
+       image: '{{vlm_image_name}}'
+       timeout: 200
+       flavor: '{{vlm_flavor}}'
+       nics:
+         - net-name: '{{internal_management_network}}'
+         - net-name: '{{test_network}}'
+       auto_ip: no
+
+  - name: Create a new VLM instance (NO 2)
+    openstack.cloud.server:
+       state: present
+       auth:
+         auth_url: '{{auth_url}}'
+         user_domain_name: '{{user_domain_name}}'
+         project_domain_name: '{{project_domain_name}}'
+         username: '{{username}}'
+         password: '{{password}}'
+         project_name: '{{project_name}}'
+       name: '{{vlm_name}}_2'
+       image: '{{vlm_image_name}}'
+       timeout: 200
+       flavor: '{{vlm_flavor}}'
+       nics:
+         - net-name: '{{internal_management_network}}'
+         - net-name: '{{test_network}}'
+       auto_ip: no
+       
+  - name: Getting VIRTUAL TEST APPLIANCE FLOATING IP ADDRESS  
+    openstack.cloud.server_info:
+       auth:
+         auth_url: '{{auth_url}}'
+         user_domain_name: '{{user_domain_name}}'
+         project_domain_name: '{{project_domain_name}}'
+         username: '{{username}}'
+         password: '{{password}}'
+         project_name: '{{project_name}}'
+       server: '{{vta_name}}'
+       filters:
+         vm_state: active
+    register: result
+  - debug:
+       msg: "{{ result }}"
+       
+  - set_fact: 
+     vta_ip={{ item.public_v4 }}
+    with_items:
+      - "{{ result.openstack_servers | json_query(query) }}"
+    vars:
+      query: "[?name=='{{vta_name}}']"
+      
+  - debug: var=vta_ip       
+       
+  - name: Getting VIRTUAL CHASSIS FLOATING IP ADDRESS  
+    openstack.cloud.server_info:
+       auth:
+         auth_url: '{{auth_url}}'
+         user_domain_name: '{{user_domain_name}}'
+         project_domain_name: '{{project_domain_name}}'
+         username: '{{username}}'
+         password: '{{password}}'
+         project_name: '{{project_name}}'
+       server: '{{chassis_name}}'
+       filters:
+         vm_state: active
+    register: result
+  - debug:
+       msg: "{{ result }}"
+       
+  - set_fact: 
+     virtual_chassis_ip={{ item.public_v4 }}
+    with_items:
+      - "{{ result.openstack_servers | json_query(query) }}"
+    vars:
+      query: "[?name=='{{chassis_name}}']"
+      
+  - debug: var=virtual_chassis_ip
+
+  - name: Getting VIRTUAL LOAD MODULE NO 1 PRIVATE IP ADDRESSES  
+    openstack.cloud.server_info:
+       auth:
+         auth_url: '{{auth_url}}'
+         user_domain_name: '{{user_domain_name}}'
+         project_domain_name: '{{project_domain_name}}'
+         username: '{{username}}'
+         password: '{{password}}'
+         project_name: '{{project_name}}'
+       server: '{{vlm_name}}_1'
+       filters:
+         vm_state: active
+    register: result
+  - debug:
+       msg: "{{ result }}"
+       
+  - set_fact: 
+     vlm1_ip={{ item.private_v4 }}
+    with_items:
+      - "{{ result.openstack_servers | json_query(query) }}"
+    vars:
+      query: "[?name=='{{vlm_name}}_1']"
+      
+  - debug: var=vlm1_ip
+  
+  - name: Getting VIRTUAL LOAD MODULE NO 2 PRIVATE IP ADDRESSES  
+    openstack.cloud.server_info:
+       auth:
+         auth_url: '{{auth_url}}'
+         user_domain_name: '{{user_domain_name}}'
+         project_domain_name: '{{project_domain_name}}'
+         username: '{{username}}'
+         password: '{{password}}'
+         project_name: '{{project_name}}'
+       server: '{{vlm_name}}_2'
+       filters:
+         vm_state: active
+    register: result
+  - debug:
+       msg: "{{ result }}"
+       
+  - set_fact: 
+     vlm2_ip={{ item.private_v4 }}
+    with_items:
+      - "{{ result.openstack_servers | json_query(query) }}"
+    vars:
+      query: "[?name=='{{vlm_name}}_2']"
+      
+  - debug: var=vlm2_ip
+  
+  - name: Change WEB UI auth credentials
+    uri:
+      url: https://{{vta_ip}}/platform/api/v2/auth/changepassword
+      method: POST
+      body: '{"username" : "admin","oldpassword" : "admin","password": "{{web_ui_new_password}}"}'
+      return_content: yes
+      force_basic_auth: yes
+      validate_certs: no
+      follow_redirects: all
+      status_code: 200
+      body_format: json
+    register: change_password
+
+  - name: Change WEB UI auth credentials
+    uri:
+      url: https://{{virtual_chassis_ip}}/platform/api/v2/auth/changepassword
+      method: POST
+      body: '{"username" : "admin","oldpassword" : "admin","password": "{{web_ui_new_password}}"}'
+      return_content: yes
+      force_basic_auth: yes
+      validate_certs: no
+      follow_redirects: all
+      status_code: 200
+      body_format: json
+    register: change_password
+
+  - name: Gather VIRTUAL CHASSIS REST API auth info
+    uri:
+      url: https://{{virtual_chassis_ip}}/api/v1/auth/session
+      method: POST
+      body: '{"username" : "admin","password" : "{{web_ui_new_password}}","rememberMe": "false"}'
+      return_content: yes
+      force_basic_auth: yes
+      validate_certs: no
+      follow_redirects: all
+      status_code: 200
+      body_format: json
+    register: auth_result
+
+  - debug: var=auth_result.json.apiKey
+  
+  - name: Attach VIRTUAL LOAD MODULE NO 1
+    uri:
+      url: https://{{virtual_chassis_ip}}/api/v2/ixos/cards/
+      method: POST
+      headers:
+       x-api-key: "{{auth_result.json.apiKey}}"
+      body: '{"ipAddress" : "{{vlm1_ip}}", "slotNumber" : "1"}'
+      return_content: yes
+      force_basic_auth: yes
+      validate_certs: no
+      follow_redirects: all
+      status_code: 202
+      body_format: json
+    register: attach_result
+    
+  - name: Attach VIRTUAL LOAD MODULE NO 2
+    uri:
+      url: https://{{virtual_chassis_ip}}/api/v2/ixos/cards/
+      method: POST
+      headers:
+       x-api-key: "{{auth_result.json.apiKey}}"
+      body: '{"ipAddress" : "{{vlm2_ip}}", "slotNumber" : "2"}'
+      return_content: yes
+      force_basic_auth: yes
+      validate_certs: no
+      follow_redirects: all
+      status_code: 202
+      body_format: json
+    register: attach_result
+    
+  - name: Checking ATTACH Operation is COMPLETED
+    uri:
+      url: "{{attach_result.json.url}}"
+      method: GET
+      headers:
+        x-api-key: "{{auth_result.json.apiKey}}"
+      return_content: yes
+      force_basic_auth: yes
+      validate_certs: no
+      follow_redirects: all
+      status_code: 200
+      body_format: json
+    register: result_status
+    until: result_status.json.state == "COMPLETED"
+    retries: 10
+    delay: 5
+  - debug: var=result_status

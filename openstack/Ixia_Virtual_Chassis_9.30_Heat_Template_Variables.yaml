@@ -1,0 +1,7 @@
+parameters:
+
+    Management_Network:                  Ixia Management Network
+
+    Virtual_Chassis_Name:                vChassis
+    Virtual_Chassis_Image_Name:          Ixia Virtual Chassis 9.30 
+    Virtual_Chassis_Flavor:              m1.custom.virtual.chassis

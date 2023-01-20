@@ -1,0 +1,115 @@
+---
+- hosts: localhost
+  become: no
+  gather_facts: False
+  vars:
+      management_bridge: br0
+      test_bridge: br1
+      tar_extract_location: /home/ixia
+      virtual_chassis_tar_location: /home/ixia/Ixia_Virtual_Chassis_9.30_KVM.qcow2.tar.bz2
+      virtual_load_module_tar_location: /home/ixia/Ixia_Virtual_Load_Module_IXN_9.30_KVM.qcow2.tar.bz2
+      virtual_test_appliance_tar_location: /home/ixia/Ixia_Virtual_Test_Appliance_IXN_9.30_KVM.qcow2.tar.bz2
+
+  tasks:
+  - name: Untar the Virtual Chassis archive
+    command: tar -xf '{{virtual_chassis_tar_location}}' -C '{{tar_extract_location}}'
+
+  - name: Untar the Virtual Load Module archive
+    command: tar -xf '{{virtual_load_module_tar_location}}' -C '{{tar_extract_location}}'
+
+  - name: Untar the Virtual Test Appliance archive
+    command: tar -xf '{{virtual_test_appliance_tar_location}}' -C '{{tar_extract_location}}'
+    
+  - name: Creating copies of Virtual Load Module image
+    command: sudo cp '{{tar_extract_location}}'/Ixia_Virtual_Load_Module_IXN_9.30_KVM.qcow2 '{{tar_extract_location}}'/Ixia_Virtual_Load_Module_IXN_9.30_KVM_1.qcow2
+    
+  - name: Defining Virtual Chassis VM
+    command: virt-install --name Virtual_Chassis9.30 --ram 4096 --vcpus 2 --network bridge='{{management_bridge}}',model=virtio --serial pty --disk '{{tar_extract_location}}'/Ixia_Virtual_Chassis_9.30_KVM.qcow2,device=disk,bus=virtio,format=qcow2 --channel unix,target_type=virtio,name=org.qemu.guest_agent.0 --boot hd --vnc --noautoconsole --force; sleep 30s
+    
+  - name: Defining Virtual Load Module VM 01
+    command: virt-install --name Virtual_Load_Module9.30_1 --ram 4096 --vcpus 4 --network bridge='{{management_bridge}}',model=virtio --network bridge='{{test_bridge}}',model=virtio --serial pty --disk '{{tar_extract_location}}'/Ixia_Virtual_Load_Module_IXN_9.30_KVM_1.qcow2,device=disk,bus=virtio,format=qcow2 --channel unix,target_type=virtio,name=org.qemu.guest_agent.0 --boot hd --vnc --noautoconsole --force; sleep 30s
+
+  - name: Defining Virtual Load Module VM 02
+    command: virt-install --name Virtual_Load_Module9.30_2 --ram 4096 --vcpus 4 --network bridge='{{management_bridge}}',model=virtio --network bridge='{{test_bridge}}',model=virtio --serial pty --disk '{{tar_extract_location}}'/Ixia_Virtual_Load_Module_IXN_9.30_KVM_2.qcow2,device=disk,bus=virtio,format=qcow2 --channel unix,target_type=virtio,name=org.qemu.guest_agent.0 --boot hd --vnc --noautoconsole --force; sleep 30s
+    
+  - name: Defining Virtual Test Appliance VM
+    command: virt-install --name Virtual_Test_Appliance9.30 --ram 4096 --vcpus 6 --network bridge='{{management_bridge}}',model=virtio --network bridge='{{test_bridge}}',model=virtio --network bridge='{{test_bridge}}',model=virtio --serial pty --disk '{{tar_extract_location}}'/Ixia_Virtual_Test_Appliance_IXN_9.30_KVM.qcow2.tar.bz2,device=disk,bus=virtio,format=qcow2 --channel unix,target_type=virtio,name=org.qemu.guest_agent.0 --boot hd --vnc --noautoconsole --force; sleep 30s
+    
+  - name: Getting the Virtual Chassis IP
+    command: virsh domifaddr --source agent Virtual_Chassis9.30 | grep eth0 | awk '{print $4}' | cut -d '/' -f 1
+    register: virtual_chassis_ip
+    
+  - name: Getting the Virtual Load Module VM 01 IP
+    command: virsh domifaddr --source agent Virtual_Load_Module9.30_1 | grep eth0 | awk '{print $4}' | cut -d '/' -f 1
+    register: vlm01_ip
+    
+  - name: Getting the Virtual Load Module VM 02 IP
+    command: virsh domifaddr --source agent Virtual_Load_Module9.30_2 | grep eth0 | awk '{print $4}' | cut -d '/' -f 1
+    register: vlm02_ip
+    
+  - name: Getting the Virtual Test Appliance IP
+    command: virsh domifaddr --source agent Virtual_Test_Appliance9.30 | grep eth0 | awk '{print $4}' | cut -d '/' -f 1
+    register: vta_ip
+    
+  - name: Gather VIRTUAL CHASSIS REST API auth info
+    uri:
+      url: https://{{virtual_chassis_ip}}/api/v1/auth/session
+      method: POST
+      body: '{"username" : "admin","password" : "admin","rememberMe": "false"}'
+      return_content: yes
+      force_basic_auth: yes
+      validate_certs: no
+      follow_redirects: all
+      status_code: 200
+      body_format: json
+    register: auth_result
+
+  - debug: var=auth_result.json.apiKey
+  
+  - name: Attach VIRTUAL LOAD MODULE NO 1
+    uri:
+      url: https://{{virtual_chassis_ip}}/api/v2/ixos/cards/
+      method: POST
+      headers:
+       x-api-key: "{{auth_result.json.apiKey}}"
+      body: '{"ipAddress" : "{{vlm1_ip}}", "slotNumber" : "1"}'
+      return_content: yes
+      force_basic_auth: yes
+      validate_certs: no
+      follow_redirects: all
+      status_code: 202
+      body_format: json
+    register: attach_result
+    
+  - name: Attach VIRTUAL LOAD MODULE NO 2
+    uri:
+      url: https://{{virtual_chassis_ip}}/api/v2/ixos/cards/
+      method: POST
+      headers:
+       x-api-key: "{{auth_result.json.apiKey}}"
+      body: '{"ipAddress" : "{{vlm2_ip}}", "slotNumber" : "2"}'
+      return_content: yes
+      force_basic_auth: yes
+      validate_certs: no
+      follow_redirects: all
+      status_code: 202
+      body_format: json
+    register: attach_result
+    
+  - name: Checking ATTACH Operation is COMPLETED
+    uri:
+      url: "{{attach_result.json.url}}"
+      method: GET
+      headers:
+        x-api-key: "{{auth_result.json.apiKey}}"
+      return_content: yes
+      force_basic_auth: yes
+      validate_certs: no
+      follow_redirects: all
+      status_code: 200
+      body_format: json
+    register: result_status
+    until: result_status.json.state == "COMPLETED"
+    retries: 10
+    delay: 5
+  - debug: var=result_status
