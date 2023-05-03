@@ -1,3 +1,32 @@
+variable "AgentAmiName" {
+	default = "Ixia_Virtual_Test_Appliance_9.30.0.209_KVM BYOL-eaa16046-9580-4e91-8167-302d8cb0da84"
+	description = "AMI name used for deploying Agent instances"
+	type = string
+}
+
+variable "AgentAmiOwner" {
+	default = "aws-marketplace"
+	description = "Owner of AMI used for deploying Agent instances"
+	type = string
+}
+
+variable "AppAmiName" {
+	default = "ixnetwork-cloud-ami-9-30-2212-7-b81852f3-030c-4879-9620-67f7e2563e1f"
+	description = "AMI name used for deploying App instances"
+	type = string
+}
+
+variable "AppAmiOwner" {
+	default = "aws-marketplace"
+	description = "Owner of AMI used for deploying App instances"
+	type = string
+}
+
+variable "ProjectTag" {
+	default = "CLOUD_IST"
+	type = string
+}
+
 variable "Region" {
 	type = string
 	default = "us-east-1"

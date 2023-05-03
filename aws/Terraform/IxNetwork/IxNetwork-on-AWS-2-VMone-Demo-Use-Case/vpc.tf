@@ -4,10 +4,9 @@ resource "aws_vpc" "Vpc" {
 	enable_dns_support = local.VPCxENABLExDNSxSUPPORT
 	enable_dns_hostnames = local.VPCxENABLExDNSxHOSTNAMES
 	tags = {
-		Name = "${local.UserLoginTag}_${local.PROJECTxTAG}_VPC_${local.REGIONxTAG["${local.Region}"]}"
+		Name = "${local.UserLoginTag}_${local.ProjectTag}_VPC_${local.RegionTag}"
 		Owner = local.UserEmailTag
-		Options = local.OPTIONSxTAG
-		Project = local.PROJECTxTAG
+		Project = local.ProjectTag
 	}
 }
 
@@ -19,7 +18,7 @@ resource "aws_flow_log" "VpcFlowLog" {
 }
 
 resource "aws_iam_role" "VPCFlowLogAccessRole" {
-	name = "${local.UserLoginTag}_${local.PROJECTxTAG}_VPC_FLOW_LOG_ACCESS_ROLE_${local.REGIONxTAG["${local.Region}"]}"
+	name = "${local.UserLoginTag}_${local.ProjectTag}_VPC_FLOW_LOG_ACCESS_ROLE_${local.RegionTag}"
 	assume_role_policy = <<EOF
 {
 	"Version": "2012-10-17",
@@ -39,7 +38,7 @@ EOF
 }
 
 resource "aws_cloudwatch_log_group" "VpcFlowLogGroup" {
-	name = "${local.UserLoginTag}_${local.PROJECTxTAG}_VPC_FLOW_LOG_GROUP_${local.REGIONxTAG["${local.Region}"]}"
+	name = "${local.UserLoginTag}_${local.ProjectTag}_VPC_FLOW_LOG_GROUP_${local.RegionTag}"
 }
 
 resource "aws_subnet" "MgmtSubnet" {
@@ -47,10 +46,9 @@ resource "aws_subnet" "MgmtSubnet" {
 	cidr_block = local.MGMTxSUBNETxCIDRxBLOCK
 	vpc_id = aws_vpc.Vpc.id
 	tags = {
-		Name = "${local.UserLoginTag}_${local.PROJECTxTAG}_MGMT_SUBNET_${local.REGIONxTAG["${local.Region}"]}"
+		Name = "${local.UserLoginTag}_${local.ProjectTag}_MGMT_SUBNET_${local.RegionTag}"
 		Owner = local.UserEmailTag
-		Options = local.OPTIONSxTAG
-		Project = local.PROJECTxTAG
+		Project = local.ProjectTag
 	}
 }
 
@@ -59,10 +57,9 @@ resource "aws_subnet" "Test1Subnet" {
 	cidr_block = local.TEST1xSUBNETxCIDRxBLOCK
 	vpc_id = aws_vpc.Vpc.id
 	tags = {
-		Name = "${local.UserLoginTag}_${local.PROJECTxTAG}_TEST1_SUBNET_${local.REGIONxTAG["${local.Region}"]}"
+		Name = "${local.UserLoginTag}_${local.ProjectTag}_TEST1_SUBNET_${local.RegionTag}"
 		Owner = local.UserEmailTag
-		Options = local.OPTIONSxTAG
-		Project = local.PROJECTxTAG
+		Project = local.ProjectTag
 	}
 }
 
@@ -71,22 +68,20 @@ resource "aws_subnet" "Test2Subnet" {
 	cidr_block = local.TEST2xSUBNETxCIDRxBLOCK
 	vpc_id = aws_vpc.Vpc.id
 	tags = {
-		Name = "${local.UserLoginTag}_${local.PROJECTxTAG}_TEST2_SUBNET_${local.REGIONxTAG["${local.Region}"]}"
+		Name = "${local.UserLoginTag}_${local.ProjectTag}_TEST2_SUBNET_${local.RegionTag}"
 		Owner = local.UserEmailTag
-		Options = local.OPTIONSxTAG
-		Project = local.PROJECTxTAG
+		Project = local.ProjectTag
 	}
 }
 
 resource "aws_security_group" "MgmtSecurityGroup" {
-	name = "${local.UserLoginTag}_${local.PROJECTxTAG}_MGMT_SECURITY_GROUP_${local.REGIONxTAG["${local.Region}"]}"
-	description = "${local.UserLoginTag}_${local.PROJECTxTAG}_MGMT_SECURITY_GROUP_${local.REGIONxTAG["${local.Region}"]}"
+	name = "${local.UserLoginTag}_${local.ProjectTag}_MGMT_SECURITY_GROUP_${local.RegionTag}"
+	description = "${local.UserLoginTag}_${local.ProjectTag}_MGMT_SECURITY_GROUP_${local.RegionTag}"
 	vpc_id = aws_vpc.Vpc.id
 	tags = {
-		Name = "${local.UserLoginTag}_${local.PROJECTxTAG}_MGMT_SECURITY_GROUP_${local.REGIONxTAG["${local.Region}"]}"
+		Name = "${local.UserLoginTag}_${local.ProjectTag}_MGMT_SECURITY_GROUP_${local.RegionTag}"
 		Owner = local.UserEmailTag
-		Options = local.OPTIONSxTAG
-		Project = local.PROJECTxTAG
+		Project = local.ProjectTag
 	}
 }
 
@@ -97,15 +92,6 @@ resource "aws_security_group_rule" "MgmtIngress1" {
 	from_port = 0
 	to_port = 0
 	source_security_group_id = aws_security_group.MgmtSecurityGroup.id
-}
-
-resource "aws_security_group_rule" "MgmtIngress2" {
-	type = "ingress"
-	security_group_id = aws_security_group.MgmtSecurityGroup.id
-	protocol = "tcp"
-	from_port = 22
-	to_port = 22
-	cidr_blocks = [ local.EC2xCONNECTxCIDR["${local.Region}"] ]
 }
 
 resource "aws_security_group_rule" "MgmtIngress22" {
@@ -145,8 +131,8 @@ resource "aws_security_group_rule" "MgmtEgress1" {
 }
 
 resource "aws_security_group" "Test1SecurityGroup" {
-	name = "${local.UserLoginTag}_${local.PROJECTxTAG}_TEST1_SECURITY_GROUP_${local.REGIONxTAG["${local.Region}"]}"
-	description = "${local.UserLoginTag}_${local.PROJECTxTAG}_TEST1_SECURITY_GROUP_${local.REGIONxTAG["${local.Region}"]}"
+	name = "${local.UserLoginTag}_${local.ProjectTag}_TEST1_SECURITY_GROUP_${local.RegionTag}"
+	description = "${local.UserLoginTag}_${local.ProjectTag}_TEST1_SECURITY_GROUP_${local.RegionTag}"
 	vpc_id = aws_vpc.Vpc.id
 	ingress {
 		description = "HTTP port"
@@ -156,10 +142,9 @@ resource "aws_security_group" "Test1SecurityGroup" {
 		cidr_blocks = [ local.InboundIPv4CidrBlock ]
 	}
 	tags = {
-		Name = "${local.UserLoginTag}_${local.PROJECTxTAG}_TEST1_SECURITY_GROUP_${local.REGIONxTAG["${local.Region}"]}"
+		Name = "${local.UserLoginTag}_${local.ProjectTag}_TEST1_SECURITY_GROUP_${local.RegionTag}"
 		Owner = local.UserEmailTag
-		Options = local.OPTIONSxTAG
-		Project = local.PROJECTxTAG
+		Project = local.ProjectTag
 	}
 }
 
@@ -195,10 +180,9 @@ resource "aws_default_security_group" "DefaultEgress1" {
 resource "aws_internet_gateway" "InternetGw" {
 	vpc_id = aws_vpc.Vpc.id
 	tags = {
-		Name = "${local.UserLoginTag}_${local.PROJECTxTAG}_INTERNET_GW_${local.REGIONxTAG["${local.Region}"]}"
+		Name = "${local.UserLoginTag}_${local.ProjectTag}_INTERNET_GW_${local.RegionTag}"
 		Owner = local.UserEmailTag
-		Options = local.OPTIONSxTAG
-		Project = local.PROJECTxTAG
+		Project = local.ProjectTag
 	}
 }
 
@@ -214,10 +198,9 @@ resource "aws_route" "MgmtRoute" {
 resource "aws_route_table" "MgmtRouteTable" {
 	vpc_id = aws_vpc.Vpc.id
 	tags = {
-		Name = "${local.UserLoginTag}_${local.PROJECTxTAG}_MGMT_ROUTE_TABLE_${local.REGIONxTAG["${local.Region}"]}"
+		Name = "${local.UserLoginTag}_${local.ProjectTag}_MGMT_ROUTE_TABLE_${local.RegionTag}"
 		Owner = local.UserEmailTag
-		Options = local.OPTIONSxTAG
-		Project = local.PROJECTxTAG
+		Project = local.ProjectTag
 	}
 }
 
@@ -233,10 +216,9 @@ resource "aws_route" "Test1Route" {
 resource "aws_route_table" "Test1RouteTable" {
 	vpc_id = aws_vpc.Vpc.id
 	tags = {
-		Name = "${local.UserLoginTag}_${local.PROJECTxTAG}_TEST1_ROUTE_TABLE_${local.REGIONxTAG["${local.Region}"]}"
+		Name = "${local.UserLoginTag}_${local.ProjectTag}_TEST1_ROUTE_TABLE_${local.RegionTag}"
 		Owner = local.UserEmailTag
-		Options = local.OPTIONSxTAG
-		Project = local.PROJECTxTAG
+		Project = local.ProjectTag
 	}
 }
 
@@ -252,10 +234,9 @@ resource "aws_route" "Test2Route" {
 resource "aws_route_table" "Test2RouteTable" {
 	vpc_id = aws_vpc.Vpc.id
 	tags = {
-		Name = "${local.UserLoginTag}_${local.PROJECTxTAG}_TEST2_ROUTE_TABLE_${local.REGIONxTAG["${local.Region}"]}"
+		Name = "${local.UserLoginTag}_${local.ProjectTag}_TEST2_ROUTE_TABLE_${local.RegionTag}"
 		Owner = local.UserEmailTag
-		Options = local.OPTIONSxTAG
-		Project = local.PROJECTxTAG
+		Project = local.ProjectTag
 	}
 }
 
