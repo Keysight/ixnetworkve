@@ -25,7 +25,7 @@ variable "UserLoginTag" {
 
 variable "IxClientInstanceType" {
 	type = string		
-	default = "m4.xlarge"
+	default = "m5.xlarge"
 	description = "Instance type of Ixia Client VM"
 	validation {
 		condition = can(regex("m5.xlarge", var.IxClientInstanceType)) || can(regex("t3.xlarge", var.IxClientInstanceType))
