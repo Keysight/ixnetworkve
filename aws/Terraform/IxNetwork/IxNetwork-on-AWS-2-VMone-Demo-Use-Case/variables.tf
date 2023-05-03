@@ -1,7 +1,3 @@
-terraform {
-  experiments = [variable_validation]
-}
-
 variable "Region" {
 	type = string
 	default = "us-east-1"
