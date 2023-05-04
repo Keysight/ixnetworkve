@@ -28,4 +28,5 @@ locals {
 	RegionTag = upper(replace(local.Region, "-", "_"))
 	UserEmailTag = var.UserEmailTag
 	UserLoginTag = var.UserLoginTag
+	uuid = substr(uuid(), 1, 6)
 }
