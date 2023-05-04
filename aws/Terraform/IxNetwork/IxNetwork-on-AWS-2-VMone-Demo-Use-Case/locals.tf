@@ -5,25 +5,22 @@ locals {
 	AppAmiOwner = var.AppAmiOwner
 	AppTag = "IXNETWORK"
 	AppVersion = "9.30"
+	InboundIPv4CidrBlock = var.InboundIPv4CidrBlock
+	Private1SubnetAvailabilityZone = var.Private1SubnetAvailabilityZone
+	Private2SubnetAvailabilityZone = var.Private2SubnetAvailabilityZone
 	ProjectTag = var.ProjectTag
+	PublicSubnetAvailabilityZone = var.PublicSubnetAvailabilityZone
 	Region = data.aws_region.current.name
 	RegionTag = upper(replace(local.Region, "-", "_"))
 	UserEmailTag = var.UserEmailTag
 	UserLoginTag = var.UserLoginTag
+}
+
+locals {
 	IxClientInstanceType = var.IxClientInstanceType
 	IxClientSSHKey = var.IxClientSSHKey
 	VMoneInstanceType = var.VMoneInstanceType
-	InboundIPv4CidrBlock = var.InboundIPv4CidrBlock
-	VPCxCIDRxBLOCK = "10.0.0.0/16"
-	VPCxINSTANCExTENANCY = "default"
-	VPCxENABLExDNSxSUPPORT = true
-	VPCxENABLExDNSxHOSTNAMES = true
 	PLACEMENTxGROUPxSTRATEGY = "cluster"
-	FLOWxLOGxTRAFFICxTYPE = "REJECT"
-	SUBNETxAVAILABILITYxZONExINDEX = "0"
-	MGMTxSUBNETxCIDRxBLOCK = "10.0.10.0/24"
-	TEST1xSUBNETxCIDRxBLOCK = "10.0.2.0/24"
-	TEST2xSUBNETxCIDRxBLOCK = "10.0.3.0/24"
 	INTERFACExSOURCExDESTxCHECK = false
 	INSTANCExDISABLExAPIxTERMINATION = false
 	INSTANCExMONITORING = false

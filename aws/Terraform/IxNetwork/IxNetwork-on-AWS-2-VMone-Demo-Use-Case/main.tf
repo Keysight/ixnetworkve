@@ -6,9 +6,9 @@ resource "aws_placement_group" "PlacementGroup" {
 resource "aws_network_interface" "IxiaClientEth0" {
 	description = "${local.UserLoginTag}_${local.ProjectTag}_${local.AppTag}_CLIENT_${local.AppVersion}_ETH0_${local.RegionTag}"
 	source_dest_check = local.INTERFACExSOURCExDESTxCHECK
-	subnet_id = aws_subnet.MgmtSubnet.id
+	subnet_id = module.vpc.PublicSubnet.id
 	security_groups = [
-		aws_security_group.MgmtSecurityGroup.id
+		module.vpc.PublicSecurityGroup.id
 	]
 	tags = {
 		Name = "${local.UserLoginTag}_${local.ProjectTag}_${local.AppTag}_CLIENT_${local.AppVersion}_ETH0_${local.RegionTag}"
@@ -20,9 +20,9 @@ resource "aws_network_interface" "IxiaClientEth0" {
 resource "aws_network_interface" "VMOne1Eth0" {
 	description = "${local.UserLoginTag}_${local.ProjectTag}_${local.AppTag}_VMONE1_${local.AppVersion}_ETH0_${local.RegionTag}"
 	source_dest_check = local.INTERFACExSOURCExDESTxCHECK
-	subnet_id = aws_subnet.MgmtSubnet.id
+	subnet_id = module.vpc.PublicSubnet.id
 	security_groups = [
-		aws_security_group.MgmtSecurityGroup.id
+		module.vpc.PublicSecurityGroup.id
 	]
 	private_ips = [ local.VMONE1xETH0xPRIVATExIPxADDRESS ]
 	tags = {
@@ -35,9 +35,9 @@ resource "aws_network_interface" "VMOne1Eth0" {
 resource "aws_network_interface" "VMOne1Eth1" {
 	description = "${local.UserLoginTag}_${local.ProjectTag}_${local.AppTag}_VMONE1_${local.AppVersion}_ETH1_${local.RegionTag}"
 	source_dest_check = local.INTERFACExSOURCExDESTxCHECK
-	subnet_id = aws_subnet.Test1Subnet.id
+	subnet_id = module.vpc.Private1Subnet.id
 	security_groups = [
-		aws_security_group.Test1SecurityGroup.id
+		module.vpc.PrivateSecurityGroup.id
 	]
 	private_ips = local.VMONE1xETH1xPRIVATExIPxADDRESSES
 	tags = {
@@ -50,9 +50,9 @@ resource "aws_network_interface" "VMOne1Eth1" {
 resource "aws_network_interface" "VMOne2Eth0" {
 	description = "${local.UserLoginTag}_${local.ProjectTag}_${local.AppTag}_VMONE2_${local.AppVersion}_ETH0_${local.RegionTag}"
 	source_dest_check = local.INTERFACExSOURCExDESTxCHECK
-	subnet_id = aws_subnet.MgmtSubnet.id
+	subnet_id = module.vpc.PublicSubnet.id
 	security_groups = [
-		aws_security_group.MgmtSecurityGroup.id
+		module.vpc.PublicSecurityGroup.id
 	]
 	private_ips = [ local.VMONE2xETH0xPRIVATExIPxADDRESS ]
 	tags = {
@@ -65,9 +65,9 @@ resource "aws_network_interface" "VMOne2Eth0" {
 resource "aws_network_interface" "VMOne2Eth1" {
 	description = "${local.UserLoginTag}_${local.ProjectTag}_${local.AppTag}_VMONE2_${local.AppVersion}_ETH1_${local.RegionTag}"
 	source_dest_check = local.INTERFACExSOURCExDESTxCHECK
-	subnet_id = aws_subnet.Test2Subnet.id
+	subnet_id = module.vpc.Private2Subnet.id
 	security_groups = [
-		aws_security_group.Test1SecurityGroup.id
+		module.vpc.PrivateSecurityGroup.id
 	]
 	private_ips = local.VMONE2xETH1xPRIVATExIPxADDRESSES
 	tags = {
@@ -161,11 +161,11 @@ resource "aws_instance" "IxiaClient" {
 	]
 }
 
-resource "aws_eip" "MgmtElasticIp" {
+resource "aws_eip" "PublicElasticIp" {
 	vpc = true
 	network_interface = aws_network_interface.IxiaClientEth0.id
 	depends_on = [
-		aws_internet_gateway.InternetGw,
+		module.vpc.InternetGw,
 		aws_instance.IxiaClient
 	]
 }
@@ -174,7 +174,7 @@ resource "aws_eip" "VMOne1Eth0ElasticIp" {
 	vpc = true
 	network_interface = aws_network_interface.VMOne1Eth0.id
 	depends_on = [
-		aws_internet_gateway.InternetGw,
+		module.vpc.InternetGw,
 		aws_instance.VMOne1
 	]
 }
@@ -183,7 +183,7 @@ resource "aws_eip" "VMOne2Eth0ElasticIp" {
 	vpc = true
 	network_interface = aws_network_interface.VMOne2Eth0.id
 	depends_on = [
-		aws_internet_gateway.InternetGw,
+		module.vpc.InternetGw,
 		aws_instance.VMOne2
 	]
 }

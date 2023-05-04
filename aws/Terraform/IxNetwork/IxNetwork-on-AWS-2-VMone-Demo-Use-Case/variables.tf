@@ -10,6 +10,11 @@ variable "AgentAmiOwner" {
 	type = string
 }
 
+variable "ApiMaxRetries" {
+	default = 1
+	type = number
+}
+
 variable "AppAmiName" {
 	default = "ixnetwork-cloud-ami-9-30-2212-7-b81852f3-030c-4879-9620-67f7e2563e1f"
 	description = "AMI name used for deploying App instances"
@@ -22,14 +27,29 @@ variable "AppAmiOwner" {
 	type = string
 }
 
+variable "Private1SubnetAvailabilityZone" {
+	default = "us-east-1a"
+	type = string
+}
+
+variable "Private2SubnetAvailabilityZone" {
+	default = "us-east-1a"
+	type = string
+}
+
 variable "ProjectTag" {
 	default = "CLOUD_IST"
 	type = string
 }
 
-variable "Region" {
+variable "PublicSubnetAvailabilityZone" {
+	default = "us-east-1a"
 	type = string
+}
+
+variable "Region" {
 	default = "us-east-1"
+	type = string
 }
 
 variable "UserEmailTag" {
