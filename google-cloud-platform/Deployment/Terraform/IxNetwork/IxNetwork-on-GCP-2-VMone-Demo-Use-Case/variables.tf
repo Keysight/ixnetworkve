@@ -1,37 +1,44 @@
 variable "AgentCustomImageFamilyName" {
-	type = string
 	default = "ixia-virtual-test-appliance-9-30-0-209"
+	type = string
 }
 
 variable "AgentCustomImageProjectId" {
-	type = string
 	default = "ixvm-261016"
+	type = string
 }
 
 variable "AppCustomImageFamilyName" {
-	type = string
 	default = "ixnetwork-cloud-gcp-9-30-2212-7"
+	type = string
 }
 
 variable "AppCustomImageProjectId" {
-	type = string
 	default = "ixvm-261016"
+	type = string
 }
 
 variable "Credentials" {
 	sensitive = true
 	type = string
+}
 
+variable "LoginIdTag" {
+	type = string
+}
+
+variable "PublicFirewallRuleSourceIpRanges" {
+	type = list(string)
+}
+
+variable "RegionName" {
+	default = "us-central1"
+	type = string
 }
 
 variable "GCP_PROJECT_NAME" {
 	type = string
 	default = "ixnetwork-ve-gcp"
-}
-
-variable "GCP_REGION_NAME" {
-	type = string
-	default = "us-central1"
 }
 
 variable "GCP_ZONE_NAME" {
@@ -42,11 +49,6 @@ variable "GCP_ZONE_NAME" {
 variable "GCP_OWNER_TAG" {
 	type = string
 	default = "gcp-ixnetwork@google.com"
-}
-
-variable "GCP_LOGIN_ID_TAG" {
-	type = string
-	default = "gcp-ixnetwork"
 }
 
 variable "GCP_PROJECT_TAG" {

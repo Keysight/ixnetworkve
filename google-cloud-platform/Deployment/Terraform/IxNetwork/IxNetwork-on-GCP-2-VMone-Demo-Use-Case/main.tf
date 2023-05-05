@@ -1,12 +1,12 @@
 resource "google_compute_address" "AppEth0PublicIpAddress" {
-	name = "${local.GCP_LOGIN_ID_TAG}-${local.GCP_PROJECT_TAG}-${local.GCP_CLIENT_IFACE_ETH0_PUBLIC_IP_ADDRESS_NAME}"
-	region = local.GCP_REGION_NAME
+	name = "${local.LoginIdTag}-${local.GCP_PROJECT_TAG}-${local.GCP_CLIENT_IFACE_ETH0_PUBLIC_IP_ADDRESS_NAME}"
+	region = local.RegionName
 	network_tier = "PREMIUM"
 	address_type = "EXTERNAL"
 }
 
 resource "google_compute_instance" "GCP_CLIENT_INSTANCE" {
-	name = "${local.GCP_LOGIN_ID_TAG}-${local.GCP_PROJECT_TAG}-${local.GCP_CLIENT_INSTANCE_NAME}"
+	name = "${local.LoginIdTag}-${local.GCP_PROJECT_TAG}-${local.GCP_CLIENT_INSTANCE_NAME}"
 	zone = local.GCP_ZONE_NAME
 	machine_type = "zones/${local.GCP_ZONE_NAME}/machineTypes/${local.GCP_CLIENT_MACHINE_TYPE}"
 	boot_disk {
@@ -17,9 +17,9 @@ resource "google_compute_instance" "GCP_CLIENT_INSTANCE" {
 		}
 	}
 	network_interface {
-		network = google_compute_network.GCP_MGMT_VPC_NETWORK.self_link
+		network = module.vpc.PublicVpcNetwork.self_link
 		network_ip = local.GCP_CLIENT_IFACE_ETH0_PRIVATE_IP_ADDRESS
-		subnetwork = google_compute_subnetwork.GCP_MGMT_SUBNET.self_link
+		subnetwork = module.vpc.PublicSubnet.self_link
 		access_config {
 			nat_ip = google_compute_address.AppEth0PublicIpAddress.address
 			network_tier = "PREMIUM"
@@ -39,14 +39,14 @@ resource "google_compute_instance" "GCP_CLIENT_INSTANCE" {
 }
 
 resource "google_compute_address" "GCP_VMONE1_IFACE_ETH0_PUBLIC_IP_ADDRESS" {
-	name = "${local.GCP_LOGIN_ID_TAG}-${local.GCP_PROJECT_TAG}-${local.GCP_VMONE1_IFACE_ETH0_PUBLIC_IP_ADDRESS_NAME}"
-	region = local.GCP_REGION_NAME
+	name = "${local.LoginIdTag}-${local.GCP_PROJECT_TAG}-${local.GCP_VMONE1_IFACE_ETH0_PUBLIC_IP_ADDRESS_NAME}"
+	region = local.RegionName
 	network_tier = "PREMIUM"
 	address_type = "EXTERNAL"
 }
 
 resource "google_compute_instance" "GCP_VMONE1_INSTANCE" {
-	name = "${local.GCP_LOGIN_ID_TAG}-${local.GCP_PROJECT_TAG}-${local.GCP_VMONE1_INSTANCE_NAME}"
+	name = "${local.LoginIdTag}-${local.GCP_PROJECT_TAG}-${local.GCP_VMONE1_INSTANCE_NAME}"
 	zone = local.GCP_ZONE_NAME
 	machine_type = "zones/${local.GCP_ZONE_NAME}/machineTypes/${local.GCP_VMONE_MACHINE_TYPE}"
 	boot_disk {
@@ -59,18 +59,18 @@ resource "google_compute_instance" "GCP_VMONE1_INSTANCE" {
 	allow_stopping_for_update = "true"
 	enable_display = "true"
 	network_interface {
-		network = google_compute_network.GCP_MGMT_VPC_NETWORK.self_link
+		network = module.vpc.PublicVpcNetwork.self_link
 		network_ip = local.GCP_VMONE1_IFACE_ETH0_PRIVATE_IP_ADDRESS
-		subnetwork = google_compute_subnetwork.GCP_MGMT_SUBNET.self_link
+		subnetwork = module.vpc.PublicSubnet.self_link
 		access_config {
 			nat_ip = google_compute_address.GCP_VMONE1_IFACE_ETH0_PUBLIC_IP_ADDRESS.address
 			network_tier = "PREMIUM"
 		}
 	}
 	network_interface {
-		network = google_compute_network.GCP_TEST1_VPC_NETWORK.self_link
+		network = module.vpc.Private1VpcNetwork.self_link
 		network_ip = local.GCP_VMONE1_IFACE_ETH1_PRIVATE_IP_ADDRESS
-		subnetwork = google_compute_subnetwork.GCP_TEST1_SUBNET.self_link
+		subnetwork = module.vpc.Private1Subnet.self_link
 		access_config {
 			network_tier = "PREMIUM"
 		}
@@ -93,14 +93,14 @@ resource "google_compute_instance" "GCP_VMONE1_INSTANCE" {
 }
 
 resource "google_compute_address" "GCP_VMONE2_IFACE_ETH0_PUBLIC_IP_ADDRESS" {
-	name = "${local.GCP_LOGIN_ID_TAG}-${local.GCP_PROJECT_TAG}-${local.GCP_VMONE2_IFACE_ETH0_PUBLIC_IP_ADDRESS_NAME}"
-	region = local.GCP_REGION_NAME
+	name = "${local.LoginIdTag}-${local.GCP_PROJECT_TAG}-${local.GCP_VMONE2_IFACE_ETH0_PUBLIC_IP_ADDRESS_NAME}"
+	region = local.RegionName
 	network_tier = "PREMIUM"
 	address_type = "EXTERNAL"
 }
 
 resource "google_compute_instance" "GCP_VMONE2_INSTANCE" {
-	name = "${local.GCP_LOGIN_ID_TAG}-${local.GCP_PROJECT_TAG}-${local.GCP_VMONE2_INSTANCE_NAME}"
+	name = "${local.LoginIdTag}-${local.GCP_PROJECT_TAG}-${local.GCP_VMONE2_INSTANCE_NAME}"
 	zone = local.GCP_ZONE_NAME
 	machine_type = "zones/${local.GCP_ZONE_NAME}/machineTypes/${local.GCP_VMONE_MACHINE_TYPE}"
 	boot_disk {
@@ -113,18 +113,18 @@ resource "google_compute_instance" "GCP_VMONE2_INSTANCE" {
 	allow_stopping_for_update = "true"
 	enable_display = "true"
 	network_interface {
-		network = google_compute_network.GCP_MGMT_VPC_NETWORK.self_link
+		network = module.vpc.PublicVpcNetwork.self_link
 		network_ip = local.GCP_VMONE2_IFACE_ETH0_PRIVATE_IP_ADDRESS
-		subnetwork = google_compute_subnetwork.GCP_MGMT_SUBNET.self_link
+		subnetwork = module.vpc.PublicSubnet.self_link
 		access_config {
 			nat_ip = google_compute_address.GCP_VMONE2_IFACE_ETH0_PUBLIC_IP_ADDRESS.address
 			network_tier = "PREMIUM"
 		}
 	}
 	network_interface {
-		network = google_compute_network.GCP_TEST2_VPC_NETWORK.self_link
+		network = module.vpc.Private2VpcNetwork.self_link
 		network_ip = local.GCP_VMONE2_IFACE_ETH1_PRIVATE_IP_ADDRESS
-		subnetwork = google_compute_subnetwork.GCP_TEST2_SUBNET.self_link
+		subnetwork = module.vpc.Private2Subnet.self_link
 		access_config {
 			network_tier = "PREMIUM"
 		}
