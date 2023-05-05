@@ -1,6 +1,27 @@
-terraform {
-	required_version = ">= 0.12.24"
-	experiments = [variable_validation]
+variable "AgentCustomImageFamilyName" {
+	type = string
+	default = "ixia-virtual-test-appliance-9-30-0-209"
+}
+
+variable "AgentCustomImageProjectId" {
+	type = string
+	default = "ixvm-261016"
+}
+
+variable "AppCustomImageFamilyName" {
+	type = string
+	default = "ixnetwork-cloud-gcp-9-30-2212-7"
+}
+
+variable "AppCustomImageProjectId" {
+	type = string
+	default = "ixvm-261016"
+}
+
+variable "Credentials" {
+	sensitive = true
+	type = string
+
 }
 
 variable "GCP_PROJECT_NAME" {
