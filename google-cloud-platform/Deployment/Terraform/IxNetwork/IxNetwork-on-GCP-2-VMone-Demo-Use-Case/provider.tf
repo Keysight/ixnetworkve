@@ -4,7 +4,7 @@ terraform {
 
 provider "google" {
 	credentials = var.Credentials
-	project = var.GCP_PROJECT_NAME
+	project = var.ProjectId
 	region = var.RegionName
-	zone = var.GCP_ZONE_NAME
+	zone = var.ZoneName
 }

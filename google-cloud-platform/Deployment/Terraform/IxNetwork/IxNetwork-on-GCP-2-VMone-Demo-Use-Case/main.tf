@@ -1,24 +1,25 @@
 resource "google_compute_address" "AppEth0PublicIpAddress" {
-	name = "${local.LoginIdTag}-${local.GCP_PROJECT_TAG}-${local.GCP_CLIENT_IFACE_ETH0_PUBLIC_IP_ADDRESS_NAME}"
+	name = "${local.LoginIdTag}-${local.ProjectTag}-${local.AppEth0PublicIpAddressName}"
 	region = local.RegionName
 	network_tier = "PREMIUM"
 	address_type = "EXTERNAL"
 }
 
-resource "google_compute_instance" "GCP_CLIENT_INSTANCE" {
-	name = "${local.LoginIdTag}-${local.GCP_PROJECT_TAG}-${local.GCP_CLIENT_INSTANCE_NAME}"
-	zone = local.GCP_ZONE_NAME
-	machine_type = "zones/${local.GCP_ZONE_NAME}/machineTypes/${local.GCP_CLIENT_MACHINE_TYPE}"
+resource "google_compute_instance" "AppInstance" {
+	name = "${local.LoginIdTag}-${local.ProjectTag}-${local.AppInstanceName}"
+	zone = local.ZoneName
+	machine_type = local.AppMachineType
 	boot_disk {
 		device_name = "persistent-disk-0"
-		auto_delete = "true"
+		auto_delete = true
 		initialize_params {
-			image = "projects/${local.GCP_CLIENT_CUSTOM_IMAGE_PROJECT_NAME}/global/images/family/${local.GCP_CLIENT_CUSTOM_IMAGE_FAMILY_NAME}"
+			image = data.google_compute_image.AppImage.id
 		}
 	}
+	allow_stopping_for_update = true
 	network_interface {
 		network = module.vpc.PublicVpcNetwork.self_link
-		network_ip = local.GCP_CLIENT_IFACE_ETH0_PRIVATE_IP_ADDRESS
+		network_ip = local.AppEth0PrivateIpAddress
 		subnetwork = module.vpc.PublicSubnet.self_link
 		access_config {
 			nat_ip = google_compute_address.AppEth0PublicIpAddress.address
@@ -26,122 +27,110 @@ resource "google_compute_instance" "GCP_CLIENT_INSTANCE" {
 		}
 	}
 	metadata = {
-		Owner = local.GCP_OWNER_TAG
-		Project = local.GCP_PROJECT_TAG
-		Options = local.GCP_OPTIONS_TAG
+		Owner = local.OwnerTag
+		Project = local.ProjectTag
 	}
-	tags = local.GCP_CLIENT_NETWORK_TARGET_TAGS
+	tags = local.AppNetworkTargetTags
 	labels = {
-		owner = replace(replace(local.GCP_OWNER_TAG, ".", "-"), "@", "-")
-		project = lower(local.GCP_PROJECT_TAG)
-		options = lower(local.GCP_OPTIONS_TAG)
+		owner = replace(replace(local.OwnerTag, ".", "-"), "@", "-")
+		project = lower(local.ProjectTag)
 	}
 }
 
-resource "google_compute_address" "GCP_VMONE1_IFACE_ETH0_PUBLIC_IP_ADDRESS" {
-	name = "${local.LoginIdTag}-${local.GCP_PROJECT_TAG}-${local.GCP_VMONE1_IFACE_ETH0_PUBLIC_IP_ADDRESS_NAME}"
+resource "google_compute_address" "Agent1Eth0PublicIpAddress" {
+	name = "${local.LoginIdTag}-${local.ProjectTag}-${local.Agent1Eth0PublicIpAddressName}"
 	region = local.RegionName
 	network_tier = "PREMIUM"
 	address_type = "EXTERNAL"
 }
 
-resource "google_compute_instance" "GCP_VMONE1_INSTANCE" {
-	name = "${local.LoginIdTag}-${local.GCP_PROJECT_TAG}-${local.GCP_VMONE1_INSTANCE_NAME}"
-	zone = local.GCP_ZONE_NAME
-	machine_type = "zones/${local.GCP_ZONE_NAME}/machineTypes/${local.GCP_VMONE_MACHINE_TYPE}"
+resource "google_compute_instance" "Agent1Instance" {
+	name = "${local.LoginIdTag}-${local.ProjectTag}-${local.Agent1InstanceName}"
+	zone = local.ZoneName
+	machine_type = local.AgentMachineType
 	boot_disk {
 		device_name = "persistent-disk-0"
-		auto_delete = "true"
+		auto_delete = true
 		initialize_params {
-			image = "projects/${local.GCP_VMONE_CUSTOM_IMAGE_PROJECT_NAME}/global/images/family/${local.GCP_VMONE_CUSTOM_IMAGE_FAMILY_NAME}"
+			image = data.google_compute_image.AgentImage.id
 		}
 	}
-	allow_stopping_for_update = "true"
-	enable_display = "true"
+	allow_stopping_for_update = true
+	enable_display = true
 	network_interface {
 		network = module.vpc.PublicVpcNetwork.self_link
-		network_ip = local.GCP_VMONE1_IFACE_ETH0_PRIVATE_IP_ADDRESS
+		network_ip = local.Agent1Eth0PrivateIpAddress
 		subnetwork = module.vpc.PublicSubnet.self_link
 		access_config {
-			nat_ip = google_compute_address.GCP_VMONE1_IFACE_ETH0_PUBLIC_IP_ADDRESS.address
+			nat_ip = google_compute_address.Agent1Eth0PublicIpAddress.address
 			network_tier = "PREMIUM"
 		}
 	}
 	network_interface {
 		network = module.vpc.Private1VpcNetwork.self_link
-		network_ip = local.GCP_VMONE1_IFACE_ETH1_PRIVATE_IP_ADDRESS
+		network_ip = local.Agent1Eth1PrivateIpAddress
 		subnetwork = module.vpc.Private1Subnet.self_link
-		access_config {
-			network_tier = "PREMIUM"
-		}
 		alias_ip_range {
-			ip_cidr_range = local.GCP_VMONE1_IFACE_ETH1_PRIVATE_IP_ALIASES
+			ip_cidr_range = local.Agent1Eth1PrivateIpAliases
 		}
 	}
 	metadata = {
-		Owner = local.GCP_OWNER_TAG
-		Project = local.GCP_PROJECT_TAG
-		Options = local.GCP_OPTIONS_TAG
-		serial-port-enable = local.GCP_VMONE_SERIAL_PORT_ENABLE
+		Owner = local.OwnerTag
+		Project = local.ProjectTag
+		serial-port-enable = local.AgentSerialPortEnable
 	}
-	tags = local.GCP_VMONE_NETWORK_TARGET_TAGS
+	tags = local.AgentNetworkTargetTags
 	labels = {
-		owner = replace(replace(local.GCP_OWNER_TAG, ".", "-"), "@", "-")
-		project = lower(local.GCP_PROJECT_TAG)
-		options = lower(local.GCP_OPTIONS_TAG)
+		owner = replace(replace(local.OwnerTag, ".", "-"), "@", "-")
+		project = lower(local.ProjectTag)
 	}
 }
 
-resource "google_compute_address" "GCP_VMONE2_IFACE_ETH0_PUBLIC_IP_ADDRESS" {
-	name = "${local.LoginIdTag}-${local.GCP_PROJECT_TAG}-${local.GCP_VMONE2_IFACE_ETH0_PUBLIC_IP_ADDRESS_NAME}"
+resource "google_compute_address" "Agent2Eth0PublicIpAddress" {
+	name = "${local.LoginIdTag}-${local.ProjectTag}-${local.Agent2Eth0PublicIpAddressName}"
 	region = local.RegionName
 	network_tier = "PREMIUM"
 	address_type = "EXTERNAL"
 }
 
-resource "google_compute_instance" "GCP_VMONE2_INSTANCE" {
-	name = "${local.LoginIdTag}-${local.GCP_PROJECT_TAG}-${local.GCP_VMONE2_INSTANCE_NAME}"
-	zone = local.GCP_ZONE_NAME
-	machine_type = "zones/${local.GCP_ZONE_NAME}/machineTypes/${local.GCP_VMONE_MACHINE_TYPE}"
+resource "google_compute_instance" "Agent2Instance" {
+	name = "${local.LoginIdTag}-${local.ProjectTag}-${local.Agent2InstanceName}"
+	zone = local.ZoneName
+	machine_type = local.AgentMachineType
 	boot_disk {
 		device_name = "persistent-disk-0"
-		auto_delete = "true"
+		auto_delete = true
 		initialize_params {
-			image = "projects/${local.GCP_VMONE_CUSTOM_IMAGE_PROJECT_NAME}/global/images/family/${local.GCP_VMONE_CUSTOM_IMAGE_FAMILY_NAME}"
+			image = data.google_compute_image.AgentImage.id
 		}
 	}
-	allow_stopping_for_update = "true"
-	enable_display = "true"
+	allow_stopping_for_update = true
+	enable_display = true
 	network_interface {
 		network = module.vpc.PublicVpcNetwork.self_link
-		network_ip = local.GCP_VMONE2_IFACE_ETH0_PRIVATE_IP_ADDRESS
+		network_ip = local.Agent2Eth0PrivateIpAddress
 		subnetwork = module.vpc.PublicSubnet.self_link
 		access_config {
-			nat_ip = google_compute_address.GCP_VMONE2_IFACE_ETH0_PUBLIC_IP_ADDRESS.address
+			nat_ip = google_compute_address.Agent2Eth0PublicIpAddress.address
 			network_tier = "PREMIUM"
 		}
 	}
 	network_interface {
 		network = module.vpc.Private2VpcNetwork.self_link
-		network_ip = local.GCP_VMONE2_IFACE_ETH1_PRIVATE_IP_ADDRESS
+		network_ip = local.Agent2Eth1PrivateIpAddress
 		subnetwork = module.vpc.Private2Subnet.self_link
-		access_config {
-			network_tier = "PREMIUM"
-		}
 		alias_ip_range {
-			ip_cidr_range = local.GCP_VMONE2_IFACE_ETH1_PRIVATE_IP_ALIASES
+			ip_cidr_range = local.Agent2Eth1PrivateIpAliases
 		}
 	}
 	metadata = {
-		Owner = local.GCP_OWNER_TAG
-		Project = local.GCP_PROJECT_TAG
-		Options = local.GCP_OPTIONS_TAG
-		serial-port-enable = local.GCP_VMONE_SERIAL_PORT_ENABLE
+		Owner = local.OwnerTag
+		Project = local.ProjectTag
+		serial-port-enable = local.AgentSerialPortEnable
 	}
-	tags = local.GCP_VMONE_NETWORK_TARGET_TAGS
+	tags = local.AgentNetworkTargetTags
 	labels = {
-		owner = replace(replace(local.GCP_OWNER_TAG, ".", "-"), "@", "-")
-		project = lower(local.GCP_PROJECT_TAG)
-		options = lower(local.GCP_OPTIONS_TAG)
+		owner = replace(replace(local.OwnerTag, ".", "-"), "@", "-")
+		project = lower(local.ProjectTag)
 	}
 }
