@@ -34,7 +34,7 @@ variable "AppCustomImageProjectId" {
 
 variable "AppMachineType" {
 	default = "n1-standard-4"
-	description = "Designation for set of resources available to Agent VM"
+	description = "Designation for set of resources available to App VM"
 	type = string
 	validation {
 		condition = can(regex("n1-standard-8", var.AppMachineType)) || can(regex("n1-standard-4", var.AppMachineType))
