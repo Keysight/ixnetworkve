@@ -1,6 +1,6 @@
 locals {
-	AgentCustomImageProjectId = var.AgentCustomImageProjectId
 	AgentCustomImageFamilyName = var.AgentCustomImageFamilyName
+	AgentCustomImageProjectId = var.AgentCustomImageProjectId
 	AgentMachineType = var.AgentMachineType
 	AgentNetworkTargetTags = [
 		"${local.AppName}-agent"

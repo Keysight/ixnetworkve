@@ -1,50 +1,65 @@
-terraform {
-	required_version = ">= 0.12.24"
-	experiments = [variable_validation]
-}
-
-variable "GCP_PROJECT_NAME" {
+variable "AgentCustomImageFamilyName" {
+	default = "ixia-virtual-test-appliance-9-30-0-209"
+	description = "Group of images to which Agent image belongs"
 	type = string
-	default = "ixnetwork-ve-gcp"
 }
 
-variable "GCP_REGION_NAME" {
+variable "AgentCustomImageProjectId" {
+	default = "ixvm-261016"
+	description = "Globally unique identifier for Agent image source project"
 	type = string
-	default = "us-central1"
 }
 
-variable "GCP_ZONE_NAME" {
+variable "AgentMachineType" {
+	default = "c2-standard-8"
+	description = "Designation for set of resources available to Agent VM"
 	type = string
-	default = "us-central1-a"
-}
-
-variable "GCP_OWNER_TAG" {
-	type = string
-	default = "gcp-ixnetwork@google.com"
-}
-
-variable "GCP_LOGIN_ID_TAG" {
-	type = string
-	default = "gcp-ixnetwork"
-}
-
-variable "GCP_PROJECT_TAG" {
-	type = string
-	default = "open-ixia-gcp-ixnetwork"
-}
-
-variable "GCP_MGMT_FIREWALL_RULE_SOURCE_IP_RANGES" {
-	type = list(string)
-	default = [
-		"1.1.1.1/32"
-	]
-}
-
-variable "GCP_VMONE_MACHINE_TYPE" {
-	type = string
-	default = "c2-standard-16"
 	validation {
-		condition = can(regex("c2-standard-16", var.GCP_VMONE_MACHINE_TYPE)) || can(regex("c2-standard-8", var.GCP_VMONE_MACHINE_TYPE)) || can(regex("c2-standard-4", var.GCP_VMONE_MACHINE_TYPE))
-		error_message = "GCP_VMONE_MACHINE_TYPE must be one of (c2-standard-16 | c2-standard-8 | c2-standard-4) types."
+		condition = can(regex("c2-standard-16", var.AgentMachineType)) || can(regex("c2-standard-8", var.AgentMachineType)) || can(regex("c2-standard-4", var.AgentMachineType))
+		error_message = "AgentMachineType must be one of (c2-standard-16 | c2-standard-8 | c2-standard-4) types."
 	}
+}
+
+variable "Credentials" {
+	description = "Path to a service account key file in JSON format"
+	sensitive = true
+	type = string
+}
+
+variable "LoginIdTag" {
+	description = "Login ID tag of user creating the stack"
+	type = string
+}
+
+variable "OwnerTag" {
+	description = "Email address tag of user creating the stack"
+	type = string
+}
+
+variable "ProjectId" {
+	description = "Globally unique identifier for working project"
+	type = string
+}
+
+variable "ProjectTag" {
+	default = "cloud-ist"
+	description = "Project tag of user creating the stack"
+	type = string
+}
+
+variable "PublicFirewallRuleSourceIpRanges" {
+	description = "List of IP Addresses /32 or IP CIDR ranges connecting inbound to App"
+	type = list(string)
+}
+
+variable "RegionName" {
+	default = "us-central1"
+	description = "Geographical location where resources can be hosted" 
+	type = string
+}
+
+variable "ZoneName" {
+	default = "us-central1-a"
+	description = "Deployment area within a region"
+	type = string
 }
