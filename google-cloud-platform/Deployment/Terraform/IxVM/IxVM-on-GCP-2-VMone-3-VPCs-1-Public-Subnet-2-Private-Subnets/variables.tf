@@ -1,15 +1,3 @@
-variable "AgentCustomImageFamilyName" {
-	default = "ixia-virtual-test-appliance-9-30-0-209"
-	description = "Group of images to which Agent image belongs"
-	type = string
-}
-
-variable "AgentCustomImageProjectId" {
-	default = "ixvm-261016"
-	description = "Globally unique identifier for Agent image source project"
-	type = string
-}
-
 variable "AgentMachineType" {
 	default = "c2-standard-8"
 	description = "Designation for set of resources available to Agent VM"

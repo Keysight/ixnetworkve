@@ -1,15 +1,3 @@
-variable "AgentCustomImageFamilyName" {
-	default = "ixia-virtual-test-appliance-9-30-0-209"
-	description = "Group of images to which Agent image belongs"
-	type = string
-}
-
-variable "AgentCustomImageProjectId" {
-	default = "ixvm-261016"
-	description = "Globally unique identifier for Agent image source project"
-	type = string
-}
-
 variable "AgentMachineType" {
 	default = "c2-standard-8"
 	description = "Designation for set of resources available to Agent VM"
@@ -18,18 +6,6 @@ variable "AgentMachineType" {
 		condition = can(regex("c2-standard-16", var.AgentMachineType)) || can(regex("c2-standard-8", var.AgentMachineType)) || can(regex("c2-standard-4", var.AgentMachineType))
 		error_message = "AgentMachineType must be one of (c2-standard-16 | c2-standard-8 | c2-standard-4) types."
 	}
-}
-
-variable "AppCustomImageFamilyName" {
-	default = "ixnetwork-cloud-gcp-9-30-2212-7"
-	description = "Group of images to which App image belongs"
-	type = string
-}
-
-variable "AppCustomImageProjectId" {
-	default = "ixvm-261016"
-	description = "Globally unique identifier for App image source project"
-	type = string
 }
 
 variable "AppMachineType" {

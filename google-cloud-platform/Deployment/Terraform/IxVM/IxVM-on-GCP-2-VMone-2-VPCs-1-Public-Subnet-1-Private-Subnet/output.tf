@@ -1,7 +1,7 @@
 output "AgentImage" {
 	value = {
-		"family" : data.google_compute_image.AgentImage.family
-		"name" : data.google_compute_image.AgentImage.name
-		"project" : data.google_compute_image.AgentImage.project
+		"family" : module.agent1.AgentImage.family
+		"name" : module.agent1.AgentImage.name
+		"project" : module.agent1.AgentImage.project
 	}
 }

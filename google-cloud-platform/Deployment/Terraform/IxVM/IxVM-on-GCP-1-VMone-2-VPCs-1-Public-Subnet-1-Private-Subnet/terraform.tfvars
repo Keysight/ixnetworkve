@@ -1,5 +1,2 @@
-# Credentials = "~/credentials.json"
-# LoginIdTag = "gcp-ixnetwork"
-# OwnerTag = "gcp-ixnetwork@google.com"
-# ProjectId = "ixnetwork-ve-gcp"
-# PublicFirewallRuleSourceIpRanges = [ "1.1.1.1/32" ]
+ProjectId = "kt-nas-demo"
+PublicFirewallRuleSourceIpRanges = [ "204.9.57.138/32" ]
