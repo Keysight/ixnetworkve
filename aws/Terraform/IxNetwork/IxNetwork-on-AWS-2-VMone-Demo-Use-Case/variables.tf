@@ -1,15 +1,3 @@
-variable "AgentAmiName" {
-	default = "Ixia_Virtual_Test_Appliance_9.30.0.209_KVM BYOL-eaa16046-9580-4e91-8167-302d8cb0da84"
-	description = "AMI name used for deploying Agent instances"
-	type = string
-}
-
-variable "AgentAmiOwner" {
-	default = "aws-marketplace"
-	description = "Owner of AMI used for deploying Agent instances"
-	type = string
-}
-
 variable "AgentInstanceType" {
 	default = "c5n.4xlarge"
 	description = "Instance type of Agent VM"
@@ -25,18 +13,6 @@ variable "ApiMaxRetries" {
 	type = number
 }
 
-variable "AppAmiName" {
-	default = "ixnetwork-cloud-ami-9-30-2212-7-b81852f3-030c-4879-9620-67f7e2563e1f"
-	description = "AMI name used for deploying App instances"
-	type = string
-}
-
-variable "AppAmiOwner" {
-	default = "aws-marketplace"
-	description = "Owner of AMI used for deploying App instances"
-	type = string
-}
-
 variable "AppInstanceType" {
 	default = "m5.xlarge"
 	description = "Instance type of App VM"
@@ -47,7 +23,7 @@ variable "AppInstanceType" {
 	}
 }
 
-variable "AppSSHKey" {
+variable "AppSshKeyName" {
 	description = "Name of an existing EC2 KeyPair to enable SSH access"
 	type = string
 }
@@ -71,11 +47,6 @@ variable "Private2SubnetAvailabilityZone" {
 	type = string
 }
 
-variable "ProjectTag" {
-	default = "CLOUD_IST"
-	type = string
-}
-
 variable "PublicSubnetAvailabilityZone" {
 	default = "us-east-1a"
 	type = string
@@ -88,7 +59,7 @@ variable "Region" {
 
 variable "UserEmailTag" {
 	type = string
-	description = "Email address tag of user creating the stack"
+	description = "Email address tag of user creating the deployment"
 	validation {
 		condition = length(var.UserEmailTag) >= 14
 		error_message = "UserEmailTag minimum length must be >= 14."
@@ -97,9 +68,14 @@ variable "UserEmailTag" {
 
 variable "UserLoginTag" {
 	type = string
-	description = "Login ID tag of user creating the stack"
+	description = "Login ID tag of user creating the deployment"
 	validation {
 		condition = length(var.UserLoginTag) >= 4
 		error_message = "UserLoginTag minimum length must be >= 4."
 	}
+}
+
+variable "UserProjectTag" {
+	default = "cloud-ist"
+	type = string
 }

@@ -1,23 +1,23 @@
 output "AgentAmi" {
 	value = {
-		"image_id" : data.aws_ami.AMI_AGENT.image_id
-		"name" : data.aws_ami.AMI_AGENT.name
-		"owner_id" : data.aws_ami.AMI_AGENT.owner_id
+		"image_id" : module.Agent1.Ami.image_id
+		"name" : module.Agent1.Ami.name
+		"owner_id" : module.Agent1.Ami.owner_id
 	}
 }
 
 output "AppAmi" {
 	value = {
-		"image_id" : data.aws_ami.AMI_APP.image_id
-		"name" : data.aws_ami.AMI_APP.name
-		"owner_id" : data.aws_ami.AMI_APP.owner_id
+		"image_id" : module.App.Ami.image_id
+		"name" : module.App.Ami.name
+		"owner_id" : module.App.Ami.owner_id
 	}
 }
 
 output "AppEth0ElasticIp" {
 	value = {
-		"public_dns" : aws_eip.AppEth0ElasticIp.public_dns
-		"public_ip" : aws_eip.AppEth0ElasticIp.public_ip
+		"public_dns" : module.App.Eth0ElasticIp.public_dns
+		"public_ip" : module.App.Eth0ElasticIp.public_ip
 	}
 }
 
