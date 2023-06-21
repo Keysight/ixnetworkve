@@ -28,6 +28,16 @@ variable "AppSshKeyName" {
 	type = string
 }
 
+variable "AwsAccessCredentialsAccessKey" {
+	description = "Access key component of credentials used for programmatic calls to AWS."
+	type = string
+}
+
+variable "AwsAccessCredentialsSecretKey" {
+	description = "Secret access key component of credentials used for programmatic calls to AWS."
+	type = string
+}
+
 variable "InboundIPv4CidrBlock" {
 	type = string
 	description = "IP Address /32 or IP CIDR range connecting inbound to App"
