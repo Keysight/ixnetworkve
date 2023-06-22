@@ -7,7 +7,7 @@ locals {
 	AppInstanceType = var.AppInstanceType
 	AppSshKeyName = var.AppSshKeyName
 	AppTag = "ixnetwork"
-	AppVersion = "9-30"
+	AppVersion = "9-36"
 	InboundIPv4CidrBlock = var.InboundIPv4CidrBlock
 	PlacementGroupName = "${local.Preamble}-placement-group-${local.Region}"
 	PlacementGroupStrategy = "cluster"

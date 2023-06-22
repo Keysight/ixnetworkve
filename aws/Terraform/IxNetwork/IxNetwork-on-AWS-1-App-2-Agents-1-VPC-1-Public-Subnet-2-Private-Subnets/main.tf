@@ -4,11 +4,9 @@ module "App" {
 	Eth0SubnetId = module.Vpc.PublicSubnet.id
 	InstanceType = local.AppInstanceType
 	SshKeyName = local.AppSshKeyName
-	Tag = local.AppTag
 	UserEmailTag = local.UserEmailTag
 	UserLoginTag = local.UserLoginTag
 	UserProjectTag = local.UserProjectTag
-	Version = local.AppVersion
 	depends_on = [
 		module.Vpc
 	]
@@ -23,11 +21,9 @@ module "Agent1" {
 	InstanceId = local.Agent1InstanceId
 	InstanceType = local.AgentInstanceType
 	PlacementGroupId = aws_placement_group.PlacementGroup.id
-	Tag = local.AppTag
 	UserEmailTag = local.UserEmailTag
 	UserLoginTag = local.UserLoginTag
 	UserProjectTag = local.UserProjectTag
-	Version = local.AppVersion
 	depends_on = [
 		aws_placement_group.PlacementGroup,
 		module.Vpc
@@ -45,11 +41,9 @@ module "Agent2" {
 	InstanceId = local.Agent2InstanceId
 	InstanceType = local.AgentInstanceType
 	PlacementGroupId = aws_placement_group.PlacementGroup.id
-	Tag = local.AppTag
 	UserEmailTag = local.UserEmailTag
 	UserLoginTag = local.UserLoginTag
 	UserProjectTag = local.UserProjectTag
-	Version = local.AppVersion
 	depends_on = [
 		aws_placement_group.PlacementGroup,
 		module.Vpc

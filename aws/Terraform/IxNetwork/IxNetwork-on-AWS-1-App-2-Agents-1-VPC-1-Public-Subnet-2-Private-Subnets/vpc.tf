@@ -5,9 +5,11 @@ module "Vpc" {
 	Private2SubnetAvailabilityZone = local.Private2SubnetAvailabilityZone
 	PublicSubnetAvailabilityZone = local.PublicSubnetAvailabilityZone
 	Region = local.Region
+	Tag = local.AppTag
 	UserEmailTag = local.UserEmailTag
 	UserLoginTag = local.UserLoginTag
 	UserProjectTag = local.UserProjectTag
+	Version = local.AppVersion
 }
 
 resource "aws_security_group_rule" "PublicIngress3389" {
