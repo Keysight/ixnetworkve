@@ -1,33 +1,33 @@
-module "app" {
-	source = "../../modules/gcp-ixnetwork-app"
-	AppEth0SubnetName = module.vpc.PublicSubnet.name
-	AppEth0VpcNetworkName = module.vpc.PublicVpcNetwork.name
-	AppMachineType = local.AppMachineType
-	LoginIdTag = local.LoginIdTag
-	OwnerTag = local.OwnerTag
-	ProjectTag = local.ProjectTag
+module "App" {
+	source = "armdupre/module-ixnetwork-app/google"
+	Eth0SubnetName = module.Vpc.PublicSubnet.name
+	Eth0VpcNetworkName = module.Vpc.PublicVpcNetwork.name
+	MachineType = local.AppMachineType
 	RegionName = local.RegionName
+	UserEmailTag = local.UserEmailTag
+	UserLoginTag = local.UserLoginTag
+	UserProjectTag = local.UserProjectTag
 	ZoneName = local.ZoneName
 	depends_on = [
-		module.vpc.PublicSubnet,
-		module.vpc.PublicVpcNetwork
+		module.Vpc.PublicSubnet,
+		module.Vpc.PublicVpcNetwork
 	]
 }
 
-module "agent" {
-	source = "../../modules/gcp-ixnetwork-agent"
-	AgentEth0SubnetName = module.vpc.PublicSubnet.name
-	AgentEth0VpcNetworkName = module.vpc.PublicVpcNetwork.name
-	AgentEth1SubnetName = module.vpc.PrivateSubnet.name
-	AgentEth1VpcNetworkName = module.vpc.PrivateVpcNetwork.name
-	AgentMachineType = local.AgentMachineType
-	LoginIdTag = local.LoginIdTag
-	OwnerTag = local.OwnerTag
-	ProjectTag = local.ProjectTag
+module "Agent1" {
+	source = "armdupre/module-ixnetwork-agent/google"
+	Eth0SubnetName = module.Vpc.PublicSubnet.name
+	Eth0VpcNetworkName = module.Vpc.PublicVpcNetwork.name
+	Eth1SubnetName = module.Vpc.PrivateSubnet.name
+	Eth1VpcNetworkName = module.Vpc.PrivateVpcNetwork.name
+	MachineType = local.AgentMachineType
 	RegionName = local.RegionName
+	UserEmailTag = local.UserEmailTag
+	UserLoginTag = local.UserLoginTag
+	UserProjectTag = local.UserProjectTag
 	ZoneName = local.ZoneName
 	depends_on = [
-		module.vpc.PublicSubnet,
-		module.vpc.PublicVpcNetwork
+		module.Vpc.PublicSubnet,
+		module.Vpc.PublicVpcNetwork
 	]
 }
