@@ -1,9 +1,9 @@
-# Credentials = "~/credentials.json"
-# LoginIdTag = "gcp-ixnetwork"
-# OwnerTag = "gcp-ixnetwork@google.com"
-# PrivateSubnetName = "gcp-ixnetwork-cloud-ist-test-01-subnet"
-# PrivateVpcNetworkName = "gcp-ixnetwork-cloud-ist-test-01-vpc-network"
-# ProjectId = "ixnetwork-ve-gcp"
+# Credentials = "~/gcp/credentials.json"
+# PrivateSubnetName = "terraform-example-test-01-subnet"
+# PrivateVpcNetworkName = "terraform-example-test-01-vpc-network"
+# ProjectId = "example"
 # PublicFirewallRuleSourceIpRanges = [ "1.1.1.1/32" ]
-# PublicSubnetName = "gcp-ixnetwork-cloud-ist-management-subnet"
-# PublicVpcNetworkName = "gcp-ixnetwork-cloud-ist-management-vpc-network"
+# PublicSubnetName = "terraform-example-management-subnet"
+# PublicVpcNetworkName = "terraform-example-management-vpc-network"
+# UserEmailTag = "terraform@example.com
+# UserLoginTag = "terraform"

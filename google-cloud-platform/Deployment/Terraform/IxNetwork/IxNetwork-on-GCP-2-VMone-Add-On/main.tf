@@ -1,43 +1,43 @@
-module "app" {
-	source = "../../modules/gcp-ixnetwork-app"
-	AppEth0SubnetName = local.PublicSubnetName
-	AppEth0VpcNetworkName = local.PublicVpcNetworkName
-	AppMachineType = local.AppMachineType
-	LoginIdTag = local.LoginIdTag
-	OwnerTag = local.OwnerTag
-	ProjectTag = local.ProjectTag
+module "App" {
+	source = "armdupre/module-ixnetwork-app/google"
+	Eth0SubnetName = local.PublicSubnetName
+	Eth0VpcNetworkName = local.PublicVpcNetworkName
+	MachineType = local.AppMachineType
 	RegionName = local.RegionName
+	UserEmailTag = local.UserEmailTag
+	UserLoginTag = local.UserLoginTag
+	UserProjectTag = local.UserProjectTag
 	ZoneName = local.ZoneName
 }
 
-module "agent1" {
-	source = "../../modules/gcp-ixnetwork-agent"
-	AgentEth0SubnetName = local.PublicSubnetName
-	AgentEth0VpcNetworkName = local.PublicVpcNetworkName
-	AgentEth1SubnetName = local.PrivateSubnetName
-	AgentEth1VpcNetworkName = local.PrivateVpcNetworkName
-	AgentMachineType = local.AgentMachineType
-	LoginIdTag = local.LoginIdTag
-	OwnerTag = local.OwnerTag
-	ProjectTag = local.ProjectTag
+module "Agent1" {
+	source = "armdupre/module-ixnetwork-agent/google"
+	Eth0SubnetName = local.PublicSubnetName
+	Eth0VpcNetworkName = local.PublicVpcNetworkName
+	Eth1SubnetName = local.PrivateSubnetName
+	Eth1VpcNetworkName = local.PrivateVpcNetworkName
+	MachineType = local.AgentMachineType
 	RegionName = local.RegionName
+	UserEmailTag = local.UserEmailTag
+	UserLoginTag = local.UserLoginTag
+	UserProjectTag = local.UserProjectTag
 	ZoneName = local.ZoneName
 }
 
-module "agent2" {
-	source = "../../modules/gcp-ixnetwork-agent"
-	AgentEth0SubnetName = local.PublicSubnetName
-	AgentEth0VpcNetworkName = local.PublicVpcNetworkName
-	AgentEth1SubnetName = local.PrivateSubnetName
-	AgentEth1VpcNetworkName = local.PrivateVpcNetworkName
-	AgentMachineType = local.AgentMachineType
-	AgentEth0PrivateIpAddress = local.Agent2Eth0PrivateIpAddress
-	AgentEth1PrivateIpAddress = local.Agent2Eth1PrivateIpAddress
-	AgentEth1PrivateIpAliases = local.Agent2Eth1PrivateIpAliases
-	AgentId = local.Agent2Id
-	LoginIdTag = local.LoginIdTag
-	OwnerTag = local.OwnerTag
-	ProjectTag = local.ProjectTag
+module "Agent2" {
+	source = "armdupre/module-ixnetwork-agent/google"
+	Eth0PrivateIpAddress = local.Agent2Eth0PrivateIpAddress
+	Eth0SubnetName = local.PublicSubnetName
+	Eth0VpcNetworkName = local.PublicVpcNetworkName
+	Eth1PrivateIpAddress = local.Agent2Eth1PrivateIpAddress
+	Eth1PrivateIpAliases = local.Agent2Eth1PrivateIpAliases
+	Eth1SubnetName = local.PrivateSubnetName
+	Eth1VpcNetworkName = local.PrivateVpcNetworkName
+	InstanceId = local.Agent2InstanceId
+	MachineType = local.AgentMachineType
 	RegionName = local.RegionName
+	UserEmailTag = local.UserEmailTag
+	UserLoginTag = local.UserLoginTag
+	UserProjectTag = local.UserProjectTag
 	ZoneName = local.ZoneName
 }

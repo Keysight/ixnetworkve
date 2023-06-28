@@ -19,18 +19,8 @@ variable "AppMachineType" {
 }
 
 variable "Credentials" {
-	description = "Path to a service account key file in JSON format"
+	description = "Path to (or contents of) a service account key file in JSON format"
 	sensitive = true
-	type = string
-}
-
-variable "LoginIdTag" {
-	description = "Login ID tag of user creating the stack"
-	type = string
-}
-
-variable "OwnerTag" {
-	description = "Email address tag of user creating the stack"
 	type = string
 }
 
@@ -44,12 +34,6 @@ variable "PrivateVpcNetworkName" {
 
 variable "ProjectId" {
 	description = "Globally unique identifier for working project"
-	type = string
-}
-
-variable "ProjectTag" {
-	default = "cloud-ist"
-	description = "Project tag of user creating the stack"
 	type = string
 }
 
@@ -69,6 +53,22 @@ variable "PublicVpcNetworkName" {
 variable "RegionName" {
 	default = "us-central1"
 	description = "Geographical location where resources can be hosted" 
+	type = string
+}
+
+variable "UserEmailTag" {
+	description = "Email address tag of user creating the deployment"
+	type = string
+}
+
+variable "UserLoginTag" {
+	description = "Login ID tag of user creating the deployment"
+	type = string
+}
+
+variable "UserProjectTag" {
+	default = "cloud-ist"
+	description = "Project tag of user creating the deployment"
 	type = string
 }
 
