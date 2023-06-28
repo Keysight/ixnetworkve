@@ -1,7 +1,7 @@
 output "AgentImage" {
 	value = {
-		"family" : module.agent.AgentImage.family
-		"name" : module.agent.AgentImage.name
-		"project" : module.agent.AgentImage.project
+		"family" : module.Agent1.Image.family
+		"name" : module.Agent1.Image.name
+		"project" : module.Agent1.Image.project
 	}
 }
