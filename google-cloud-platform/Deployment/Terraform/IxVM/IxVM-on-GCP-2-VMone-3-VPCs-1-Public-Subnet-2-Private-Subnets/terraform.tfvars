@@ -1,5 +1,5 @@
-# Credentials = "~/credentials.json"
-# LoginIdTag = "gcp-ixnetwork"
-# OwnerTag = "gcp-ixnetwork@google.com"
-# ProjectId = "ixnetwork-ve-gcp"
+# Credentials = "~/gcp/credentials.json"
+# ProjectId = "example"
 # PublicFirewallRuleSourceIpRanges = [ "1.1.1.1/32" ]
+# UserEmailTag = "terraform@example.com
+# UserLoginTag = "terraform"
