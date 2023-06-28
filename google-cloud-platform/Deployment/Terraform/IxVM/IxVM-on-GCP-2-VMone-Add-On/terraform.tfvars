@@ -1,0 +1,9 @@
+# Credentials = "~/credentials.json"
+# LoginIdTag = "gcp-ixnetwork"
+# OwnerTag = "gcp-ixnetwork@google.com"
+# PrivateSubnetName = "gcp-ixnetwork-cloud-ist-test-01-subnet"
+# PrivateVpcNetworkName = "gcp-ixnetwork-cloud-ist-test-01-vpc-network"
+# ProjectId = "ixnetwork-ve-gcp"
+# PublicFirewallRuleSourceIpRanges = [ "1.1.1.1/32" ]
+# PublicSubnetName = "gcp-ixnetwork-cloud-ist-management-subnet"
+# PublicVpcNetworkName = "gcp-ixnetwork-cloud-ist-management-vpc-network"
