@@ -1,0 +1,300 @@
+---
+- hosts: localhost
+  become: no
+  gather_facts: False
+  vars:
+      web_ui_new_password: TestAnsible1234*
+      hostname: 10.0.0.10
+      username: ixia
+      password: ixia123
+      datastore: datastore1
+      chassisname: Ansible_VirtualChassis
+      vmonename: Ansible_VTA
+      vlmname: Ansible_VLM
+      chassis_image: /home/ixia/Ixia_Virtual_Chassis_9.36_ESXi.ova
+      vlm_image: /home/ixia/Ixia_Virtual_Load_Module_IXN_9.36_ESXi.ova
+      vmone_image: /home/ixia/Ixia_Virtual_Test_Appliance_IXN_9.36_ESXi.ova
+      mng_network: VM Network
+      test_network: VMNetwork_1
+  
+  tasks:
+  
+  - name: Gather all info for registered virtual machines
+    community.vmware.vmware_vm_info:
+      hostname: '{{hostname}}'
+      username: '{{username}}'
+      password: '{{password}}'
+      validate_certs: no
+      vm_type: vm
+    delegate_to: localhost
+    register: vm_info
+    
+  - debug:
+       msg: "{{ vm_info }}"
+
+  - name: Deploy VLMs
+    vmware_deploy_ovf:
+      hostname: '{{hostname}}'
+      username: '{{username}}'
+      password: '{{password}}'
+      validate_certs: no
+      name: "{{item}}_{{my_idx}}"
+      datastore: '{{datastore}}'
+      disk_provisioning: thin
+      networks: 
+        "Management Network": '{{mng_network}}'
+        "Test Network": '{{test_network}}'
+      ova: '{{vlm_image}}'
+      allow_duplicates: no
+      power_on: yes
+      fail_on_spec_warnings: yes
+      wait: yes
+      wait_for_ip_address: yes
+    loop:
+      - '{{vlmname}}'
+      - '{{vlmname}}'
+    loop_control:
+      index_var: my_idx
+    async: 200  # Maximum runtime in seconds. Adjust as needed.
+    poll: 0  # Fire and continue (never poll)
+    delegate_to: localhost
+
+  - name: Deploy Vmone
+    vmware_deploy_ovf:
+      hostname: '{{hostname}}'
+      username: '{{username}}'
+      password: '{{password}}'
+      validate_certs: no
+      name: '{{vmonename}}'
+      datastore: '{{datastore}}'
+      disk_provisioning: thin
+      networks: 
+        "Management Network": '{{mng_network}}'
+        "Test Network 1": '{{test_network}}'
+        "Test Network 2": '{{test_network}}'
+      ova: '{{vmone_image}}'
+      allow_duplicates: no
+      power_on: yes
+      fail_on_spec_warnings: yes
+      wait: yes
+      wait_for_ip_address: yes
+    delegate_to: localhost
+
+  - name: Deploy Hogan Chassis
+    vmware_deploy_ovf:
+      hostname: '{{hostname}}'
+      username: '{{username}}'
+      password: '{{password}}'
+      validate_certs: no
+      name: '{{chassisname}}'
+      datastore: '{{datastore}}'
+      disk_provisioning: thin
+      networks: 
+        "Management Network": '{{mng_network}}'
+        "Backplane Network": '{{test_network}}'
+      ova: '{{chassis_image}}'
+      allow_duplicates: no
+      power_on: yes
+      fail_on_spec_warnings: yes
+      wait: yes
+      wait_for_ip_address: yes
+    delegate_to: localhost
+
+  - pause: seconds=30
+
+  - name: Gather all info for registered virtual machines
+    community.vmware.vmware_vm_info:
+      hostname: '{{hostname}}'
+      username: '{{username}}'
+      password: '{{password}}'
+      validate_certs: no
+      vm_type: vm
+    delegate_to: localhost
+    register: vm_info
+    
+  - debug:
+       msg: "{{ vm_info }}"
+
+
+  - set_fact: 
+      chassis_ip={{ item.ip_address }}
+    with_items:
+      - "{{ vm_info.virtual_machines | json_query(query) }}"
+    vars:
+      query: "[?guest_name=='{{chassisname}}']"
+
+  - debug: var=chassis_ip
+
+  - set_fact: 
+      vta_ip={{ item.ip_address }}
+    with_items:
+      - "{{ vm_info.virtual_machines | json_query(query) }}"
+    vars:
+      query: "[?guest_name=='{{vmonename}}']"
+
+  - debug: var=vta_ip
+
+  - set_fact: 
+      vlm1_ip={{ item.ip_address }}
+    with_items:
+      - "{{ vm_info.virtual_machines | json_query(query) }}"
+    vars:
+      query: "[?guest_name=='{{vlmname}}_0']"
+
+  - debug: var=vlm1_ip
+
+  - set_fact: 
+      vlm2_ip={{ item.ip_address }}
+    with_items:
+      - "{{ vm_info.virtual_machines | json_query(query) }}"
+    vars:
+      query: "[?guest_name=='{{vlmname}}_1']"
+
+  - debug: var=vlm2_ip
+
+  - name: Change web ui auth credentials
+    uri:
+      url: https://{{chassis_ip}}/platform/api/v2/auth/changepassword
+      method: POST
+      body: '{"username" : "admin","oldpassword" : "admin","password": "{{web_ui_new_password}}"}'
+      return_content: yes
+      force_basic_auth: yes
+      validate_certs: no
+      follow_redirects: all
+      status_code: 200
+      body_format: json
+    register: change_password
+
+  - name: Gather chassis api auth info
+    uri:
+      url: https://{{chassis_ip}}/api/v1/auth/session
+      method: POST
+      body: '{"username" : "admin","password" : "{{web_ui_new_password}}","rememberMe": "false"}'
+      return_content: yes
+      force_basic_auth: yes
+      validate_certs: no
+      follow_redirects: all
+      status_code: 200
+      body_format: json
+    register: auth_result
+
+  - debug: var=auth_result.json.apiKey
+
+  - name: Attach VLM_1
+    uri:
+      url: https://{{chassis_ip}}/api/v2/ixos/cards/
+      method: POST
+      headers:
+       x-api-key: "{{auth_result.json.apiKey}}"
+      body: '{"ipAddress" : "{{vlm1_ip}}", "slotNumber" : "1"}'
+      return_content: yes
+      force_basic_auth: yes
+      validate_certs: no
+      follow_redirects: all
+      status_code: 202
+      body_format: json
+    register: attach_result
+
+  - name: Attach VLM_2
+    uri:
+      url: https://{{chassis_ip}}/api/v2/ixos/cards/
+      method: POST
+      headers:
+       x-api-key: "{{auth_result.json.apiKey}}"
+      body: '{"ipAddress" : "{{vlm2_ip}}", "slotNumber" : "2"}'
+      return_content: yes
+      force_basic_auth: yes
+      validate_certs: no
+      follow_redirects: all
+      status_code: 202
+      body_format: json
+    register: attach_result
+
+  - name: check attach is completed
+    uri:
+      url: "{{attach_result.json.url}}"
+      method: GET
+      headers:
+        x-api-key: "{{auth_result.json.apiKey}}"
+      return_content: yes
+      force_basic_auth: yes
+      validate_certs: no
+      follow_redirects: all
+      status_code: 200
+      body_format: json
+    register: result_status
+    until: result_status.json.state == "COMPLETED"
+    retries: 10
+    delay: 5
+  - debug: var=result_status
+
+  - name: Disable license check
+    uri:
+      url: https://{{chassis_ip}}/chassis/api/v2/ixos/chassis/1000
+      method: PATCH
+      headers:
+       x-api-key: "{{auth_result.json.apiKey}}" 
+      body: '{"licenseCheck": "DISABLED"}'
+      return_content: yes
+      force_basic_auth: yes
+      validate_certs: no
+      follow_redirects: all
+      status_code: 200
+      body_format: json
+
+  - name: Get chassis services info 
+    uri:
+      url: https://{{chassis_ip}}/chassis/api/v2/ixos/services
+      method: GET
+      headers:
+       x-api-key: "{{auth_result.json.apiKey}}" 
+      return_content: yes
+      force_basic_auth: yes
+      validate_certs: no
+      follow_redirects: all
+      status_code: 200
+      body_format: json
+    register: get_services
+
+  - set_fact: 
+      ixserver_id={{ item.id }}
+    with_items:
+      - "{{ get_services.json | json_query(query) }}"
+    vars:
+      query: "[?name=='ixServer.service']"
+
+  - debug: var=ixserver_id
+
+  - name: Restart IxServer
+    uri:
+      url: https://{{chassis_ip}}/chassis/api/v2/ixos/services/{{ixserver_id}}/operations/restart
+      method: POST
+      headers:
+       x-api-key: "{{auth_result.json.apiKey}}"
+      return_content: yes
+      force_basic_auth: yes
+      validate_certs: no
+      follow_redirects: all
+      status_code: 202
+    register: restart_result
+
+  - debug: var=restart_result.json
+
+  - name: Check IxServer is up
+    uri:
+      url: "{{restart_result.json.url}}"
+      method: GET
+      headers:
+        x-api-key: "{{auth_result.json.apiKey}}"
+      return_content: yes
+      force_basic_auth: yes
+      validate_certs: no
+      follow_redirects: all
+      status_code: 200
+      body_format: json
+    register: result_status
+    until: result_status.json.state == "COMPLETED"
+    retries: 10
+    delay: 5
+  - debug: var=result_status
+
