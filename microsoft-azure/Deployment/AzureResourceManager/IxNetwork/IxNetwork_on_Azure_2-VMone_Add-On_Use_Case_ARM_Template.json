@@ -1,0 +1,1007 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"DiagnosticsStorageAccountName": {
+			"defaultValue": "ixvmbootdiagnostics",
+			"type": "String"
+		},
+		"VnetName": {
+			"defaultValue": "vnet",
+			"type": "String"
+		},
+		"ManagementSubnetName": {
+			"defaultValue": "mngt_subnet",
+			"type": "String"
+		},
+		"Test1SubnetName": {
+			"defaultValue": "test_subnet1",
+			"type": "String"
+		},
+		"Test2SubnetName": {
+			"defaultValue": "test_subnet2",
+			"type": "String"
+		},
+		"ManagementSecurityRuleSourceIPPrefix": {
+			"defaultValue": "213.249.122.234/32",
+			"type": "String"
+		},
+		"IxNetworkClientVmSize": {
+			"defaultValue": "Standard_F4s_v2",
+			"type": "String",
+			"allowedValues": [
+				"Standard_F4s_v2",
+				"Standard_F8s_v2"
+			]
+		},
+		"VirtualTestAppliance1Eth0IpAddress": {
+			"defaultValue": "10.0.1.13",
+			"type": "String"
+		},
+		"VirtualTestAppliance1Eth1IpAddresses": {
+			"defaultValue": ["10.0.10.32", "10.0.10.33", "10.0.10.34", "10.0.10.35", "10.0.10.36", "10.0.10.37", "10.0.10.38", "10.0.10.39", "10.0.10.40", "10.0.10.41"],
+			"type": "Array"
+		},
+		"VirtualTestAppliance2Eth0IpAddress": {
+			"defaultValue": "10.0.1.14",
+			"type": "String"
+		},
+		"VirtualTestAppliance2Eth1IpAddresses": {
+			"defaultValue": ["10.0.11.32","10.0.11.33","10.0.11.34","10.0.11.35","10.0.11.36","10.0.11.37","10.0.11.38","10.0.11.39","10.0.11.40","10.0.11.41"],
+			"type": "Array"
+		},
+		"IxNetworkClientUsername": {
+			"minLength": 1,
+			"type": "String"
+		},
+		"IxNetworkClientPassword": {
+			"type": "securestring"
+		},
+		"VirtualTestApplianceAdminUsername": {
+			"minLength": 1,
+			"type": "String"
+		},
+		"VirtualTestApplianceAdminPassword": {
+			"type": "securestring"
+		},
+		"VirtualTestApplianceVmSize": {
+			"defaultValue": "Standard_F4s_v2",
+			"type": "String",
+			"allowedValues": [
+				"Standard_F16s_v2",
+				"Standard_F8s_v2",
+				"Standard_F4s_v2"
+			]
+		},
+		"OptionalVMPrefix": {
+			"defaultValue": "VE",
+			"type": "String"
+		},
+		"UserEmailTag": {
+			"defaultValue": "Optional-Email-Tag",
+			"type": "String"
+		},
+		"UserProjectTag": {
+			"defaultValue": "Optional-Project-Tag",
+			"type": "String"
+		}
+	},
+	"variables": {
+		"apiVersion": "2018-06-01",
+		"SubscriptionId": "[subscription().subscriptionId]",
+		"OptionalVMPrefix": "[parameters('OptionalVMPrefix')]",
+		"UserEmailTag": "[parameters('UserEmailTag')]",
+		"UserProjectTag": "[parameters('UserProjectTag')]",
+		"DiagnosticsStorageAccountName": "[parameters('DiagnosticsStorageAccountName')]",
+		"VnetName": "[parameters('VnetName')]",
+		"ManagementSubnetName": "[parameters('ManagementSubnetName')]",
+		"MgmtSubnetRef": "[resourceId(resourceGroup().name, 'Microsoft.Network/virtualNetworks/subnets', variables('VnetName'),  variables('ManagementSubnetName'))]",
+		"Test1SubnetName": "[parameters('Test1SubnetName')]",
+		"Test1SubnetRef": "[resourceId(resourceGroup().name, 'Microsoft.Network/virtualNetworks/subnets', variables('VnetName'),  variables('Test1SubnetName'))]",
+		"Test2SubnetName": "[parameters('Test2SubnetName')]",
+		"Test2SubnetRef": "[resourceId(resourceGroup().name, 'Microsoft.Network/virtualNetworks/subnets', variables('VnetName'),  variables('Test2SubnetName'))]",
+		"MgmtNetworkSecurityGroupName": "[concat(variables('OptionalVMPrefix'), '_', 'NETWORK_SECURITY_GROUP')]",
+		"Test1NetworkSecurityGroupName": "[concat(variables('OptionalVMPrefix'), '_', 'TEST1_NETWORK_SECURITY_GROUP')]",
+		"Test2NetworkSecurityGroupName": "[concat(variables('OptionalVMPrefix'), '_', 'TEST2_NETWORK_SECURITY_GROUP')]",
+		"MgmtSshSecurityRuleName": "[concat(variables('OptionalVMPrefix'), '_', 'SSH_RULE')]",
+		"MgmtHttpSecurityRuleName": "[concat(variables('OptionalVMPrefix'), '_', 'WEB_RULE')]",
+		"MgmtHttpsSecurityRuleName": "[concat(variables('OptionalVMPrefix'), '_', 'HTTPS_RULE')]",
+		"MgmtRdpSecurityRuleName": "[concat(variables('OptionalVMPrefix'), '_', 'RDP_RULE')]",
+		"ManagementSecurityRuleSourceIPPrefix": "[parameters('ManagementSecurityRuleSourceIPPrefix')]",
+		"IxNetworkClientEth0Name": "[concat(variables('OptionalVMPrefix'), '_', 'IXNETWORK_CLIENT_ETH0')]",
+		"VirtualTestAppliance1Eth0Name": "[concat(variables('OptionalVMPrefix'), '_', 'IXNETWORK_VIRTUALTESTAPPLIANCE1_ETH0')]",
+		"VirtualTestAppliance1Eth1Name": "[concat(variables('OptionalVMPrefix'), '_', 'IXNETWORK_VIRTUALTESTAPPLIANCE1_ETH1')]",
+		"VirtualTestAppliance2Eth0Name": "[concat(variables('OptionalVMPrefix'), '_', 'IXNETWORK_VIRTUALTESTAPPLIANCE2_ETH0')]",
+		"VirtualTestAppliance2Eth1Name": "[concat(variables('OptionalVMPrefix'), '_', 'IXNETWORK_VIRTUALTESTAPPLIANCE2_ETH1')]",
+		"VirtualTestAppliance1Eth0IpAddress": "[parameters('VirtualTestAppliance1Eth0IpAddress')]",
+		"VirtualTestAppliance1Eth1IpAddresses": "[parameters('VirtualTestAppliance1Eth1IpAddresses')]",
+		"VirtualTestAppliance2Eth0IpAddress": "[parameters('VirtualTestAppliance2Eth0IpAddress')]",
+		"VirtualTestAppliance2Eth1IpAddresses": "[parameters('VirtualTestAppliance2Eth1IpAddresses')]",
+		"IxNetworkClientDnsLabel": "[concat(toLower(variables('OptionalVMPrefix')), '-', 'ixnetwork-client', '-', substring(uniqueString(resourceGroup().id),0,6))]",
+		"EnableAcceleratedNetworking": false,
+		"IxNetworkClientEnableIPForwarding": false,
+		"BootDiagnosticsEnabled": true,
+		"IxNetworkClientVmSize": "[parameters('IxNetworkClientVmSize')]",
+		"IxNetworkClientName": "[concat(variables('OptionalVMPrefix'), '-', 'IXNETWORK-WI')]",
+		"VirtualTestAppliance1Name": "[concat(variables('OptionalVMPrefix'), '-', 'IXNETWORK-VIRTUALTESTAPPLIANCE1')]",
+		"VirtualTestAppliance1DnsLabel": "[concat(toLower(variables('OptionalVMPrefix')), '-', 'ixnetwork-virtualtestappliance-1', '-', substring(uniqueString(resourceGroup().id),0,6))]",
+		"VirtualTestAppliance2Name": "[concat(variables('OptionalVMPrefix'), '-', 'IXNETWORK-VIRTUALTESTAPPLIANCE2')]",
+		"VirtualTestAppliance2DnsLabel": "[concat(toLower(variables('OptionalVMPrefix')), '-', 'ixnetwork-virtualtestappliance-2', '-', substring(uniqueString(resourceGroup().id),0,6))]",
+		"VirtualTestApplianceEnableIPForwarding": true,
+		"VirtualTestApplianceDisablePasswordAuthentication": false,
+		"VirtualTestApplianceProvisionVMAgent": true,
+		"VirtualTestApplianceDiskSizeGB": "8",
+		"IxNetworkClientDiskSizeGB": "127",
+		"MgmtPublicIpAddressName": "[concat(variables('OptionalVMPrefix'), '_', 'MGMT_PUBLIC_IP')]",
+		"VirtualTestAppliance1Eth0PublicIpAddressName": "[concat(variables('OptionalVMPrefix'), '_', 'IXNETWORK_VIRTUALTESTAPPLIANCE1_ETH0_PUBLIC_IP')]",
+		"VirtualTestAppliance2Eth0PublicIpAddressName": "[concat(variables('OptionalVMPrefix'), '_', 'IXNETWORK_VIRTUALTESTAPPLIANCE2_ETH0_PUBLIC_IP')]",
+		"CreateOption": "FromImage"
+	},
+	"resources": [{
+			"type": "Microsoft.Network/networkSecurityGroups",
+			"name": "[variables('MgmtNetworkSecurityGroupName')]",
+			"apiVersion": "[variables('apiVersion')]",
+			"location": "[resourceGroup().location]",
+			"scale": null,
+			"tags": {
+				"Owner": "[variables('UserEmailTag')]",
+				"Project": "[variables('UserProjectTag')]",
+				"ResourceGroup": "[resourceGroup().name]",
+				"Location": "[resourceGroup().location]"
+			},
+			"properties": {
+				"securityRules": [{
+						"name": "[variables('MgmtHttpsSecurityRuleName')]",
+						"properties": {
+							"description": "Allow HTTPS",
+							"protocol": "Tcp",
+							"sourcePortRange": "*",
+							"destinationPortRange": "443",
+							"sourceAddressPrefix": "[variables('ManagementSecurityRuleSourceIPPrefix')]",
+							"destinationAddressPrefix": "*",
+							"access": "Allow",
+							"priority": 100,
+							"direction": "Inbound",
+							"sourceAddressPrefixes": [],
+							"destinationAddressPrefixes": []
+						}
+					},
+					{
+						"name": "[variables('MgmtSshSecurityRuleName')]",
+						"properties": {
+							"description": "Allow SSH",
+							"protocol": "Tcp",
+							"sourcePortRange": "*",
+							"destinationPortRange": "22",
+							"sourceAddressPrefix": "[variables('ManagementSecurityRuleSourceIPPrefix')]",
+							"destinationAddressPrefix": "*",
+							"access": "Allow",
+							"priority": 101,
+							"direction": "Inbound",
+							"sourceAddressPrefixes": [],
+							"destinationAddressPrefixes": []
+						}
+					},
+					{
+						"name": "[variables('MgmtHttpSecurityRuleName')]",
+						"properties": {
+							"description": "Allow HTTP",
+							"protocol": "Tcp",
+							"sourcePortRange": "*",
+							"destinationPortRange": "80",
+							"sourceAddressPrefix": "[variables('ManagementSecurityRuleSourceIPPrefix')]",
+							"destinationAddressPrefix": "*",
+							"access": "Allow",
+							"priority": 102,
+							"direction": "Inbound",
+							"sourceAddressPrefixes": [],
+							"destinationAddressPrefixes": []
+						}
+					},
+					{
+						"name": "[variables('MgmtRdpSecurityRuleName')]",
+						"properties": {
+							"description": "Allow RDP",
+							"protocol": "Tcp",
+							"sourcePortRange": "*",
+							"destinationPortRange": "3389",
+							"sourceAddressPrefix": "[variables('ManagementSecurityRuleSourceIPPrefix')]",
+							"destinationAddressPrefix": "*",
+							"access": "Allow",
+							"priority": 103,
+							"direction": "Inbound",
+							"sourceAddressPrefixes": [],
+							"destinationAddressPrefixes": []
+						}
+					}
+				]
+			},
+			"dependsOn": []
+		},
+
+		{
+			"type": "Microsoft.Network/networkSecurityGroups",
+			"name": "[variables('Test1NetworkSecurityGroupName')]",
+			"apiVersion": "[variables('apiVersion')]",
+			"location": "[resourceGroup().location]",
+			"scale": null,
+			"tags": {
+				"Owner": "[variables('UserEmailTag')]",
+				"Project": "[variables('UserProjectTag')]",
+				"ResourceGroup": "[resourceGroup().name]",
+				"Location": "[resourceGroup().location]"
+			},
+			"properties": {
+				"securityRules": [{
+					"name": "[variables('MgmtHttpSecurityRuleName')]",
+					"properties": {
+						"description": "Allow HTTP",
+						"protocol": "Tcp",
+						"sourcePortRange": "*",
+						"destinationPortRange": "80",
+						"sourceAddressPrefix": "[variables('ManagementSecurityRuleSourceIPPrefix')]",
+						"destinationAddressPrefix": "*",
+						"access": "Allow",
+						"priority": 102,
+						"direction": "Inbound",
+						"sourceAddressPrefixes": [],
+						"destinationAddressPrefixes": []
+					}
+				}]
+			},
+			"dependsOn": []
+		},
+
+		{
+			"type": "Microsoft.Network/networkSecurityGroups",
+			"name": "[variables('Test2NetworkSecurityGroupName')]",
+			"apiVersion": "[variables('apiVersion')]",
+			"location": "[resourceGroup().location]",
+			"scale": null,
+			"tags": {
+				"Owner": "[variables('UserEmailTag')]",
+				"Project": "[variables('UserProjectTag')]",
+				"ResourceGroup": "[resourceGroup().name]",
+				"Location": "[resourceGroup().location]"
+			},
+			"properties": {
+				"securityRules": [{
+					"name": "[variables('MgmtHttpSecurityRuleName')]",
+					"properties": {
+						"description": "Allow HTTP",
+						"protocol": "Tcp",
+						"sourcePortRange": "*",
+						"destinationPortRange": "80",
+						"sourceAddressPrefix": "[variables('ManagementSecurityRuleSourceIPPrefix')]",
+						"destinationAddressPrefix": "*",
+						"access": "Allow",
+						"priority": 102,
+						"direction": "Inbound",
+						"sourceAddressPrefixes": [],
+						"destinationAddressPrefixes": []
+					}
+				}]
+			},
+			"dependsOn": []
+		},
+
+		{
+			"type": "Microsoft.Network/networkInterfaces",
+			"name": "[variables('IxNetworkClientEth0Name')]",
+			"apiVersion": "[variables('apiVersion')]",
+			"location": "[resourceGroup().location]",
+			"scale": null,
+			"tags": {
+				"Owner": "[variables('UserEmailTag')]",
+				"Project": "[variables('UserProjectTag')]",
+				"ResourceGroup": "[resourceGroup().name]",
+				"Location": "[resourceGroup().location]"
+			},
+			"properties": {
+				"ipConfigurations": [{
+					"name": "ipconfig1",
+					"properties": {
+						"privateIPAllocationMethod": "Dynamic",
+						"publicIPAddress": {
+							"id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('MgmtPublicIpAddressName'))]"
+						},
+						"subnet": {
+							"id": "[variables('MgmtSubnetRef')]"
+						},
+						"primary": true,
+						"privateIPAddressVersion": "IPv4"
+					}
+				}],
+				"dnsSettings": {
+					"dnsServers": [],
+					"appliedDnsServers": []
+				},
+				"enableAcceleratedNetworking": "[variables('EnableAcceleratedNetworking')]",
+				"enableIPForwarding": "[variables('IxNetworkClientEnableIPForwarding')]",
+				"networkSecurityGroup": {
+					"id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('MgmtNetworkSecurityGroupName'))]"
+				},
+				"primary": true,
+				"virtualMachine": {
+					"id": "[resourceId('Microsoft.Compute/virtualMachines', variables('IxNetworkClientName'))]"
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Network/networkSecurityGroups', variables('MgmtNetworkSecurityGroupName'))]",
+				"[resourceId('Microsoft.Network/publicIPAddresses', variables('MgmtPublicIpAddressName'))]"
+			]
+		},
+
+		{
+			"type": "Microsoft.Network/networkInterfaces",
+			"name": "[variables('VirtualTestAppliance1Eth0Name')]",
+			"apiVersion": "[variables('apiVersion')]",
+			"location": "[resourceGroup().location]",
+			"scale": null,
+			"tags": {
+				"Owner": "[variables('UserEmailTag')]",
+				"Project": "[variables('UserProjectTag')]",
+				"ResourceGroup": "[resourceGroup().name]",
+				"Location": "[resourceGroup().location]"
+			},
+			"properties": {
+				"ipConfigurations": [{
+					"name": "ipconfig1",
+					"properties": {
+						"privateIPAddress": "[variables('VirtualTestAppliance1Eth0IpAddress')]",
+						"privateIPAllocationMethod": "Static",
+						"publicIPAddress": {
+							"id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('VirtualTestAppliance1Eth0PublicIpAddressName'))]"
+						},
+						"subnet": {
+							"id": "[variables('MgmtSubnetRef')]"
+						},
+						"primary": true,
+						"privateIPAddressVersion": "IPv4"
+					}
+				}],
+				"dnsSettings": {
+					"dnsServers": [],
+					"appliedDnsServers": []
+				},
+				"enableAcceleratedNetworking": "[variables('EnableAcceleratedNetworking')]",
+				"enableIPForwarding": "[variables('VirtualTestApplianceEnableIPForwarding')]",
+				"networkSecurityGroup": {
+					"id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('MgmtNetworkSecurityGroupName'))]"
+				},
+				"primary": true
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Network/networkSecurityGroups', variables('MgmtNetworkSecurityGroupName'))]",
+				"[resourceId('Microsoft.Network/publicIPAddresses', variables('VirtualTestAppliance1Eth0PublicIpAddressName'))]"
+			]
+		},
+
+		{
+			"type": "Microsoft.Network/networkInterfaces",
+			"name": "[variables('VirtualTestAppliance1Eth1Name')]",
+			"apiVersion": "[variables('apiVersion')]",
+			"location": "[resourceGroup().location]",
+			"scale": null,
+			"tags": {
+				"Owner": "[variables('UserEmailTag')]",
+				"Project": "[variables('UserProjectTag')]",
+				"ResourceGroup": "[resourceGroup().name]",
+				"Location": "[resourceGroup().location]"
+			},
+			"properties": {
+				"ipConfigurations": [{
+						"name": "ipconfig1",
+						"properties": {
+							"privateIPAddress": "[variables('VirtualTestAppliance1Eth1IpAddresses')[0]]",
+							"privateIPAllocationMethod": "Static",
+							"subnet": {
+								"id": "[variables('Test1SubnetRef')]"
+							},
+							"primary": true,
+							"privateIPAddressVersion": "IPv4"
+						}
+					},
+					{
+						"name": "ipconfig2",
+						"properties": {
+							"privateIPAddress": "[variables('VirtualTestAppliance1Eth1IpAddresses')[1]]",
+							"privateIPAllocationMethod": "Static",
+							"subnet": {
+								"id": "[variables('Test1SubnetRef')]"
+							},
+							"primary": false,
+							"privateIPAddressVersion": "IPv4"
+						}
+					},
+					{
+						"name": "ipconfig3",
+						"properties": {
+							"privateIPAddress": "[variables('VirtualTestAppliance1Eth1IpAddresses')[2]]",
+							"privateIPAllocationMethod": "Static",
+							"subnet": {
+								"id": "[variables('Test1SubnetRef')]"
+							},
+							"primary": false,
+							"privateIPAddressVersion": "IPv4"
+						}
+					},
+					{
+						"name": "ipconfig4",
+						"properties": {
+							"privateIPAddress": "[variables('VirtualTestAppliance1Eth1IpAddresses')[3]]",
+							"privateIPAllocationMethod": "Static",
+							"subnet": {
+								"id": "[variables('Test1SubnetRef')]"
+							},
+							"primary": false,
+							"privateIPAddressVersion": "IPv4"
+						}
+					},
+					{
+						"name": "ipconfig5",
+						"properties": {
+							"privateIPAddress": "[variables('VirtualTestAppliance1Eth1IpAddresses')[4]]",
+							"privateIPAllocationMethod": "Static",
+							"subnet": {
+								"id": "[variables('Test1SubnetRef')]"
+							},
+							"primary": false,
+							"privateIPAddressVersion": "IPv4"
+						}
+					},
+					{
+						"name": "ipconfig6",
+						"properties": {
+							"privateIPAddress": "[variables('VirtualTestAppliance1Eth1IpAddresses')[5]]",
+							"privateIPAllocationMethod": "Static",
+							"subnet": {
+								"id": "[variables('Test1SubnetRef')]"
+							},
+							"primary": false,
+							"privateIPAddressVersion": "IPv4"
+						}
+					},
+					{
+						"name": "ipconfig7",
+						"properties": {
+							"privateIPAddress": "[variables('VirtualTestAppliance1Eth1IpAddresses')[6]]",
+							"privateIPAllocationMethod": "Static",
+							"subnet": {
+								"id": "[variables('Test1SubnetRef')]"
+							},
+							"primary": false,
+							"privateIPAddressVersion": "IPv4"
+						}
+					},
+					{
+						"name": "ipconfig8",
+						"properties": {
+							"privateIPAddress": "[variables('VirtualTestAppliance1Eth1IpAddresses')[7]]",
+							"privateIPAllocationMethod": "Static",
+							"subnet": {
+								"id": "[variables('Test1SubnetRef')]"
+							},
+							"primary": false,
+							"privateIPAddressVersion": "IPv4"
+						}
+					},
+					{
+						"name": "ipconfig9",
+						"properties": {
+							"privateIPAddress": "[variables('VirtualTestAppliance1Eth1IpAddresses')[8]]",
+							"privateIPAllocationMethod": "Static",
+							"subnet": {
+								"id": "[variables('Test1SubnetRef')]"
+							},
+							"primary": false,
+							"privateIPAddressVersion": "IPv4"
+						}
+					},
+					{
+						"name": "ipconfigA",
+						"properties": {
+							"privateIPAddress": "[variables('VirtualTestAppliance1Eth1IpAddresses')[9]]",
+							"privateIPAllocationMethod": "Static",
+							"subnet": {
+								"id": "[variables('Test1SubnetRef')]"
+							},
+							"primary": false,
+							"privateIPAddressVersion": "IPv4"
+						}
+					}
+				],
+				"dnsSettings": {
+					"dnsServers": [],
+					"appliedDnsServers": []
+				},
+				"enableAcceleratedNetworking": "[variables('EnableAcceleratedNetworking')]",
+				"enableIPForwarding": "[variables('VirtualTestApplianceEnableIPForwarding')]",
+				"networkSecurityGroup": {
+					"id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('Test1NetworkSecurityGroupName'))]"
+				},
+				"primary": false
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Network/networkSecurityGroups', variables('Test1NetworkSecurityGroupName'))]"
+			]
+		},
+
+		{
+			"type": "Microsoft.Network/networkInterfaces",
+			"name": "[variables('VirtualTestAppliance2Eth0Name')]",
+			"apiVersion": "[variables('apiVersion')]",
+			"location": "[resourceGroup().location]",
+			"scale": null,
+			"tags": {
+				"Owner": "[variables('UserEmailTag')]",
+				"Project": "[variables('UserProjectTag')]",
+				"ResourceGroup": "[resourceGroup().name]",
+				"Location": "[resourceGroup().location]"
+			},
+			"properties": {
+				"ipConfigurations": [{
+					"name": "ipconfig1",
+					"properties": {
+						"privateIPAddress": "[variables('VirtualTestAppliance2Eth0IpAddress')]",
+						"privateIPAllocationMethod": "Static",
+						"publicIPAddress": {
+							"id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('VirtualTestAppliance2Eth0PublicIpAddressName'))]"
+						},
+						"subnet": {
+							"id": "[variables('MgmtSubnetRef')]"
+						},
+						"primary": true,
+						"privateIPAddressVersion": "IPv4"
+					}
+				}],
+				"dnsSettings": {
+					"dnsServers": [],
+					"appliedDnsServers": []
+				},
+				"enableAcceleratedNetworking": "[variables('EnableAcceleratedNetworking')]",
+				"enableIPForwarding": "[variables('VirtualTestApplianceEnableIPForwarding')]",
+				"networkSecurityGroup": {
+					"id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('MgmtNetworkSecurityGroupName'))]"
+				},
+				"primary": true
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Network/networkSecurityGroups', variables('MgmtNetworkSecurityGroupName'))]",
+				"[resourceId('Microsoft.Network/publicIPAddresses', variables('VirtualTestAppliance2Eth0PublicIpAddressName'))]"
+			]
+		},
+
+		{
+			"type": "Microsoft.Network/networkInterfaces",
+			"name": "[variables('VirtualTestAppliance2Eth1Name')]",
+			"apiVersion": "[variables('apiVersion')]",
+			"location": "[resourceGroup().location]",
+			"scale": null,
+			"tags": {
+				"Owner": "[variables('UserEmailTag')]",
+				"Project": "[variables('UserProjectTag')]",
+				"ResourceGroup": "[resourceGroup().name]",
+				"Location": "[resourceGroup().location]"
+			},
+			"properties": {
+				"ipConfigurations": [{
+						"name": "ipconfig1",
+						"properties": {
+							"privateIPAddress": "[variables('VirtualTestAppliance2Eth1IpAddresses')[0]]",
+							"privateIPAllocationMethod": "Static",
+							"subnet": {
+								"id": "[variables('Test2SubnetRef')]"
+							},
+							"primary": true,
+							"privateIPAddressVersion": "IPv4"
+						}
+					},
+					{
+						"name": "ipconfig2",
+						"properties": {
+							"privateIPAddress": "[variables('VirtualTestAppliance2Eth1IpAddresses')[1]]",
+							"privateIPAllocationMethod": "Static",
+							"subnet": {
+								"id": "[variables('Test2SubnetRef')]"
+							},
+							"primary": false,
+							"privateIPAddressVersion": "IPv4"
+						}
+					},
+					{
+						"name": "ipconfig3",
+						"properties": {
+							"privateIPAddress": "[variables('VirtualTestAppliance2Eth1IpAddresses')[2]]",
+							"privateIPAllocationMethod": "Static",
+							"subnet": {
+								"id": "[variables('Test2SubnetRef')]"
+							},
+							"primary": false,
+							"privateIPAddressVersion": "IPv4"
+						}
+					},
+					{
+						"name": "ipconfig4",
+						"properties": {
+							"privateIPAddress": "[variables('VirtualTestAppliance2Eth1IpAddresses')[3]]",
+							"privateIPAllocationMethod": "Static",
+							"subnet": {
+								"id": "[variables('Test2SubnetRef')]"
+							},
+							"primary": false,
+							"privateIPAddressVersion": "IPv4"
+						}
+					},
+					{
+						"name": "ipconfig5",
+						"properties": {
+							"privateIPAddress": "[variables('VirtualTestAppliance2Eth1IpAddresses')[4]]",
+							"privateIPAllocationMethod": "Static",
+							"subnet": {
+								"id": "[variables('Test2SubnetRef')]"
+							},
+							"primary": false,
+							"privateIPAddressVersion": "IPv4"
+						}
+					},
+					{
+						"name": "ipconfig6",
+						"properties": {
+							"privateIPAddress": "[variables('VirtualTestAppliance2Eth1IpAddresses')[5]]",
+							"privateIPAllocationMethod": "Static",
+							"subnet": {
+								"id": "[variables('Test2SubnetRef')]"
+							},
+							"primary": false,
+							"privateIPAddressVersion": "IPv4"
+						}
+					},
+					{
+						"name": "ipconfig7",
+						"properties": {
+							"privateIPAddress": "[variables('VirtualTestAppliance2Eth1IpAddresses')[6]]",
+							"privateIPAllocationMethod": "Static",
+							"subnet": {
+								"id": "[variables('Test2SubnetRef')]"
+							},
+							"primary": false,
+							"privateIPAddressVersion": "IPv4"
+						}
+					},
+					{
+						"name": "ipconfig8",
+						"properties": {
+							"privateIPAddress": "[variables('VirtualTestAppliance2Eth1IpAddresses')[7]]",
+							"privateIPAllocationMethod": "Static",
+							"subnet": {
+								"id": "[variables('Test2SubnetRef')]"
+							},
+							"primary": false,
+							"privateIPAddressVersion": "IPv4"
+						}
+					},
+					{
+						"name": "ipconfig9",
+						"properties": {
+							"privateIPAddress": "[variables('VirtualTestAppliance2Eth1IpAddresses')[8]]",
+							"privateIPAllocationMethod": "Static",
+							"subnet": {
+								"id": "[variables('Test2SubnetRef')]"
+							},
+							"primary": false,
+							"privateIPAddressVersion": "IPv4"
+						}
+					},
+					{
+						"name": "ipconfigA",
+						"properties": {
+							"privateIPAddress": "[variables('VirtualTestAppliance2Eth1IpAddresses')[9]]",
+							"privateIPAllocationMethod": "Static",
+							"subnet": {
+								"id": "[variables('Test2SubnetRef')]"
+							},
+							"primary": false,
+							"privateIPAddressVersion": "IPv4"
+						}
+					}
+				],
+				"dnsSettings": {
+					"dnsServers": [],
+					"appliedDnsServers": []
+				},
+				"enableAcceleratedNetworking": "[variables('EnableAcceleratedNetworking')]",
+				"enableIPForwarding": "[variables('VirtualTestApplianceEnableIPForwarding')]",
+				"networkSecurityGroup": {
+					"id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('Test2NetworkSecurityGroupName'))]"
+				},
+				"primary": false
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Network/networkSecurityGroups', variables('Test2NetworkSecurityGroupName'))]"
+			]
+		},
+
+		{
+			"type": "Microsoft.Network/publicIPAddresses",
+			"name": "[variables('MgmtPublicIpAddressName')]",
+			"apiVersion": "[variables('apiVersion')]",
+			"location": "[resourceGroup().location]",
+			"scale": null,
+			"tags": {
+				"Owner": "[variables('UserEmailTag')]",
+				"Project": "[variables('UserProjectTag')]",
+				"ResourceGroup": "[resourceGroup().name]",
+				"Location": "[resourceGroup().location]"
+			},
+			"properties": {
+				"publicIPAddressVersion": "IPv4",
+				"publicIPAllocationMethod": "Dynamic",
+				"idleTimeoutInMinutes": 4,
+				"dnsSettings": {
+					"domainNameLabel": "[variables('IxNetworkClientDnsLabel')]",
+					"fqdn": "[concat(variables('IxNetworkClientDnsLabel'),'.', resourceGroup().location,'.cloudapp.azure.com')]"
+				}
+			},
+			"dependsOn": []
+		},
+
+		{
+			"type": "Microsoft.Network/publicIPAddresses",
+			"name": "[variables('VirtualTestAppliance1Eth0PublicIpAddressName')]",
+			"apiVersion": "[variables('apiVersion')]",
+			"location": "[resourceGroup().location]",
+			"scale": null,
+			"tags": {
+				"Owner": "[variables('UserEmailTag')]",
+				"Project": "[variables('UserProjectTag')]",
+				"ResourceGroup": "[resourceGroup().name]",
+				"Location": "[resourceGroup().location]"
+			},
+			"properties": {
+				"publicIPAddressVersion": "IPv4",
+				"publicIPAllocationMethod": "Dynamic",
+				"idleTimeoutInMinutes": 4,
+				"dnsSettings": {
+					"domainNameLabel": "[variables('VirtualTestAppliance1DnsLabel')]",
+					"fqdn": "[concat(variables('VirtualTestAppliance1DnsLabel'),'.', resourceGroup().location,'.cloudapp.azure.com')]"
+				}
+			},
+			"dependsOn": []
+		},
+
+		{
+			"type": "Microsoft.Network/publicIPAddresses",
+			"name": "[variables('VirtualTestAppliance2Eth0PublicIpAddressName')]",
+			"apiVersion": "[variables('apiVersion')]",
+			"location": "[resourceGroup().location]",
+			"scale": null,
+			"tags": {
+				"Owner": "[variables('UserEmailTag')]",
+				"Project": "[variables('UserProjectTag')]",
+				"ResourceGroup": "[resourceGroup().name]",
+				"Location": "[resourceGroup().location]"
+			},
+			"properties": {
+				"publicIPAddressVersion": "IPv4",
+				"publicIPAllocationMethod": "Dynamic",
+				"idleTimeoutInMinutes": 4,
+				"dnsSettings": {
+					"domainNameLabel": "[variables('VirtualTestAppliance2DnsLabel')]",
+					"fqdn": "[concat(variables('VirtualTestAppliance2DnsLabel'),'.', resourceGroup().location,'.cloudapp.azure.com')]"
+				}
+			},
+			"dependsOn": []
+		},
+
+		{
+			"type": "Microsoft.Compute/virtualMachines",
+			"name": "[variables('IxNetworkClientName')]",
+			"apiVersion": "[variables('apiVersion')]",
+			"location": "[resourceGroup().location]",
+			"plan": {
+				"name": "keysight-ixnetwork-virtual-edition-client",
+				"product": "keysight-ixnetwork-virtual-edition",
+				"publisher": "keysight-technologies-ixvm"
+			},
+			"scale": null,
+			"tags": {
+				"Owner": "[variables('UserEmailTag')]",
+				"Project": "[variables('UserProjectTag')]",
+				"ResourceGroup": "[resourceGroup().name]",
+				"Location": "[resourceGroup().location]"
+			},
+			"properties": {
+				"hardwareProfile": {
+					"vmSize": "[variables('IxNetworkClientVmSize')]"
+				},
+				"osProfile": {
+					"computerName": "[variables('IxNetworkClientName')]",
+					"adminUsername": "[parameters('IxNetworkClientUsername')]",
+					"adminPassword": "[parameters('IxNetworkClientPassword')]"
+				},
+				"storageProfile": {
+					"imageReference": {
+						"publisher": "keysight-technologies-ixvm",
+						"offer": "keysight-ixnetwork-virtual-edition",
+						"sku": "keysight-ixnetwork-virtual-edition-client",
+						"version": "latest"
+					},
+					"osDisk": {
+						"osType": "Windows",
+						"name": "[concat('disk_', variables('IxNetworkClientName'))]",
+						"createOption": "[variables('CreateOption')]",
+						"caching": "ReadWrite",
+						"diskSizeGB": "[variables('IxNetworkClientDiskSizeGB')]"
+					},
+					"dataDisks": []
+				},
+				"networkProfile": {
+					"networkInterfaces": [{
+						"id": "[resourceId('Microsoft.Network/networkInterfaces', variables('IxNetworkClientEth0Name'))]",
+						"properties": {
+							"primary": true
+						}
+					}]
+				},
+				"diagnosticsProfile": {
+					"bootDiagnostics": {
+						"enabled": "[variables('BootDiagnosticsEnabled')]",
+						"storageUri": "[concat('https', '://', variables('DiagnosticsStorageAccountName'), '.blob.core.windows.net', '/')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Network/networkInterfaces', variables('IxNetworkClientEth0Name'))]"
+			]
+		},
+
+		{
+			"type": "Microsoft.Compute/virtualMachines",
+			"name": "[variables('VirtualTestAppliance1Name')]",
+			"apiVersion": "[variables('apiVersion')]",
+			"location": "[resourceGroup().location]",
+			"plan": {
+				"name": "keysight-ixnetwork-virtual-test-appliance",
+				"product": "keysight-ixnetwork-virtual-edition",
+				"publisher": "keysight-technologies-ixvm"
+			},
+			"scale": null,
+			"tags": {
+				"Owner": "[variables('UserEmailTag')]",
+				"Project": "[variables('UserProjectTag')]",
+				"ResourceGroup": "[resourceGroup().name]",
+				"Location": "[resourceGroup().location]"
+			},
+			"properties": {
+				"hardwareProfile": {
+					"vmSize": "[variables('VirtualTestApplianceVmSize')]"
+				},
+				"storageProfile": {
+					"imageReference": {
+						"publisher": "keysight-technologies-ixvm",
+						"offer": "keysight-ixnetwork-virtual-edition",
+						"sku": "keysight-ixnetwork-virtual-test-appliance",
+						"version": "latest"
+					},
+					"osDisk": {
+						"osType": "Linux",
+						"name": "[concat('disk_', variables('VirtualTestAppliance1Name'))]",
+						"createOption": "[variables('CreateOption')]",
+						"caching": "ReadWrite",
+						"diskSizeGB": "[variables('VirtualTestApplianceDiskSizeGB')]"
+					},
+					"dataDisks": []
+				},
+				"osProfile": {
+					"computerName": "[variables('VirtualTestAppliance1Name')]",
+					"adminUsername": "[parameters('VirtualTestApplianceAdminUsername')]",
+					"adminPassword": "[parameters('VirtualTestApplianceAdminPassword')]",
+					"linuxConfiguration": {
+						"disablePasswordAuthentication": "[variables('VirtualTestApplianceDisablePasswordAuthentication')]",
+						"provisionVMAgent": "[variables('VirtualTestApplianceProvisionVMAgent')]"
+					}
+				},
+				"networkProfile": {
+					"networkInterfaces": [{
+							"id": "[resourceId('Microsoft.Network/networkInterfaces', variables('VirtualTestAppliance1Eth0Name'))]",
+							"properties": {
+								"primary": true
+							}
+						},
+						{
+							"id": "[resourceId('Microsoft.Network/networkInterfaces', variables('VirtualTestAppliance1Eth1Name'))]",
+							"properties": {
+								"primary": false
+							}
+						}
+					]
+				},
+				"diagnosticsProfile": {
+					"bootDiagnostics": {
+						"enabled": "[variables('BootDiagnosticsEnabled')]",
+						"storageUri": "[concat('https', '://', variables('DiagnosticsStorageAccountName'), '.blob.core.windows.net', '/')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Network/networkInterfaces', variables('VirtualTestAppliance1Eth0Name'))]",
+				"[resourceId('Microsoft.Network/networkInterfaces', variables('VirtualTestAppliance1Eth1Name'))]"
+			]
+		},
+
+		{
+			"type": "Microsoft.Compute/virtualMachines",
+			"name": "[variables('VirtualTestAppliance2Name')]",
+			"apiVersion": "[variables('apiVersion')]",
+			"location": "[resourceGroup().location]",
+			"plan": {
+				"name": "keysight-ixnetwork-virtual-test-appliance",
+				"product": "keysight-ixnetwork-virtual-edition",
+				"publisher": "keysight-technologies-ixvm"
+			},
+			"scale": null,
+			"tags": {
+				"Owner": "[variables('UserEmailTag')]",
+				"Project": "[variables('UserProjectTag')]",
+				"ResourceGroup": "[resourceGroup().name]",
+				"Location": "[resourceGroup().location]"
+			},
+			"properties": {
+				"hardwareProfile": {
+					"vmSize": "[variables('VirtualTestApplianceVmSize')]"
+				},
+				"storageProfile": {
+					"imageReference": {
+						"publisher": "keysight-technologies-ixvm",
+						"offer": "keysight-ixnetwork-virtual-edition",
+						"sku": "keysight-ixnetwork-virtual-test-appliance",
+						"version": "latest"
+					},
+					"osDisk": {
+						"osType": "Linux",
+						"name": "[concat('disk_', variables('VirtualTestAppliance2Name'))]",
+						"createOption": "[variables('CreateOption')]",
+						"caching": "ReadWrite",
+						"diskSizeGB": "[variables('VirtualTestApplianceDiskSizeGB')]"
+					},
+					"dataDisks": []
+				},
+				"osProfile": {
+					"computerName": "[variables('VirtualTestAppliance2Name')]",
+					"adminUsername": "[parameters('VirtualTestApplianceAdminUsername')]",
+					"adminPassword": "[parameters('VirtualTestApplianceAdminPassword')]",
+					"linuxConfiguration": {
+						"disablePasswordAuthentication": "[variables('VirtualTestApplianceDisablePasswordAuthentication')]",
+						"provisionVMAgent": "[variables('VirtualTestApplianceProvisionVMAgent')]"
+					}
+				},
+				"networkProfile": {
+					"networkInterfaces": [{
+							"id": "[resourceId('Microsoft.Network/networkInterfaces', variables('VirtualTestAppliance2Eth0Name'))]",
+							"properties": {
+								"primary": true
+							}
+						},
+						{
+							"id": "[resourceId('Microsoft.Network/networkInterfaces', variables('VirtualTestAppliance2Eth1Name'))]",
+							"properties": {
+								"primary": false
+							}
+						}
+					]
+				},
+				"diagnosticsProfile": {
+					"bootDiagnostics": {
+						"enabled": "[variables('BootDiagnosticsEnabled')]",
+						"storageUri": "[concat('https', '://', variables('DiagnosticsStorageAccountName'), '.blob.core.windows.net', '/')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Network/networkInterfaces', variables('VirtualTestAppliance2Eth0Name'))]",
+				"[resourceId('Microsoft.Network/networkInterfaces', variables('VirtualTestAppliance2Eth1Name'))]"
+			]
+		}
+	]
+}
