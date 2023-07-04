@@ -1,0 +1,79 @@
+heat_template_version: 2013-05-23
+
+
+description: >
+  Version: 9.36 
+    This is the HEAT template used for Ixia Virtual Products deployment in OpenStack-based environments. It can be used with IxNetwork VE and IxLoad VE products with version 8.10 EA or newer.
+    The template will create 1 Virtual Networks (named "Test Network") and for Management it will be using an existing user given network name.
+    The template will create 1 Virtual Machine  (named "vCard-1").
+    The Ixia_Virtual_Load_Module_9.36_Heat_Template_Variables.yaml environment file is used for hardcoding the parameters for the resources defined in this Heat Template.
+
+
+parameters:
+   
+    Management_Network:
+      type:        string
+      label:       Ixia Management Network - Name
+      description: The name of the MANAGEMENT NETWORK that is already configured in OpenStack
+
+    Test_Network:
+      type:        string
+      label:       Ixia Test Network - Name
+      description: The name of the TEST NETWORK to be created
+
+    Test_Sub_Network:
+      type:        string
+      label:       Ixia Test Network - CIDR
+      description: The IP Address / Subnet Mask of the TEST NETWORK to be created
+
+    Virtual_Load_Module_Name:
+      type:        string
+      label:       Ixia Virtual Load Module - Instance Name
+      description: The name of the IXIA VIRTUAL LOAD MODULE to be created
+
+    Virtual_Load_Module_Image_Name:
+      type:        string
+      label:       Ixia Virtual Load Module - Image Name
+      description: The QCOW2 image to be used for the IXIA VIRTUAL LOAD MODULE 
+
+    Virtual_Load_Module_Flavor:
+      type:        string
+      label:       Ixia Virtual Load Module - Flavor
+      description: The resources required for each IXIA VIRTUAL LOAD MODULE are 4 vCPU, 4 GB RAM, 2 GB HDD
+
+
+resources:
+
+  Ixia-Test-Network:
+    type:                OS::Neutron::Net
+    properties:
+      name:              {get_param:    Test_Network}
+
+  Ixia-Test-Subnet:
+     type:               OS::Neutron::Subnet
+     properties:
+       network_id:       {get_resource: Ixia-Test-Network}
+       cidr:             {get_param:    Test_Sub_Network}
+       gateway_ip:       null
+       ip_version:       4
+       enable_dhcp:      false
+
+  Test-Port-1:
+       type:             OS::Neutron::Port
+       properties:
+         network_id:     {get_resource: Ixia-Test-Network}
+         fixed_ips:
+           - subnet_id:  {get_resource: Ixia-Test-Subnet}
+
+  vCard-1:
+    type:                OS::Nova::Server
+    properties:
+      name:              {list_join:    ['-', [{get_param: Virtual_Load_Module_Name}, '1']]}
+      image:             {get_param:    Virtual_Load_Module_Image_Name}
+      flavor:            {get_param:    Virtual_Load_Module_Flavor}
+      networks:
+        - network:       {get_param:    Management_Network }
+        - port:          {get_resource: Test-Port-1}
+      
+
+# outputs:
