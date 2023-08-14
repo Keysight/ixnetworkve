@@ -19,8 +19,6 @@ variable "AgentInstanceType" {
 								"c5n.xlarge", "c5n.2xlarge", "c5n.4xlarge", "c5n.9xlarge", "c5n.18xlarge",
 								"c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge"
 							], var.AgentInstanceType)
-
-
 		error_message = <<EOF
 AgentInstanceType must be one of the following types:
 	t3.xlarge, t3.2xlarge,
@@ -140,5 +138,6 @@ variable "UserLoginTag" {
 
 variable "UserProjectTag" {
 	default = "cloud-ist"
+	description = "Project tag of user creating the deployment"
 	type = string
 }
