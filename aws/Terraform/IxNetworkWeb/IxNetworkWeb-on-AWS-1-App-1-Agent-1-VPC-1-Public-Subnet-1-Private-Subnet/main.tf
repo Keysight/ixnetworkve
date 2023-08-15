@@ -1,5 +1,6 @@
 module "App" {
 	source = "armdupre/module-ixnetwork-web-app/aws"
+	version = "9.36.0"
 	Eth0SecurityGroupId = module.Vpc.PublicSecurityGroup.id
 	Eth0SubnetId = module.Vpc.PublicSubnet.id
 	InstanceType = local.AppInstanceType
@@ -13,6 +14,7 @@ module "App" {
 
 module "Agent1" {
 	source = "armdupre/module-ixnetwork-agent/aws"
+	version = "9.36.1"
 	Eth0SecurityGroupId = module.Vpc.PublicSecurityGroup.id
 	Eth0SubnetId = module.Vpc.PublicSubnet.id
 	Eth1SecurityGroupId = module.Vpc.PrivateSecurityGroup.id
