@@ -16,12 +16,12 @@ variable "PrivateSubnetName" {
 	type = string
 }
 
-variable "PublicSubnetName" {
-	description = "Subnet name assciated with the public subnet"
+variable "PublicSecurityRuleSourceIpPrefix" {
 	type = string
 }
 
-variable "PublicSecurityRuleSourceIpPrefix" {
+variable "PublicSubnetName" {
+	description = "Subnet name assciated with the public subnet"
 	type = string
 }
 
