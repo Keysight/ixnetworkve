@@ -1,6 +1,8 @@
 module "App" {
 	source = "armdupre/module-ixnetwork-app/azurerm"
+	version = "9.36.0"
 	AdminPassword = local.AppAdminPassword
+	AdminUserName = local.AppAdminUserName
 	Eth0SubnetId = module.Vnet.PublicSubnet.id
 	ResourceGroupLocation = azurerm_resource_group.ResourceGroup.location
 	ResourceGroupName = azurerm_resource_group.ResourceGroup.name
@@ -15,6 +17,7 @@ module "App" {
 
 module "Agent1" {
 	source = "armdupre/module-ixnetwork-agent/azurerm"
+	version = "9.36.0"
 	Eth0SubnetId = module.Vnet.PublicSubnet.id
 	Eth1SubnetId = module.Vnet.PrivateSubnet.id
 	InstanceId = local.Agent1InstanceId
@@ -32,6 +35,7 @@ module "Agent1" {
 
 module "Agent2" {
 	source = "armdupre/module-ixnetwork-agent/azurerm"
+	version = "9.36.0"
 	Eth0IpAddress = local.Agent2Eth0IpAddress
 	Eth0SubnetId = module.Vnet.PublicSubnet.id
 	Eth1IpAddresses = local.Agent2Eth1IpAddresses
