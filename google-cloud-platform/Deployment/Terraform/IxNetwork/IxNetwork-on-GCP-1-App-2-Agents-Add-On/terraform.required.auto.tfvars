@@ -5,5 +5,5 @@
 # PublicFirewallRuleSourceIpRanges = [ "1.1.1.1/32" ]
 # PublicSubnetName = "terraform-example-management-subnet"
 # PublicVpcNetworkName = "terraform-example-management-vpc-network"
-# UserEmailTag = "terraform@example.com
+# UserEmailTag = "terraform@example.com"
 # UserLoginTag = "terraform"
