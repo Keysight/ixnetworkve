@@ -1,4 +1,4 @@
-# AgentInstanceType = "c5n.4xlarge"
+# AgentInstanceType = "c5n.xlarge"
 # ApiMaxRetries = 1
 # PrivateSubnetAvailabilityZone = "us-east-1a"
 # PublicSubnetAvailabilityZone = "us-east-1a"

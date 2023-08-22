@@ -1,5 +1,5 @@
-# AgentInstanceType = "c5n.4xlarge"
+# AgentInstanceType = "c5n.xlarge"
 # ApiMaxRetries = 1
-# AppInstanceType = "m5.xlarge"
+# AppInstanceType = "t3.xlarge"
 # Region = "us-east-1"
 # UserProjectTag = "cloud-ist"
