@@ -1,5 +1,5 @@
 variable "AgentInstanceType" {
-	default = "c5n.4xlarge"
+	default = "c5n.xlarge"
 	description = "Instance type of Agent VM"
 	type = string
 	validation {
@@ -46,7 +46,7 @@ variable "ApiMaxRetries" {
 }
 
 variable "AppInstanceType" {
-	default = "m5.xlarge"
+	default = "t3.xlarge"
 	description = "Instance type of App VM"
 	type = string
 	validation {
