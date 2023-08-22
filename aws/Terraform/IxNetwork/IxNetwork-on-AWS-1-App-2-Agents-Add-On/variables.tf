@@ -1,5 +1,5 @@
 variable "AgentInstanceType" {
-	default = "c5n.4xlarge"
+	default = "c5n.xlarge"
 	description = "Instance type of Agent VM"
 	type = string
 	validation {
@@ -46,7 +46,7 @@ variable "ApiMaxRetries" {
 }
 
 variable "AppInstanceType" {
-	default = "m5.xlarge"
+	default = "t3.xlarge"
 	description = "Instance type of App VM"
 	type = string
 	validation {
@@ -99,23 +99,23 @@ variable "AwsAccessCredentialsSecretKey" {
 	type = string
 }
 
-variable "PrivateSubnetId" {
-	description = "Subnet id assciated with the private subnet"
-	type = string
-}
-
 variable "PrivateSecurityGroupId" {
 	description = "Security Group Id associated with the private subnet."
 	type = string
 }
 
-variable "PublicSubnetId" {
-	description = "Subnet id assciated with the public subnet"
+variable "PrivateSubnetId" {
+	description = "Subnet id assciated with the private subnet"
 	type = string
 }
 
 variable "PublicSecurityGroupId" {
 	description = "Security Group Id associated with the public subnet."
+	type = string
+}
+
+variable "PublicSubnetId" {
+	description = "Subnet id assciated with the public subnet"
 	type = string
 }
 
