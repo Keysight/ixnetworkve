@@ -1,5 +1,5 @@
 variable "AgentInstanceType" {
-	default = "c5n.4xlarge"
+	default = "c5n.xlarge"
 	description = "Instance type of Agent VM"
 	type = string
 	validation {
