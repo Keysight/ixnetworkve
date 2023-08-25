@@ -5,3 +5,17 @@ output "AgentImage" {
 		"project" : module.Agent1.Image.project
 	}
 }
+
+output "Agent1Eth0PublicIpAddress" {
+	value = {
+		"address" : module.Agent1.Eth0PublicIpAddress.address
+		"address_type" : module.Agent1.Eth0PublicIpAddress.address_type
+	}
+}
+
+output "Agent2Eth0PublicIpAddress" {
+	value = {
+		"address" : module.Agent2.Eth0PublicIpAddress.address
+		"address_type" : module.Agent2.Eth0PublicIpAddress.address_type
+	}
+}
