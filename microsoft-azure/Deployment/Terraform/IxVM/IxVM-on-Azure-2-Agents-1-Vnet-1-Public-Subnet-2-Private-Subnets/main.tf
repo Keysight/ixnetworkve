@@ -11,6 +11,7 @@ module "Agent1" {
 	UserLoginTag = local.UserLoginTag
 	VmSize = local.AgentVmSize
 	depends_on = [
+		azurerm_ssh_public_key.SshKey,
 		module.Vnet
 	]
 }
@@ -30,6 +31,7 @@ module "Agent2" {
 	UserLoginTag = local.UserLoginTag
 	VmSize = local.AgentVmSize
 	depends_on = [
+		azurerm_ssh_public_key.SshKey,
 		module.Vnet
 	]
 }
