@@ -10,11 +10,8 @@ locals {
 	AppTag = "ixnetwork"
 	AppVersion = "9-36"
 	Preamble = "${local.UserLoginTag}-${local.UserProjectTag}-${local.AppTag}-${local.AppVersion}-${local.Agent2InstanceId}"
-	ProjectId = var.ProjectId
 	PublicFirewallRuleSourceIpRanges = var.PublicFirewallRuleSourceIpRanges
-	RegionName = var.RegionName
 	UserEmailTag = var.UserEmailTag
 	UserLoginTag = var.UserLoginTag
 	UserProjectTag = var.UserProjectTag
-	ZoneName = var.ZoneName
 }

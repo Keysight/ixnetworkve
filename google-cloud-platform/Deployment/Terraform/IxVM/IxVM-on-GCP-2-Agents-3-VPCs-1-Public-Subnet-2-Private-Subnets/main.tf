@@ -7,11 +7,11 @@ module "Agent1" {
 	Eth1VpcNetworkName = module.Vpc.Private1VpcNetwork.name
 	InstanceId = local.Agent1InstanceId
 	MachineType = local.AgentMachineType
-	RegionName = local.RegionName
+	RegionName = data.google_client_config.current.region
 	UserEmailTag = local.UserEmailTag
 	UserLoginTag = local.UserLoginTag
 	UserProjectTag = local.UserProjectTag
-	ZoneName = local.ZoneName
+	ZoneName = data.google_client_config.current.zone
 	depends_on = [
 		module.Vpc.PublicSubnet,
 		module.Vpc.PublicVpcNetwork
@@ -30,11 +30,11 @@ module "Agent2" {
 	Eth1VpcNetworkName = module.Vpc.Private2VpcNetwork.name
 	InstanceId = local.Agent2InstanceId
 	MachineType = local.AgentMachineType
-	RegionName = local.RegionName
+	RegionName = data.google_client_config.current.region
 	UserEmailTag = local.UserEmailTag
 	UserLoginTag = local.UserLoginTag
 	UserProjectTag = local.UserProjectTag
-	ZoneName = local.ZoneName
+	ZoneName = data.google_client_config.current.zone
 	depends_on = [
 		module.Vpc.PublicSubnet,
 		module.Vpc.PublicVpcNetwork
