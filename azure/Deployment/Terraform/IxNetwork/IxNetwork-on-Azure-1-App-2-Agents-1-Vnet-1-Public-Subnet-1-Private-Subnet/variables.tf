@@ -34,8 +34,9 @@ AppVmSize must be one of the following sizes:
 	}
 }
 
-variable "PublicSecurityRuleSourceIpPrefix" {
-	type = string
+variable "PublicSecurityRuleSourceIpPrefixes" {
+	description = "List of IP Addresses /32 or IP CIDR ranges connecting inbound to App"
+	type = list(string)
 }
 
 variable "ResourceGroupLocation" {
