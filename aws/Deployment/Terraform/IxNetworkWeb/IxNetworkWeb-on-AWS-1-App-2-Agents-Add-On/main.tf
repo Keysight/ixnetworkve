@@ -1,8 +1,8 @@
 module "App" {
 	source = "armdupre/module-ixnetwork-web-app/aws"
 	version = "9.36.0"
-	Eth0SecurityGroupId = local.PublicSecurityGroupId
-	Eth0SubnetId = local.PublicSubnetId
+	Eth0SecurityGroupId = data.aws_security_group.PublicSecurityGroup.id
+	Eth0SubnetId = data.aws_subnet.PublicSubnet.id
 	InstanceType = local.AppInstanceType
 	UserEmailTag = local.UserEmailTag
 	UserLoginTag = local.UserLoginTag
@@ -12,10 +12,10 @@ module "App" {
 module "Agent1" {
 	source = "armdupre/module-ixnetwork-agent/aws"
 	version = "9.36.0"
-	Eth0SecurityGroupId = local.PublicSecurityGroupId
-	Eth0SubnetId = local.PublicSubnetId
-	Eth1SecurityGroupId = local.PrivateSecurityGroupId
-	Eth1SubnetId = local.PrivateSubnetId
+	Eth0SecurityGroupId = data.aws_security_group.PublicSecurityGroup.id
+	Eth0SubnetId = data.aws_subnet.PublicSubnet.id
+	Eth1SecurityGroupId = data.aws_security_group.PrivateSecurityGroup.id
+	Eth1SubnetId = data.aws_subnet.PrivateSubnet.id
 	InstanceId = local.Agent1InstanceId
 	InstanceType = local.AgentInstanceType
 	PlacementGroupId = aws_placement_group.PlacementGroup.id
@@ -31,11 +31,11 @@ module "Agent2" {
 	source = "armdupre/module-ixnetwork-agent/aws"
 	version = "9.36.0"
 	Eth0PrivateIpAddress = local.Agent2Eth0PrivateIpAddress
-	Eth0SecurityGroupId = local.PublicSecurityGroupId
-	Eth0SubnetId = local.PublicSubnetId
+	Eth0SecurityGroupId = data.aws_security_group.PublicSecurityGroup.id
+	Eth0SubnetId = data.aws_subnet.PublicSubnet.id
 	Eth1PrivateIpAddresses = local.Agent2Eth1PrivateIpAddresses
-	Eth1SecurityGroupId = local.PrivateSecurityGroupId
-	Eth1SubnetId = local.PrivateSubnetId
+	Eth1SecurityGroupId = data.aws_security_group.PrivateSecurityGroup.id
+	Eth1SubnetId = data.aws_subnet.PrivateSubnet.id
 	InstanceId = local.Agent2InstanceId
 	InstanceType = local.AgentInstanceType
 	PlacementGroupId = aws_placement_group.PlacementGroup.id

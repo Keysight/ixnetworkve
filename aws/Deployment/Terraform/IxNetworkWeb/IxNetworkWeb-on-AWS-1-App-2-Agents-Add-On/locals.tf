@@ -10,10 +10,10 @@ locals {
 	PlacementGroupName = "${local.Preamble}-placement-group-${local.Region}"
 	PlacementGroupStrategy = "cluster"
 	Preamble = "${local.UserLoginTag}-${local.UserProjectTag}-${local.AppTag}-${local.AppVersion}"
-	PrivateSecurityGroupId = var.PrivateSecurityGroupId
-	PrivateSubnetId = var.PrivateSubnetId
-	PublicSecurityGroupId = var.PublicSecurityGroupId
-	PublicSubnetId = var.PublicSubnetId
+	PrivateSecurityGroupName = var.PrivateSecurityGroupName
+	PrivateSubnetName = var.PrivateSubnetName
+	PublicSecurityGroupName = var.PublicSecurityGroupName
+	PublicSubnetName = var.PublicSubnetName
 	Region = data.aws_region.current.name
 	UserEmailTag = var.UserEmailTag
 	UserLoginTag = var.UserLoginTag

@@ -94,23 +94,23 @@ variable "AwsAccessCredentialsSecretKey" {
 	type = string
 }
 
-variable "PrivateSecurityGroupId" {
-	description = "Security Group Id associated with the private subnet."
+variable "PrivateSecurityGroupName" {
+	description = "Security Group Name tag associated with the private subnet"
 	type = string
 }
 
-variable "PrivateSubnetId" {
-	description = "Subnet id assciated with the private subnet"
+variable "PrivateSubnetName" {
+	description = "Subnet Name tag associated with the private subnet"
 	type = string
 }
 
-variable "PublicSecurityGroupId" {
-	description = "Security Group Id associated with the public subnet."
+variable "PublicSecurityGroupName" {
+	description = "Security Group Name tag associated with the public subnet"
 	type = string
 }
 
-variable "PublicSubnetId" {
-	description = "Subnet id assciated with the public subnet"
+variable "PublicSubnetName" {
+	description = "Subnet Name tag associated with the public subnet"
 	type = string
 }
 
