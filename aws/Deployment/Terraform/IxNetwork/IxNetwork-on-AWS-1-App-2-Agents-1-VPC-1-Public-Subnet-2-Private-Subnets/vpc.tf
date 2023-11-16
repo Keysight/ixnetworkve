@@ -1,5 +1,6 @@
 module "Vpc" {
 	source = "armdupre/module-1-vpc-1-public-subnet-2-private-subnets/aws"
+	version = "0.1.1"
 	InboundIPv4CidrBlocks = local.InboundIPv4CidrBlocks
 	Private1SubnetAvailabilityZone = local.Private1SubnetAvailabilityZone
 	Private2SubnetAvailabilityZone = local.Private2SubnetAvailabilityZone
@@ -18,5 +19,5 @@ resource "aws_security_group_rule" "PublicIngress3389" {
 	protocol = "tcp"
 	from_port = 3389
 	to_port = 3389
-	cidr_blocks = [ local.InboundIPv4CidrBlock ]
+	cidr_blocks = local.InboundIPv4CidrBlocks
 }
