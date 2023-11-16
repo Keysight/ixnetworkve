@@ -19,8 +19,6 @@ variable "AgentInstanceType" {
 								"c5n.xlarge", "c5n.2xlarge", "c5n.4xlarge", "c5n.9xlarge", "c5n.18xlarge",
 								"c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge"
 							], var.AgentInstanceType)
-
-
 		error_message = <<EOF
 AgentInstanceType must be one of the following types:
 	t3.xlarge, t3.2xlarge,
@@ -57,13 +55,9 @@ variable "AwsAccessCredentialsSecretKey" {
 	type = string
 }
 
-variable "InboundIPv4CidrBlock" {
-	description = "IP Address /32 or IP CIDR range connecting inbound to App"
-	type = string
-	validation {
-		condition = length(var.InboundIPv4CidrBlock) >= 9 && length(var.InboundIPv4CidrBlock) <= 18 && can(regex("(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})/(\\d{1,2})", var.InboundIPv4CidrBlock))
-		error_message = "InboundIPv4CidrBlock must be a valid IP CIDR range of the form x.x.x.x/x."
-	}
+variable "InboundIPv4CidrBlocks" {
+	description = "List of IP Addresses /32 or IP CIDR ranges connecting inbound to App"
+	type = list(string)
 }
 
 variable "PrivateSubnetAvailabilityZone" {
