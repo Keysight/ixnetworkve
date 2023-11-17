@@ -4,7 +4,7 @@ module "App" {
 	Eth0SecurityGroupId = module.Vpc.PublicSecurityGroup.id
 	Eth0SubnetId = module.Vpc.PublicSubnet.id
 	InstanceType = local.AppInstanceType
-	SshKeyName = local.AppSshKeyName
+	SshKeyName = aws_key_pair.SshKey.key_name
 	UserEmailTag = local.UserEmailTag
 	UserLoginTag = local.UserLoginTag
 	UserProjectTag = local.UserProjectTag

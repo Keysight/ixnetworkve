@@ -84,11 +84,6 @@ AppInstanceType must be one of the following types:
 	}
 }
 
-variable "AppSshKeyName" {
-	description = "Name of an existing EC2 KeyPair to enable SSH access"
-	type = string
-}
-
 variable "AwsAccessCredentialsAccessKey" {
 	description = "Access key component of credentials used for programmatic calls to AWS."
 	type = string

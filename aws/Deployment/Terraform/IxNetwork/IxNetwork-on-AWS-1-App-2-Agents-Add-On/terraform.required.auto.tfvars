@@ -1,4 +1,3 @@
-# AppSshKeyName = "example-ssh-key-name"
 # AwsAccessCredentialsAccessKey = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 # AwsAccessCredentialsSecretKey = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
 # PrivateSecurityGroupName = "terraform-example-aws-demo-private-security-group-us-east-1"
