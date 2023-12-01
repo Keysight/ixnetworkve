@@ -8,7 +8,7 @@ locals {
 	AppVmSize = var.AppVmSize
 	Preamble = "${local.UserLoginTag}-${local.AppTag}-${local.AppVersion}"
 	PublicRdpSecurityRuleName = "${local.Preamble}-rdp-rule"
-	PublicSecurityRuleSourceIpPrefix = var.PublicSecurityRuleSourceIpPrefix
+	PublicSecurityRuleSourceIpPrefixes = var.PublicSecurityRuleSourceIpPrefixes
 	ResourceGroupLocation = var.ResourceGroupLocation
 	ResourceGroupName = var.ResourceGroupName
 	SshKeyAlgorithm = "RSA"

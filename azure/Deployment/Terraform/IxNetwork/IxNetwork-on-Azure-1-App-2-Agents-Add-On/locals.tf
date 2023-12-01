@@ -12,7 +12,7 @@ locals {
 	Preamble = "${local.UserLoginTag}-${local.AppTag}-${local.AppVersion}"
 	PrivateSubnetName = var.PrivateSubnetName
 	PublicRdpSecurityRuleName = "${local.Preamble}-rdp-rule"
-	PublicSecurityRuleSourceIpPrefix = var.PublicSecurityRuleSourceIpPrefix
+	PublicSecurityRuleSourceIpPrefixes = var.PublicSecurityRuleSourceIpPrefixes
 	PublicSubnetName = var.PublicSubnetName
 	ResourceGroupLocation = var.ResourceGroupLocation
 	ResourceGroupName = var.ResourceGroupName

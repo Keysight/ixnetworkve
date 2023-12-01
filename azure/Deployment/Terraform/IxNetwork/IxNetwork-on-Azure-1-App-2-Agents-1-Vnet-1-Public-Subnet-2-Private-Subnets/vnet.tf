@@ -1,6 +1,7 @@
 module "Vnet" {
 	source = "armdupre/module-1-vnet-1-public-subnet-2-private-subnets/azurerm"
-	PublicSecurityRuleSourceIpPrefix = local.PublicSecurityRuleSourceIpPrefix
+	version = "0.1.1"
+	PublicSecurityRuleSourceIpPrefixes = local.PublicSecurityRuleSourceIpPrefixes
 	ResourceGroupLocation = azurerm_resource_group.ResourceGroup.location
 	ResourceGroupName = azurerm_resource_group.ResourceGroup.name
 	Tag = local.AppTag
@@ -16,7 +17,7 @@ resource "azurerm_network_security_rule" "PublicRdpSecurityRule" {
 	protocol = "Tcp"
 	source_port_range = "*"
 	destination_port_range = "3389"
-	source_address_prefix = local.PublicSecurityRuleSourceIpPrefix
+	source_address_prefixes = local.PublicSecurityRuleSourceIpPrefixes
 	destination_address_prefix = "*"
 	access = "Allow"
 	priority = 103

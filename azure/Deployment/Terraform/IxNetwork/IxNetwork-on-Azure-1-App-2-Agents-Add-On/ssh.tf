@@ -1,7 +1,7 @@
 resource "azurerm_ssh_public_key" "SshKey" {
 	name = local.SshKeyName
-	resource_group_name = local.ResourceGroupName
-	location = local.ResourceGroupLocation
+	resource_group_name = data.azurerm_resource_group.ResourceGroup.name
+	location = data.azurerm_resource_group.ResourceGroup.location
 	public_key = tls_private_key.SshKey.public_key_openssh
 }
 

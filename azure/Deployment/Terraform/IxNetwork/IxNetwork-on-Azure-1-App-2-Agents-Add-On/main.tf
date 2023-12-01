@@ -4,8 +4,8 @@ module "App" {
 	AdminPassword = local.AppAdminPassword
 	AdminUserName = local.AppAdminUserName
 	Eth0SubnetId = data.azurerm_subnet.PublicSubnet.id
-	ResourceGroupLocation = local.ResourceGroupLocation
-	ResourceGroupName = local.ResourceGroupName
+	ResourceGroupLocation = data.azurerm_resource_group.ResourceGroup.location
+	ResourceGroupName = data.azurerm_resource_group.ResourceGroup.name
 	SshKeyName = azurerm_ssh_public_key.SshKey.name
 	UserEmailTag = local.UserEmailTag
 	UserLoginTag = local.UserLoginTag
@@ -21,8 +21,8 @@ module "Agent1" {
 	Eth0SubnetId = data.azurerm_subnet.PublicSubnet.id
 	Eth1SubnetId = data.azurerm_subnet.PrivateSubnet.id
 	InstanceId = local.Agent1InstanceId
-	ResourceGroupLocation = local.ResourceGroupLocation
-	ResourceGroupName = local.ResourceGroupName
+	ResourceGroupLocation = data.azurerm_resource_group.ResourceGroup.location
+	ResourceGroupName = data.azurerm_resource_group.ResourceGroup.name
 	SshKeyName = azurerm_ssh_public_key.SshKey.name
 	UserEmailTag = local.UserEmailTag
 	UserLoginTag = local.UserLoginTag
@@ -40,8 +40,8 @@ module "Agent2" {
 	Eth1IpAddresses = local.Agent2Eth1IpAddresses
 	Eth1SubnetId = data.azurerm_subnet.PrivateSubnet.id
 	InstanceId = local.Agent2InstanceId
-	ResourceGroupLocation = local.ResourceGroupLocation
-	ResourceGroupName = local.ResourceGroupName
+	ResourceGroupLocation = data.azurerm_resource_group.ResourceGroup.location
+	ResourceGroupName = data.azurerm_resource_group.ResourceGroup.name
 	SshKeyName = azurerm_ssh_public_key.SshKey.name
 	UserEmailTag = local.UserEmailTag
 	UserLoginTag = local.UserLoginTag
