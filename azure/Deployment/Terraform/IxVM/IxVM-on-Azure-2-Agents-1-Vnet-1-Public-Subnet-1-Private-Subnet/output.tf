@@ -22,10 +22,7 @@ output "ResourceGroup" {
 output "SshKey" {
 	sensitive = true
 	value = {
-		"private_key_openssh" : tls_private_key.SshKey.private_key_openssh
 		"private_key_pem" : tls_private_key.SshKey.private_key_pem
-		"public_key_openssh" : tls_private_key.SshKey.public_key_openssh
-		"public_key_pem" : tls_private_key.SshKey.public_key_pem
 	}
 }
 

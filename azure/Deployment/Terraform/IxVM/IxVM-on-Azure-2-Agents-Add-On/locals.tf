@@ -8,7 +8,7 @@ locals {
 	AppVersion = "9-36"
 	Preamble = "${local.UserLoginTag}-${local.AppTag}-${local.AppVersion}"
 	PrivateSubnetName = var.PrivateSubnetName
-	PublicSecurityRuleSourceIpPrefix = var.PublicSecurityRuleSourceIpPrefix
+	PublicSecurityRuleSourceIpPrefixes = var.PublicSecurityRuleSourceIpPrefixes
 	PublicSubnetName = var.PublicSubnetName
 	ResourceGroupLocation = var.ResourceGroupLocation
 	ResourceGroupName = var.ResourceGroupName

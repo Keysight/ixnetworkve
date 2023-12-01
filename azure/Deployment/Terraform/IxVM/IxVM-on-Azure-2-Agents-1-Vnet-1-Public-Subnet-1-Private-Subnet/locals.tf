@@ -7,7 +7,7 @@ locals {
 	AppTag = "ixnetwork"
 	AppVersion = "9-36"
 	Preamble = "${local.UserLoginTag}-${local.AppTag}-${local.AppVersion}"
-	PublicSecurityRuleSourceIpPrefix = var.PublicSecurityRuleSourceIpPrefix
+	PublicSecurityRuleSourceIpPrefixes = var.PublicSecurityRuleSourceIpPrefixes
 	ResourceGroupLocation = var.ResourceGroupLocation
 	ResourceGroupName = var.ResourceGroupName
 	SshKeyAlgorithm = "RSA"

@@ -11,8 +11,19 @@ AgentVmSize must be one of the following sizes:
 	}
 }
 
-variable "PublicSecurityRuleSourceIpPrefix" {
+variable "ClientId" {
+	sensitive = true
 	type = string
+}
+
+variable "ClientSecret" {
+	sensitive = true
+	type = string
+}
+
+variable "PublicSecurityRuleSourceIpPrefixes" {
+	description = "List of IP Addresses /32 or IP CIDR ranges connecting inbound to App"
+	type = list(string)
 }
 
 variable "ResourceGroupLocation" {
@@ -25,6 +36,11 @@ variable "ResourceGroupName" {
 }
 
 variable "SubscriptionId" {
+	sensitive = true
+	type = string
+}
+
+variable "TenantId" {
 	sensitive = true
 	type = string
 }
