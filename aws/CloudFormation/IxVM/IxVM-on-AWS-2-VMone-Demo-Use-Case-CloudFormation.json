@@ -107,7 +107,7 @@
                 "INSTANCExEBSxDELETExONxTERMINATION": true,
                 "INSTANCExEBSxVOLUMExTYPE": "gp2",
                 "APPxTAG": "KEYSIGHT",
-                "APPxVERSION": "9.36",
+                "APPxVERSION": "10.00",
                 "TESTAPPLIANCE1xETH0xPRIVATExIPxADDRESS": "10.0.10.11",
                 "TESTAPPLIANCE1xETH1xPRIVATExIPxADDRESSES": "10.0.2.12|10.0.2.13|10.0.2.14|10.0.2.15|10.0.2.16|10.0.2.17|10.0.2.18|10.0.2.19|10.0.2.20|10.0.2.21",
                 "TESTAPPLIANCE2xETH0xPRIVATExIPxADDRESS": "10.0.10.12",
