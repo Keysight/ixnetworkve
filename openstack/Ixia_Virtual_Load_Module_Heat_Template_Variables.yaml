@@ -1,0 +1,10 @@
+parameters:
+
+    Management_Network:                  Ixia Management Network
+
+    Test_Network:                        Ixia Test Network
+    Test_Sub_Network:                    192.168.2.0/24
+
+    Virtual_Load_Module_Name:            vCard
+    Virtual_Load_Module_Image_Name:      Ixia Virtual Load Module 10.00 
+    Virtual_Load_Module_Flavor:          m1.custom.virtual.load.module

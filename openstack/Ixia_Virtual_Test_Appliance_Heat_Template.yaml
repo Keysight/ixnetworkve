@@ -1,0 +1,108 @@
+heat_template_version: 2013-05-23
+
+
+description: >
+  Version: 10.00 
+    This is the HEAT template used for Ixia Virtual Products deployment in OpenStack-based environments. It can be used with IxNetwork VE and IxLoad VE products with version 8.10 EA or newer.
+    The template will create 1 Virtual Machine  (named "Virtual Test Appliance").
+    The Ixia_Virtual_Test_Appliance_10.00_Heat_Template_Variables.yaml environment file is used for hardcoding the parameters for the resources defined in this Heat Template.
+
+
+parameters:
+
+    Management_Network:
+      type:        string
+      label:       Ixia Management Network - Name
+      description: The name of the MANAGEMENT NETWORK that is already configured in OpenStack
+
+    Virtual_Test_Appliance_Name:
+      type:        string
+      label:       Ixia Virtual Test Appliance - Instance Name
+      description: The name of the IXIA VIRTUAL TEST APPLIANCE to be created
+
+    Virtual_Test_Appliance_Image_Name:
+      type:        string
+      label:       Ixia Virtual Test Appliance - Image Name
+      description: The QCOW2 image to be used for the IXIA VIRTUAL TEST APPLIANCE
+
+    Virtual_Test_Appliance_Flavor:
+      type:        string
+      label:       Ixia Virtual Test Appliance - Flavor
+      description: The resources required for each IXIA VIRTUAL TEST APPLIANCE are 4 vCPU, 4 GB RAM, 8 GB HDD
+
+    Test_Network1:
+      type:        string
+      label:       Ixia Test Network 1 - Name
+      description: The name of the TEST NETWORK 1 to be created
+
+    Test_Sub_Network1:
+      type:        string
+      label:       Ixia Test Network 1 - CIDR
+      description: The IP Address / Subnet Mask of the TEST NETWORK 1 to be created
+
+    Test_Network2:
+      type:        string
+      label:       Ixia Test Network 2 - Name
+      description: The name of the TEST NETWORK 2 to be created
+
+    Test_Sub_Network2:
+      type:        string
+      label:       Ixia Test Network 2 - CIDR
+      description: The IP Address / Subnet Mask of the TEST NETWORK 2 to be created
+
+
+
+resources:
+
+  Ixia-Test-Network1:
+    type:                OS::Neutron::Net
+    properties:
+      name:              {get_param:    Test_Network1}
+
+  Ixia-Test-Subnet1:
+     type:               OS::Neutron::Subnet
+     properties:
+       network_id:       {get_resource: Ixia-Test-Network1}
+       cidr:             {get_param:    Test_Sub_Network1}
+       gateway_ip:       null
+       ip_version:       4
+       enable_dhcp:      false
+
+  Ixia-Test-Network2:
+    type:                OS::Neutron::Net
+    properties:
+      name:              {get_param:    Test_Network2}
+
+  Ixia-Test-Subnet2:
+     type:               OS::Neutron::Subnet
+     properties:
+       network_id:       {get_resource: Ixia-Test-Network2}
+       cidr:             {get_param:    Test_Sub_Network2}
+       gateway_ip:       null
+       ip_version:       4
+       enable_dhcp:      false
+
+  Test-Port-1:
+       type:             OS::Neutron::Port
+       properties:
+         network_id:     {get_resource: Ixia-Test-Network1}
+         fixed_ips:
+           - subnet_id:  {get_resource: Ixia-Test-Subnet1}
+
+  Test-Port-2:
+       type:             OS::Neutron::Port
+       properties:
+         network_id:     {get_resource: Ixia-Test-Network2}
+         fixed_ips:
+           - subnet_id:  {get_resource: Ixia-Test-Subnet2}
+
+  virtualTestAppliance:
+    type:                OS::Nova::Server
+    properties:
+      name:              {get_param:    Virtual_Test_Appliance_Name}
+      image:             {get_param:    Virtual_Test_Appliance_Image_Name}
+      flavor:            {get_param:    Virtual_Test_Appliance_Flavor}
+      networks:
+        - network:       {get_param:    Management_Network }
+        - port:          {get_resource: Test-Port-1}
+        - port:          {get_resource: Test-Port-2}
