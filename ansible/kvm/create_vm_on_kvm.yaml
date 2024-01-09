@@ -6,9 +6,9 @@
       management_bridge: br0
       test_bridge: br1
       tar_extract_location: /home/ixia
-      virtual_chassis_tar_location: /home/ixia/Ixia_Virtual_Chassis_9.36_KVM.qcow2.tar.bz2
-      virtual_load_module_tar_location: /home/ixia/Ixia_Virtual_Load_Module_IXN_9.36_KVM.qcow2.tar.bz2
-      virtual_test_appliance_tar_location: /home/ixia/Ixia_Virtual_Test_Appliance_IXN_9.36_KVM.qcow2.tar.bz2
+      virtual_chassis_tar_location: /home/ixia/Ixia_Virtual_Chassis_10.00_KVM.qcow2.tar.bz2
+      virtual_load_module_tar_location: /home/ixia/Ixia_Virtual_Load_Module_IXN_10.00_KVM.qcow2.tar.bz2
+      virtual_test_appliance_tar_location: /home/ixia/Ixia_Virtual_Test_Appliance_IXN_10.00_KVM.qcow2.tar.bz2
 
   tasks:
   - name: Untar the Virtual Chassis archive
@@ -21,34 +21,34 @@
     command: tar -xf '{{virtual_test_appliance_tar_location}}' -C '{{tar_extract_location}}'
     
   - name: Creating copies of Virtual Load Module image
-    command: sudo cp '{{tar_extract_location}}'/Ixia_Virtual_Load_Module_IXN_9.36_KVM.qcow2 '{{tar_extract_location}}'/Ixia_Virtual_Load_Module_IXN_9.36_KVM_1.qcow2
+    command: sudo cp '{{tar_extract_location}}'/Ixia_Virtual_Load_Module_IXN_10.00_KVM.qcow2 '{{tar_extract_location}}'/Ixia_Virtual_Load_Module_IXN_10.00_KVM_1.qcow2
     
   - name: Defining Virtual Chassis VM
-    command: virt-install --name Virtual_Chassis9.36 --ram 4096 --vcpus 2 --network bridge='{{management_bridge}}',model=virtio --serial pty --disk '{{tar_extract_location}}'/Ixia_Virtual_Chassis_9.36_KVM.qcow2,device=disk,bus=virtio,format=qcow2 --channel unix,target_type=virtio,name=org.qemu.guest_agent.0 --boot hd --vnc --noautoconsole --force; sleep 30s
+    command: virt-install --name Virtual_Chassis10.00 --ram 4096 --vcpus 2 --network bridge='{{management_bridge}}',model=virtio --serial pty --disk '{{tar_extract_location}}'/Ixia_Virtual_Chassis_10.00_KVM.qcow2,device=disk,bus=virtio,format=qcow2 --channel unix,target_type=virtio,name=org.qemu.guest_agent.0 --boot hd --vnc --noautoconsole --force; sleep 30s
     
   - name: Defining Virtual Load Module VM 01
-    command: virt-install --name Virtual_Load_Module9.36_1 --ram 4096 --vcpus 4 --network bridge='{{management_bridge}}',model=virtio --network bridge='{{test_bridge}}',model=virtio --serial pty --disk '{{tar_extract_location}}'/Ixia_Virtual_Load_Module_IXN_9.36_KVM_1.qcow2,device=disk,bus=virtio,format=qcow2 --channel unix,target_type=virtio,name=org.qemu.guest_agent.0 --boot hd --vnc --noautoconsole --force; sleep 30s
+    command: virt-install --name Virtual_Load_Module10.00_1 --ram 4096 --vcpus 4 --network bridge='{{management_bridge}}',model=virtio --network bridge='{{test_bridge}}',model=virtio --serial pty --disk '{{tar_extract_location}}'/Ixia_Virtual_Load_Module_IXN_10.00_KVM_1.qcow2,device=disk,bus=virtio,format=qcow2 --channel unix,target_type=virtio,name=org.qemu.guest_agent.0 --boot hd --vnc --noautoconsole --force; sleep 30s
 
   - name: Defining Virtual Load Module VM 02
-    command: virt-install --name Virtual_Load_Module9.36_2 --ram 4096 --vcpus 4 --network bridge='{{management_bridge}}',model=virtio --network bridge='{{test_bridge}}',model=virtio --serial pty --disk '{{tar_extract_location}}'/Ixia_Virtual_Load_Module_IXN_9.36_KVM_2.qcow2,device=disk,bus=virtio,format=qcow2 --channel unix,target_type=virtio,name=org.qemu.guest_agent.0 --boot hd --vnc --noautoconsole --force; sleep 30s
+    command: virt-install --name Virtual_Load_Module10.00_2 --ram 4096 --vcpus 4 --network bridge='{{management_bridge}}',model=virtio --network bridge='{{test_bridge}}',model=virtio --serial pty --disk '{{tar_extract_location}}'/Ixia_Virtual_Load_Module_IXN_10.00_KVM_2.qcow2,device=disk,bus=virtio,format=qcow2 --channel unix,target_type=virtio,name=org.qemu.guest_agent.0 --boot hd --vnc --noautoconsole --force; sleep 30s
     
   - name: Defining Virtual Test Appliance VM
-    command: virt-install --name Virtual_Test_Appliance9.36 --ram 4096 --vcpus 6 --network bridge='{{management_bridge}}',model=virtio --network bridge='{{test_bridge}}',model=virtio --network bridge='{{test_bridge}}',model=virtio --serial pty --disk '{{tar_extract_location}}'/Ixia_Virtual_Test_Appliance_IXN_9.36_KVM.qcow2.tar.bz2,device=disk,bus=virtio,format=qcow2 --channel unix,target_type=virtio,name=org.qemu.guest_agent.0 --boot hd --vnc --noautoconsole --force; sleep 30s
+    command: virt-install --name Virtual_Test_Appliance10.00 --ram 4096 --vcpus 6 --network bridge='{{management_bridge}}',model=virtio --network bridge='{{test_bridge}}',model=virtio --network bridge='{{test_bridge}}',model=virtio --serial pty --disk '{{tar_extract_location}}'/Ixia_Virtual_Test_Appliance_IXN_10.00_KVM.qcow2.tar.bz2,device=disk,bus=virtio,format=qcow2 --channel unix,target_type=virtio,name=org.qemu.guest_agent.0 --boot hd --vnc --noautoconsole --force; sleep 30s
     
   - name: Getting the Virtual Chassis IP
-    command: virsh domifaddr --source agent Virtual_Chassis9.36 | grep eth0 | awk '{print $4}' | cut -d '/' -f 1
+    command: virsh domifaddr --source agent Virtual_Chassis10.00 | grep eth0 | awk '{print $4}' | cut -d '/' -f 1
     register: virtual_chassis_ip
     
   - name: Getting the Virtual Load Module VM 01 IP
-    command: virsh domifaddr --source agent Virtual_Load_Module9.36_1 | grep eth0 | awk '{print $4}' | cut -d '/' -f 1
+    command: virsh domifaddr --source agent Virtual_Load_Module10.00_1 | grep eth0 | awk '{print $4}' | cut -d '/' -f 1
     register: vlm01_ip
     
   - name: Getting the Virtual Load Module VM 02 IP
-    command: virsh domifaddr --source agent Virtual_Load_Module9.36_2 | grep eth0 | awk '{print $4}' | cut -d '/' -f 1
+    command: virsh domifaddr --source agent Virtual_Load_Module10.00_2 | grep eth0 | awk '{print $4}' | cut -d '/' -f 1
     register: vlm02_ip
     
   - name: Getting the Virtual Test Appliance IP
-    command: virsh domifaddr --source agent Virtual_Test_Appliance9.36 | grep eth0 | awk '{print $4}' | cut -d '/' -f 1
+    command: virsh domifaddr --source agent Virtual_Test_Appliance10.00 | grep eth0 | awk '{print $4}' | cut -d '/' -f 1
     register: vta_ip
     
   - name: Gather VIRTUAL CHASSIS REST API auth info

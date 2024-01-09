@@ -2,10 +2,10 @@ heat_template_version: 2013-05-23
 
 
 description: >
-  Version: 9.36 
+  Version: 10.00 
     This is the HEAT template used for Ixia Virtual Products deployment in OpenStack-based environments. It can be used with IxNetwork VE and IxLoad VE products with version 8.10 EA or newer.
     The template will create 1 Virtual Machine  (named "vChassis").
-    The Ixia_Virtual_Chassis_9.36_Heat_Template_Variables.yaml environment file is used for hardcoding the parameters for the resources defined in this Heat Template.
+    The Ixia_Virtual_Chassis_10.00_Heat_Template_Variables.yaml environment file is used for hardcoding the parameters for the resources defined in this Heat Template.
 
 
 parameters:
