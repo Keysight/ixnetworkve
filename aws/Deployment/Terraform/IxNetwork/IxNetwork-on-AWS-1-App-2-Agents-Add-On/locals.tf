@@ -6,10 +6,9 @@ locals {
 	Agent2InstanceId = "agent2"
 	AppInstanceType = var.AppInstanceType
 	AppTag = "ixnetwork"
-	AppVersion = "9-36"
 	PlacementGroupName = "${local.Preamble}-placement-group-${local.Region}"
 	PlacementGroupStrategy = "cluster"
-	Preamble = "${local.UserLoginTag}-${local.UserProjectTag}-${local.AppTag}-${local.AppVersion}"
+	Preamble = "${local.UserLoginTag}-${local.UserProjectTag}-${local.AppTag}"
 	PrivateSecurityGroupName = var.PrivateSecurityGroupName
 	PrivateSubnetName = var.PrivateSubnetName
 	PublicSecurityGroupName = var.PublicSecurityGroupName

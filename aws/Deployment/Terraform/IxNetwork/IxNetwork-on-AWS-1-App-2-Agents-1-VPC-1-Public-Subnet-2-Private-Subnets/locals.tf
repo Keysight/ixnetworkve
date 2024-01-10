@@ -6,11 +6,10 @@ locals {
 	Agent2InstanceId = "agent2"
 	AppInstanceType = var.AppInstanceType
 	AppTag = "ixnetwork"
-	AppVersion = "9-36"
 	InboundIPv4CidrBlocks = var.InboundIPv4CidrBlocks
 	PlacementGroupName = "${local.Preamble}-placement-group-${local.Region}"
 	PlacementGroupStrategy = "cluster"
-	Preamble = "${local.UserLoginTag}-${local.UserProjectTag}-${local.AppTag}-${local.AppVersion}"
+	Preamble = "${local.UserLoginTag}-${local.UserProjectTag}-${local.AppTag}"
 	Private1SubnetAvailabilityZone = var.Private1SubnetAvailabilityZone
 	Private2SubnetAvailabilityZone = var.Private2SubnetAvailabilityZone
 	PublicSubnetAvailabilityZone = var.PublicSubnetAvailabilityZone

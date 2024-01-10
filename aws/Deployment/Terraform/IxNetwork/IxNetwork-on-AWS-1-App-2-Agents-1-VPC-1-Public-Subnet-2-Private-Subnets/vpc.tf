@@ -1,6 +1,6 @@
 module "Vpc" {
 	source = "armdupre/module-1-vpc-1-public-subnet-2-private-subnets/aws"
-	version = "0.1.1"
+	version = "10.0.0"
 	InboundIPv4CidrBlocks = local.InboundIPv4CidrBlocks
 	Private1SubnetAvailabilityZone = local.Private1SubnetAvailabilityZone
 	Private2SubnetAvailabilityZone = local.Private2SubnetAvailabilityZone
@@ -10,7 +10,6 @@ module "Vpc" {
 	UserEmailTag = local.UserEmailTag
 	UserLoginTag = local.UserLoginTag
 	UserProjectTag = local.UserProjectTag
-	Version = local.AppVersion
 }
 
 resource "aws_security_group_rule" "PublicIngress3389" {
