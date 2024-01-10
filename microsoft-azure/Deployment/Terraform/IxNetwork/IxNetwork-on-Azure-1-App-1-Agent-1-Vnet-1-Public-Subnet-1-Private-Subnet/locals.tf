@@ -4,9 +4,8 @@ locals {
 	AppAdminPassword = var.AppAdminPassword
 	AppAdminUserName = var.AppAdminUserName
 	AppTag = "ixnetwork"
-	AppVersion = "9-36"
 	AppVmSize = var.AppVmSize
-	Preamble = "${local.UserLoginTag}-${local.AppTag}-${local.AppVersion}"
+	Preamble = "${local.UserLoginTag}-${local.AppTag}"
 	PublicRdpSecurityRuleName = "${local.Preamble}-rdp-rule"
 	PublicSecurityRuleSourceIpPrefixes = var.PublicSecurityRuleSourceIpPrefixes
 	ResourceGroupLocation = var.ResourceGroupLocation

@@ -1,6 +1,6 @@
 module "Agent1" {
 	source = "armdupre/module-ixnetwork-agent/azurerm"
-	version = "9.36.0"
+	version = "10.0.0"
 	Eth0SubnetId = data.azurerm_subnet.PublicSubnet.id
 	Eth1SubnetId = data.azurerm_subnet.PrivateSubnet.id
 	InstanceId = local.Agent1InstanceId
@@ -17,7 +17,7 @@ module "Agent1" {
 
 module "Agent2" {
 	source = "armdupre/module-ixnetwork-agent/azurerm"
-	version = "9.36.0"
+	version = "10.0.0"
 	Eth0IpAddress = local.Agent2Eth0IpAddress
 	Eth0SubnetId = data.azurerm_subnet.PublicSubnet.id
 	Eth1IpAddresses = local.Agent2Eth1IpAddresses
