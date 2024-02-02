@@ -29,4 +29,5 @@ terraform validate
 terraform plan
 terraform state list
 terraform output
+terraform output SshKey
 ```
