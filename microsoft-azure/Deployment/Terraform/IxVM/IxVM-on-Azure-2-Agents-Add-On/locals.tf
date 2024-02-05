@@ -5,7 +5,7 @@ locals {
 	Agent2Eth1IpAddresses = ["10.0.2.22", "10.0.2.23", "10.0.2.24", "10.0.2.25", "10.0.2.26", "10.0.2.27", "10.0.2.28", "10.0.2.29", "10.0.2.30", "10.0.2.31"]
 	Agent2InstanceId = "agent2"
 	AppTag = "ixnetwork"
-	Preamble = "${local.UserLoginTag}-${local.AppTag}"
+	Preamble = "${local.UserLoginTag}-${local.UserProjectTag}-${local.AppTag}"
 	PrivateSubnetName = var.PrivateSubnetName
 	PublicSecurityRuleSourceIpPrefixes = var.PublicSecurityRuleSourceIpPrefixes
 	PublicSubnetName = var.PublicSubnetName
