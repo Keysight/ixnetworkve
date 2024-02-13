@@ -2,7 +2,7 @@ provider "azurerm" {
 	client_id = var.ClientId
 	client_secret = var.ClientSecret
 	environment = var.Environment
-	skip_provider_registration = true
+	skip_provider_registration = var.SkipProviderRegistration
 	subscription_id = var.SubscriptionId
 	tenant_id = var.TenantId
 	features {
