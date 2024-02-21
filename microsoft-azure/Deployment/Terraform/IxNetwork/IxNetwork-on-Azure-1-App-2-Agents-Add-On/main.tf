@@ -1,18 +1,15 @@
 module "App" {
 	source = "armdupre/module-ixnetwork-app/azurerm"
-	version = "10.0.0"
+	version = "10.0.1"
 	AdminPassword = local.AppAdminPassword
 	AdminUserName = local.AppAdminUserName
 	Eth0SubnetId = data.azurerm_subnet.PublicSubnet.id
 	ResourceGroupLocation = data.azurerm_resource_group.ResourceGroup.location
 	ResourceGroupName = data.azurerm_resource_group.ResourceGroup.name
-	SshKeyName = azurerm_ssh_public_key.SshKey.name
 	UserEmailTag = local.UserEmailTag
 	UserLoginTag = local.UserLoginTag
+	UserProjectTag = local.UserProjectTag
 	VmSize = local.AppVmSize
-	depends_on = [
-		azurerm_ssh_public_key.SshKey
-	]
 }
 
 module "Agent1" {
@@ -26,6 +23,7 @@ module "Agent1" {
 	SshKeyName = azurerm_ssh_public_key.SshKey.name
 	UserEmailTag = local.UserEmailTag
 	UserLoginTag = local.UserLoginTag
+	UserProjectTag = local.UserProjectTag
 	VmSize = local.AgentVmSize
 	depends_on = [
 		azurerm_ssh_public_key.SshKey
@@ -45,6 +43,7 @@ module "Agent2" {
 	SshKeyName = azurerm_ssh_public_key.SshKey.name
 	UserEmailTag = local.UserEmailTag
 	UserLoginTag = local.UserLoginTag
+	UserProjectTag = local.UserProjectTag
 	VmSize = local.AgentVmSize
 	depends_on = [
 		azurerm_ssh_public_key.SshKey

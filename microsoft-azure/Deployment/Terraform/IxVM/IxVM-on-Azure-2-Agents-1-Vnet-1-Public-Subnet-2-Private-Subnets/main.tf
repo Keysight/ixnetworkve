@@ -9,6 +9,7 @@ module "Agent1" {
 	SshKeyName = azurerm_ssh_public_key.SshKey.name
 	UserEmailTag = local.UserEmailTag
 	UserLoginTag = local.UserLoginTag
+	UserProjectTag = local.UserProjectTag
 	VmSize = local.AgentVmSize
 	depends_on = [
 		azurerm_ssh_public_key.SshKey,
@@ -29,6 +30,7 @@ module "Agent2" {
 	SshKeyName = azurerm_ssh_public_key.SshKey.name
 	UserEmailTag = local.UserEmailTag
 	UserLoginTag = local.UserLoginTag
+	UserProjectTag = local.UserProjectTag
 	VmSize = local.AgentVmSize
 	depends_on = [
 		azurerm_ssh_public_key.SshKey,

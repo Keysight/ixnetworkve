@@ -3,4 +3,5 @@
 # AppVmSize = "Standard_F4s_v2"
 # Environment = "usgovernment"
 # ResourceGroupLocation = "USGov Texas"
+# SkipProviderRegistration = false
 # UserProjectTag = "cloud-ist"

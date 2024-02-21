@@ -7,7 +7,7 @@ This deployment creates a topology with a single virtual private cloud having a 
 ```
 terraform.required.auto.tfvars
 ```
-You **MUST** uncomment all lines in this file and replace values to match your particular environment.
+You **MUST** uncomment all lines in this file and replace values to match your particular environment.  
 Otherwise, Terraform will prompt the user to supply input arguents via cli.
 
 ## Optional Variables
@@ -20,8 +20,11 @@ You **MAY** uncomment one or more lines as needed in this file and replace value
 ```
 terraform init
 terraform apply -auto-approve
+terraform output SshKey
 terraform destroy -auto-approve
 ```
+You **MUST** output the SSH key pair associated with the AWS instances.  
+Use the **private_key_pem** material to get Windows password for the App from the AWS Console.
 
 ## Optional Usage
 ```
