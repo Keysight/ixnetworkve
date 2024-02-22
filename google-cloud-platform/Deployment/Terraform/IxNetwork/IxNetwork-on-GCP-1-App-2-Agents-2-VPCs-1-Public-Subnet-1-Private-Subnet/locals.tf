@@ -9,8 +9,7 @@ locals {
 	Agent2InstanceName = "${local.Preamble}-instance"
 	AppMachineType = var.AppMachineType
 	AppTag = "ixnetwork"
-	AppVersion = "9-36"
-	Preamble = "${local.UserLoginTag}-${local.UserProjectTag}-${local.AppTag}-${local.AppVersion}-${local.Agent2InstanceId}"
+	Preamble = "${local.UserLoginTag}-${local.UserProjectTag}-${local.AppTag}-${local.Agent2InstanceId}"
 	PublicFirewallRuleSourceIpRanges = var.PublicFirewallRuleSourceIpRanges
 	UserEmailTag = var.UserEmailTag
 	UserLoginTag = var.UserLoginTag
