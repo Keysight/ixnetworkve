@@ -1,6 +1,6 @@
 module "App" {
 	source = "armdupre/module-ixnetwork-app/google"
-	version = "9.36.0"
+	version = "10.0.0"
 	Eth0SubnetName = local.PublicSubnetName
 	Eth0VpcNetworkName = local.PublicVpcNetworkName
 	MachineType = local.AppMachineType
@@ -13,7 +13,7 @@ module "App" {
 
 module "Agent1" {
 	source = "armdupre/module-ixnetwork-agent/google"
-	version = "9.36.0"
+	version = "10.0.0"
 	Eth0SubnetName = local.PublicSubnetName
 	Eth0VpcNetworkName = local.PublicVpcNetworkName
 	Eth1SubnetName = local.PrivateSubnetName
@@ -29,7 +29,7 @@ module "Agent1" {
 
 module "Agent2" {
 	source = "armdupre/module-ixnetwork-agent/google"
-	version = "9.36.0"
+	version = "10.0.0"
 	Eth0PrivateIpAddress = local.Agent2Eth0PrivateIpAddress
 	Eth0SubnetName = local.PublicSubnetName
 	Eth0VpcNetworkName = local.PublicVpcNetworkName
