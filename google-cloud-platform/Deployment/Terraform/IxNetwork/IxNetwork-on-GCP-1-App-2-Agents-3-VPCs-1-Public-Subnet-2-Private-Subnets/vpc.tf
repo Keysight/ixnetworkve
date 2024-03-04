@@ -1,11 +1,11 @@
 module "Vpc" {
 	source = "armdupre/module-3-vpcs-1-public-subnet-2-private-subnets/google"
+	version = "10.0.0"
 	PublicFirewallRuleSourceIpRanges = local.PublicFirewallRuleSourceIpRanges
 	RegionName = data.google_client_config.current.region
 	Tag = local.AppTag
 	UserLoginTag = local.UserLoginTag
 	UserProjectTag = local.UserProjectTag
-	Version = local.AppVersion
 }
 
 resource "google_compute_network_peering" "Private1VpcNetworkPeer" {

@@ -1,6 +1,6 @@
 module "Agent1" {
 	source = "armdupre/module-ixnetwork-agent/google"
-	version = "9.36.0"
+	version = "10.0.0"
 	Eth0SubnetName = module.Vpc.PublicSubnet.name
 	Eth0VpcNetworkName = module.Vpc.PublicVpcNetwork.name
 	Eth1SubnetName = module.Vpc.PrivateSubnet.name
