@@ -63,7 +63,7 @@
 		"VirtualTestAppliance1Eth0IpAddress": "10.0.10.11",
 		"VirtualTestAppliance1Eth1IpAddresses": ["10.0.2.12", "10.0.2.13", "10.0.2.14", "10.0.2.15", "10.0.2.16", "10.0.2.17", "10.0.2.18", "10.0.2.19", "10.0.2.20", "10.0.2.21"],
         "VirtualTestAppliance1Name": "[concat(variables('OptionalVMPrefix'), '-', 'IXNETWORK-VIRTUALTESTAPPLIANCE1')]",
-		"VirtualTestAppliance1DnsLabel": "[concat(toLower(variables('OptionalVMPrefix')), '-', 'ixnetwork-virtualtestappliance-1', '-', substring(uniqueString(resourceGroup().id),0,6))]",
+		"VirtualTestAppliance1DnsLabel": "[concat(toLower(variables('OptionalVMPrefix')), '-', 'ixn-vta-1', '-', substring(uniqueString(resourceGroup().id),0,6))]",
         "VirtualTestApplianceEnableAcceleratedNetworking": false,
         "VirtualTestApplianceEnableIPForwarding": true,
 		"VirtualTestApplianceDisablePasswordAuthentication": false,
