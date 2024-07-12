@@ -61,3 +61,7 @@ resource "azurerm_resource_group" "ResourceGroup" {
 	name = local.ResourceGroupName
 	location = local.ResourceGroupLocation
 }
+
+resource "random_id" "RandomId" {
+	byte_length = 4
+}
