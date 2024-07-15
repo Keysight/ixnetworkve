@@ -35,3 +35,7 @@ module "Agent2" {
 		azurerm_ssh_public_key.SshKey
 	]
 }
+
+resource "random_id" "RandomId" {
+	byte_length = 4
+}
