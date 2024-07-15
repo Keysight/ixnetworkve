@@ -3,13 +3,6 @@
 ## Description
 This deployment creates a topology with a single virtual network having a single public facing subnet and a single private subnet.
 
-## Required Variables
-```
-terraform.required.auto.tfvars
-```
-You **MUST** uncomment all lines in this file and replace values to match your particular environment.  
-Otherwise, Terraform will prompt the user to supply input arguents via cli.
-
 ## Optional Variables
 ```
 terraform.optional.auto.tfvars
@@ -29,5 +22,5 @@ terraform validate
 terraform plan
 terraform state list
 terraform output
-terraform output SshKey
+terraform output SshKey | tail -n +3 | head -n-3 | sed "s/^[ \t]*//" > SshKey.pem
 ```
