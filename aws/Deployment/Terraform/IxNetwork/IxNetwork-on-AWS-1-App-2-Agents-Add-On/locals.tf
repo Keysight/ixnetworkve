@@ -17,7 +17,7 @@ locals {
 	SshKeyAlgorithm = "RSA"
 	SshKeyName = "${local.Preamble}-ssh-key"
 	SshKeyRsaBits = "4096"
-	UserEmailTag = var.UserEmailTag
-	UserLoginTag = var.UserLoginTag
-	UserProjectTag = var.UserProjectTag
+	UserEmailTag = var.UserEmailTag == null ? data.aws_caller_identity.current.user_id : var.UserEmailTag
+	UserLoginTag = var.UserLoginTag == null ? "terraform" : var.UserLoginTag
+	UserProjectTag = var.UserProjectTag == null ? random_id.RandomId.id : var.UserProjectTag
 }
