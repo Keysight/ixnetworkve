@@ -207,7 +207,7 @@ properties:
 
   GCP_CLIENT_CUSTOM_IMAGE_FAMILY_NAME:
     type: string
-    default: ixnetwork-cloud-gcp-10-00-2312-4
+    default: ixnetwork-cloud-gcp-10-40-2406-3
 
   GCP_CLIENT_MACHINE_TYPE:
     type: string
@@ -240,7 +240,7 @@ properties:
 
   GCP_VMONE_CUSTOM_IMAGE_FAMILY_NAME:
     type: string
-    default: ixia-virtual-test-appliance-10-00-0-140
+    default: ixia-virtual-test-appliance-10-40-0-75
 
   GCP_VMONE_MACHINE_TYPE:
     type: string
