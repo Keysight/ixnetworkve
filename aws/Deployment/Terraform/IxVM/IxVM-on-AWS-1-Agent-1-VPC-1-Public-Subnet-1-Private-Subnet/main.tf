@@ -1,6 +1,6 @@
 module "Agent1" {
 	source = "armdupre/module-ixnetwork-agent/aws"
-	version = "10.0.0"
+	version = "10.40.0"
 	Eth0SecurityGroupId = module.Vpc.PublicSecurityGroup.id
 	Eth0SubnetId = module.Vpc.PublicSubnet.id
 	Eth1SecurityGroupId = module.Vpc.PrivateSecurityGroup.id

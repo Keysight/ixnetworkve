@@ -85,7 +85,7 @@ variable "UserLoginTag" {
 	description = "Login ID tag of user creating the deployment"
 	type = string
 	validation {
-		condition var.UserLoginTag == null ? true : = length(var.UserLoginTag) >= 4
+		condition = var.UserLoginTag == null ? true : length(var.UserLoginTag) >= 4
 		error_message = "UserLoginTag minimum length must be >= 4."
 	}
 }
