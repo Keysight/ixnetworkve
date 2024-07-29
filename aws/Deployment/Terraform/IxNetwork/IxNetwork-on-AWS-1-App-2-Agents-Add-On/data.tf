@@ -33,7 +33,3 @@ data "aws_subnet" "PublicSubnet" {
 		values = [ local.PublicSubnetName ]
     }
 }
-
-data "http" "ip" {
-	url = "https://ifconfig.me"
-}
