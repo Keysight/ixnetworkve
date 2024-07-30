@@ -4,8 +4,11 @@ locals {
 	Agent2Eth0PrivateIpAddress = "10.0.10.12"
 	Agent2Eth1PrivateIpAddresses = [ "10.0.3.12", "10.0.3.13", "10.0.3.14", "10.0.3.15", "10.0.3.16", "10.0.3.17", "10.0.3.18", "10.0.3.19", "10.0.3.20", "10.0.3.21" ]
 	Agent2InstanceId = "agent2"
+	ApiMaxRetries = var.ApiMaxRetries
 	AppInstanceType = var.AppInstanceType
 	AppTag = "ixnetwork-web"
+	AwsAccessCredentialsAccessKey = var.AwsAccessCredentialsAccessKey
+	AwsAccessCredentialsSecretKey = var.AwsAccessCredentialsSecretKey
 	InboundIPv4CidrBlocks = var.InboundIPv4CidrBlocks == null ? [ "${data.http.ip.response_body}/32" ] : var.InboundIPv4CidrBlocks
 	PlacementGroupName = "${local.Preamble}-placement-group-${local.Region}"
 	PlacementGroupStrategy = "cluster"
