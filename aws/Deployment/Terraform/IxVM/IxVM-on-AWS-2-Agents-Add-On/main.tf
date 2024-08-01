@@ -1,6 +1,6 @@
 module "Agent1" {
 	source = "armdupre/module-ixnetwork-agent/aws"
-	version = "10.40.0"
+	version = "10.40.1"
 	Eth0SecurityGroupId = data.aws_security_group.PublicSecurityGroup.id
 	Eth0SubnetId = data.aws_subnet.PublicSubnet.id
 	Eth1SecurityGroupId = data.aws_security_group.PrivateSecurityGroup.id
@@ -18,7 +18,7 @@ module "Agent1" {
 
 module "Agent2" {
 	source = "armdupre/module-ixnetwork-agent/aws"
-	version = "10.40.0"
+	version = "10.40.1"
 	Eth0PrivateIpAddress = local.Agent2Eth0PrivateIpAddress
 	Eth0SecurityGroupId = data.aws_security_group.PublicSecurityGroup.id
 	Eth0SubnetId = data.aws_subnet.PublicSubnet.id
