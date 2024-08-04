@@ -1,6 +1,5 @@
 module "Agent1" {
-	source = "armdupre/module-ixnetwork-agent/azurerm"
-	version = "10.40.0"
+	source = "git::https://github.com/armdupre/terraform-azurerm-module-ixnetwork-agent.git?ref=10.40.0"
 	Eth0SubnetId = module.Vnet.PublicSubnet.id
 	Eth1SubnetId = module.Vnet.PrivateSubnet.id
 	InstanceId = local.Agent1InstanceId
