@@ -1,5 +1,7 @@
 data "google_client_config" "current" {}
 
+data "google_client_openid_userinfo" "current" {}
+
 data "google_compute_subnetwork" "PrivateSubnet" {
 	name = local.PrivateSubnetName
 }
