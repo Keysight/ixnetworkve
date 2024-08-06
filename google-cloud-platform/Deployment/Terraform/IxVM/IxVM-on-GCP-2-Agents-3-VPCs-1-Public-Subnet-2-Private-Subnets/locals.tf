@@ -8,7 +8,7 @@ locals {
 	Agent2InstanceId = "agent2"
 	Agent2InstanceName = "${local.Preamble}-instance"
 	AppTag = "ixnetwork"
-	Preamble = "${local.UserLoginTag}-${local.UserProjectTag}-${local.AppTag}-${local.Agent2InstanceId}"
+	Preamble = replace("${local.UserLoginTag}-${local.UserProjectTag}-${local.AppTag}-${local.Agent2InstanceId}", "_", "-")
 	Private1VpcNetworkPeerName = "${local.Preamble}-test1-vpc-peer"
 	Private2VpcNetworkPeerName = "${local.Preamble}-test2-vpc-peer"
 	PublicFirewallRuleSourceIpRanges = var.PublicFirewallRuleSourceIpRanges == null ? [ "${data.http.ip.response_body}/32" ] : var.PublicFirewallRuleSourceIpRanges

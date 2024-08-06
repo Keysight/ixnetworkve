@@ -9,7 +9,7 @@ locals {
 	Agent2InstanceName = "${local.Preamble}-instance"
 	AppMachineType = var.AppMachineType
 	AppTag = "ixnetwork"
-	Preamble = "${local.UserLoginTag}-${local.UserProjectTag}-${local.AppTag}-${local.Agent2InstanceId}"
+	Preamble = replace("${local.UserLoginTag}-${local.UserProjectTag}-${local.AppTag}-${local.Agent2InstanceId}", "_", "-")
 	PrivateSubnetName = var.PrivateSubnetName
 	PrivateVpcNetworkName = var.PrivateVpcNetworkName
 	PublicSubnetName = var.PublicSubnetName
