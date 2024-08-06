@@ -2,8 +2,5 @@
 # PrivateSubnetName = "terraform-example-test-01-subnet"
 # PrivateVpcNetworkName = "terraform-example-test-01-vpc-network"
 # ProjectId = "example"
-# PublicFirewallRuleSourceIpRanges = [ "1.1.1.1/32" ]
 # PublicSubnetName = "terraform-example-management-subnet"
 # PublicVpcNetworkName = "terraform-example-management-vpc-network"
-# UserEmailTag = "terraform@example.com"
-# UserLoginTag = "terraform"

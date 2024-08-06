@@ -8,9 +8,9 @@ locals {
 	Agent2InstanceId = "agent2"
 	Agent2InstanceName = "${local.Preamble}-instance"
 	AppTag = "ixnetwork"
-	Preamble = "${local.UserLoginTag}-${local.UserProjectTag}-${local.AppTag}-${local.Agent2InstanceId}"
-	PublicFirewallRuleSourceIpRanges = var.PublicFirewallRuleSourceIpRanges
-	UserEmailTag = var.UserEmailTag
-	UserLoginTag = var.UserLoginTag
-	UserProjectTag = var.UserProjectTag
+	Preamble = replace("${local.UserLoginTag}-${local.UserProjectTag}-${local.AppTag}-${local.Agent2InstanceId}", "_", "-")
+	PublicFirewallRuleSourceIpRanges = var.PublicFirewallRuleSourceIpRanges == null ? [ "${data.http.ip.response_body}/32" ] : var.PublicFirewallRuleSourceIpRanges
+	UserEmailTag = var.UserEmailTag == null ? data.google_client_openid_userinfo.current.email : var.UserEmailTag
+	UserLoginTag = var.UserLoginTag == null ? "terraform" : var.UserLoginTag
+	UserProjectTag = var.UserProjectTag == null ? lower(random_id.RandomId.id) : var.UserProjectTag
 }

@@ -1,6 +1,5 @@
 module "Agent1" {
-	source = "armdupre/module-ixnetwork-agent/aws"
-	version = "10.0.0"
+	source = "git::https://github.com/armdupre/terraform-aws-module-ixnetwork-agent.git?ref=10.40.1"
 	Eth0SecurityGroupId = module.Vpc.PublicSecurityGroup.id
 	Eth0SubnetId = module.Vpc.PublicSubnet.id
 	Eth1SecurityGroupId = module.Vpc.PrivateSecurityGroup.id
@@ -18,8 +17,7 @@ module "Agent1" {
 }
 
 module "Agent2" {
-	source = "armdupre/module-ixnetwork-agent/aws"
-	version = "10.0.0"
+	source = "git::https://github.com/armdupre/terraform-aws-module-ixnetwork-agent.git?ref=10.40.1"
 	Eth0PrivateIpAddress = local.Agent2Eth0PrivateIpAddress
 	Eth0SecurityGroupId = module.Vpc.PublicSecurityGroup.id
 	Eth0SubnetId = module.Vpc.PublicSubnet.id
@@ -41,4 +39,8 @@ module "Agent2" {
 resource "aws_placement_group" "PlacementGroup" {
 	name = local.PlacementGroupName
 	strategy = local.PlacementGroupStrategy
+}
+
+resource "random_id" "RandomId" {
+	byte_length = 4
 }

@@ -39,12 +39,14 @@ AppVmSize must be one of the following sizes:
 }
 
 variable "ClientId" {
+	default = null
 	description = "Id of an application created in Azure Active Directory"
 	sensitive = true
 	type = string
 }
 
 variable "ClientSecret" {
+	default = null
 	description = "Authentication value of an application created in Azure Active Directory"
 	sensitive = true
 	type = string
@@ -53,11 +55,6 @@ variable "ClientSecret" {
 variable "PrivateSubnetName" {
 	description = "Subnet name assciated with the private subnet"
 	type = string
-}
-
-variable "PublicSecurityRuleSourceIpPrefixes" {
-	description = "List of IP Addresses /32 or IP CIDR ranges connecting inbound to App"
-	type = list(string)
 }
 
 variable "PublicSubnetName" {
@@ -83,29 +80,33 @@ variable "SkipProviderRegistration" {
 }
 
 variable "SubscriptionId" {
+	default = null
 	description = "Id of subscription and underlying services used by the deployment"
 	sensitive = true
 	type = string
 }
 
 variable "TenantId" {
+	default = null
 	description  = "Id of an Azure Active Directory instance where one subscription may have multiple tenants"
 	sensitive = true
 	type = string
 }
 
 variable "UserEmailTag" {
+	default = null
 	description = "Email address tag of user creating the deployment"
 	type = string
 }
 
 variable "UserLoginTag" {
+	default = null
 	description = "Login ID tag of user creating the deployment"
 	type = string
 }
 
 variable "UserProjectTag" {
-	default = "cloud-ist"
+	default = null
 	description = "Project tag of user creating the deployment"
 	type = string
 }

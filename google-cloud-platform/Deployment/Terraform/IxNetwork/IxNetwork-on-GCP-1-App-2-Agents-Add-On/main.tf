@@ -1,6 +1,5 @@
 module "App" {
-	source = "armdupre/module-ixnetwork-app/google"
-	version = "10.0.0"
+	source = "git::https://github.com/armdupre/terraform-google-module-ixnetwork-app.git?ref=10.40.0"
 	Eth0SubnetName = data.google_compute_subnetwork.PublicSubnet.name
 	Eth0VpcNetworkName = data.google_compute_network.PublicVpcNetwork.name
 	MachineType = local.AppMachineType
@@ -12,8 +11,7 @@ module "App" {
 }
 
 module "Agent1" {
-	source = "armdupre/module-ixnetwork-agent/google"
-	version = "10.0.0"
+	source = "git::https://github.com/armdupre/terraform-google-module-ixnetwork-agent.git?ref=10.40.0"
 	Eth0SubnetName = data.google_compute_subnetwork.PublicSubnet.name
 	Eth0VpcNetworkName = data.google_compute_network.PublicVpcNetwork.name
 	Eth1SubnetName = data.google_compute_subnetwork.PrivateSubnet.name
@@ -28,8 +26,7 @@ module "Agent1" {
 }
 
 module "Agent2" {
-	source = "armdupre/module-ixnetwork-agent/google"
-	version = "10.0.0"
+	source = "git::https://github.com/armdupre/terraform-google-module-ixnetwork-agent.git?ref=10.40.0"
 	Eth0PrivateIpAddress = local.Agent2Eth0PrivateIpAddress
 	Eth0SubnetName = data.google_compute_subnetwork.PublicSubnet.name
 	Eth0VpcNetworkName = data.google_compute_network.PublicVpcNetwork.name
@@ -44,4 +41,8 @@ module "Agent2" {
 	UserLoginTag = local.UserLoginTag
 	UserProjectTag = local.UserProjectTag
 	ZoneName = data.google_client_config.current.zone
+}
+
+resource "random_id" "RandomId" {
+	byte_length = 4
 }
