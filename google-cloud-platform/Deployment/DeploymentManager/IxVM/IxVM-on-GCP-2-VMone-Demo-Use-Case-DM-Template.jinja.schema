@@ -1,9 +1,9 @@
 ---
 info:
-  title: IxNetwork-on-GCP-2-VMone-Demo-Use-Case-DM-Template.jinja.schema
+  title: IxVM-on-GCP-2-VMone-Demo-Use-Case-DM-Template.jinja.schema
 
 imports:
-- path: IxNetwork-on-GCP-2-VMone-Demo-Use-Case-DM-Template.jinja
+- path: IxVM-on-GCP-2-VMone-Demo-Use-Case-DM-Template.jinja
 
 properties:
   GCP_PROJECT_NAME:
@@ -28,7 +28,7 @@ properties:
 
   GCP_PROJECT_TAG:
     type: string
-    default: open-ixia-gcp-ixnetwork
+    default: ixia
 
   GCP_OPTIONS_TAG:
     type: string
