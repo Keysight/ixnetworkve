@@ -28,7 +28,7 @@ properties:
 
   GCP_PROJECT_TAG:
     type: string
-    default: open-ixia-gcp-ixnetwork
+    default: ixia
 
   GCP_OPTIONS_TAG:
     type: string
