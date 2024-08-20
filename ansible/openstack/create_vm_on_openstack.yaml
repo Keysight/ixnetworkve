@@ -19,12 +19,12 @@
       chassis_flavor: virtual.chassis
       vlm_flavor: virtual.load.module.usstream
       vta_flavor: virtual.test.appliance.usstream	
-      chassis_image_name: virtual-chassis-10.00
-      vlm_image_name: virtual-load-module-10.00
-      vta_image_name: virtual-test-appliance-10.00
-      chassis_disk_location: /home/ixia/Ixia_Virtual_Chassis_10.00_KVM.qcow2
-      vlm_disk_location: /home/ixia/Ixia_Virtual_Load_Module_IXN_10.00_KVM.qcow2
-      virtual_test_appliance_disk_location: /home/ixia/Ixia_Virtual_Test_Appliance_IXN_10.00_KVM.qcow2
+      chassis_image_name: virtual-chassis-10.40
+      vlm_image_name: virtual-load-module-10.40
+      vta_image_name: virtual-test-appliance-10.40
+      chassis_disk_location: /home/ixia/Ixia_Virtual_Chassis_10.40_KVM.qcow2
+      vlm_disk_location: /home/ixia/Ixia_Virtual_Load_Module_IXN_10.40_KVM.qcow2
+      virtual_test_appliance_disk_location: /home/ixia/Ixia_Virtual_Test_Appliance_IXN_10.40_KVM.qcow2
 
   tasks:
   - name: Upload the VIRTUAL CHASSIS IMAGE
