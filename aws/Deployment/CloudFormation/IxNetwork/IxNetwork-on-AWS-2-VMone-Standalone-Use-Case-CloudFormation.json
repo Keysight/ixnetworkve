@@ -99,7 +99,7 @@
                 "INSTANCExDISABLExAPIxTERMINATION": false,
                 "INSTANCExMONITORING": false,
                 "INSTANCExINSTANCExINITIATEDxSHUTDOWNxBEHAVIOR": "stop",
-                "INSTANCExBLOCKxDEVICExNAME": "/dev/sda1",
+                "INSTANCExBLOCKxDEVICExNAME": "/dev/xvda",
                 "INSTANCExEBSxDELETExONxTERMINATION": true,
                 "INSTANCExEBSxVOLUMExTYPE": "gp2",
                 "APPxTAG": "IXNETWORK",
@@ -811,7 +811,7 @@
                     ]
                 },
                 "IpProtocol": "-1",
-                "SourceSecurityGroupId": {
+                "DestinationSecurityGroupId": {
                     "Fn::GetAtt": [
                         "Vpc",
                         "DefaultSecurityGroup"
