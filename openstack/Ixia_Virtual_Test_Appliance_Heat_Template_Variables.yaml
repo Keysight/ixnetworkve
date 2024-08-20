@@ -8,5 +8,5 @@ parameters:
     Test_Sub_Network2:                    192.168.3.0/24
 
     Virtual_Test_Appliance_Name:            Virtual Test Appliance
-    Virtual_Test_Appliance_Image_Name:      Ixia Virtual Test Appliance 10.00 
+    Virtual_Test_Appliance_Image_Name:      Ixia Virtual Test Appliance 10.40 
     Virtual_Test_Appliance_Flavor:          m1.custom.virtual.test.appliance
