@@ -687,36 +687,6 @@
                 }
             }
         },
-        "MgmtIngress998": {
-            "Type": "AWS::EC2::SecurityGroupIngress",
-            "Properties": {
-                "GroupId": {
-                    "Ref": "MgmtSecurityGroup"
-                },
-                "Description": "TCP port",
-                "FromPort": "998",
-                "IpProtocol": "tcp",
-                "ToPort": "1000",
-                "CidrIp": {
-                    "Ref": "InboundIPv4CidrBlock"
-                }
-            }
-        },
-        "MgmtIngress1000": {
-            "Type": "AWS::EC2::SecurityGroupIngress",
-            "Properties": {
-                "GroupId": {
-                    "Ref": "MgmtSecurityGroup"
-                },
-                "Description": "UDP port",
-                "FromPort": "1000",
-                "IpProtocol": "udp",
-                "ToPort": "1000",
-                "CidrIp": {
-                    "Ref": "InboundIPv4CidrBlock"
-                }
-            }
-        },
         "MgmtIngress1080": {
             "Type": "AWS::EC2::SecurityGroupIngress",
             "Properties": {
@@ -1041,36 +1011,6 @@
                 "FromPort": "9613",
                 "IpProtocol": "tcp",
                 "ToPort": "9676",
-                "CidrIp": {
-                    "Ref": "InboundIPv4CidrBlock"
-                }
-            }
-        },
-        "MgmtIngress10115": {
-            "Type": "AWS::EC2::SecurityGroupIngress",
-            "Properties": {
-                "GroupId": {
-                    "Ref": "MgmtSecurityGroup"
-                },
-                "Description": "TCP port",
-                "FromPort": "10115",
-                "IpProtocol": "tcp",
-                "ToPort": "10116",
-                "CidrIp": {
-                    "Ref": "InboundIPv4CidrBlock"
-                }
-            }
-        },
-        "MgmtIngress10116": {
-            "Type": "AWS::EC2::SecurityGroupIngress",
-            "Properties": {
-                "GroupId": {
-                    "Ref": "MgmtSecurityGroup"
-                },
-                "Description": "UDP port",
-                "FromPort": "10116",
-                "IpProtocol": "udp",
-                "ToPort": "10116",
                 "CidrIp": {
                     "Ref": "InboundIPv4CidrBlock"
                 }
