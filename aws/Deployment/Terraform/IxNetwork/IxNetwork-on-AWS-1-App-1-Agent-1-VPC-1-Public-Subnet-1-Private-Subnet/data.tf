@@ -7,5 +7,5 @@ data "aws_availability_zones" "available" {
 }
 
 data "http" "ip" {
-	url = "https://ifconfig.me"
+	url = "https://ifconfig.me/ip"
 }
