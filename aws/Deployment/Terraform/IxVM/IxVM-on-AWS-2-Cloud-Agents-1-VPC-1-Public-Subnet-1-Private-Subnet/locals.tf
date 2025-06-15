@@ -1,8 +1,5 @@
 locals {
-	AgentAmiName = "Ixia_Cloud_Test_Appliance_11.00.4444.430"
-	AgentAmiOwner =  "686851222680"
 	AgentInstanceType = var.AgentInstanceType
-	AgentVersion = "11-00"
 	Agent1InstanceId = "agent1"
 	Agent2Eth0PrivateIpAddress = "10.0.10.12"
 	Agent2Eth1PrivateIpAddresses = [ "10.0.2.22", "10.0.2.23", "10.0.2.24", "10.0.2.25", "10.0.2.26", "10.0.2.27", "10.0.2.28", "10.0.2.29", "10.0.2.30", "10.0.2.31" ]

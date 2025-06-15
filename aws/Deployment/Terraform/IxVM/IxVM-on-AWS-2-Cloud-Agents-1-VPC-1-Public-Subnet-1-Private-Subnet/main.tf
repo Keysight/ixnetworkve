@@ -1,7 +1,5 @@
 module "Agent1" {
-	source = "git::https://github.com/armdupre/terraform-aws-module-ixnetwork-cloud-agent.git?ref=0.0.1"
-	AmiName = local.AgentAmiName
-	AmiOwner = local.AgentAmiOwner
+	source = "git::https://github.com/armdupre/terraform-aws-module-ixnetwork-cloud-agent.git?ref=11.0.0"
 	Eth0SecurityGroupId = module.Vpc.PublicSecurityGroup.id
 	Eth0SubnetId = module.Vpc.PublicSubnet.id
 	Eth1SecurityGroupId = module.Vpc.PrivateSecurityGroup.id
@@ -12,7 +10,6 @@ module "Agent1" {
 	UserEmailTag = local.UserEmailTag
 	UserLoginTag = local.UserLoginTag
 	UserProjectTag = local.UserProjectTag
-	Version = local.AgentVersion
 	depends_on = [
 		aws_placement_group.PlacementGroup,
 		module.Vpc
@@ -20,9 +17,7 @@ module "Agent1" {
 }
 
 module "Agent2" {
-	source = "git::https://github.com/armdupre/terraform-aws-module-ixnetwork-cloud-agent.git?ref=0.0.1"
-	AmiName = local.AgentAmiName
-	AmiOwner = local.AgentAmiOwner
+	source = "git::https://github.com/armdupre/terraform-aws-module-ixnetwork-cloud-agent.git?ref=11.0.0"
 	Eth0PrivateIpAddress = local.Agent2Eth0PrivateIpAddress
 	Eth0SecurityGroupId = module.Vpc.PublicSecurityGroup.id
 	Eth0SubnetId = module.Vpc.PublicSubnet.id
@@ -35,7 +30,6 @@ module "Agent2" {
 	UserEmailTag = local.UserEmailTag
 	UserLoginTag = local.UserLoginTag
 	UserProjectTag = local.UserProjectTag
-	Version = local.AgentVersion
 	depends_on = [
 		aws_placement_group.PlacementGroup,
 		module.Vpc
