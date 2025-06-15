@@ -1,5 +1,5 @@
 module "App" {
-	source = "git::https://github.com/armdupre/terraform-aws-module-ixnetwork-app.git?ref=10.40.1"
+	source = "git::https://github.com/armdupre/terraform-aws-module-ixnetwork-app.git?ref=11.0.0"
 	Eth0SecurityGroupId = module.Vpc.PublicSecurityGroup.id
 	Eth0SubnetId = module.Vpc.PublicSubnet.id
 	InstanceType = local.AppInstanceType
@@ -13,7 +13,7 @@ module "App" {
 }
 
 module "Agent1" {
-	source = "git::https://github.com/armdupre/terraform-aws-module-ixnetwork-agent.git?ref=10.40.1"
+	source = "git::https://github.com/armdupre/terraform-aws-module-ixnetwork-agent.git?ref=11.0.0"
 	Eth0SecurityGroupId = module.Vpc.PublicSecurityGroup.id
 	Eth0SubnetId = module.Vpc.PublicSubnet.id
 	Eth1SecurityGroupId = module.Vpc.PrivateSecurityGroup.id
