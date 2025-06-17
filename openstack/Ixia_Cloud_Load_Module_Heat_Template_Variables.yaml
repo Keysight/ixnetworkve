@@ -1,0 +1,10 @@
+parameters:
+
+    Management_Network:                  Ixia Management Network
+
+    Test_Network:                        Ixia Test Network
+    Test_Sub_Network:                    192.168.2.0/24
+
+    Cloud_Load_Module_Name:            cCard
+    Cloud_Load_Module_Image_Name:      Ixia Cloud Load Module 11.00 
+    Cloud_Load_Module_Flavor:          m1.custom.Cloud.load.module

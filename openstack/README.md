@@ -9,12 +9,12 @@ To start using IxNetwork VE's Heat templates and yaml configuration, please refe
 ## Prerequisites
 
 The prerequisites are:
-- IxNetwork VE Virtual Chassis, IxNetwork VE Virtual Load Module and IxNetwork VE Virtual Test Appliance qcow2 images extracted and uploaded into OpenStack Glance Server (images)
+- IxNetwork VE Virtual / Cloud Chassis, IxNetwork VE Virtual / Cloud Load Module and IxNetwork VE Virtual / Cloud Test Appliance qcow2 images extracted and uploaded into OpenStack Glance Server (images)
 - OpenStack setup and account for running your tests
-- Flavors created for the BreakingPoint VE Virtual Controller and BreakingPoint VE Virtual Blade.
-  - IxNetwork VE Virtual Chassis: 4GB RAM, 2vCPUs and 8GB Disk
-  - IxNetwork VE Virtual Load Module: 8GB RAM, 4 vCPUs and 2GB Disk
-  - IxNetwork VE Virtual Test Appliance: 4GB RAM, 4 vCPUs and 8GB Disk
+- Flavors created for the Virtual / Cloud Chassis, Virtual / Cloud Test Appliance and Virtual / Cloud Load Module:
+  - IxNetwork VE Virtual / Cloud Chassis: 4GB RAM, 2vCPUs and 8GB Disk
+  - IxNetwork VE Virtual / Cloud Load Module: 8GB RAM, 4 vCPUs and 4GB Disk
+  - IxNetwork VE Virtual / Cloud Test Appliance: 4GB RAM, 4 vCPUs and 8GB Disk
  
 ## Specialized knowledge
 Before you deploy these templates, we recommend that you become familiar with the following notions:
