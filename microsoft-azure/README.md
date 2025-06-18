@@ -29,10 +29,10 @@ Located in `microsoft-azure/Deployment/AzureResourceManager/IxNetwork-FullDeploy
   - **Add-On Use Case**: Designed to integrate with existing infrastructure
 ---
 
-#### 🧪 Example #1: Deploying a Demo Use Case Template with one Virtual IxNetwork VE Client + a single Virtual / Cloud Test Appliance
+#### 🧪 Example #1: Deploying a Demo Use Case Template with one IxNetwork VE Client and one  Virtual / Cloud Test Appliance
 
 **Resources Created:**
-- 1x Virtual IxNetwork VE Client
+- 1x IxNetwork VE Client
 - 1x Virtual / Cloud Test Appliance
 - A dedicated VNET network
 - Subnet and firewall rules for SSH, RDP and test traffic
@@ -59,7 +59,7 @@ az deployment group create --name ixnetwork-demo-01 --resource-group ixnetwork-d
 #### 🧪 Example #2: Deploying a Add On Use Case Template with one IxNetwork VE Client and one Virtual / Cloud Test Appliances
 
 **Resources Created:**
-- 1x Virtual IxNetwork VE Client
+- 1x IxNetwork VE Client
 - 1x Virtual / Cloud Test Appliances
 - Firewall rules for SSH, RDP and test traffic
 - External IP addresses (optional)

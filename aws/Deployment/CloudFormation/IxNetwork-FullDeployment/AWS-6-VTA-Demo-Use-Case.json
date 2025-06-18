@@ -5576,7 +5576,7 @@
         "IxClientSSHKey": {
             "Description": "Name of an existing EC2 KeyPair to enable SSH access",
             "Type": "AWS::EC2::KeyPair::KeyName",
-			"Default": "ixvm-frankfurt-key-pair"
+			"Default": "add-your-own-ssh-key"
         },
         "TestApplianceInstanceType": {
             "Description": "Instance type of Test Appliance VM",

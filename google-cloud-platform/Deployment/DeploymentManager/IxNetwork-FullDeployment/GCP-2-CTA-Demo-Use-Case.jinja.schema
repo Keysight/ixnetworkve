@@ -1,9 +1,9 @@
 ---
 info:
-  title: IxNetwork-on-GCP-2-VTA-Demo-Use-Case-DM-Template.jinja.schema
+  title: GCP-2-CTA-Demo-Use-Case.jinja.schema
 
 imports:
-- path: IxNetwork-on-GCP-2-VTA-Demo-Use-Case-DM-Template.jinja
+- path: GCP-2-CTA-Demo-Use-Case.jinja
 
 properties:
   GCP_REGION_NAME:

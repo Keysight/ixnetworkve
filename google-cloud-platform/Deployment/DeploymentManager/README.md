@@ -24,10 +24,10 @@ Located in `google-cloud-platform/Deployment/DeploymentManager/IxNetwork-FullDep
   - **Demo Use Case**: Full deployment including networking, security groups, etc.
 ---
 
-#### 🧪 Example #1: Deploying a Demo Use Case Template with one Virtual IxNetwork VE (Client + Test Appliance) on a Single VM
+#### 🧪 Example #1: Deploying a Demo Use Case Template with one IxNetwork VE Client and one Virtual / Cloud Test Appliance
 
 **Resources Created:**
-- 1x Virtual IxNetwork VE Client
+- 1x IxNetwork VE Client
 - 1x Virtual / Cloud Test Appliance
 - A dedicated VPC network
 - Subnet and firewall rules for SSH and test traffic
@@ -40,9 +40,7 @@ Located in `google-cloud-platform/Deployment/DeploymentManager/IxNetwork-FullDep
 - `vpc_name`: Name of the VPC network
 - `subnet_name`: Name of the subnet
 - `instance_name`: Name of the VM instance
-- `machine_type`: GCP machine type (e.g., `n1-standard-4`)
-- `image_family`: Image family for the VM (e.g., custom IxNetwork image)
-- `image_project`: Project hosting the image
+- `machine_type`: GCP machine type
 - `external_ip`: Boolean to assign an external IP
 - `network_tags`: Optional tags for firewall rules
 
@@ -64,10 +62,10 @@ or in case you'd like to use the **Cloud Test Appliance**:
 gcloud deployment-manager deployments create GCP-1-CTA-Demo-Use-Case --template GCP-1-CTA-Demo-Use-Case.jinja
 ```
 
-#### 🧪 Example #2: Deploying a Demo Use Case Template with one Virtual IxNetwork Client and two Virtual / Cloud Test Appliances
+#### 🧪 Example #2: Deploying a Demo Use Case Template with one IxNetwork VE Client and two Virtual / Cloud Test Appliances
 
 **Resources Created:**
-- 1x Virtual IxNetwork VE Client
+- 1x IxNetwork VE Client
 - 2x Virtual / Cloud Test Appliances
 - A dedicated VPC network
 - Subnet and firewall rules for SSH and test traffic
@@ -79,12 +77,10 @@ gcloud deployment-manager deployments create GCP-1-CTA-Demo-Use-Case --template 
 - `zone`: GCP zone for the VM instances
 - `vpc_name`: Name of the VPC network
 - `subnet_name`: Name of the subnet
-- `client_instance_name`: Name of the Virtual IxNetwork Client VM
+- `client_instance_name`: Name of the IxNetwork VE Client VM
 - `appliance1_instance_name`: Name of the first Test Appliance VM
 - `appliance2_instance_name`: Name of the second Test Appliance VM
-- `machine_type`: GCP machine type (e.g., `n1-standard-4`)
-- `image_family`: Image family for the VMs (e.g., custom IxNetwork image)
-- `image_project`: Project hosting the image
+- `machine_type`: GCP machine type
 - `external_ip`: Boolean to assign external IPs
 - `network_tags`: Optional tags for firewall rules
 
@@ -121,9 +117,7 @@ gcloud deployment-manager deployments create GCP-2-CTA-Demo-Use-Case --template 
 - `vpc_name`: Name of the VPC network
 - `subnet_name`: Name of the subnet
 - `instance_name`: Name of the Test Appliance VM
-- `machine_type`: GCP machine type (e.g., `n1-standard-4`)
-- `image_family`: Image family for the VM (e.g., custom BPS image)
-- `image_project`: Project hosting the image
+- `machine_type`: GCP machine type
 - `external_ip`: Boolean to assign an external IP
 - `network_tags`: Optional tags for firewall rules
 
@@ -145,7 +139,7 @@ or in case you'd like to use the **Cloud Test Appliance**:
 gcloud deployment-manager deployments create GCP-1-CTA-Demo-Use-Case --template GCP-1-CTA-Demo-Use-Case.jinja
 ```
 
-#### 🧪 Example #4: Deploying a Demo Use Case Template with two Virtual / Cloud Test Appliances
+#### 🧪 Example #4: Deploying a Demo Use Case Template and two Virtual / Cloud Test Appliances
 
 **Resources Created:**
 - 2x Virtual / Cloud Test Appliances
@@ -161,9 +155,7 @@ gcloud deployment-manager deployments create GCP-1-CTA-Demo-Use-Case --template 
 - `subnet_name`: Name of the subnet
 - `appliance1_instance_name`: Name of the first Test Appliance VM
 - `appliance2_instance_name`: Name of the second Test Appliance VM
-- `machine_type`: GCP machine type (e.g., `n1-standard-4`)
-- `image_family`: Image family for the VMs (e.g., custom BPS image)
-- `image_project`: Project hosting the image
+- `machine_type`: GCP machine type
 - `external_ip`: Boolean to assign external IPs
 - `network_tags`: Optional tags for firewall rules
 

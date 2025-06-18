@@ -49,10 +49,10 @@ Located in `aws/Deployment/CloudFormation/IxNetwork-FullDeployment` and `aws/Dep
 - **Add-On Use Case**: Designed to integrate with existing infrastructure
 ---
 
-#### 🧪 Example #1: Deploying a Demo Use Case Template with one Virtual IxNetwork VE Client + two Virtual / Cloud Test Appliance
+#### 🧪 Example #1: Deploying a Demo Use Case Template with one IxNetwork VE Client and two Virtual / Cloud Test Appliance
 
 **Resources Created:**
-- 1x Virtual IxNetwork VE Client
+- 1x IxNetwork VE Client
 - 2x Virtual / Cloud Test Appliance
 - A dedicated VPC network
 - Subnet and firewall rules for SSH, RDP and test traffic
@@ -81,7 +81,7 @@ aws cloudformation create-stack \
 This adds a the IxNetwork VE Client and a Virtual / Cloud Test Appliance to an existing infrastructure (e.g., VPC, subnets).
 
 **Resources Created:**
-- 1x Virtual IxNetwork VE Client
+- 1x IxNetwork VE Client
 - 2x Virtual / Cloud Test Appliance
 - Firewall rules for SSH, RDP and test traffic
 - External IP address (optional)
@@ -102,7 +102,7 @@ aws cloudformation create-stack \
   --template-body file://aws/Deployment/CloudFormation/IxNetwork-FullDeployment/AWS-2-CTA-Add-On-Use-Case.json
 ```
 
-#### 🧪 Example #3: Deploying a Demo Use Case Template with a single Virtual / Cloud Test Appliance
+#### 🧪 Example #3: Deploying a Demo Use Case Template with one Virtual / Cloud Test Appliance
 
 **Resources Created:**
 - 1x Virtual / Cloud Test Appliance
@@ -187,10 +187,10 @@ Located in `microsoft-azure/Deployment/AzureResourceManager/IxNetwork-FullDeploy
   - **Add-On Use Case**: Designed to integrate with existing infrastructure
 ---
 
-#### 🧪 Example #1: Deploying a Demo Use Case Template with one Virtual IxNetwork VE Client + a single Virtual / Cloud Test Appliance
+#### 🧪 Example #1: Deploying a Demo Use Case Template with one IxNetwork VE Client and one Virtual / Cloud Test Appliance
 
 **Resources Created:**
-- 1x Virtual IxNetwork VE Client
+- 1x IxNetwork VE Client
 - 1x Virtual / Cloud Test Appliance
 - A dedicated VNET network
 - Subnet and firewall rules for SSH, RDP and test traffic
@@ -214,10 +214,10 @@ or in case you'd like to use the **Cloud Test Appliance**:
 az deployment group create --name ixnetwork-demo-01 --resource-group ixnetwork-demo-01 --template-file Azure-CTA-1-Arm_Demo_Use_Case_Template.json  --parameters Azure-CTA-1-Arm_Demo_Use_Case_Parameters.json
 ```
 
-#### 🧪 Example #2: Deploying a Add On Use Case Template with one IxNetwork VE Client and one Virtual / Cloud Test Appliances
+#### 🧪 Example #2: Deploying a Add On Use Case Template with one IxNetwork VE Client and one Virtual / Cloud Test Appliance
 
 **Resources Created:**
-- 1x Virtual IxNetwork VE Client
+- 1x IxNetwork VE Client
 - 1x Virtual / Cloud Test Appliances
 - Firewall rules for SSH, RDP and test traffic
 - External IP addresses (optional)
@@ -240,12 +240,12 @@ or in case you'd like to use the **Cloud Test Appliance**:
 az deployment group create --name ixnetwork-addon-01 --resource-group ixnetwork-addon-01 --template-file Azure-CTA-1-Arm_Add-On_Use_Case_Template.json  --parameters Azure-CTA-1-Arm_Add-On_Use_Case_Parameters.json
 ```
 
-#### 🧪 Example #3: Deploying a Demo Use Case Template with a single Virtual / Cloud Test Appliance
+#### 🧪 Example #3: Deploying a Demo Use Case Template with one Virtual / Cloud Test Appliance
 
 **Resources Created:**
 - 1x Virtual / Cloud Test Appliance
 - A dedicated VPC network
-- Subnet and firewall rules for SSH, RDP and test traffic
+- Subnet and firewall rules for SSH and test traffic
 - External IP address (optional)
 
 ---
@@ -270,7 +270,7 @@ az deployment group create --name ixnetwork-demo-02 --resource-group ixnetwork-d
 
 **Resources Created:**
 - 1x Virtual / Cloud Test Appliances
-- Firewall rules for SSH, RDP and test traffic
+- Firewall rules for SSH and test traffic
 - External IP addresses (optional)
 ---
 
@@ -324,10 +324,10 @@ Located in `google-cloud-platform/Deployment/DeploymentManager/IxNetwork-FullDep
   - **Demo Use Case**: Full deployment including networking, security groups, etc.
 ---
 
-#### 🧪 Example #1: Deploying a Demo Use Case Template with one Virtual IxNetwork VE Client + a single Virtual / Cloud Test Appliance
+#### 🧪 Example #1: Deploying a Demo Use Case Template with one IxNetwork VE Client and one  Virtual / Cloud Test Appliance
 
 **Resources Created:**
-- 1x Virtual IxNetwork VE Client
+- 1x IxNetwork VE Client
 - 1x Virtual / Cloud Test Appliance
 - A dedicated VPC network
 - Subnet and firewall rules for SSH and test traffic
@@ -340,7 +340,7 @@ Located in `google-cloud-platform/Deployment/DeploymentManager/IxNetwork-FullDep
 - `vpc_name`: Name of the VPC network
 - `subnet_name`: Name of the subnet
 - `instance_name`: Name of the VM instance
-- `machine_type`: GCP machine type (e.g., `n1-standard-4`)
+- `machine_type`: GCP machine type
 - `external_ip`: Boolean to assign an external IP
 - `network_tags`: Optional tags for firewall rules
 
@@ -365,7 +365,7 @@ gcloud deployment-manager deployments create 1-CTA-Demo-Use-Case --template 1-CT
 #### 🧪 Example #2: Deploying a Demo Use Case Template with one IxNetwork VE Client and two Virtual / Cloud Test Appliances
 
 **Resources Created:**
-- 1x Virtual IxNetwork VE Client
+- 1x IxNetwork VE Client
 - 2x Virtual / Cloud Test Appliances
 - A dedicated VPC network
 - Subnet and firewall rules for SSH and test traffic
@@ -377,10 +377,10 @@ gcloud deployment-manager deployments create 1-CTA-Demo-Use-Case --template 1-CT
 - `zone`: GCP zone for the VM instances
 - `vpc_name`: Name of the VPC network
 - `subnet_name`: Name of the subnet
-- `client_instance_name`: Name of the Virtual IxNetwork Client VM
+- `client_instance_name`: Name of the IxNetwork VE Client VM
 - `appliance1_instance_name`: Name of the first Test Appliance VM
 - `appliance2_instance_name`: Name of the second Test Appliance VM
-- `machine_type`: GCP machine type (e.g., `n1-standard-4`)
+- `machine_type`: GCP machine type
 - `external_ip`: Boolean to assign external IPs
 - `network_tags`: Optional tags for firewall rules
 
@@ -417,7 +417,7 @@ gcloud deployment-manager deployments create 2-CTA-Demo-Use-Case --template 2-CT
 - `vpc_name`: Name of the VPC network
 - `subnet_name`: Name of the subnet
 - `instance_name`: Name of the Test Appliance VM
-- `machine_type`: GCP machine type (e.g., `n1-standard-4`)
+- `machine_type`: GCP machine type
 - `external_ip`: Boolean to assign an external IP
 - `network_tags`: Optional tags for firewall rules
 
@@ -455,7 +455,7 @@ gcloud deployment-manager deployments create 1-CTA-Demo-Use-Case --template 1-CT
 - `subnet_name`: Name of the subnet
 - `appliance1_instance_name`: Name of the first Test Appliance VM
 - `appliance2_instance_name`: Name of the second Test Appliance VM
-- `machine_type`: GCP machine type (e.g., `n1-standard-4`)
+- `machine_type`: GCP machine type
 - `external_ip`: Boolean to assign external IPs
 - `network_tags`: Optional tags for firewall rules
 

@@ -27,10 +27,10 @@ Located in `aws/Deployment/CloudFormation/IxNetwork-FullDeployment`, these JSON 
 - **Add-On Use Case**: Designed to integrate with existing infrastructure
 ---
 
-#### 🧪 Example #1: Deploying a Demo Use Case Template with one Virtual IxNetwork VE Client + two Virtual / Cloud Test Appliance
+#### 🧪 Example #1: Deploying a Demo Use Case Template with one IxNetwork VE Client + two Virtual / Cloud Test Appliance
 
 **Resources Created:**
-- 1x Virtual IxNetwork VE Client
+- 1x IxNetwork VE Client
 - 2x Virtual / Cloud Test Appliance
 - A dedicated VPC network
 - Subnet and firewall rules for SSH, RDP and test traffic
@@ -61,7 +61,7 @@ aws cloudformation create-stack \
 This adds a the IxNetwork VE Client and a Virtual / Cloud Test Appliance to an existing infrastructure (e.g., VPC, subnets).
 
 **Resources Created:**
-- 1x Virtual IxNetwork VE Client
+- 1x IxNetwork VE Client
 - 2x Virtual / Cloud Test Appliance
 - Firewall rules for SSH, RDP and test traffic
 - External IP address (optional)

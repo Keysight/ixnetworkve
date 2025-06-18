@@ -39,9 +39,7 @@ Located in `google-cloud-platform/Deployment/DeploymentManager/IxNetwork-TestApp
 - `vpc_name`: Name of the VPC network
 - `subnet_name`: Name of the subnet
 - `instance_name`: Name of the Test Appliance VM
-- `machine_type`: GCP machine type (e.g., `n1-standard-4`)
-- `image_family`: Image family for the VM (e.g., custom BPS image)
-- `image_project`: Project hosting the image
+- `machine_type`: GCP machine type
 - `external_ip`: Boolean to assign an external IP
 - `network_tags`: Optional tags for firewall rules
 
@@ -79,9 +77,7 @@ gcloud deployment-manager deployments create GCP-1-CTA-Demo-Use-Case --template 
 - `subnet_name`: Name of the subnet
 - `appliance1_instance_name`: Name of the first Test Appliance VM
 - `appliance2_instance_name`: Name of the second Test Appliance VM
-- `machine_type`: GCP machine type (e.g., `n1-standard-4`)
-- `image_family`: Image family for the VMs (e.g., custom BPS image)
-- `image_project`: Project hosting the image
+- `machine_type`: GCP machine type
 - `external_ip`: Boolean to assign external IPs
 - `network_tags`: Optional tags for firewall rules
 
