@@ -1326,7 +1326,7 @@
                     ]
                 },
                 "KeyName": {
-                    "Ref": "IxClientSSHKey"
+                    "Ref": "SSHKey"
                 },
                 "PlacementGroupName": {
                     "Ref": "PlacementGroup"
@@ -1479,7 +1479,7 @@
                     ]
                 },
                 "KeyName": {
-                    "Ref": "IxClientSSHKey"
+                    "Ref": "SSHKey"
                 },
                 "PlacementGroupName": {
                     "Ref": "PlacementGroup"
@@ -1634,7 +1634,7 @@
                     ]
                 },
                 "KeyName": {
-                    "Ref": "IxClientSSHKey"
+                    "Ref": "SSHKey"
                 },
                 "PlacementGroupName": {
                     "Ref": "PlacementGroup"
@@ -1890,7 +1890,7 @@
                     "Parameters": [
                         "IxClientAmiAlias",
                         "IxClientInstanceType",
-                        "IxClientSSHKey"
+                        "SSHKey"
                     ]
                 },
                 {
@@ -1936,7 +1936,7 @@
                 "IxClientInstanceType": {
                     "default": "Keysight Client Instance Type"
                 },
-                "IxClientSSHKey": {
+                "SSHKey": {
                     "default": "Keysight Client SSH Key"
                 },
                 "TestApplianceInstanceType": {
@@ -2011,7 +2011,7 @@
             ],
             "Default": "m5.xlarge"
         },
-        "IxClientSSHKey": {
+        "SSHKey": {
             "Description": "Name of an existing EC2 KeyPair to enable SSH access",
             "Type": "AWS::EC2::KeyPair::KeyName",
 			"Default": "add-your-own-ssh-key"
