@@ -1,0 +1,3234 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "IxVM on AWS 2-TestAppliance Test CloudFormation",
+    "Mappings": {
+        "RegionMap": {
+            "us-east-1": {
+                "EC2xCONNECTxCIDR": "18.206.107.24/29",
+                "EC2xREGION": "US East (N. Virginia)",
+                "REGIONxTAG": "US_EAST_1"
+            },
+            "us-east-2": {
+                "EC2xCONNECTxCIDR": "3.16.146.0/29",
+                "EC2xREGION": "US East (Ohio)",
+                "REGIONxTAG": "US_EAST_2"
+            },
+            "us-west-1": {
+                "EC2xCONNECTxCIDR": "13.52.6.112/29",
+                "EC2xREGION": "US West (N. California)",
+                "REGIONxTAG": "US_WEST_1"
+            },
+            "us-west-2": {
+                "EC2xCONNECTxCIDR": "18.237.140.160/29",
+                "EC2xREGION": "US West (Oregon)",
+                "REGIONxTAG": "US_WEST_2"
+            },
+            "ap-south-1": {
+                "EC2xCONNECTxCIDR": "13.233.177.0/29",
+                "EC2xREGION": "Asia Pacific (Mumbai)",
+                "REGIONxTAG": "AP_SOUTH_1"
+            },
+            "ap-northeast-2": {
+                "EC2xCONNECTxCIDR": "13.209.1.56/29",
+                "EC2xREGION": "Asia Pacific (Seoul)",
+                "REGIONxTAG": "AP_NORTHEAST_2"
+            },
+            "ap-southeast-1": {
+                "EC2xCONNECTxCIDR": "3.0.5.32/29",
+                "EC2xREGION": "Asia Pacific (Singapore)",
+                "REGIONxTAG": "AP_SOUTHEAST_1"
+            },
+            "ap-southeast-2": {
+                "EC2xCONNECTxCIDR": "13.239.158.0/29",
+                "EC2xREGION": "Asia Pacific (Sydney)",
+                "REGIONxTAG": "AP_SOUTHEAST_2"
+            },
+            "ap-northeast-1": {
+                "EC2xCONNECTxCIDR": "3.112.23.0/29",
+                "EC2xREGION": "Asia Pacific (Tokyo)",
+                "REGIONxTAG": "AP_NORTHEAST_1"
+            },
+            "ca-central-1": {
+                "EC2xCONNECTxCIDR": "35.183.92.176/29",
+                "EC2xREGION": "Canada (Central)",
+                "REGIONxTAG": "CA_CENTRAL_1"
+            },
+            "eu-central-1": {
+                "EC2xCONNECTxCIDR": "3.120.181.40/29",
+                "EC2xREGION": "EU (Frankfurt)",
+                "REGIONxTAG": "EU_CENTRAL_1"
+            },
+            "eu-west-1": {
+                "EC2xCONNECTxCIDR": "18.202.216.48/29",
+                "EC2xREGION": "EU (Ireland)",
+                "REGIONxTAG": "EU_WEST_1"
+            },
+            "eu-west-2": {
+                "EC2xCONNECTxCIDR": "3.8.37.24/29",
+                "EC2xREGION": "EU (London)",
+                "REGIONxTAG": "EU_WEST_2"
+            },
+            "eu-west-3": {
+                "EC2xCONNECTxCIDR": "35.180.112.80/29",
+                "EC2xREGION": "EU (Paris)",
+                "REGIONxTAG": "EU_WEST_3"
+            },
+            "eu-north-1": {
+                "EC2xCONNECTxCIDR": "13.48.4.200/30",
+                "EC2xREGION": "EU (Stockholm)",
+                "REGIONxTAG": "EU_NORTH_1"
+            },
+            "sa-east-1": {
+                "EC2xCONNECTxCIDR": "13.48.4.200/30",
+                "EC2xREGION": "South America (Sao Paulo)",
+                "REGIONxTAG": "SA_EAST_1"
+            }
+        },
+        "VariableMap": {
+            "local": {
+                "OPTIONSxTAG": "MANUAL",
+                "PROJECTxTAG": "OPEN",
+                "VPCxCIDRxBLOCK": "10.0.0.0/16",
+                "VPCxINSTANCExTENANCY": "default",
+                "VPCxENABLExDNSxSUPPORT": true,
+                "VPCxENABLExDNSxHOSTNAMES": true,
+                "PLACEMENTxGROUPxSTRATEGY": "cluster",
+                "FLOWxLOGxRESOURCExTYPE": "VPC",
+                "FLOWxLOGxTRAFFICxTYPE": "REJECT",
+                "SUBNETxAVAILABILITYxZONExINDEX": "0",
+                "MGMTxSUBNETxCIDRxBLOCK": "10.0.10.0/24",
+                "TEST1xSUBNETxCIDRxBLOCK": "10.0.2.0/24",
+                "TEST2xSUBNETxCIDRxBLOCK": "10.0.3.0/24",
+                "INTERFACExSOURCExDESTxCHECK": false,
+                "INSTANCExDISABLExAPIxTERMINATION": false,
+                "INSTANCExMONITORING": false,
+                "INSTANCExINSTANCExINITIATEDxSHUTDOWNxBEHAVIOR": "stop",
+                "INSTANCExBLOCKxDEVICExNAME": "/dev/xvda",
+                "INSTANCExEBSxDELETExONxTERMINATION": true,
+                "INSTANCExEBSxVOLUMExTYPE": "gp2",
+                "APPxTAG": "KEYSIGHT",
+                "APPxVERSION": "11.00",
+                "TESTAPPLIANCE1xETH0xPRIVATExIPxADDRESS": "10.0.10.11",
+                "TESTAPPLIANCE1xETH1xPRIVATExIPxADDRESSES": "10.0.2.12|10.0.2.13|10.0.2.14|10.0.2.15|10.0.2.16|10.0.2.17|10.0.2.18|10.0.2.19|10.0.2.20|10.0.2.21",
+                "TESTAPPLIANCE2xETH0xPRIVATExIPxADDRESS": "10.0.10.12",
+                "TESTAPPLIANCE2xETH1xPRIVATExIPxADDRESSES": "10.0.3.12|10.0.3.13|10.0.3.14|10.0.3.15|10.0.3.16|10.0.3.17|10.0.3.18|10.0.3.19|10.0.3.20|10.0.3.21"
+            }
+        }
+    },
+    "Resources": {
+        "PlacementGroup": {
+            "Type": "AWS::EC2::PlacementGroup",
+            "Properties": {
+                "Strategy": {
+                    "Fn::FindInMap": [
+                        "VariableMap",
+                        "local",
+                        "PLACEMENTxGROUPxSTRATEGY"
+                    ]
+                }
+            }
+        },
+        "Vpc": {
+            "Type": "AWS::EC2::VPC",
+            "Properties": {
+                "CidrBlock": {
+                    "Fn::FindInMap": [
+                        "VariableMap",
+                        "local",
+                        "VPCxCIDRxBLOCK"
+                    ]
+                },
+                "InstanceTenancy": {
+                    "Fn::FindInMap": [
+                        "VariableMap",
+                        "local",
+                        "VPCxINSTANCExTENANCY"
+                    ]
+                },
+                "EnableDnsSupport": {
+                    "Fn::FindInMap": [
+                        "VariableMap",
+                        "local",
+                        "VPCxENABLExDNSxSUPPORT"
+                    ]
+                },
+                "EnableDnsHostnames": {
+                    "Fn::FindInMap": [
+                        "VariableMap",
+                        "local",
+                        "VPCxENABLExDNSxHOSTNAMES"
+                    ]
+                },
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": {
+                            "Fn::Join": [
+                                "_",
+                                [
+                                    {
+                                        "Ref": "UserLoginTag"
+                                    },
+                                    {
+                                        "Fn::FindInMap": [
+                                            "VariableMap",
+                                            "local",
+                                            "PROJECTxTAG"
+                                        ]
+                                    },
+                                    "VPC",
+                                    {
+                                        "Fn::FindInMap": [
+                                            "RegionMap",
+                                            {
+                                                "Ref": "AWS::Region"
+                                            },
+                                            "REGIONxTAG"
+                                        ]
+                                    }
+                                ]
+                            ]
+                        }
+                    },
+                    {
+                        "Key": "Owner",
+                        "Value": {
+                            "Ref": "UserEmailTag"
+                        }
+                    },
+                    {
+                        "Key": "Options",
+                        "Value": {
+                            "Fn::FindInMap": [
+                                "VariableMap",
+                                "local",
+                                "OPTIONSxTAG"
+                            ]
+                        }
+                    },
+                    {
+                        "Key": "Project",
+                        "Value": {
+                            "Fn::FindInMap": [
+                                "VariableMap",
+                                "local",
+                                "PROJECTxTAG"
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+        "VpcFlowLog": {
+            "Type": "AWS::EC2::FlowLog",
+            "Properties": {
+                "DeliverLogsPermissionArn": {
+                    "Fn::GetAtt": [
+                        "VPCFlowLogAccessRole",
+                        "Arn"
+                    ]
+                },
+                "LogGroupName": {
+                    "Fn::Join": [
+                        "_",
+                        [
+                            {
+                                "Ref": "UserLoginTag"
+                            },
+                            {
+                                "Fn::FindInMap": [
+                                    "VariableMap",
+                                    "local",
+                                    "PROJECTxTAG"
+                                ]
+                            },
+                            "VPC_FLOW_LOG",
+                            {
+                                "Fn::FindInMap": [
+                                    "RegionMap",
+                                    {
+                                        "Ref": "AWS::Region"
+                                    },
+                                    "REGIONxTAG"
+                                ]
+                            }
+                        ]
+                    ]
+                },
+                "ResourceId": {
+                    "Ref": "Vpc"
+                },
+                "ResourceType": {
+                    "Fn::FindInMap": [
+                        "VariableMap",
+                        "local",
+                        "FLOWxLOGxRESOURCExTYPE"
+                    ]
+                },
+                "TrafficType": {
+                    "Fn::FindInMap": [
+                        "VariableMap",
+                        "local",
+                        "FLOWxLOGxTRAFFICxTYPE"
+                    ]
+                }
+            }
+        },
+        "MgmtSubnet": {
+            "Type": "AWS::EC2::Subnet",
+            "Properties": {
+                "AvailabilityZone": {
+                    "Fn::Select": [
+                        {
+                            "Fn::FindInMap": [
+                                "VariableMap",
+                                "local",
+                                "SUBNETxAVAILABILITYxZONExINDEX"
+                            ]
+                        },
+                        {
+                            "Fn::GetAZs": {
+                                "Ref": "AWS::Region"
+                            }
+                        }
+                    ]
+                },
+                "CidrBlock": {
+                    "Fn::FindInMap": [
+                        "VariableMap",
+                        "local",
+                        "MGMTxSUBNETxCIDRxBLOCK"
+                    ]
+                },
+                "VpcId": {
+                    "Ref": "Vpc"
+                },
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": {
+                            "Fn::Join": [
+                                "_",
+                                [
+                                    {
+                                        "Ref": "UserLoginTag"
+                                    },
+                                    {
+                                        "Fn::FindInMap": [
+                                            "VariableMap",
+                                            "local",
+                                            "PROJECTxTAG"
+                                        ]
+                                    },
+                                    "MGMT_SUBNET",
+                                    {
+                                        "Fn::FindInMap": [
+                                            "RegionMap",
+                                            {
+                                                "Ref": "AWS::Region"
+                                            },
+                                            "REGIONxTAG"
+                                        ]
+                                    }
+                                ]
+                            ]
+                        }
+                    },
+                    {
+                        "Key": "Owner",
+                        "Value": {
+                            "Ref": "UserEmailTag"
+                        }
+                    },
+                    {
+                        "Key": "Options",
+                        "Value": {
+                            "Fn::FindInMap": [
+                                "VariableMap",
+                                "local",
+                                "OPTIONSxTAG"
+                            ]
+                        }
+                    },
+                    {
+                        "Key": "Project",
+                        "Value": {
+                            "Fn::FindInMap": [
+                                "VariableMap",
+                                "local",
+                                "PROJECTxTAG"
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+        "Test1Subnet": {
+            "Type": "AWS::EC2::Subnet",
+            "Properties": {
+                "AvailabilityZone": {
+                    "Fn::Select": [
+                        {
+                            "Fn::FindInMap": [
+                                "VariableMap",
+                                "local",
+                                "SUBNETxAVAILABILITYxZONExINDEX"
+                            ]
+                        },
+                        {
+                            "Fn::GetAZs": {
+                                "Ref": "AWS::Region"
+                            }
+                        }
+                    ]
+                },
+                "CidrBlock": {
+                    "Fn::FindInMap": [
+                        "VariableMap",
+                        "local",
+                        "TEST1xSUBNETxCIDRxBLOCK"
+                    ]
+                },
+                "VpcId": {
+                    "Ref": "Vpc"
+                },
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": {
+                            "Fn::Join": [
+                                "_",
+                                [
+                                    {
+                                        "Ref": "UserLoginTag"
+                                    },
+                                    {
+                                        "Fn::FindInMap": [
+                                            "VariableMap",
+                                            "local",
+                                            "PROJECTxTAG"
+                                        ]
+                                    },
+                                    "TEST1_SUBNET",
+                                    {
+                                        "Fn::FindInMap": [
+                                            "RegionMap",
+                                            {
+                                                "Ref": "AWS::Region"
+                                            },
+                                            "REGIONxTAG"
+                                        ]
+                                    }
+                                ]
+                            ]
+                        }
+                    },
+                    {
+                        "Key": "Owner",
+                        "Value": {
+                            "Ref": "UserEmailTag"
+                        }
+                    },
+                    {
+                        "Key": "Options",
+                        "Value": {
+                            "Fn::FindInMap": [
+                                "VariableMap",
+                                "local",
+                                "OPTIONSxTAG"
+                            ]
+                        }
+                    },
+                    {
+                        "Key": "Project",
+                        "Value": {
+                            "Fn::FindInMap": [
+                                "VariableMap",
+                                "local",
+                                "PROJECTxTAG"
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+        "Test2Subnet": {
+            "Type": "AWS::EC2::Subnet",
+            "Properties": {
+                "AvailabilityZone": {
+                    "Fn::Select": [
+                        {
+                            "Fn::FindInMap": [
+                                "VariableMap",
+                                "local",
+                                "SUBNETxAVAILABILITYxZONExINDEX"
+                            ]
+                        },
+                        {
+                            "Fn::GetAZs": {
+                                "Ref": "AWS::Region"
+                            }
+                        }
+                    ]
+                },
+                "CidrBlock": {
+                    "Fn::FindInMap": [
+                        "VariableMap",
+                        "local",
+                        "TEST2xSUBNETxCIDRxBLOCK"
+                    ]
+                },
+                "VpcId": {
+                    "Ref": "Vpc"
+                },
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": {
+                            "Fn::Join": [
+                                "_",
+                                [
+                                    {
+                                        "Ref": "UserLoginTag"
+                                    },
+                                    {
+                                        "Fn::FindInMap": [
+                                            "VariableMap",
+                                            "local",
+                                            "PROJECTxTAG"
+                                        ]
+                                    },
+                                    "TEST2_SUBNET",
+                                    {
+                                        "Fn::FindInMap": [
+                                            "RegionMap",
+                                            {
+                                                "Ref": "AWS::Region"
+                                            },
+                                            "REGIONxTAG"
+                                        ]
+                                    }
+                                ]
+                            ]
+                        }
+                    },
+                    {
+                        "Key": "Owner",
+                        "Value": {
+                            "Ref": "UserEmailTag"
+                        }
+                    },
+                    {
+                        "Key": "Options",
+                        "Value": {
+                            "Fn::FindInMap": [
+                                "VariableMap",
+                                "local",
+                                "OPTIONSxTAG"
+                            ]
+                        }
+                    },
+                    {
+                        "Key": "Project",
+                        "Value": {
+                            "Fn::FindInMap": [
+                                "VariableMap",
+                                "local",
+                                "PROJECTxTAG"
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+        "MgmtSecurityGroup": {
+            "Type": "AWS::EC2::SecurityGroup",
+            "Properties": {
+                "GroupDescription": {
+                    "Fn::Join": [
+                        "_",
+                        [
+                            {
+                                "Ref": "UserLoginTag"
+                            },
+                            {
+                                "Fn::FindInMap": [
+                                    "VariableMap",
+                                    "local",
+                                    "PROJECTxTAG"
+                                ]
+                            },
+                            "MGMT_SECURITY_GROUP",
+                            {
+                                "Fn::FindInMap": [
+                                    "RegionMap",
+                                    {
+                                        "Ref": "AWS::Region"
+                                    },
+                                    "REGIONxTAG"
+                                ]
+                            }
+                        ]
+                    ]
+                },
+                "VpcId": {
+                    "Ref": "Vpc"
+                },
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": {
+                            "Fn::Join": [
+                                "_",
+                                [
+                                    {
+                                        "Ref": "UserLoginTag"
+                                    },
+                                    {
+                                        "Fn::FindInMap": [
+                                            "VariableMap",
+                                            "local",
+                                            "PROJECTxTAG"
+                                        ]
+                                    },
+                                    "MGMT_SECURITY_GROUP",
+                                    {
+                                        "Fn::FindInMap": [
+                                            "RegionMap",
+                                            {
+                                                "Ref": "AWS::Region"
+                                            },
+                                            "REGIONxTAG"
+                                        ]
+                                    }
+                                ]
+                            ]
+                        }
+                    },
+                    {
+                        "Key": "Owner",
+                        "Value": {
+                            "Ref": "UserEmailTag"
+                        }
+                    },
+                    {
+                        "Key": "Options",
+                        "Value": {
+                            "Fn::FindInMap": [
+                                "VariableMap",
+                                "local",
+                                "OPTIONSxTAG"
+                            ]
+                        }
+                    },
+                    {
+                        "Key": "Project",
+                        "Value": {
+                            "Fn::FindInMap": [
+                                "VariableMap",
+                                "local",
+                                "PROJECTxTAG"
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+        "MgmtIngressPing": {
+            "Type": "AWS::EC2::SecurityGroupIngress",
+            "Properties": {
+                "GroupId": {
+                    "Ref": "MgmtSecurityGroup"
+                },
+                "Description": "ICMP",
+                "FromPort": "-1",
+                "IpProtocol": "icmp",
+                "ToPort": "-1",
+                "CidrIp": {
+                    "Ref": "InboundIPv4CidrBlock"
+                }
+            }
+        },
+        "MgmtIngress1": {
+            "Type": "AWS::EC2::SecurityGroupIngress",
+            "Properties": {
+                "GroupId": {
+                    "Ref": "MgmtSecurityGroup"
+                },
+                "IpProtocol": "-1",
+                "SourceSecurityGroupId": {
+                    "Ref": "MgmtSecurityGroup"
+                }
+            }
+        },
+        "MgmtIngress2": {
+            "Type": "AWS::EC2::SecurityGroupIngress",
+            "Properties": {
+                "GroupId": {
+                    "Ref": "MgmtSecurityGroup"
+                },
+                "IpProtocol": "tcp",
+                "FromPort": 22,
+                "ToPort": 22,
+                "CidrIp": {
+                    "Fn::FindInMap": [
+                        "RegionMap",
+                        {
+                            "Ref": "AWS::Region"
+                        },
+                        "EC2xCONNECTxCIDR"
+                    ]
+                }
+            }
+        },
+        "MgmtIngress22": {
+            "Type": "AWS::EC2::SecurityGroupIngress",
+            "Properties": {
+                "GroupId": {
+                    "Ref": "MgmtSecurityGroup"
+                },
+                "IpProtocol": "tcp",
+                "FromPort": 22,
+                "ToPort": 22,
+                "CidrIp": {
+                    "Ref": "InboundIPv4CidrBlock"
+                }
+            }
+        },
+        "MgmtIngress67": {
+            "Type": "AWS::EC2::SecurityGroupIngress",
+            "Properties": {
+                "GroupId": {
+                    "Ref": "MgmtSecurityGroup"
+                },
+                "Description": "UDP port",
+                "FromPort": "67",
+                "IpProtocol": "udp",
+                "ToPort": "68",
+                "CidrIp": {
+                    "Ref": "InboundIPv4CidrBlock"
+                }
+            }
+        },
+        "MgmtIngress80": {
+            "Type": "AWS::EC2::SecurityGroupIngress",
+            "Properties": {
+                "GroupId": {
+                    "Ref": "MgmtSecurityGroup"
+                },
+                "Description": "TCP port - for IM(NV)",
+                "FromPort": "80",
+                "IpProtocol": "tcp",
+                "ToPort": "80",
+                "CidrIp": {
+                    "Ref": "InboundIPv4CidrBlock"
+                }
+            }
+        },
+        "MgmtIngress111": {
+            "Type": "AWS::EC2::SecurityGroupIngress",
+            "Properties": {
+                "GroupId": {
+                    "Ref": "MgmtSecurityGroup"
+                },
+                "Description": "TCP port",
+                "FromPort": "111",
+                "IpProtocol": "tcp",
+                "ToPort": "111",
+                "CidrIp": {
+                    "Ref": "InboundIPv4CidrBlock"
+                }
+            }
+        },
+        "MgmtIngress123": {
+            "Type": "AWS::EC2::SecurityGroupIngress",
+            "Properties": {
+                "GroupId": {
+                    "Ref": "MgmtSecurityGroup"
+                },
+                "Description": "UDP port",
+                "FromPort": "123",
+                "IpProtocol": "udp",
+                "ToPort": "123",
+                "CidrIp": {
+                    "Ref": "InboundIPv4CidrBlock"
+                }
+            }
+        },
+        "MgmtIngress161": {
+            "Type": "AWS::EC2::SecurityGroupIngress",
+            "Properties": {
+                "GroupId": {
+                    "Ref": "MgmtSecurityGroup"
+                },
+                "Description": "UDP port",
+                "FromPort": "161",
+                "IpProtocol": "udp",
+                "ToPort": "162",
+                "CidrIp": {
+                    "Ref": "InboundIPv4CidrBlock"
+                }
+            }
+        },
+        "MgmtIngress443": {
+            "Type": "AWS::EC2::SecurityGroupIngress",
+            "Properties": {
+                "GroupId": {
+                    "Ref": "MgmtSecurityGroup"
+                },
+                "IpProtocol": "tcp",
+                "FromPort": 443,
+                "ToPort": 443,
+                "CidrIp": {
+                    "Ref": "InboundIPv4CidrBlock"
+                }
+            }
+        },
+        "MgmtIngress605": {
+            "Type": "AWS::EC2::SecurityGroupIngress",
+            "Properties": {
+                "GroupId": {
+                    "Ref": "MgmtSecurityGroup"
+                },
+                "Description": "UDP port",
+                "FromPort": "605",
+                "IpProtocol": "udp",
+                "ToPort": "605",
+                "CidrIp": {
+                    "Ref": "InboundIPv4CidrBlock"
+                }
+            }
+        },
+        "MgmtIngress1080": {
+            "Type": "AWS::EC2::SecurityGroupIngress",
+            "Properties": {
+                "GroupId": {
+                    "Ref": "MgmtSecurityGroup"
+                },
+                "Description": "TCP port",
+                "FromPort": "1080",
+                "IpProtocol": "tcp",
+                "ToPort": "1080",
+                "CidrIp": {
+                    "Ref": "InboundIPv4CidrBlock"
+                }
+            }
+        },
+        "MgmtIngress2345": {
+            "Type": "AWS::EC2::SecurityGroupIngress",
+            "Properties": {
+                "GroupId": {
+                    "Ref": "MgmtSecurityGroup"
+                },
+                "Description": "TCP port",
+                "FromPort": "2345",
+                "IpProtocol": "tcp",
+                "ToPort": "2345",
+                "CidrIp": {
+                    "Ref": "InboundIPv4CidrBlock"
+                }
+            }
+        },
+        "MgmtIngress2601": {
+            "Type": "AWS::EC2::SecurityGroupIngress",
+            "Properties": {
+                "GroupId": {
+                    "Ref": "MgmtSecurityGroup"
+                },
+                "Description": "TCP port",
+                "FromPort": "2601",
+                "IpProtocol": "tcp",
+                "ToPort": "2601",
+                "CidrIp": {
+                    "Ref": "InboundIPv4CidrBlock"
+                }
+            }
+        },
+        "MgmtIngress3222": {
+            "Type": "AWS::EC2::SecurityGroupIngress",
+            "Properties": {
+                "GroupId": {
+                    "Ref": "MgmtSecurityGroup"
+                },
+                "Description": "TCP port",
+                "FromPort": "3222",
+                "IpProtocol": "tcp",
+                "ToPort": "3222",
+                "CidrIp": {
+                    "Ref": "InboundIPv4CidrBlock"
+                }
+            }
+        },
+        "MgmtIngress3389": {
+            "Type": "AWS::EC2::SecurityGroupIngress",
+            "Properties": {
+                "GroupId": {
+                    "Ref": "MgmtSecurityGroup"
+                },
+                "IpProtocol": "tcp",
+                "FromPort": 3389,
+                "ToPort": 3389,
+                "CidrIp": {
+                    "Ref": "InboundIPv4CidrBlock"
+                }
+            }
+        },
+        "MgmtIngress3601": {
+            "Type": "AWS::EC2::SecurityGroupIngress",
+            "Properties": {
+                "GroupId": {
+                    "Ref": "MgmtSecurityGroup"
+                },
+                "Description": "TCP port",
+                "FromPort": "3601",
+                "IpProtocol": "tcp",
+                "ToPort": "3601",
+                "CidrIp": {
+                    "Ref": "InboundIPv4CidrBlock"
+                }
+            }
+        },
+        "MgmtIngress4501": {
+            "Type": "AWS::EC2::SecurityGroupIngress",
+            "Properties": {
+                "GroupId": {
+                    "Ref": "MgmtSecurityGroup"
+                },
+                "Description": "TCP port",
+                "FromPort": "4501",
+                "IpProtocol": "tcp",
+                "ToPort": "4502",
+                "CidrIp": {
+                    "Ref": "InboundIPv4CidrBlock"
+                }
+            }
+        },
+        "MgmtIngress4601": {
+            "Type": "AWS::EC2::SecurityGroupIngress",
+            "Properties": {
+                "GroupId": {
+                    "Ref": "MgmtSecurityGroup"
+                },
+                "Description": "TCP port",
+                "FromPort": "4601",
+                "IpProtocol": "tcp",
+                "ToPort": "4601",
+                "CidrIp": {
+                    "Ref": "InboundIPv4CidrBlock"
+                }
+            }
+        },
+        "MgmtIngress5285": {
+            "Type": "AWS::EC2::SecurityGroupIngress",
+            "Properties": {
+                "GroupId": {
+                    "Ref": "MgmtSecurityGroup"
+                },
+                "Description": "TCP port",
+                "FromPort": "5285",
+                "IpProtocol": "tcp",
+                "ToPort": "5286",
+                "CidrIp": {
+                    "Ref": "InboundIPv4CidrBlock"
+                }
+            }
+        },
+        "MgmtIngress5326": {
+            "Type": "AWS::EC2::SecurityGroupIngress",
+            "Properties": {
+                "GroupId": {
+                    "Ref": "MgmtSecurityGroup"
+                },
+                "Description": "TCP port",
+                "FromPort": "5326",
+                "IpProtocol": "tcp",
+                "ToPort": "5327",
+                "CidrIp": {
+                    "Ref": "InboundIPv4CidrBlock"
+                }
+            }
+        },
+        "MgmtIngress5480": {
+            "Type": "AWS::EC2::SecurityGroupIngress",
+            "Properties": {
+                "GroupId": {
+                    "Ref": "MgmtSecurityGroup"
+                },
+                "Description": "TCP port",
+                "FromPort": "5480",
+                "IpProtocol": "tcp",
+                "ToPort": "5480",
+                "CidrIp": {
+                    "Ref": "InboundIPv4CidrBlock"
+                }
+            }
+        },
+        "MgmtIngress5488": {
+            "Type": "AWS::EC2::SecurityGroupIngress",
+            "Properties": {
+                "GroupId": {
+                    "Ref": "MgmtSecurityGroup"
+                },
+                "Description": "TCP port",
+                "FromPort": "5488",
+                "IpProtocol": "tcp",
+                "ToPort": "5489",
+                "CidrIp": {
+                    "Ref": "InboundIPv4CidrBlock"
+                }
+            }
+        },
+        "MgmtIngress6001": {
+            "Type": "AWS::EC2::SecurityGroupIngress",
+            "Properties": {
+                "GroupId": {
+                    "Ref": "MgmtSecurityGroup"
+                },
+                "Description": "TCP port",
+                "FromPort": "6001",
+                "IpProtocol": "tcp",
+                "ToPort": "6005",
+                "CidrIp": {
+                    "Ref": "InboundIPv4CidrBlock"
+                }
+            }
+        },
+        "MgmtIngress6004": {
+            "Type": "AWS::EC2::SecurityGroupIngress",
+            "Properties": {
+                "GroupId": {
+                    "Ref": "MgmtSecurityGroup"
+                },
+                "Description": "UDP port",
+                "FromPort": "6004",
+                "IpProtocol": "udp",
+                "ToPort": "6004",
+                "CidrIp": {
+                    "Ref": "InboundIPv4CidrBlock"
+                }
+            }
+        },
+        "MgmtIngress6665": {
+            "Type": "AWS::EC2::SecurityGroupIngress",
+            "Properties": {
+                "GroupId": {
+                    "Ref": "MgmtSecurityGroup"
+                },
+                "Description": "TCP port",
+                "FromPort": "6665",
+                "IpProtocol": "tcp",
+                "ToPort": "6665",
+                "CidrIp": {
+                    "Ref": "InboundIPv4CidrBlock"
+                }
+            }
+        },
+        "MgmtIngress6967": {
+            "Type": "AWS::EC2::SecurityGroupIngress",
+            "Properties": {
+                "GroupId": {
+                    "Ref": "MgmtSecurityGroup"
+                },
+                "Description": "TCP port",
+                "FromPort": "6967",
+                "IpProtocol": "tcp",
+                "ToPort": "6967",
+                "CidrIp": {
+                    "Ref": "InboundIPv4CidrBlock"
+                }
+            }
+        },
+        "MgmtIngress6978": {
+            "Type": "AWS::EC2::SecurityGroupIngress",
+            "Properties": {
+                "GroupId": {
+                    "Ref": "MgmtSecurityGroup"
+                },
+                "Description": "TCP port",
+                "FromPort": "6978",
+                "IpProtocol": "tcp",
+                "ToPort": "6978",
+                "CidrIp": {
+                    "Ref": "InboundIPv4CidrBlock"
+                }
+            }
+        },
+        "MgmtIngress8021": {
+            "Type": "AWS::EC2::SecurityGroupIngress",
+            "Properties": {
+                "GroupId": {
+                    "Ref": "MgmtSecurityGroup"
+                },
+                "Description": "TCP port",
+                "FromPort": "8021",
+                "IpProtocol": "tcp",
+                "ToPort": "8022",
+                "CidrIp": {
+                    "Ref": "InboundIPv4CidrBlock"
+                }
+            }
+        },
+        "MgmtIngress8881": {
+            "Type": "AWS::EC2::SecurityGroupIngress",
+            "Properties": {
+                "GroupId": {
+                    "Ref": "MgmtSecurityGroup"
+                },
+                "Description": "TCP port",
+                "FromPort": "8881",
+                "IpProtocol": "tcp",
+                "ToPort": "8881",
+                "CidrIp": {
+                    "Ref": "InboundIPv4CidrBlock"
+                }
+            }
+        },
+        "MgmtIngress8989": {
+            "Type": "AWS::EC2::SecurityGroupIngress",
+            "Properties": {
+                "GroupId": {
+                    "Ref": "MgmtSecurityGroup"
+                },
+                "Description": "TCP port",
+                "FromPort": "8989",
+                "IpProtocol": "tcp",
+                "ToPort": "8990",
+                "CidrIp": {
+                    "Ref": "InboundIPv4CidrBlock"
+                }
+            }
+        },
+        "MgmtIngress9101": {
+            "Type": "AWS::EC2::SecurityGroupIngress",
+            "Properties": {
+                "GroupId": {
+                    "Ref": "MgmtSecurityGroup"
+                },
+                "Description": "TCP port",
+                "FromPort": "9101",
+                "IpProtocol": "tcp",
+                "ToPort": "9102",
+                "CidrIp": {
+                    "Ref": "InboundIPv4CidrBlock"
+                }
+            }
+        },
+        "MgmtIngress9613": {
+            "Type": "AWS::EC2::SecurityGroupIngress",
+            "Properties": {
+                "GroupId": {
+                    "Ref": "MgmtSecurityGroup"
+                },
+                "Description": "TCP port",
+                "FromPort": "9613",
+                "IpProtocol": "tcp",
+                "ToPort": "9676",
+                "CidrIp": {
+                    "Ref": "InboundIPv4CidrBlock"
+                }
+            }
+        },
+        "MgmtIngress10119": {
+            "Type": "AWS::EC2::SecurityGroupIngress",
+            "Properties": {
+                "GroupId": {
+                    "Ref": "MgmtSecurityGroup"
+                },
+                "Description": "TCP port",
+                "FromPort": "10119",
+                "IpProtocol": "tcp",
+                "ToPort": "10119",
+                "CidrIp": {
+                    "Ref": "InboundIPv4CidrBlock"
+                }
+            }
+        },
+        "MgmtIngress17662": {
+            "Type": "AWS::EC2::SecurityGroupIngress",
+            "Properties": {
+                "GroupId": {
+                    "Ref": "MgmtSecurityGroup"
+                },
+                "Description": "TCP port",
+                "FromPort": "17662",
+                "IpProtocol": "tcp",
+                "ToPort": "17662",
+                "CidrIp": {
+                    "Ref": "InboundIPv4CidrBlock"
+                }
+            }
+        },
+        "MgmtIngress17668": {
+            "Type": "AWS::EC2::SecurityGroupIngress",
+            "Properties": {
+                "GroupId": {
+                    "Ref": "MgmtSecurityGroup"
+                },
+                "Description": "TCP port",
+                "FromPort": "17668",
+                "IpProtocol": "tcp",
+                "ToPort": "17777",
+                "CidrIp": {
+                    "Ref": "InboundIPv4CidrBlock"
+                }
+            }
+        },
+        "MgmtIngress18765": {
+            "Type": "AWS::EC2::SecurityGroupIngress",
+            "Properties": {
+                "GroupId": {
+                    "Ref": "MgmtSecurityGroup"
+                },
+                "Description": "TCP port",
+                "FromPort": "18765",
+                "IpProtocol": "tcp",
+                "ToPort": "18765",
+                "CidrIp": {
+                    "Ref": "InboundIPv4CidrBlock"
+                }
+            }
+        },
+        "MgmtIngress21123": {
+            "Type": "AWS::EC2::SecurityGroupIngress",
+            "Properties": {
+                "GroupId": {
+                    "Ref": "MgmtSecurityGroup"
+                },
+                "Description": "TCP port",
+                "FromPort": "21123",
+                "IpProtocol": "tcp",
+                "ToPort": "21123",
+                "CidrIp": {
+                    "Ref": "InboundIPv4CidrBlock"
+                }
+            }
+        },
+        "MgmtIngress21653": {
+            "Type": "AWS::EC2::SecurityGroupIngress",
+            "Properties": {
+                "GroupId": {
+                    "Ref": "MgmtSecurityGroup"
+                },
+                "Description": "TCP port",
+                "FromPort": "21653",
+                "IpProtocol": "tcp",
+                "ToPort": "21653",
+                "CidrIp": {
+                    "Ref": "InboundIPv4CidrBlock"
+                }
+            }
+        },
+        "Test1SecurityGroup": {
+            "Type": "AWS::EC2::SecurityGroup",
+            "Properties": {
+                "GroupDescription": {
+                    "Fn::Join": [
+                        "_",
+                        [
+                            {
+                                "Ref": "UserLoginTag"
+                            },
+                            {
+                                "Fn::FindInMap": [
+                                    "VariableMap",
+                                    "local",
+                                    "PROJECTxTAG"
+                                ]
+                            },
+                            "TEST1_SECURITY_GROUP",
+                            {
+                                "Fn::FindInMap": [
+                                    "RegionMap",
+                                    {
+                                        "Ref": "AWS::Region"
+                                    },
+                                    "REGIONxTAG"
+                                ]
+                            }
+                        ]
+                    ]
+                },
+                "VpcId": {
+                    "Ref": "Vpc"
+                },
+                "SecurityGroupIngress": [
+                    {
+                        "CidrIp": {
+                            "Ref": "InboundIPv4CidrBlock"
+                        },
+                        "Description": "HTTP port",
+                        "FromPort": "80",
+                        "IpProtocol": "tcp",
+                        "ToPort": "80"
+                    }
+                ],
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": {
+                            "Fn::Join": [
+                                "_",
+                                [
+                                    {
+                                        "Ref": "UserLoginTag"
+                                    },
+                                    {
+                                        "Fn::FindInMap": [
+                                            "VariableMap",
+                                            "local",
+                                            "PROJECTxTAG"
+                                        ]
+                                    },
+                                    "TEST1_SECURITY_GROUP",
+                                    {
+                                        "Fn::FindInMap": [
+                                            "RegionMap",
+                                            {
+                                                "Ref": "AWS::Region"
+                                            },
+                                            "REGIONxTAG"
+                                        ]
+                                    }
+                                ]
+                            ]
+                        }
+                    },
+                    {
+                        "Key": "Owner",
+                        "Value": {
+                            "Ref": "UserEmailTag"
+                        }
+                    },
+                    {
+                        "Key": "Options",
+                        "Value": {
+                            "Fn::FindInMap": [
+                                "VariableMap",
+                                "local",
+                                "OPTIONSxTAG"
+                            ]
+                        }
+                    },
+                    {
+                        "Key": "Project",
+                        "Value": {
+                            "Fn::FindInMap": [
+                                "VariableMap",
+                                "local",
+                                "PROJECTxTAG"
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+        "Test1Ingress1": {
+            "Type": "AWS::EC2::SecurityGroupIngress",
+            "Properties": {
+                "GroupId": {
+                    "Ref": "Test1SecurityGroup"
+                },
+                "IpProtocol": "-1",
+                "SourceSecurityGroupId": {
+                    "Ref": "Test1SecurityGroup"
+                }
+            }
+        },
+        "DefaultEgress1": {
+            "Type": "AWS::EC2::SecurityGroupEgress",
+            "Properties": {
+                "GroupId": {
+                    "Fn::GetAtt": [
+                        "Vpc",
+                        "DefaultSecurityGroup"
+                    ]
+                },
+                "IpProtocol": "-1",
+                "DestinationSecurityGroupId": {
+                    "Fn::GetAtt": [
+                        "Vpc",
+                        "DefaultSecurityGroup"
+                    ]
+                }
+            }
+        },
+        "InternetGw": {
+            "Type": "AWS::EC2::InternetGateway",
+            "Properties": {
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": {
+                            "Fn::Join": [
+                                "_",
+                                [
+                                    {
+                                        "Ref": "UserLoginTag"
+                                    },
+                                    {
+                                        "Fn::FindInMap": [
+                                            "VariableMap",
+                                            "local",
+                                            "PROJECTxTAG"
+                                        ]
+                                    },
+                                    "INTERNET_GW",
+                                    {
+                                        "Fn::FindInMap": [
+                                            "RegionMap",
+                                            {
+                                                "Ref": "AWS::Region"
+                                            },
+                                            "REGIONxTAG"
+                                        ]
+                                    }
+                                ]
+                            ]
+                        }
+                    },
+                    {
+                        "Key": "Owner",
+                        "Value": {
+                            "Ref": "UserEmailTag"
+                        }
+                    },
+                    {
+                        "Key": "Options",
+                        "Value": {
+                            "Fn::FindInMap": [
+                                "VariableMap",
+                                "local",
+                                "OPTIONSxTAG"
+                            ]
+                        }
+                    },
+                    {
+                        "Key": "Project",
+                        "Value": {
+                            "Fn::FindInMap": [
+                                "VariableMap",
+                                "local",
+                                "PROJECTxTAG"
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+        "GwAttach": {
+            "Type": "AWS::EC2::VPCGatewayAttachment",
+            "Properties": {
+                "VpcId": {
+                    "Ref": "Vpc"
+                },
+                "InternetGatewayId": {
+                    "Ref": "InternetGw"
+                }
+            }
+        },
+        "MgmtRoute": {
+            "Type": "AWS::EC2::Route",
+            "Properties": {
+                "DestinationCidrBlock": "0.0.0.0/0",
+                "RouteTableId": {
+                    "Ref": "MgmtRouteTable"
+                },
+                "GatewayId": {
+                    "Ref": "InternetGw"
+                }
+            },
+            "DependsOn": "GwAttach"
+        },
+        "MgmtRouteTable": {
+            "Type": "AWS::EC2::RouteTable",
+            "Properties": {
+                "VpcId": {
+                    "Ref": "Vpc"
+                },
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": {
+                            "Fn::Join": [
+                                "_",
+                                [
+                                    {
+                                        "Ref": "UserLoginTag"
+                                    },
+                                    {
+                                        "Fn::FindInMap": [
+                                            "VariableMap",
+                                            "local",
+                                            "PROJECTxTAG"
+                                        ]
+                                    },
+                                    "MGMT_ROUTE_TABLE",
+                                    {
+                                        "Fn::FindInMap": [
+                                            "RegionMap",
+                                            {
+                                                "Ref": "AWS::Region"
+                                            },
+                                            "REGIONxTAG"
+                                        ]
+                                    }
+                                ]
+                            ]
+                        }
+                    },
+                    {
+                        "Key": "Owner",
+                        "Value": {
+                            "Ref": "UserEmailTag"
+                        }
+                    },
+                    {
+                        "Key": "Options",
+                        "Value": {
+                            "Fn::FindInMap": [
+                                "VariableMap",
+                                "local",
+                                "OPTIONSxTAG"
+                            ]
+                        }
+                    },
+                    {
+                        "Key": "Project",
+                        "Value": {
+                            "Fn::FindInMap": [
+                                "VariableMap",
+                                "local",
+                                "PROJECTxTAG"
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+        "Test1Route": {
+            "Type": "AWS::EC2::Route",
+            "Properties": {
+                "DestinationCidrBlock": "0.0.0.0/0",
+                "RouteTableId": {
+                    "Ref": "Test1RouteTable"
+                },
+                "GatewayId": {
+                    "Ref": "InternetGw"
+                }
+            },
+            "DependsOn": "GwAttach"
+        },
+        "Test1RouteTable": {
+            "Type": "AWS::EC2::RouteTable",
+            "Properties": {
+                "VpcId": {
+                    "Ref": "Vpc"
+                },
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": {
+                            "Fn::Join": [
+                                "_",
+                                [
+                                    {
+                                        "Ref": "UserLoginTag"
+                                    },
+                                    {
+                                        "Fn::FindInMap": [
+                                            "VariableMap",
+                                            "local",
+                                            "PROJECTxTAG"
+                                        ]
+                                    },
+                                    "TEST1_ROUTE_TABLE",
+                                    {
+                                        "Fn::FindInMap": [
+                                            "RegionMap",
+                                            {
+                                                "Ref": "AWS::Region"
+                                            },
+                                            "REGIONxTAG"
+                                        ]
+                                    }
+                                ]
+                            ]
+                        }
+                    },
+                    {
+                        "Key": "Owner",
+                        "Value": {
+                            "Ref": "UserEmailTag"
+                        }
+                    },
+                    {
+                        "Key": "Options",
+                        "Value": {
+                            "Fn::FindInMap": [
+                                "VariableMap",
+                                "local",
+                                "OPTIONSxTAG"
+                            ]
+                        }
+                    },
+                    {
+                        "Key": "Project",
+                        "Value": {
+                            "Fn::FindInMap": [
+                                "VariableMap",
+                                "local",
+                                "PROJECTxTAG"
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+        "Test2Route": {
+            "Type": "AWS::EC2::Route",
+            "Properties": {
+                "DestinationCidrBlock": "0.0.0.0/0",
+                "RouteTableId": {
+                    "Ref": "Test2RouteTable"
+                },
+                "GatewayId": {
+                    "Ref": "InternetGw"
+                }
+            },
+            "DependsOn": "GwAttach"
+        },
+        "Test2RouteTable": {
+            "Type": "AWS::EC2::RouteTable",
+            "Properties": {
+                "VpcId": {
+                    "Ref": "Vpc"
+                },
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": {
+                            "Fn::Join": [
+                                "_",
+                                [
+                                    {
+                                        "Ref": "UserLoginTag"
+                                    },
+                                    {
+                                        "Fn::FindInMap": [
+                                            "VariableMap",
+                                            "local",
+                                            "PROJECTxTAG"
+                                        ]
+                                    },
+                                    "TEST2_ROUTE_TABLE",
+                                    {
+                                        "Fn::FindInMap": [
+                                            "RegionMap",
+                                            {
+                                                "Ref": "AWS::Region"
+                                            },
+                                            "REGIONxTAG"
+                                        ]
+                                    }
+                                ]
+                            ]
+                        }
+                    },
+                    {
+                        "Key": "Owner",
+                        "Value": {
+                            "Ref": "UserEmailTag"
+                        }
+                    },
+                    {
+                        "Key": "Options",
+                        "Value": {
+                            "Fn::FindInMap": [
+                                "VariableMap",
+                                "local",
+                                "OPTIONSxTAG"
+                            ]
+                        }
+                    },
+                    {
+                        "Key": "Project",
+                        "Value": {
+                            "Fn::FindInMap": [
+                                "VariableMap",
+                                "local",
+                                "PROJECTxTAG"
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+        "MgmtSubnetRouteTableAssociation": {
+            "Type": "AWS::EC2::SubnetRouteTableAssociation",
+            "Properties": {
+                "RouteTableId": {
+                    "Ref": "MgmtRouteTable"
+                },
+                "SubnetId": {
+                    "Ref": "MgmtSubnet"
+                }
+            }
+        },
+        "Test1SubnetRouteTableAssociation": {
+            "Type": "AWS::EC2::SubnetRouteTableAssociation",
+            "Properties": {
+                "RouteTableId": {
+                    "Ref": "Test1RouteTable"
+                },
+                "SubnetId": {
+                    "Ref": "Test1Subnet"
+                }
+            }
+        },
+        "Test2SubnetRouteTableAssociation": {
+            "Type": "AWS::EC2::SubnetRouteTableAssociation",
+            "Properties": {
+                "RouteTableId": {
+                    "Ref": "Test2RouteTable"
+                },
+                "SubnetId": {
+                    "Ref": "Test2Subnet"
+                }
+            }
+        },
+        "TestAppliance1Eth0": {
+            "Type": "AWS::EC2::NetworkInterface",
+            "Properties": {
+                "Description": {
+                    "Fn::Join": [
+                        "_",
+                        [
+                            {
+                                "Ref": "UserLoginTag"
+                            },
+                            {
+                                "Fn::FindInMap": [
+                                    "VariableMap",
+                                    "local",
+                                    "PROJECTxTAG"
+                                ]
+                            },
+                            {
+                                "Fn::FindInMap": [
+                                    "VariableMap",
+                                    "local",
+                                    "APPxTAG"
+                                ]
+                            },
+                            "TESTAPPLIANCE1",
+                            {
+                                "Fn::FindInMap": [
+                                    "VariableMap",
+                                    "local",
+                                    "APPxVERSION"
+                                ]
+                            },
+                            "ETH0",
+                            {
+                                "Fn::FindInMap": [
+                                    "RegionMap",
+                                    {
+                                        "Ref": "AWS::Region"
+                                    },
+                                    "REGIONxTAG"
+                                ]
+                            }
+                        ]
+                    ]
+                },
+                "SourceDestCheck": {
+                    "Fn::FindInMap": [
+                        "VariableMap",
+                        "local",
+                        "INTERFACExSOURCExDESTxCHECK"
+                    ]
+                },
+                "SubnetId": {
+                    "Ref": "MgmtSubnet"
+                },
+                "GroupSet": [
+                    {
+                        "Ref": "MgmtSecurityGroup"
+                    }
+                ],
+                "PrivateIpAddress": {
+                    "Fn::FindInMap": [
+                        "VariableMap",
+                        "local",
+                        "TESTAPPLIANCE1xETH0xPRIVATExIPxADDRESS"
+                    ]
+                },
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": {
+                            "Fn::Join": [
+                                "_",
+                                [
+                                    {
+                                        "Ref": "UserLoginTag"
+                                    },
+                                    {
+                                        "Fn::FindInMap": [
+                                            "VariableMap",
+                                            "local",
+                                            "PROJECTxTAG"
+                                        ]
+                                    },
+                                    {
+                                        "Fn::FindInMap": [
+                                            "VariableMap",
+                                            "local",
+                                            "APPxTAG"
+                                        ]
+                                    },
+                                    "TESTAPPLIANCE1",
+                                    {
+                                        "Fn::FindInMap": [
+                                            "VariableMap",
+                                            "local",
+                                            "APPxVERSION"
+                                        ]
+                                    },
+                                    "ETH0",
+                                    {
+                                        "Fn::FindInMap": [
+                                            "RegionMap",
+                                            {
+                                                "Ref": "AWS::Region"
+                                            },
+                                            "REGIONxTAG"
+                                        ]
+                                    }
+                                ]
+                            ]
+                        }
+                    },
+                    {
+                        "Key": "Owner",
+                        "Value": {
+                            "Ref": "UserEmailTag"
+                        }
+                    },
+                    {
+                        "Key": "Options",
+                        "Value": {
+                            "Fn::FindInMap": [
+                                "VariableMap",
+                                "local",
+                                "OPTIONSxTAG"
+                            ]
+                        }
+                    },
+                    {
+                        "Key": "Project",
+                        "Value": {
+                            "Fn::FindInMap": [
+                                "VariableMap",
+                                "local",
+                                "PROJECTxTAG"
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+        "TestAppliance1Eth1": {
+            "Type": "AWS::EC2::NetworkInterface",
+            "Properties": {
+                "Description": {
+                    "Fn::Join": [
+                        "_",
+                        [
+                            {
+                                "Ref": "UserLoginTag"
+                            },
+                            {
+                                "Fn::FindInMap": [
+                                    "VariableMap",
+                                    "local",
+                                    "PROJECTxTAG"
+                                ]
+                            },
+                            {
+                                "Fn::FindInMap": [
+                                    "VariableMap",
+                                    "local",
+                                    "APPxTAG"
+                                ]
+                            },
+                            "TESTAPPLIANCE1",
+                            {
+                                "Fn::FindInMap": [
+                                    "VariableMap",
+                                    "local",
+                                    "APPxVERSION"
+                                ]
+                            },
+                            "ETH1",
+                            {
+                                "Fn::FindInMap": [
+                                    "RegionMap",
+                                    {
+                                        "Ref": "AWS::Region"
+                                    },
+                                    "REGIONxTAG"
+                                ]
+                            }
+                        ]
+                    ]
+                },
+                "SourceDestCheck": {
+                    "Fn::FindInMap": [
+                        "VariableMap",
+                        "local",
+                        "INTERFACExSOURCExDESTxCHECK"
+                    ]
+                },
+                "SubnetId": {
+                    "Ref": "Test1Subnet"
+                },
+                "GroupSet": [
+                    {
+                        "Ref": "Test1SecurityGroup"
+                    }
+                ],
+                "PrivateIpAddress": {
+                    "Fn::Select": [
+                        "0",
+                        {
+                            "Fn::Split": [
+                                "|",
+                                {
+                                    "Fn::FindInMap": [
+                                        "VariableMap",
+                                        "local",
+                                        "TESTAPPLIANCE1xETH1xPRIVATExIPxADDRESSES"
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "PrivateIpAddresses": [
+                    {
+                        "PrivateIpAddress": {
+                            "Fn::Select": [
+                                "1",
+                                {
+                                    "Fn::Split": [
+                                        "|",
+                                        {
+                                            "Fn::FindInMap": [
+                                                "VariableMap",
+                                                "local",
+                                                "TESTAPPLIANCE1xETH1xPRIVATExIPxADDRESSES"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        "Primary": false
+                    },
+                    {
+                        "PrivateIpAddress": {
+                            "Fn::Select": [
+                                "2",
+                                {
+                                    "Fn::Split": [
+                                        "|",
+                                        {
+                                            "Fn::FindInMap": [
+                                                "VariableMap",
+                                                "local",
+                                                "TESTAPPLIANCE1xETH1xPRIVATExIPxADDRESSES"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        "Primary": false
+                    },
+                    {
+                        "PrivateIpAddress": {
+                            "Fn::Select": [
+                                "3",
+                                {
+                                    "Fn::Split": [
+                                        "|",
+                                        {
+                                            "Fn::FindInMap": [
+                                                "VariableMap",
+                                                "local",
+                                                "TESTAPPLIANCE1xETH1xPRIVATExIPxADDRESSES"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        "Primary": false
+                    },
+                    {
+                        "PrivateIpAddress": {
+                            "Fn::Select": [
+                                "4",
+                                {
+                                    "Fn::Split": [
+                                        "|",
+                                        {
+                                            "Fn::FindInMap": [
+                                                "VariableMap",
+                                                "local",
+                                                "TESTAPPLIANCE1xETH1xPRIVATExIPxADDRESSES"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        "Primary": false
+                    },
+                    {
+                        "PrivateIpAddress": {
+                            "Fn::Select": [
+                                "5",
+                                {
+                                    "Fn::Split": [
+                                        "|",
+                                        {
+                                            "Fn::FindInMap": [
+                                                "VariableMap",
+                                                "local",
+                                                "TESTAPPLIANCE1xETH1xPRIVATExIPxADDRESSES"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        "Primary": false
+                    },
+                    {
+                        "PrivateIpAddress": {
+                            "Fn::Select": [
+                                "6",
+                                {
+                                    "Fn::Split": [
+                                        "|",
+                                        {
+                                            "Fn::FindInMap": [
+                                                "VariableMap",
+                                                "local",
+                                                "TESTAPPLIANCE1xETH1xPRIVATExIPxADDRESSES"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        "Primary": false
+                    },
+                    {
+                        "PrivateIpAddress": {
+                            "Fn::Select": [
+                                "7",
+                                {
+                                    "Fn::Split": [
+                                        "|",
+                                        {
+                                            "Fn::FindInMap": [
+                                                "VariableMap",
+                                                "local",
+                                                "TESTAPPLIANCE1xETH1xPRIVATExIPxADDRESSES"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        "Primary": false
+                    },
+                    {
+                        "PrivateIpAddress": {
+                            "Fn::Select": [
+                                "8",
+                                {
+                                    "Fn::Split": [
+                                        "|",
+                                        {
+                                            "Fn::FindInMap": [
+                                                "VariableMap",
+                                                "local",
+                                                "TESTAPPLIANCE1xETH1xPRIVATExIPxADDRESSES"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        "Primary": false
+                    },
+                    {
+                        "PrivateIpAddress": {
+                            "Fn::Select": [
+                                "9",
+                                {
+                                    "Fn::Split": [
+                                        "|",
+                                        {
+                                            "Fn::FindInMap": [
+                                                "VariableMap",
+                                                "local",
+                                                "TESTAPPLIANCE1xETH1xPRIVATExIPxADDRESSES"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        "Primary": false
+                    }
+                ],
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": {
+                            "Fn::Join": [
+                                "_",
+                                [
+                                    {
+                                        "Ref": "UserLoginTag"
+                                    },
+                                    {
+                                        "Fn::FindInMap": [
+                                            "VariableMap",
+                                            "local",
+                                            "PROJECTxTAG"
+                                        ]
+                                    },
+                                    {
+                                        "Fn::FindInMap": [
+                                            "VariableMap",
+                                            "local",
+                                            "APPxTAG"
+                                        ]
+                                    },
+                                    "TESTAPPLIANCE1",
+                                    {
+                                        "Fn::FindInMap": [
+                                            "VariableMap",
+                                            "local",
+                                            "APPxVERSION"
+                                        ]
+                                    },
+                                    "ETH1",
+                                    {
+                                        "Fn::FindInMap": [
+                                            "RegionMap",
+                                            {
+                                                "Ref": "AWS::Region"
+                                            },
+                                            "REGIONxTAG"
+                                        ]
+                                    }
+                                ]
+                            ]
+                        }
+                    },
+                    {
+                        "Key": "Owner",
+                        "Value": {
+                            "Ref": "UserEmailTag"
+                        }
+                    },
+                    {
+                        "Key": "Options",
+                        "Value": {
+                            "Fn::FindInMap": [
+                                "VariableMap",
+                                "local",
+                                "OPTIONSxTAG"
+                            ]
+                        }
+                    },
+                    {
+                        "Key": "Project",
+                        "Value": {
+                            "Fn::FindInMap": [
+                                "VariableMap",
+                                "local",
+                                "PROJECTxTAG"
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+        "TestAppliance2Eth0": {
+            "Type": "AWS::EC2::NetworkInterface",
+            "Properties": {
+                "Description": {
+                    "Fn::Join": [
+                        "_",
+                        [
+                            {
+                                "Ref": "UserLoginTag"
+                            },
+                            {
+                                "Fn::FindInMap": [
+                                    "VariableMap",
+                                    "local",
+                                    "PROJECTxTAG"
+                                ]
+                            },
+                            {
+                                "Fn::FindInMap": [
+                                    "VariableMap",
+                                    "local",
+                                    "APPxTAG"
+                                ]
+                            },
+                            "TESTAPPLIANCE2",
+                            {
+                                "Fn::FindInMap": [
+                                    "VariableMap",
+                                    "local",
+                                    "APPxVERSION"
+                                ]
+                            },
+                            "ETH0",
+                            {
+                                "Fn::FindInMap": [
+                                    "RegionMap",
+                                    {
+                                        "Ref": "AWS::Region"
+                                    },
+                                    "REGIONxTAG"
+                                ]
+                            }
+                        ]
+                    ]
+                },
+                "SourceDestCheck": {
+                    "Fn::FindInMap": [
+                        "VariableMap",
+                        "local",
+                        "INTERFACExSOURCExDESTxCHECK"
+                    ]
+                },
+                "SubnetId": {
+                    "Ref": "MgmtSubnet"
+                },
+                "GroupSet": [
+                    {
+                        "Ref": "MgmtSecurityGroup"
+                    }
+                ],
+                "PrivateIpAddress": {
+                    "Fn::FindInMap": [
+                        "VariableMap",
+                        "local",
+                        "TESTAPPLIANCE2xETH0xPRIVATExIPxADDRESS"
+                    ]
+                },
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": {
+                            "Fn::Join": [
+                                "_",
+                                [
+                                    {
+                                        "Ref": "UserLoginTag"
+                                    },
+                                    {
+                                        "Fn::FindInMap": [
+                                            "VariableMap",
+                                            "local",
+                                            "PROJECTxTAG"
+                                        ]
+                                    },
+                                    {
+                                        "Fn::FindInMap": [
+                                            "VariableMap",
+                                            "local",
+                                            "APPxTAG"
+                                        ]
+                                    },
+                                    "TESTAPPLIANCE2",
+                                    {
+                                        "Fn::FindInMap": [
+                                            "VariableMap",
+                                            "local",
+                                            "APPxVERSION"
+                                        ]
+                                    },
+                                    "ETH0",
+                                    {
+                                        "Fn::FindInMap": [
+                                            "RegionMap",
+                                            {
+                                                "Ref": "AWS::Region"
+                                            },
+                                            "REGIONxTAG"
+                                        ]
+                                    }
+                                ]
+                            ]
+                        }
+                    },
+                    {
+                        "Key": "Owner",
+                        "Value": {
+                            "Ref": "UserEmailTag"
+                        }
+                    },
+                    {
+                        "Key": "Options",
+                        "Value": {
+                            "Fn::FindInMap": [
+                                "VariableMap",
+                                "local",
+                                "OPTIONSxTAG"
+                            ]
+                        }
+                    },
+                    {
+                        "Key": "Project",
+                        "Value": {
+                            "Fn::FindInMap": [
+                                "VariableMap",
+                                "local",
+                                "PROJECTxTAG"
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+        "TestAppliance2Eth1": {
+            "Type": "AWS::EC2::NetworkInterface",
+            "Properties": {
+                "Description": {
+                    "Fn::Join": [
+                        "_",
+                        [
+                            {
+                                "Ref": "UserLoginTag"
+                            },
+                            {
+                                "Fn::FindInMap": [
+                                    "VariableMap",
+                                    "local",
+                                    "PROJECTxTAG"
+                                ]
+                            },
+                            {
+                                "Fn::FindInMap": [
+                                    "VariableMap",
+                                    "local",
+                                    "APPxTAG"
+                                ]
+                            },
+                            "TESTAPPLIANCE2",
+                            {
+                                "Fn::FindInMap": [
+                                    "VariableMap",
+                                    "local",
+                                    "APPxVERSION"
+                                ]
+                            },
+                            "ETH1",
+                            {
+                                "Fn::FindInMap": [
+                                    "RegionMap",
+                                    {
+                                        "Ref": "AWS::Region"
+                                    },
+                                    "REGIONxTAG"
+                                ]
+                            }
+                        ]
+                    ]
+                },
+                "SourceDestCheck": {
+                    "Fn::FindInMap": [
+                        "VariableMap",
+                        "local",
+                        "INTERFACExSOURCExDESTxCHECK"
+                    ]
+                },
+                "SubnetId": {
+                    "Ref": "Test2Subnet"
+                },
+                "GroupSet": [
+                    {
+                        "Ref": "Test1SecurityGroup"
+                    }
+                ],
+                "PrivateIpAddress": {
+                    "Fn::Select": [
+                        "0",
+                        {
+                            "Fn::Split": [
+                                "|",
+                                {
+                                    "Fn::FindInMap": [
+                                        "VariableMap",
+                                        "local",
+                                        "TESTAPPLIANCE2xETH1xPRIVATExIPxADDRESSES"
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "PrivateIpAddresses": [
+                    {
+                        "PrivateIpAddress": {
+                            "Fn::Select": [
+                                "1",
+                                {
+                                    "Fn::Split": [
+                                        "|",
+                                        {
+                                            "Fn::FindInMap": [
+                                                "VariableMap",
+                                                "local",
+                                                "TESTAPPLIANCE2xETH1xPRIVATExIPxADDRESSES"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        "Primary": false
+                    },
+                    {
+                        "PrivateIpAddress": {
+                            "Fn::Select": [
+                                "2",
+                                {
+                                    "Fn::Split": [
+                                        "|",
+                                        {
+                                            "Fn::FindInMap": [
+                                                "VariableMap",
+                                                "local",
+                                                "TESTAPPLIANCE2xETH1xPRIVATExIPxADDRESSES"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        "Primary": false
+                    },
+                    {
+                        "PrivateIpAddress": {
+                            "Fn::Select": [
+                                "3",
+                                {
+                                    "Fn::Split": [
+                                        "|",
+                                        {
+                                            "Fn::FindInMap": [
+                                                "VariableMap",
+                                                "local",
+                                                "TESTAPPLIANCE2xETH1xPRIVATExIPxADDRESSES"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        "Primary": false
+                    },
+                    {
+                        "PrivateIpAddress": {
+                            "Fn::Select": [
+                                "4",
+                                {
+                                    "Fn::Split": [
+                                        "|",
+                                        {
+                                            "Fn::FindInMap": [
+                                                "VariableMap",
+                                                "local",
+                                                "TESTAPPLIANCE2xETH1xPRIVATExIPxADDRESSES"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        "Primary": false
+                    },
+                    {
+                        "PrivateIpAddress": {
+                            "Fn::Select": [
+                                "5",
+                                {
+                                    "Fn::Split": [
+                                        "|",
+                                        {
+                                            "Fn::FindInMap": [
+                                                "VariableMap",
+                                                "local",
+                                                "TESTAPPLIANCE2xETH1xPRIVATExIPxADDRESSES"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        "Primary": false
+                    },
+                    {
+                        "PrivateIpAddress": {
+                            "Fn::Select": [
+                                "6",
+                                {
+                                    "Fn::Split": [
+                                        "|",
+                                        {
+                                            "Fn::FindInMap": [
+                                                "VariableMap",
+                                                "local",
+                                                "TESTAPPLIANCE2xETH1xPRIVATExIPxADDRESSES"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        "Primary": false
+                    },
+                    {
+                        "PrivateIpAddress": {
+                            "Fn::Select": [
+                                "7",
+                                {
+                                    "Fn::Split": [
+                                        "|",
+                                        {
+                                            "Fn::FindInMap": [
+                                                "VariableMap",
+                                                "local",
+                                                "TESTAPPLIANCE2xETH1xPRIVATExIPxADDRESSES"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        "Primary": false
+                    },
+                    {
+                        "PrivateIpAddress": {
+                            "Fn::Select": [
+                                "8",
+                                {
+                                    "Fn::Split": [
+                                        "|",
+                                        {
+                                            "Fn::FindInMap": [
+                                                "VariableMap",
+                                                "local",
+                                                "TESTAPPLIANCE2xETH1xPRIVATExIPxADDRESSES"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        "Primary": false
+                    },
+                    {
+                        "PrivateIpAddress": {
+                            "Fn::Select": [
+                                "9",
+                                {
+                                    "Fn::Split": [
+                                        "|",
+                                        {
+                                            "Fn::FindInMap": [
+                                                "VariableMap",
+                                                "local",
+                                                "TESTAPPLIANCE2xETH1xPRIVATExIPxADDRESSES"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        "Primary": false
+                    }
+                ],
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": {
+                            "Fn::Join": [
+                                "_",
+                                [
+                                    {
+                                        "Ref": "UserLoginTag"
+                                    },
+                                    {
+                                        "Fn::FindInMap": [
+                                            "VariableMap",
+                                            "local",
+                                            "PROJECTxTAG"
+                                        ]
+                                    },
+                                    {
+                                        "Fn::FindInMap": [
+                                            "VariableMap",
+                                            "local",
+                                            "APPxTAG"
+                                        ]
+                                    },
+                                    "TESTAPPLIANCE2",
+                                    {
+                                        "Fn::FindInMap": [
+                                            "VariableMap",
+                                            "local",
+                                            "APPxVERSION"
+                                        ]
+                                    },
+                                    "ETH1",
+                                    {
+                                        "Fn::FindInMap": [
+                                            "RegionMap",
+                                            {
+                                                "Ref": "AWS::Region"
+                                            },
+                                            "REGIONxTAG"
+                                        ]
+                                    }
+                                ]
+                            ]
+                        }
+                    },
+                    {
+                        "Key": "Owner",
+                        "Value": {
+                            "Ref": "UserEmailTag"
+                        }
+                    },
+                    {
+                        "Key": "Options",
+                        "Value": {
+                            "Fn::FindInMap": [
+                                "VariableMap",
+                                "local",
+                                "OPTIONSxTAG"
+                            ]
+                        }
+                    },
+                    {
+                        "Key": "Project",
+                        "Value": {
+                            "Fn::FindInMap": [
+                                "VariableMap",
+                                "local",
+                                "PROJECTxTAG"
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+        "TestAppliance1": {
+            "Type": "AWS::EC2::Instance",
+            "Properties": {
+                "DisableApiTermination": {
+                    "Fn::FindInMap": [
+                        "VariableMap",
+                        "local",
+                        "INSTANCExDISABLExAPIxTERMINATION"
+                    ]
+                },
+                "InstanceInitiatedShutdownBehavior": {
+                    "Fn::FindInMap": [
+                        "VariableMap",
+                        "local",
+                        "INSTANCExINSTANCExINITIATEDxSHUTDOWNxBEHAVIOR"
+                    ]
+                },
+                "ImageId": "resolve:ssm:/aws/service/marketplace/prod-7br5el7ykbm2g/11.00",
+                "InstanceType": {
+                    "Ref": "TestApplianceInstanceType"
+                },
+                "Monitoring": {
+                    "Fn::FindInMap": [
+                        "VariableMap",
+                        "local",
+                        "INSTANCExMONITORING"
+                    ]
+                },
+                "KeyName": {
+                    "Ref": "SSHKey"
+                },
+                "PlacementGroupName": {
+                    "Ref": "PlacementGroup"
+                },
+                "IamInstanceProfile": {
+                    "Ref": "EC2InstanceProfile"
+                },
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": {
+                            "Fn::Join": [
+                                "_",
+                                [
+                                    {
+                                        "Ref": "UserLoginTag"
+                                    },
+                                    {
+                                        "Fn::FindInMap": [
+                                            "VariableMap",
+                                            "local",
+                                            "PROJECTxTAG"
+                                        ]
+                                    },
+                                    {
+                                        "Fn::FindInMap": [
+                                            "VariableMap",
+                                            "local",
+                                            "APPxTAG"
+                                        ]
+                                    },
+                                    "TESTAPPLIANCE1",
+                                    {
+                                        "Fn::FindInMap": [
+                                            "VariableMap",
+                                            "local",
+                                            "APPxVERSION"
+                                        ]
+                                    },
+                                    {
+                                        "Fn::FindInMap": [
+                                            "RegionMap",
+                                            {
+                                                "Ref": "AWS::Region"
+                                            },
+                                            "REGIONxTAG"
+                                        ]
+                                    }
+                                ]
+                            ]
+                        }
+                    },
+                    {
+                        "Key": "Owner",
+                        "Value": {
+                            "Ref": "UserEmailTag"
+                        }
+                    },
+                    {
+                        "Key": "Options",
+                        "Value": {
+                            "Fn::FindInMap": [
+                                "VariableMap",
+                                "local",
+                                "OPTIONSxTAG"
+                            ]
+                        }
+                    },
+                    {
+                        "Key": "Project",
+                        "Value": {
+                            "Fn::FindInMap": [
+                                "VariableMap",
+                                "local",
+                                "PROJECTxTAG"
+                            ]
+                        }
+                    }
+                ],
+                "UserData": "",
+                "NetworkInterfaces": [
+                    {
+                        "NetworkInterfaceId": {
+                            "Ref": "TestAppliance1Eth0"
+                        },
+                        "DeviceIndex": "0"
+                    },
+                    {
+                        "NetworkInterfaceId": {
+                            "Ref": "TestAppliance1Eth1"
+                        },
+                        "DeviceIndex": "1"
+                    }
+                ],
+                "BlockDeviceMappings": [
+                    {
+                        "DeviceName": {
+                            "Fn::FindInMap": [
+                                "VariableMap",
+                                "local",
+                                "INSTANCExBLOCKxDEVICExNAME"
+                            ]
+                        },
+                        "Ebs": {
+                            "DeleteOnTermination": {
+                                "Fn::FindInMap": [
+                                    "VariableMap",
+                                    "local",
+                                    "INSTANCExEBSxDELETExONxTERMINATION"
+                                ]
+                            },
+                            "VolumeType": {
+                                "Fn::FindInMap": [
+                                    "VariableMap",
+                                    "local",
+                                    "INSTANCExEBSxVOLUMExTYPE"
+                                ]
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "TestAppliance2": {
+            "Type": "AWS::EC2::Instance",
+            "Properties": {
+                "DisableApiTermination": {
+                    "Fn::FindInMap": [
+                        "VariableMap",
+                        "local",
+                        "INSTANCExDISABLExAPIxTERMINATION"
+                    ]
+                },
+                "InstanceInitiatedShutdownBehavior": {
+                    "Fn::FindInMap": [
+                        "VariableMap",
+                        "local",
+                        "INSTANCExINSTANCExINITIATEDxSHUTDOWNxBEHAVIOR"
+                    ]
+                },
+                "ImageId": "resolve:ssm:/aws/service/marketplace/prod-7br5el7ykbm2g/11.00",
+                "InstanceType": {
+                    "Ref": "TestApplianceInstanceType"
+                },
+                "Monitoring": {
+                    "Fn::FindInMap": [
+                        "VariableMap",
+                        "local",
+                        "INSTANCExMONITORING"
+                    ]
+                },
+                "KeyName": {
+                    "Ref": "SSHKey"
+                },
+                "PlacementGroupName": {
+                    "Ref": "PlacementGroup"
+                },
+                "IamInstanceProfile": {
+                    "Ref": "EC2InstanceProfile"
+                },
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": {
+                            "Fn::Join": [
+                                "_",
+                                [
+                                    {
+                                        "Ref": "UserLoginTag"
+                                    },
+                                    {
+                                        "Fn::FindInMap": [
+                                            "VariableMap",
+                                            "local",
+                                            "PROJECTxTAG"
+                                        ]
+                                    },
+                                    {
+                                        "Fn::FindInMap": [
+                                            "VariableMap",
+                                            "local",
+                                            "APPxTAG"
+                                        ]
+                                    },
+                                    "TESTAPPLIANCE2",
+                                    {
+                                        "Fn::FindInMap": [
+                                            "VariableMap",
+                                            "local",
+                                            "APPxVERSION"
+                                        ]
+                                    },
+                                    {
+                                        "Fn::FindInMap": [
+                                            "RegionMap",
+                                            {
+                                                "Ref": "AWS::Region"
+                                            },
+                                            "REGIONxTAG"
+                                        ]
+                                    }
+                                ]
+                            ]
+                        }
+                    },
+                    {
+                        "Key": "Owner",
+                        "Value": {
+                            "Ref": "UserEmailTag"
+                        }
+                    },
+                    {
+                        "Key": "Options",
+                        "Value": {
+                            "Fn::FindInMap": [
+                                "VariableMap",
+                                "local",
+                                "OPTIONSxTAG"
+                            ]
+                        }
+                    },
+                    {
+                        "Key": "Project",
+                        "Value": {
+                            "Fn::FindInMap": [
+                                "VariableMap",
+                                "local",
+                                "PROJECTxTAG"
+                            ]
+                        }
+                    }
+                ],
+                "UserData": "",
+                "NetworkInterfaces": [
+                    {
+                        "NetworkInterfaceId": {
+                            "Ref": "TestAppliance2Eth0"
+                        },
+                        "DeviceIndex": "0"
+                    },
+                    {
+                        "NetworkInterfaceId": {
+                            "Ref": "TestAppliance2Eth1"
+                        },
+                        "DeviceIndex": "1"
+                    }
+                ],
+                "BlockDeviceMappings": [
+                    {
+                        "DeviceName": {
+                            "Fn::FindInMap": [
+                                "VariableMap",
+                                "local",
+                                "INSTANCExBLOCKxDEVICExNAME"
+                            ]
+                        },
+                        "Ebs": {
+                            "DeleteOnTermination": {
+                                "Fn::FindInMap": [
+                                    "VariableMap",
+                                    "local",
+                                    "INSTANCExEBSxDELETExONxTERMINATION"
+                                ]
+                            },
+                            "VolumeType": {
+                                "Fn::FindInMap": [
+                                    "VariableMap",
+                                    "local",
+                                    "INSTANCExEBSxVOLUMExTYPE"
+                                ]
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "TestAppliance1Eth0ElasticIp": {
+            "Type": "AWS::EC2::EIP",
+            "DependsOn": [
+                "GwAttach",
+                "TestAppliance1"
+            ],
+            "Properties": {
+                "Domain": "vpc"
+            }
+        },
+        "TestAppliance1Eth0ElasticIpAssociation": {
+            "Type": "AWS::EC2::EIPAssociation",
+            "Properties": {
+                "AllocationId": {
+                    "Fn::GetAtt": [
+                        "TestAppliance1Eth0ElasticIp",
+                        "AllocationId"
+                    ]
+                },
+                "NetworkInterfaceId": {
+                    "Ref": "TestAppliance1Eth0"
+                }
+            }
+        },
+        "TestAppliance2Eth0ElasticIp": {
+            "Type": "AWS::EC2::EIP",
+            "DependsOn": [
+                "GwAttach",
+                "TestAppliance2"
+            ],
+            "Properties": {
+                "Domain": "vpc"
+            }
+        },
+        "TestAppliance2Eth0ElasticIpAssociation": {
+            "Type": "AWS::EC2::EIPAssociation",
+            "Properties": {
+                "AllocationId": {
+                    "Fn::GetAtt": [
+                        "TestAppliance2Eth0ElasticIp",
+                        "AllocationId"
+                    ]
+                },
+                "NetworkInterfaceId": {
+                    "Ref": "TestAppliance2Eth0"
+                }
+            }
+        },
+        "EC2InstanceProfile": {
+            "Properties": {
+                "Path": "/",
+                "Roles": [
+                    {
+                        "Ref": "EC2ReadOnlyAccessRole"
+                    }
+                ]
+            },
+            "Type": "AWS::IAM::InstanceProfile"
+        },
+        "EC2ReadOnlyAccessRole": {
+            "Properties": {
+                "AssumeRolePolicyDocument": {
+                    "Statement": [
+                        {
+                            "Action": "sts:AssumeRole",
+                            "Effect": "Allow",
+                            "Principal": {
+                                "Service": "ec2.amazonaws.com"
+                            }
+                        }
+                    ],
+                    "Version": "2012-10-17"
+                },
+                "ManagedPolicyArns": [
+                    "arn:aws:iam::aws:policy/AmazonEC2ReadOnlyAccess"
+                ],
+                "Path": "/"
+            },
+            "Type": "AWS::IAM::Role"
+        },
+        "VPCFlowLogAccessRole": {
+            "Properties": {
+                "AssumeRolePolicyDocument": {
+                    "Statement": [
+                        {
+                            "Action": "sts:AssumeRole",
+                            "Effect": "Allow",
+                            "Principal": {
+                                "Service": "vpc-flow-logs.amazonaws.com"
+                            }
+                        }
+                    ],
+                    "Version": "2012-10-17"
+                },
+                "ManagedPolicyArns": [
+                    "arn:aws:iam::aws:policy/CloudWatchLogsFullAccess"
+                ],
+                "Path": "/"
+            },
+            "Type": "AWS::IAM::Role"
+        }
+    },
+    "Metadata": {
+        "AWS::CloudFormation::Interface": {
+            "ParameterGroups": [
+                {
+                    "Label": {
+                        "default": "User Tag Configuration"
+                    },
+                    "Parameters": [
+                        "UserEmailTag",
+                        "UserLoginTag"
+                    ]
+                },
+                {
+                    "Label": {
+                        "default": "Keysight Client Instance Configuration"
+                    },
+                    "Parameters": [
+                        "SSHKey"
+                    ]
+                },
+                {
+                    "Label": {
+                        "default": "TestAppliance Instance Configuration"
+                    },
+                    "Parameters": [
+                        "TestApplianceInstanceType"
+                    ]
+                },
+                {
+                    "Label": {
+                        "default": "Security Group Configuration"
+                    },
+                    "Parameters": [
+                        "InboundIPv4CidrBlock"
+                    ]
+                }
+            ],
+            "ParameterLabels": {
+                "UserEmailTag": {
+                    "default": "User Email Tag"
+                },
+                "UserLoginTag": {
+                    "default": "User Login Tag"
+                },
+                "SSHKey": {
+                    "default": "Keysight Client SSH Key"
+                },
+                "TestApplianceInstanceType": {
+                    "default": "TestAppliance Instance Type"
+                },
+                "InboundIPv4CidrBlock": {
+                    "default": "Inbound IPv4 CIDR Block"
+                }
+            }
+        }
+    },
+    "Parameters": {
+        "UserEmailTag": {
+            "Description": "Email address tag of user creating the stack",
+            "MinLength": "14",
+            "Type": "String",
+            "Default": "demo@keysight.com"
+        },
+        "UserLoginTag": {
+            "Description": "Login ID tag of user creating the stack",
+            "MinLength": "4",
+            "Type": "String",
+			"Default": "Demo"
+        },
+        "SSHKey": {
+            "Description": "Name of an existing EC2 KeyPair to enable SSH access",
+            "Type": "AWS::EC2::KeyPair::KeyName",
+			"Default": "add-your-own-ssh-key"
+        },
+        "TestApplianceInstanceType": {
+            "Description": "Instance type of TestAppliance Appliance VM",
+            "Type": "String",
+            "AllowedValues": [
+                "t3.xlarge",
+                "t3.2xlarge",
+                "t3a.xlarge",
+                "t3a.2xlarge",
+                "m5.xlarge",
+                "m5.2xlarge",
+                "m5.4xlarge",
+                "m5.8xlarge",
+                "m5.12xlarge",
+                "m5.16xlarge",
+                "m5.24xlarge",
+                "m5a.xlarge",
+                "m5a.2xlarge",
+                "m5a.4xlarge",
+                "m5a.8xlarge",
+                "m5a.12xlarge",
+                "m5a.16xlarge",
+                "m5a.24xlarge",
+                "m5n.xlarge",
+                "m5n.2xlarge",
+                "m5n.4xlarge",
+                "m5n.8xlarge",
+                "m5n.12xlarge",
+                "m5n.16xlarge",
+                "m5n.24xlarge",
+                "m6i.xlarge",
+                "m6i.2xlarge",
+                "m6i.4xlarge",
+                "m6i.8xlarge",
+                "m6i.12xlarge",
+                "m6i.16xlarge",
+                "m6i.24xlarge",
+                "m6i.32xlarge",
+                "c4.xlarge",
+                "c4.2xlarge",
+                "c4.4xlarge",
+                "c4.8xlarge",
+                "c5.xlarge",
+                "c5.2xlarge",
+                "c5.4xlarge",
+                "c5.9xlarge",
+                "c5.12xlarge",
+                "c5.18xlarge",
+                "c5.24xlarge",
+                "c5a.xlarge",
+                "c5a.2xlarge",
+                "c5a.4xlarge",
+                "c5a.8xlarge",
+                "c5a.12xlarge",
+                "c5a.16xlarge",
+                "c5a.24xlarge",
+                "c5n.xlarge",
+                "c5n.2xlarge",
+                "c5n.4xlarge",
+                "c5n.9xlarge",
+                "c5n.18xlarge",
+                "c6i.xlarge",
+                "c6i.2xlarge",
+                "c6i.4xlarge",
+                "c6i.8xlarge",
+                "c6i.12xlarge",
+                "c6i.16xlarge",
+                "c6i.24xlarge",
+                "c6i.32xlarge"
+            ],
+            "Default": "c5n.xlarge"
+        },
+        "InboundIPv4CidrBlock": {
+            "AllowedPattern": "(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})/(\\d{1,2})",
+            "ConstraintDescription": "must be a valid IP CIDR range of the form x.x.x.x/x.",
+            "Description": "IP Address /32 or IP CIDR range connecting inbound to Keysight Client",
+            "MaxLength": "18",
+            "MinLength": "9",
+            "Type": "String",
+			"Default": "213.249.122.0/24"
+        }
+    },
+    "Outputs": {
+        "TestAppliance1": {
+            "Description": "KEY_TESTAPPLIANCE1_PRIVATE_IP",
+            "Value": {
+                "Fn::GetAtt": [
+                    "TestAppliance1",
+                    "PrivateIp"
+                ]
+            }
+        },
+        "TestAppliance2": {
+            "Description": "KEY_TESTAPPLIANCE2_PRIVATE_IP",
+            "Value": {
+                "Fn::GetAtt": [
+                    "TestAppliance2",
+                    "PrivateIp"
+                ]
+            }
+        }
+    }
+}

@@ -1,9 +1,5 @@
 ## <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Microsoft_Azure.svg/1024px-Microsoft_Azure.svg.png" alt="Azure Logo" width="150"/> Microsoft Azure
 
-### 🔧 Configurations
-
-This folder contains one IxNetwork VE configuration for your use cases. 
-
 ### 🚀 Deployment
 
 Version **11.00** of IxNetwork Virtual Edition is available on the Microsoft Azure Marketplace here:
@@ -23,7 +19,7 @@ Before you begin, ensure you have the following:
 
 ### 📦 Deployment Manager Templates
 
-Located in `microsoft-azure/Deployment/AzureResourceManager/IxNetwork-FullDeployment` and `microsoft-azure/Deployment/AzureResourceManager/IxNetwork-TestApplianceOnly`, these ARM templates are organized into:
+Located in `microsoft-azure/Deployment/AzureResourceManager/IxNetwork-FullDeployment`, these ARM templates are organized into:
 
   - **Demo Use Case**: Full deployment including networking, security groups, etc.
   - **Add-On Use Case**: Designed to integrate with existing infrastructure
@@ -80,54 +76,4 @@ or in case you'd like to use the **Cloud Test Appliance**:
 
 ```bash
 az deployment group create --name ixnetwork-addon-01 --resource-group ixnetwork-addon-01 --template-file Azure-CTA-1-Arm_Add-On_Use_Case_Template.json  --parameters Azure-CTA-1-Arm_Add-On_Use_Case_Parameters.json
-```
-
-#### 🧪 Example #3: Deploying a Demo Use Case Template with a single Virtual / Cloud Test Appliance
-
-**Resources Created:**
-- 1x Virtual / Cloud Test Appliance
-- A dedicated VPC network
-- Subnet and firewall rules for SSH, RDP and test traffic
-- External IP address (optional)
-
----
-
-### 🚀 Deployment Steps:
-
-1. **Open Cloud Shell** in the Azure Cloud Console.
-2. **Upload the Paramters and Template files**.
-3. **Run the deployment command for Virtual Test Appliance use cases**:
-
-```bash
-az deployment group create --name ixnetwork-demo-02 --resource-group ixnetwork-demo-02 --template-file Azure-VTA-1-Arm_Demo_Use_Case_Template.json --parameters Azure-VTA-1-Arm_Demo_Use_Case_Parameters.json
-```
-
-or in case you'd like to use the **Cloud Test Appliance**: 
-
-```bash
-az deployment group create --name ixnetwork-demo-02 --resource-group ixnetwork-demo-02 --template-file Azure-CTA-1-Arm_Demo_Use_Case_Template.json  --parameters Azure-CTA-1-Arm_Demo_Use_Case_Parameters.json
-```
-
-#### 🧪 Example #4: Deploying a Add On Use Case Template with one Virtual / Cloud Test Appliances
-
-**Resources Created:**
-- 1x Virtual / Cloud Test Appliances
-- Firewall rules for SSH, RDP and test traffic
-- External IP addresses (optional)
----
-
-### 🚀 Deployment Steps:
-
-1. **Open Cloud Shell** in the Azure Cloud Console.
-2. **Upload the Paramters and Template files**.
-3. **Run the deployment command for Virtual Test Appliance use cases**:
-
-```bash
-az deployment group create --name ixnetwork-addon-02 --resource-group ixnetwork-addon-02 --template-file Azure-VTA-1-Arm_Add-On_Use_Case_Template.json  --parameters Azure-VTA-1-Arm_Add-On_Use_Case_Parameters.json
-```
-
-or in case you'd like to use the **Cloud Test Appliance**: 
-
-```bash
-az deployment group create --name ixnetwork-addon-02 --resource-group ixnetwork-addon-02 --template-file Azure-CTA-1-Arm_Add-On_Use_Case_Template.json  --parameters Azure-CTA-1-Arm_Add-On_Use_Case_Parameters.json
 ```

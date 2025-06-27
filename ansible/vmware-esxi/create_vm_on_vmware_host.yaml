@@ -11,9 +11,9 @@
       chassisname: Ansible_VirtualChassis
       vmonename: Ansible_VTA
       vlmname: Ansible_VLM
-      chassis_image: /home/ixia/Ixia_Virtual_Chassis_10.40_ESXi.ova
-      vlm_image: /home/ixia/Ixia_Virtual_Load_Module_IXN_10.40_ESXi.ova
-      vmone_image: /home/ixia/Ixia_Virtual_Test_Appliance_IXN_10.40_ESXi.ova
+      chassis_image: /home/ixia/Ixia_Virtual_Chassis_11.00_ESXi.ova
+      vlm_image: /home/ixia/Ixia_Virtual_Load_Module_IXN_11.00_ESXi.ova
+      vmone_image: /home/ixia/Ixia_Virtual_Test_Appliance_IXN_11.00_ESXi.ova
       mng_network: VM Network
       test_network: VMNetwork_1
   

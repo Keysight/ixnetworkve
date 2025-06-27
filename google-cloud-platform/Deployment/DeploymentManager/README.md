@@ -1,16 +1,8 @@
 ## <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Google_Cloud_logo.svg/1920px-Google_Cloud_logo.svg.png" alt="GCP Logo" width="150"/> Google Cloud Platform (GCP)
 
-### 🔧 Configurations
-
-This folder contains several IxNetwork VE .bpt configurations that can be used on their respective instance sizes. 
-We have 4 different folders: 
-- C2-STANDARD-4
-- C2-STANDARD-8
-- C2-STANDARD-16
-
 ### 🚀 Deployment
 
-Version **11.00** of IxNetwork Virtual Edition is available on the GCP Marketplace here:
+Version **11.00** of IxNetwork is available on the GCP Marketplace here:
 
 - [Keysight IxNetwork Virtual Edition Marketplace](https://console.cloud.google.com/marketplace/product/keysight-public/keysight-ixnetwork-virtual-edition)
 
@@ -32,7 +24,7 @@ Located in `google-cloud-platform/Deployment/DeploymentManager/IxNetwork-FullDep
   - **Demo Use Case**: Full deployment including networking, security groups, etc.
 ---
 
-#### 🧪 Example #1: Deploying a Demo Use Case Template with one IxNetwork VE Client and one  Virtual / Cloud Test Appliance
+#### 🧪 Example #1: Deploying a Demo Use Case Template with one IxNetwork VE Client and one Virtual / Cloud Test Appliance
 
 **Resources Created:**
 - 1x IxNetwork VE Client
@@ -61,13 +53,13 @@ Located in `google-cloud-platform/Deployment/DeploymentManager/IxNetwork-FullDep
 3. **Run the deployment command for Virtual Test Appliance use cases**:
 
 ```bash
-gcloud deployment-manager deployments create 1-VTA-Demo-Use-Case --template 1-VTA-Demo-Use-Case.jinja
+gcloud deployment-manager deployments create GCP-1-VTA-Demo-Use-Case --template GCP-1-VTA-Demo-Use-Case.jinja
 ```
 
 or in case you'd like to use the **Cloud Test Appliance**: 
 
 ```bash
-gcloud deployment-manager deployments create 1-CTA-Demo-Use-Case --template 1-CTA-Demo-Use-Case.jinja
+gcloud deployment-manager deployments create GCP-1-CTA-Demo-Use-Case --template GCP-1-CTA-Demo-Use-Case.jinja
 ```
 
 #### 🧪 Example #2: Deploying a Demo Use Case Template with one IxNetwork VE Client and two Virtual / Cloud Test Appliances
@@ -101,16 +93,16 @@ gcloud deployment-manager deployments create 1-CTA-Demo-Use-Case --template 1-CT
 3. **Run the deployment command for Virtual Test Appliance use cases**:
 
 ```bash
-gcloud deployment-manager deployments create 2-VTA-Demo --template 2-VTA-Demo-Use-Case.jinja
+gcloud deployment-manager deployments create GCP-2-VTA-Demo-Use-Case --template GCP-2-VTA-Demo-Use-Case.jinja
 ```
 
 or in case you'd like to use the **Cloud Test Appliance**: 
 
 ```bash
-gcloud deployment-manager deployments create 2-CTA-Demo-Use-Case --template 2-CTA-Demo-Use-Case.jinja
+gcloud deployment-manager deployments create GCP-2-CTA-Demo-Use-Case --template GCP-2-CTA-Demo-Use-Case.jinja
 ```
 
-#### 🧪 Example #3: Deploying a Demo Use Case Template with a single Virtual / Cloud Test Appliance
+#### 🧪 Example #3: Deploying a Demo Use Case Template with one Virtual / Cloud Test Appliance
 
 **Resources Created:**
 - 1x Virtual / Cloud Test Appliance
@@ -138,16 +130,16 @@ gcloud deployment-manager deployments create 2-CTA-Demo-Use-Case --template 2-CT
 3. **Run the deployment command for Virtual Test Appliance use cases**:
 
 ```bash
-gcloud deployment-manager deployments create 1-VTA-Demo --template 1-VTA-Demo-Use-Case.jinja
+gcloud deployment-manager deployments create GCP-1-VTA-Demo-Use-Case --template GCP-1-VTA-Demo-Use-Case.jinja
 ```
 
 or in case you'd like to use the **Cloud Test Appliance**: 
 
 ```bash
-gcloud deployment-manager deployments create 1-CTA-Demo-Use-Case --template 1-CTA-Demo-Use-Case.jinja
+gcloud deployment-manager deployments create GCP-1-CTA-Demo-Use-Case --template GCP-1-CTA-Demo-Use-Case.jinja
 ```
 
-#### 🧪 Example #4: Deploying a Demo Use Case Template with two Virtual / Cloud Test Appliances
+#### 🧪 Example #4: Deploying a Demo Use Case Template and two Virtual / Cloud Test Appliances
 
 **Resources Created:**
 - 2x Virtual / Cloud Test Appliances
@@ -176,11 +168,11 @@ gcloud deployment-manager deployments create 1-CTA-Demo-Use-Case --template 1-CT
 3. **Run the deployment command for Virtual Test Appliance use cases**:
 
 ```bash
-gcloud deployment-manager deployments create 2-VTA-Demo --template 2-VTA-Demo-Use-Case.jinja
+gcloud deployment-manager deployments create GCP-2-VTA-Demo-Use-Case --template GCP-2-VTA-Demo-Use-Case.jinja
 ```
 
 or in case you'd like to use the **Cloud Test Appliance**: 
 
 ```bash
-gcloud deployment-manager deployments create 2-CTA-Demo-Use-Case --template 2-CTA-Demo-Use-Case.jinja
+gcloud deployment-manager deployments create GCP-2-CTA-Demo-Use-Case --template GCP-2-CTA-Demo-Use-Case.jinja
 ```

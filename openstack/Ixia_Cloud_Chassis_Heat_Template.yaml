@@ -1,0 +1,42 @@
+heat_template_version: 2013-05-23
+
+
+description: >
+  Version: 11.00 
+    This is the HEAT template used for Ixia Cloud Products deployment in OpenStack-based environments. It can be used with IxNetwork VE products with version 8.10 EA or newer.
+    The template will create 1 Cloud Machine  (named "cChassis").
+    The Ixia_Cloud_Chassis_11.00_Heat_Template_Variables.yaml environment file is used for hardcoding the parameters for the resources defined in this Heat Template.
+
+
+parameters:
+
+    Management_Network:
+      type:        string
+      label:       Ixia Management Network - Name
+      description: The name of the MANAGEMENT NETWORK that is already configured in OpenStack
+
+    Cloud_Chassis_Name:
+      type:        string
+      label:       Ixia Cloud Chassis - Instance Name
+      description: The name of the IXIA CLOUD CHASSIS to be created
+
+    Cloud_Chassis_Image_Name:
+      type:        string
+      label:       Ixia Cloud Chassis - Image Name
+      description: The QCOW2 image to be used for the IXIA CLOUD CHASSIS
+
+    Cloud_Chassis_Flavor:
+      type:        string
+      label:       Ixia Cloud Chassis - Flavor
+      description: The resources required for each IXIA CLOUD CHASSIS are 2 vCPU, 4 GB RAM, 8 GB HDD
+
+resources:
+
+  Cloud_Chassis:
+    type:                OS::Nova::Server
+    properties:
+      name:              {get_param:    Cloud_Chassis_Name}
+      image:             {get_param:    Cloud_Chassis_Image_Name}
+      flavor:            {get_param:    Cloud_Chassis_Flavor}
+      networks:
+        - network:       {get_param:    Management_Network }

@@ -2,11 +2,11 @@ heat_template_version: 2013-05-23
 
 
 description: >
-  Version: 10.40 
+  Version: 11.00 
     This is the HEAT template used for Ixia Virtual Products deployment in OpenStack-based environments. It can be used with IxNetwork VE and IxLoad VE products with version 8.10 EA or newer.
     The template will create 1 Virtual Networks (named "Test Network") and for Management it will be using an existing user given network name.
     The template will create 1 Virtual Machine  (named "vCard-1").
-    The Ixia_Virtual_Load_Module_10.40_Heat_Template_Variables.yaml environment file is used for hardcoding the parameters for the resources defined in this Heat Template.
+    The Ixia_Virtual_Load_Module_11.00_Heat_Template_Variables.yaml environment file is used for hardcoding the parameters for the resources defined in this Heat Template.
 
 
 parameters:
@@ -39,7 +39,7 @@ parameters:
     Virtual_Load_Module_Flavor:
       type:        string
       label:       Ixia Virtual Load Module - Flavor
-      description: The resources required for each IXIA VIRTUAL LOAD MODULE are 4 vCPU, 4 GB RAM, 2 GB HDD
+      description: The resources required for each IXIA VIRTUAL LOAD MODULE are 4 vCPU, 4 GB RAM, 4 GB HDD
 
 
 resources:

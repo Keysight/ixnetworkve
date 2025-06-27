@@ -1,0 +1,7 @@
+parameters:
+
+    Management_Network:                  Ixia Management Network
+
+    Cloud_Chassis_Name:                vChassis
+    Cloud_Chassis_Image_Name:          Ixia Cloud Chassis 11.00 
+    Cloud_Chassis_Flavor:              m1.custom.Cloud.chassis

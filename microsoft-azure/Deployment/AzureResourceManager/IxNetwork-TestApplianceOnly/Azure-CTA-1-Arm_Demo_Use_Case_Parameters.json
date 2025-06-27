@@ -1,0 +1,27 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "ManagementSecurityRuleSourceIPPrefix": {
+      "value": "213.249.122.234/32"
+    },
+    "VirtualTestApplianceVmSize": {
+      "value": "Standard_F4s_v2"
+    },
+    "OptionalVMPrefix": {
+      "value": "VE"
+    },
+    "UserEmailTag": {
+      "value": "Optional-Email-Tag"
+    },
+    "UserProjectTag": {
+      "value": "Optional-Project-Tag"
+    },
+    "AdminUsername": {
+      "value": "ixia"
+    },
+    "AdminPassword": {
+      "value": "strongPassword1234*"
+    }
+  }
+}
