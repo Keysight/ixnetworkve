@@ -3,5 +3,4 @@
 *.lock.hcl
 terraform.auto.tfvars
 .sshkey.pem
-backend.tf
 Makefile
