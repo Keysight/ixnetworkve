@@ -8,16 +8,20 @@ locals {
 	AppAdminUserName = var.AppAdminUserName
 	AppTag = "ixnetwork"
 	AppVmSize = var.AppVmSize
+	ClientId = var.ClientId
+	ClientSecret = var.ClientSecret
 	Preamble = "${local.UserLoginTag}-${local.UserProjectTag}-${local.AppTag}"
 	PrivateSubnetName = var.PrivateSubnetName
 	PublicRdpSecurityRuleName = "${local.Preamble}-rdp-rule"
 	PublicSubnetName = var.PublicSubnetName
 	ResourceGroupLocation = var.ResourceGroupLocation
 	ResourceGroupName = var.ResourceGroupName
+	ResourceProviderRegistrations = var.ResourceProviderRegistrations
 	SshKeyAlgorithm = "RSA"
 	SshKeyName = "${local.Preamble}-ssh-key"
 	SshKeyRsaBits = "4096"
 	SubscriptionId = var.SubscriptionId
+	TenantId = var.TenantId
 	UserEmailTag = var.UserEmailTag == null ? data.azurerm_client_config.current.client_id : var.UserEmailTag
 	UserLoginTag = var.UserLoginTag == null ? "terraform" : var.UserLoginTag
 	UserProjectTag = var.UserProjectTag == null ? random_id.RandomId.id : var.UserProjectTag
