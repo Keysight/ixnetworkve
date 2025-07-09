@@ -5,5 +5,5 @@ data "azurerm_subscription" "current" {}
 data "azurerm_subscriptions" "available" {}
 
 data "http" "ip" {
-	url = "https://ifconfig.me"
+	url = "https://ifconfig.me/ip"
 }

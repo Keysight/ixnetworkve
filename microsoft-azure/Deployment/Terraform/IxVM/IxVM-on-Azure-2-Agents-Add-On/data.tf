@@ -26,5 +26,5 @@ data "azurerm_resource_group" "ResourceGroup" {
 }
 
 data "http" "ip" {
-	url = "https://ifconfig.me"
+	url = "https://ifconfig.me/ip"
 }

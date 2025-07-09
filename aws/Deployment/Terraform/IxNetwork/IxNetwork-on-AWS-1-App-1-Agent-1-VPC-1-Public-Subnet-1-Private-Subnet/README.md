@@ -5,15 +5,16 @@ This deployment creates a topology with a single virtual private cloud having a 
 
 ## Optional Variables
 ```
+terraform.aws.auto.tfvars
 terraform.optional.auto.tfvars
 ```
-You **MAY** uncomment one or more lines as needed in this file and replace values to match your particular environment.
+You **MAY** uncomment one or more lines as needed in these files and replace values to match your particular environment.
 
 ## Required Usage
 ```
 terraform init
 terraform apply -auto-approve
-terraform output SshKey | tail -n +3 | head -n-3 | sed "s/^[ \t]*//" > SshKey.pem
+terraform output SshKey | tail -n +3 | head -n-3 | sed "s/^[ \t]*//" > .sshKey.pem
 terraform destroy -auto-approve
 ```
 You **MUST** output the SSH key pair associated with the AWS instances.  
