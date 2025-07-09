@@ -2765,7 +2765,7 @@
         "IxClientAmiAlias": {
             "Description": "Ami Alias of Keysight Client VM",
             "Type": "String",
-            "Default": "/aws/service/marketplace/prod-v4qpodk5prgfg/11.00"
+            "Default": "/aws/service/marketplace/prod-v4qpodk5prgfg/11.00-security-update-1"
         },
         "VpcCidrBlock": {
             "AllowedPattern": "(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})/(\\d{1,2})",
