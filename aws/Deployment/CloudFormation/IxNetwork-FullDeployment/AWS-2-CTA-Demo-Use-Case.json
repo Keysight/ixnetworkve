@@ -2938,7 +2938,7 @@
         "IxClientAmiAlias": {
             "Description": "Ami Alias of Keysight Client VM",
             "Type": "String",
-            "Default": "/aws/service/marketplace/prod-v4qpodk5prgfg/11.00"
+            "Default": "/aws/service/marketplace/prod-v4qpodk5prgfg/11.00-security-update-1"
         },
         "IxClientInstanceType": {
             "Description": "Instance type of Keysight Client VM",
