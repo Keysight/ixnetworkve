@@ -1,5 +1,5 @@
 module "App" {
-	source = "git::https://github.com/armdupre/terraform-azurerm-module-ixnetwork-app.git?ref=10.40.0"
+	source = "git::https://github.com/armdupre/terraform-azurerm-module-ixnetwork-app.git?ref=11.0.0"
 	AdminPassword = local.AppAdminPassword
 	AdminUserName = local.AppAdminUserName
 	Eth0SubnetId = data.azurerm_subnet.PublicSubnet.id
@@ -12,7 +12,7 @@ module "App" {
 }
 
 module "Agent1" {
-	source = "git::https://github.com/armdupre/terraform-azurerm-module-ixnetwork-agent.git?ref=10.40.0"
+	source = "git::https://github.com/armdupre/terraform-azurerm-module-ixnetwork-agent.git?ref=11.0.0"
 	Eth0SubnetId = data.azurerm_subnet.PublicSubnet.id
 	Eth1SubnetId = data.azurerm_subnet.PrivateSubnet.id
 	InstanceId = local.Agent1InstanceId
@@ -29,7 +29,7 @@ module "Agent1" {
 }
 
 module "Agent2" {
-	source = "git::https://github.com/armdupre/terraform-azurerm-module-ixnetwork-agent.git?ref=10.40.0"
+	source = "git::https://github.com/armdupre/terraform-azurerm-module-ixnetwork-agent.git?ref=11.0.0"
 	Eth0IpAddress = local.Agent2Eth0IpAddress
 	Eth0SubnetId = data.azurerm_subnet.PublicSubnet.id
 	Eth1IpAddresses = local.Agent2Eth1IpAddresses

@@ -5,9 +5,10 @@ This deployment creates a topology with a single virtual network having a single
 
 ## Optional Variables
 ```
+terraform.azure.auto.tfvars
 terraform.optional.auto.tfvars
 ```
-You **MAY** uncomment one or more lines as needed in this file and replace values to match your particular environment.
+You **MAY** uncomment one or more lines as needed in these files and replace values to match your particular environment.
 
 ## Required Usage
 ```
