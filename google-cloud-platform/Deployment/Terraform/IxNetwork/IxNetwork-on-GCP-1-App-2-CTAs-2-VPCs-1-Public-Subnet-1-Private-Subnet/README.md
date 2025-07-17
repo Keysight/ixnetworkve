@@ -1,4 +1,4 @@
-# IxNetwork-on-GCP-1-App-2-Cloud-Agents-2-VPCs-1-Public-Subnet-1-Private-Subnet
+# IxNetwork-on-GCP-1-App-2-CTAs-2-VPCs-1-Public-Subnet-1-Private-Subnet
 
 ## Description
 This deployment creates a topology with two virtual private clouds, one having a single public facing subnet and the other having a single private subnet.
@@ -12,9 +12,10 @@ Otherwise, Terraform will prompt the user to supply input arguents via cli.
 
 ## Optional Variables
 ```
+terraform.gcp.auto.tfvars
 terraform.optional.auto.tfvars
 ```
-You **MAY** uncomment one or more lines as needed in this file and replace values to match your particular environment.
+You **MAY** uncomment one or more lines as needed in these files and replace values to match your particular environment.
 
 ## Required Usage
 ```
