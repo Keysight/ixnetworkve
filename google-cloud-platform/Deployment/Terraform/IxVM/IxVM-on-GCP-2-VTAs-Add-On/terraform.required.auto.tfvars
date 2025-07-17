@@ -1,4 +1,3 @@
-# Credentials = "~/gcp/credentials.json"
 # PrivateSubnetName = "terraform-example-test-01-subnet"
 # PrivateVpcNetworkName = "terraform-example-test-01-vpc-network"
 # ProjectId = "example"
