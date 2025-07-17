@@ -12,12 +12,6 @@ AgentMachineType must be one of the following types:
 	}
 }
 
-variable "Credentials" {
-	description = "Path to (or contents of) a service account key file in JSON format"
-	sensitive = true
-	type = string
-}
-
 variable "ProjectId" {
 	description = "Globally unique identifier for working project"
 	type = string

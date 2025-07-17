@@ -8,12 +8,6 @@ variable "AgentMachineType" {
 	}
 }
 
-variable "Credentials" {
-	description = "Path to (or contents of) a service account key file in JSON format"
-	sensitive = true
-	type = string
-}
-
 variable "PrivateSubnetName" {
 	description = "Name tag associated with the private subnet"
 	type = string
