@@ -1,0 +1,68 @@
+variable "AppMachineType" {
+	default = "c4-standard-8"
+	description = "Designation for set of resources available to App VM"
+	type = string
+	validation {
+		condition = contains([	"c4-standard-8"
+							], var.AppMachineType)
+		error_message = <<EOF
+AppMachineType must be one of the following types:
+	c4-standard-8
+		EOF
+	}
+}
+
+variable "Credentials" {
+	description = "Path to (or contents of) a service account key file in JSON format"
+	sensitive = true
+	type = string
+}
+
+variable "ProjectId" {
+	description = "Globally unique identifier for working project"
+	type = string
+}
+
+variable "PublicFirewallRuleSourceIpRanges" {
+	default = null
+	description = "List of IP Addresses /32 or IP CIDR ranges connecting inbound to App"
+	type = list(string)
+}
+
+variable "RegionName" {
+	default = "us-central1"
+	description = "Geographical location where resources can be hosted" 
+	type = string
+}
+
+variable "UserEmailTag" {
+	default = null
+	description = "Email address tag of user creating the deployment"
+	type = string
+	validation {
+		condition = var.UserEmailTag == null ? true : length(var.UserEmailTag) >= 14
+		error_message = "UserEmailTag minimum length must be >= 14."
+	}
+}
+
+variable "UserLoginTag" {
+	default = null
+	description = "Login ID tag of user creating the deployment"
+	type = string
+	validation {
+		condition = var.UserLoginTag == null ? true : length(var.UserLoginTag) >= 4
+		error_message = "UserLoginTag minimum length must be >= 4."
+	}
+}
+
+variable "UserProjectTag" {
+	default = null
+	description = "Project tag of user creating the deployment"
+	type = string
+}
+
+variable "ZoneName" {
+	default = "us-central1-a"
+	description = "Deployment area within a region"
+	type = string
+}
