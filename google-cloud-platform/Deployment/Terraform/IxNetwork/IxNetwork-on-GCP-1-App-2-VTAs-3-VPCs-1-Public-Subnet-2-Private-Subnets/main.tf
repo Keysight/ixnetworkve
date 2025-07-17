@@ -1,5 +1,5 @@
 module "App" {
-	source = "git::https://github.com/armdupre/terraform-google-module-ixnetwork-app.git?ref=11.0.0"
+	source = "git::https://github.com/armdupre/terraform-google-module-ixnetwork-app.git?ref=11.0.1"
 	Eth0SubnetName = module.Vpc.PublicSubnet.name
 	Eth0VpcNetworkName = module.Vpc.PublicVpcNetwork.name
 	MachineType = local.AppMachineType

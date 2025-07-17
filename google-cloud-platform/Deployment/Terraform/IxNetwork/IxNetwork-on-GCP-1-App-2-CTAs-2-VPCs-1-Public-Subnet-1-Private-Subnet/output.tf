@@ -6,6 +6,12 @@ output "AgentImage" {
 	}
 }
 
+output "AgentInstance" {
+	value = {	
+		"machine_type" : module.Agent1.Instance.machine_type
+	}
+}
+
 output "Agent1Eth0PublicIpAddress" {
 	value = {
 		"address" : module.Agent1.Eth0PublicIpAddress.address
