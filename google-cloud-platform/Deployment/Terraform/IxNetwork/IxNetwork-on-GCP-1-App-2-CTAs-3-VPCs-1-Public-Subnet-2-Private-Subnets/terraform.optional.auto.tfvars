@@ -1,4 +1,4 @@
-# AgentMachineType = "c2-standard-8"
+# AgentMachineType = "c4-standard-8"
 # AppMachineType = "n1-standard-4"
 # PublicFirewallRuleSourceIpRanges = [ "1.1.1.1/32" ]
 # RegionName = "us-central1"

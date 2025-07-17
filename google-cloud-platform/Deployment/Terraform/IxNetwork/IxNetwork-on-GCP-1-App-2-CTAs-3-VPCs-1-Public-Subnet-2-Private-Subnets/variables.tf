@@ -6,7 +6,7 @@ variable "AgentMachineType" {
 		condition = contains([	"c4-standard-4",	"c4-standard-8"
 							], var.AgentMachineType)
 		error_message = <<EOF
-MachineType must be one of the following sizes:
+AgentMachineType must be one of the following types:
 	c4-standard-4, c4-standard-8
 		EOF
 	}
