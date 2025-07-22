@@ -3,12 +3,34 @@ variable "AgentMachineType" {
 	description = "Designation for set of resources available to Agent VM"
 	type = string
 	validation {
-		condition = contains([	"c4-standard-4",	"c4-standard-8"
-							], var.AgentMachineType)
+		condition = contains([ "c4-standard-4", "c4-standard-8", "c4-standard-48", "c4-standard-96", "c4-standard-192" ], var.AgentMachineType)
 		error_message = <<EOF
 AgentMachineType must be one of the following types:
-	c4-standard-4, c4-standard-8
+	c4-standard-4, c4-standard-8, c4-standard-48, c4-standard-96, c4-standard-192
 		EOF
+	}
+}
+
+variable "AgentTotalEgressBandwidthTier" {
+	default = "DEFAULT"
+	description = "Level of egress bandwidth tier associated with Agent VM"
+	type = string
+	validation {
+		condition = contains([ "DEFAULT", "TIER_1" ], var.AgentTotalEgressBandwidthTier)
+		error_message = <<EOF
+AgentTotalEgressBandwidthTier must be one of the following values:
+	DEFAULT, TIER_1
+		EOF
+	}
+}
+
+variable "PrivateVpcNetworkMtu" {
+	default = 1500
+	description = "Maxium Transmission Unit associated with the first private vpc network"
+	type = number
+	validation {
+		condition = contains([1500, 8896], var.PrivateVpcNetworkMtu)
+		error_message = "PrivateVpcNetworkMtu must be one of (1500 | 8896) values."
 	}
 }
 

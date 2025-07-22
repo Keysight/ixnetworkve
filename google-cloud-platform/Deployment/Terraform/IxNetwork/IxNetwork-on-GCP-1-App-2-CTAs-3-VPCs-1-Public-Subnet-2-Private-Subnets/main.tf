@@ -15,7 +15,7 @@ module "App" {
 }
 
 module "Agent1" {
-	source = "git::https://github.com/armdupre/terraform-google-module-ixnetwork-cloud-agent.git?ref=11.0.0"
+	source = "git::https://github.com/armdupre/terraform-google-module-ixnetwork-cloud-agent.git?ref=11.0.1"
 	Eth0SubnetName = module.Vpc.PublicSubnet.name
 	Eth0VpcNetworkName = module.Vpc.PublicVpcNetwork.name
 	Eth1SubnetName = module.Vpc.Private1Subnet.name
@@ -23,6 +23,7 @@ module "Agent1" {
 	InstanceId = local.Agent1InstanceId
 	MachineType = local.AgentMachineType
 	RegionName = data.google_client_config.current.region
+	TotalEgressBandwidthTier = local.AgentTotalEgressBandwidthTier
 	UserEmailTag = local.UserEmailTag
 	UserLoginTag = local.UserLoginTag
 	UserProjectTag = local.UserProjectTag
@@ -34,7 +35,7 @@ module "Agent1" {
 }
 
 module "Agent2" {
-	source = "git::https://github.com/armdupre/terraform-google-module-ixnetwork-cloud-agent.git?ref=11.0.0"
+	source = "git::https://github.com/armdupre/terraform-google-module-ixnetwork-cloud-agent.git?ref=11.0.1"
 	Eth0PrivateIpAddress = local.Agent2Eth0PrivateIpAddress
 	Eth0SubnetName = module.Vpc.PublicSubnet.name
 	Eth0VpcNetworkName = module.Vpc.PublicVpcNetwork.name
@@ -45,6 +46,7 @@ module "Agent2" {
 	InstanceId = local.Agent2InstanceId
 	MachineType = local.AgentMachineType
 	RegionName = data.google_client_config.current.region
+	TotalEgressBandwidthTier = local.AgentTotalEgressBandwidthTier
 	UserEmailTag = local.UserEmailTag
 	UserLoginTag = local.UserLoginTag
 	UserProjectTag = local.UserProjectTag
