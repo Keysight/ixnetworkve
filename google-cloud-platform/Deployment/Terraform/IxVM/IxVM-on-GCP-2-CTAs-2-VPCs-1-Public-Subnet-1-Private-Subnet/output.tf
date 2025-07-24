@@ -17,6 +17,7 @@ output "Agent1Instance" {
 	value = {	
 		"machine_type" : module.Agent1.Instance.machine_type
 		"name" : module.Agent1.Instance.name
+		"total_egress_bandwidth_tier" : module.Agent1.Instance.total_egress_bandwidth_tier
 	}
 }
 
@@ -31,6 +32,7 @@ output "Agent2Instance" {
 	value = {	
 		"machine_type" : module.Agent2.Instance.machine_type
 		"name" : module.Agent2.Instance.name
+		"total_egress_bandwidth_tier" : module.Agent2.Instance.total_egress_bandwidth_tier
 	}
 }
 
