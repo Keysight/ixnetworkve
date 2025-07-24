@@ -8,6 +8,7 @@ module "App" {
 	Eth2VpcNetworkName = module.Vpc.Private2VpcNetwork.name
 	MachineType = local.AppMachineType
 	RegionName = data.google_client_config.current.region
+	TotalEgressBandwidthTier = local.AppTotalEgressBandwidthTier
 	UserEmailTag = local.UserEmailTag
 	UserLoginTag = local.UserLoginTag
 	UserProjectTag = local.UserProjectTag

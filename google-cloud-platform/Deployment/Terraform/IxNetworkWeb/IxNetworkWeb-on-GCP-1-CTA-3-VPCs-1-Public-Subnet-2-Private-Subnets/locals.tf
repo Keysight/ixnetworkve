@@ -1,8 +1,11 @@
 locals {
 	AppMachineType = var.AppMachineType
+	AppTotalEgressBandwidthTier = var.AppTotalEgressBandwidthTier
 	AppTag = "ixnetwork"
 	Preamble = replace("${local.UserLoginTag}-${local.UserProjectTag}-${local.AppTag}", "_", "-")
+	Private1VpcNetworkMtu = var.Private1VpcNetworkMtu
 	Private1VpcNetworkPeerName = "${local.Preamble}-test1-vpc-peer"
+	Private2VpcNetworkMtu = var.Private2VpcNetworkMtu
 	Private2VpcNetworkPeerName = "${local.Preamble}-test2-vpc-peer"
 	PublicFirewallRuleSourceIpRanges = var.PublicFirewallRuleSourceIpRanges == null ? [ "${data.http.ip.response_body}/32" ] : var.PublicFirewallRuleSourceIpRanges
 	UserEmailTag = var.UserEmailTag == null ? "terraform@example.com" : var.UserEmailTag

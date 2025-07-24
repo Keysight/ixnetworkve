@@ -1,4 +1,7 @@
 # AppMachineType = "c4-standard-8"
+# AppTotalEgressBandwidthTier = "DEFAULT"
+# Private1VpcNetworkMtu = 1500
+# Private2VpcNetworkMtu = 1500
 # PublicFirewallRuleSourceIpRanges = [ "1.1.1.1/32" ]
 # RegionName = "us-central1"
 # UserEmailTag = "terraform@example.com"
