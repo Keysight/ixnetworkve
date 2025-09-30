@@ -1,4 +1,4 @@
-# IxNetworkWeb-on-AWS-1-App-2-Agents-Add-On
+# IxNetworkWeb-on-AWS-1-App-2-VTAs-Add-On
 
 ## Description
 This deployment creates resources that will be attached to an existing network topology.
