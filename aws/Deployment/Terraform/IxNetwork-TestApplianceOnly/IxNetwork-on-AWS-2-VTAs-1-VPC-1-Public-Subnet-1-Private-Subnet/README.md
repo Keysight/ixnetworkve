@@ -1,4 +1,4 @@
-# IxVM-on-AWS-2-Agents-1-VPC-1-Public-Subnet-1-Private-Subnet
+# IxNetwork-on-AWS-2-VTAs-1-VPC-1-Public-Subnet-1-Private-Subnet
 
 ## Description
 This deployment creates a topology with a single virtual private cloud having a single public facing subnet and a single private subnet.
