@@ -1,4 +1,4 @@
-# IxNetworkWeb-on-Azure-1-App-2-Cloud-Agents-1-Vnet-1-Public-Subnet-1-Private-Subnet
+# IxNetworkWeb-on-Azure-1-App-2-CTAs-1-Vnet-1-Public-Subnet-1-Private-Subnet
 
 ## Description
 This deployment creates a topology with a single virtual network having a single public facing subnet and a single private subnet.
