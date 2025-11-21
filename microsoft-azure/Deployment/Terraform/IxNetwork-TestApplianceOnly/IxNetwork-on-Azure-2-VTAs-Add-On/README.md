@@ -1,4 +1,4 @@
-# IxVM-on-Azure-2-VTAs-Add-On
+# IxNetwork-on-Azure-2-VTAs-Add-On
 
 ## Description
 This deployment creates resources that will be attached to an existing network topology.
