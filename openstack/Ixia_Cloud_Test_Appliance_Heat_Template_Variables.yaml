@@ -8,5 +8,5 @@ parameters:
     Test_Sub_Network2:                    192.168.3.0/24
 
     Cloud_Test_Appliance_Name:            Cloud Test Appliance
-    Cloud_Test_Appliance_Image_Name:      Ixia Cloud Test Appliance 11.00 
+    Cloud_Test_Appliance_Image_Name:      Ixia Cloud Test Appliance 26.0.0 
     Cloud_Test_Appliance_Flavor:          m1.custom.cloud.test.appliance

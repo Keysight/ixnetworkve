@@ -24,7 +24,7 @@ This section includes `.bpt` configuration files tailored for specific AWS insta
 
 ### 🚀 Deployment
 
-Version **11.00** of IxNetwork is available on the AWS Marketplace split into 3 different products:
+Version **26.0.0** of IxNetwork is available on the AWS Marketplace split into 3 different products:
 
 - [Keysight IxNetwork Virtual Edition Client](https://aws.amazon.com/marketplace/pp/prodview-53hekf632ilpk?sr=0-8&ref_=beagle&applicationId=AWSMPContessa)
 - [Keysight IxNetwork Virtual Test Appliance](https://aws.amazon.com/marketplace/pp/prodview-zuwqwpqngaa5q?sr=0-6&ref_=beagle&applicationId=AWSMPContessa)
@@ -164,7 +164,7 @@ This folder contains one IxNetwork VE configuration for your use cases.
 
 ### 🚀 Deployment
 
-Version **11.00** of IxNetwork Virtual Edition is available on the Microsoft Azure Marketplace here:
+Version **26.0.0** of IxNetwork Virtual Edition is available on the Microsoft Azure Marketplace here:
 
 - [Keysight IxNetwork Virtual Edition Marketplace](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/keysight-technologies-ixvm.keysight-ixnetwork-virtual-edition?tab=Overview)
 
@@ -302,7 +302,7 @@ We have 4 different folders:
 
 ### 🚀 Deployment
 
-Version **11.00** of IxNetwork Virtual Edition is available on the GCP Marketplace here:
+Version **26.0.0** of IxNetwork Virtual Edition is available on the GCP Marketplace here:
 
 - [Keysight IxNetwork Virtual Edition Marketplace](https://console.cloud.google.com/marketplace/product/keysight-public/keysight-ixnetwork-virtual-edition)
 

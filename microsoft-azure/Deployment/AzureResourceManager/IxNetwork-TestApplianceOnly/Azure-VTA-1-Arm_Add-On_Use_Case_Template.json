@@ -437,7 +437,7 @@
             "apiVersion": "[variables('apiVersion')]",
             "location": "[resourceGroup().location]",
 			"plan": {
-				"name": "keysight-ixnetwork-virtual-test-appliance-11-00",
+				"name": "keysight-ixnetwork-virtual-test-appliance-26-0-0",
 				"product": "keysight-ixnetwork-virtual-edition",
 				"publisher": "keysight-technologies-ixvm"
 			},
@@ -456,8 +456,8 @@
 					"imageReference": {
 						"publisher": "keysight-technologies-ixvm",
 						"offer": "keysight-ixnetwork-virtual-edition",
-						"sku": "keysight-ixnetwork-virtual-test-appliance-11-00",
-						"version": "11.00.634"
+						"sku": "keysight-ixnetwork-virtual-test-appliance-26-0-0",
+						"version": "26.0.317"
 					},
                     "osDisk": {
                         "osType": "Linux",

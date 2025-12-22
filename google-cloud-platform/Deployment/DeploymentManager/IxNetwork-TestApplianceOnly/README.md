@@ -2,7 +2,7 @@
 
 ### 🚀 Deployment
 
-Version **11.00** of IxNetwork is available on the GCP Marketplace here:
+Version **26.0.0** of IxNetwork is available on the GCP Marketplace here:
 
 - [Keysight IxNetwork Virtual Edition Marketplace](https://console.cloud.google.com/marketplace/product/keysight-public/keysight-ixnetwork-virtual-edition)
 

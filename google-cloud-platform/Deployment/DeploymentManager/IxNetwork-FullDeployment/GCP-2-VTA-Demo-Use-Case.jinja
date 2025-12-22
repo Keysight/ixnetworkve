@@ -204,7 +204,7 @@ resources:
       boot: true
       type: PERSISTENT      
       initializeParams:
-        sourceImage: projects/mpi-keysight-public/global/images/ixnetwork-cloud-gcp-11-00-2504-10
+        sourceImage: projects/mpi-keysight-public/global/images/keysight-ixnetwork-cloud-gcp-26-0-2601-6
     networkInterfaces:
     - name: nic0
       network: $(ref.{{ properties["GCP_PROJECT_TAG"] }}-{{ properties["GCP_MGMT_VPC_NETWORK_NAME"] }}.selfLink)
@@ -254,7 +254,7 @@ resources:
       boot: true
       type: PERSISTENT
       initializeParams:
-        sourceImage: projects/mpi-keysight-public/global/images/ixia-virtual-test-appliance-11-00-0-634
+        sourceImage: projects/mpi-keysight-public/global/images/keysight-virtual-test-appliance-26-0-0-317
     displayDevice:
         enableDisplay: true
     networkInterfaces:
@@ -318,7 +318,7 @@ resources:
       boot: true
       type: PERSISTENT
       initializeParams:
-        sourceImage: projects/mpi-keysight-public/global/images/ixia-virtual-test-appliance-11-00-0-634
+        sourceImage: projects/mpi-keysight-public/global/images/keysight-virtual-test-appliance-26-0-0-317
     displayDevice:
         enableDisplay: true
     networkInterfaces:
