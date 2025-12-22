@@ -33,22 +33,22 @@
 		"IxNetworkClientPassword": {
 			"type": "securestring"
 		},
-		"VirtualTestApplianceAdminUsername": {
+		"CloudTestApplianceAdminUsername": {
 			"minLength": 1,
 			"type": "String"
 		},
-		"VirtualTestApplianceAdminPassword": {
+		"CloudTestApplianceAdminPassword": {
 			"type": "securestring"
 		},
-		"VirtualTestAppliance1Eth0IpAddress": { 
+		"CloudTestAppliance1Eth0IpAddress": { 
 			"defaultValue": "10.0.1.13",
 			"type": "String"
 		},
-		"VirtualTestAppliance1Eth1IpAddresses": {
+		"CloudTestAppliance1Eth1IpAddresses": {
 			"defaultValue": ["10.0.10.32","10.0.10.33","10.0.10.34","10.0.10.35","10.0.10.36","10.0.10.37","10.0.10.38","10.0.10.39","10.0.10.40","10.0.10.41"],
 			"type": "Array"
 		},
-		"VirtualTestApplianceVmSize": {
+		"CloudTestApplianceVmSize": {
 			"defaultValue": "Standard_F4s_v2",
 			"type": "String",
 			"allowedValues": [
@@ -89,25 +89,25 @@
         "MgmtRdpSecurityRuleName": "[concat(variables('OptionalVMPrefix'), '_', 'RDP_RULE')]",
         "ManagementSecurityRuleSourceIPPrefix": "[parameters('ManagementSecurityRuleSourceIPPrefix')]",
         "IxNetworkClientEth0Name": "[concat(variables('OptionalVMPrefix'), '_', 'IXNETWORK_CLIENT_ETH0')]",
-        "VirtualTestAppliance1Eth0Name": "[concat(variables('OptionalVMPrefix'), '_', 'IXNETWORK_VIRTUALTESTAPPLIANCE1_ETH0')]",
-        "VirtualTestAppliance1Eth1Name": "[concat(variables('OptionalVMPrefix'), '_', 'IXNETWORK_VIRTUALTESTAPPLIANCE1_ETH1')]",
-		"VirtualTestAppliance1Eth0IpAddress": "[parameters('VirtualTestAppliance1Eth0IpAddress')]",
-		"VirtualTestAppliance1Eth1IpAddresses": "[parameters('VirtualTestAppliance1Eth1IpAddresses')]",
+        "CloudTestAppliance1Eth0Name": "[concat(variables('OptionalVMPrefix'), '_', 'IXNETWORK_CloudTestAppliance1_ETH0')]",
+        "CloudTestAppliance1Eth1Name": "[concat(variables('OptionalVMPrefix'), '_', 'IXNETWORK_CloudTestAppliance1_ETH1')]",
+		"CloudTestAppliance1Eth0IpAddress": "[parameters('CloudTestAppliance1Eth0IpAddress')]",
+		"CloudTestAppliance1Eth1IpAddresses": "[parameters('CloudTestAppliance1Eth1IpAddresses')]",
         "IxNetworkClientName": "[concat(variables('OptionalVMPrefix'), '-', 'IXNETWORK-WI')]",
 		"IxNetworkClientDnsLabel": "[concat(toLower(variables('OptionalVMPrefix')), '-', 'ixn-client', '-', substring(uniqueString(resourceGroup().id),0,6))]",
         "EnableAcceleratedNetworking": false,
         "IxNetworkClientEnableIPForwarding": false,
 		"BootDiagnosticsEnabled": true,
-        "VirtualTestAppliance1Name": "[concat(variables('OptionalVMPrefix'), '-', 'IXNETWORK-VIRTUALTESTAPPLIANCE1')]",
-		"VirtualTestAppliance1DnsLabel": "[concat(toLower(variables('OptionalVMPrefix')), '-', 'ixn-vta-1', '-', substring(uniqueString(resourceGroup().id),0,6))]",
-        "VirtualTestApplianceEnableIPForwarding": true,
-		"VirtualTestApplianceDisablePasswordAuthentication": false,
-		"VirtualTestApplianceProvisionVMAgent": true,
-        "VirtualTestApplianceVmSize": "[parameters('VirtualTestApplianceVmSize')]",
-		"VirtualTestApplianceDiskSizeGB": "30",
+        "CloudTestAppliance1Name": "[concat(variables('OptionalVMPrefix'), '-', 'IXNETWORK-CloudTestAppliance1')]",
+		"CloudTestAppliance1DnsLabel": "[concat(toLower(variables('OptionalVMPrefix')), '-', 'ixn-vta-1', '-', substring(uniqueString(resourceGroup().id),0,6))]",
+        "CloudTestApplianceEnableIPForwarding": true,
+		"CloudTestApplianceDisablePasswordAuthentication": false,
+		"CloudTestApplianceProvisionVMAgent": true,
+        "CloudTestApplianceVmSize": "[parameters('CloudTestApplianceVmSize')]",
+		"CloudTestApplianceDiskSizeGB": "30",
 		"IxNetworkClientDiskSizeGB": "127",
         "MgmtPublicIpAddressName": "[concat(variables('OptionalVMPrefix'), '_', 'MGMT_PUBLIC_IP')]",
-        "VirtualTestAppliance1Eth0PublicIpAddressName": "[concat(variables('OptionalVMPrefix'), '_', 'IXNETWORK_VIRTUALTESTAPPLIANCE1_ETH0_PUBLIC_IP')]",
+        "CloudTestAppliance1Eth0PublicIpAddressName": "[concat(variables('OptionalVMPrefix'), '_', 'IXNETWORK_CloudTestAppliance1_ETH0_PUBLIC_IP')]",
 		"CreateOption": "FromImage"
 	},
     "resources": [
@@ -280,7 +280,7 @@
                    
         {
             "type": "Microsoft.Network/networkInterfaces",
-            "name": "[variables('VirtualTestAppliance1Eth0Name')]",
+            "name": "[variables('CloudTestAppliance1Eth0Name')]",
             "apiVersion": "[variables('apiVersion')]",
             "location": "[resourceGroup().location]",
             "scale": null,
@@ -295,10 +295,10 @@
                     {
                         "name": "ipconfig1",
                         "properties": {
-                            "privateIPAddress": "[variables('VirtualTestAppliance1Eth0IpAddress')]",
+                            "privateIPAddress": "[variables('CloudTestAppliance1Eth0IpAddress')]",
                             "privateIPAllocationMethod": "Static",
                              "publicIPAddress": {
-                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('VirtualTestAppliance1Eth0PublicIpAddressName'))]"
+                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('CloudTestAppliance1Eth0PublicIpAddressName'))]"
                             }, 
                             "subnet": {
                                 "id": "[variables('MgmtSubnetRef')]"
@@ -313,7 +313,7 @@
                     "appliedDnsServers": []
                 },
                 "enableAcceleratedNetworking": "[variables('EnableAcceleratedNetworking')]",
-                "enableIPForwarding": "[variables('VirtualTestApplianceEnableIPForwarding')]",
+                "enableIPForwarding": "[variables('CloudTestApplianceEnableIPForwarding')]",
                 "networkSecurityGroup": {
                     "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('MgmtNetworkSecurityGroupName'))]"
                 },
@@ -321,13 +321,13 @@
             },
             "dependsOn": [
                 "[resourceId('Microsoft.Network/networkSecurityGroups', variables('MgmtNetworkSecurityGroupName'))]",
-                "[resourceId('Microsoft.Network/publicIPAddresses', variables('VirtualTestAppliance1Eth0PublicIpAddressName'))]"
+                "[resourceId('Microsoft.Network/publicIPAddresses', variables('CloudTestAppliance1Eth0PublicIpAddressName'))]"
             ]
         },      
  
        {
             "type": "Microsoft.Network/networkInterfaces",
-            "name": "[variables('VirtualTestAppliance1Eth1Name')]",
+            "name": "[variables('CloudTestAppliance1Eth1Name')]",
             "apiVersion": "[variables('apiVersion')]",
             "location": "[resourceGroup().location]",
             "scale": null,
@@ -342,7 +342,7 @@
                     {
                         "name": "ipconfig1",
                         "properties": {
-                            "privateIPAddress": "[variables('VirtualTestAppliance1Eth1IpAddresses')[0]]",
+                            "privateIPAddress": "[variables('CloudTestAppliance1Eth1IpAddresses')[0]]",
                             "privateIPAllocationMethod": "Static",
                             "subnet": {
                                 "id": "[variables('Test1SubnetRef')]"
@@ -354,7 +354,7 @@
                     {
                         "name": "ipconfig2",
                         "properties": {
-                            "privateIPAddress": "[variables('VirtualTestAppliance1Eth1IpAddresses')[1]]",
+                            "privateIPAddress": "[variables('CloudTestAppliance1Eth1IpAddresses')[1]]",
                             "privateIPAllocationMethod": "Static",
                             "subnet": {
                                 "id": "[variables('Test1SubnetRef')]"
@@ -366,7 +366,7 @@
                     {
                         "name": "ipconfig3",
                         "properties": {
-                            "privateIPAddress": "[variables('VirtualTestAppliance1Eth1IpAddresses')[2]]",
+                            "privateIPAddress": "[variables('CloudTestAppliance1Eth1IpAddresses')[2]]",
                             "privateIPAllocationMethod": "Static",
                             "subnet": {
                                 "id": "[variables('Test1SubnetRef')]"
@@ -378,7 +378,7 @@
                     {
                         "name": "ipconfig4",
                         "properties": {
-                            "privateIPAddress": "[variables('VirtualTestAppliance1Eth1IpAddresses')[3]]",
+                            "privateIPAddress": "[variables('CloudTestAppliance1Eth1IpAddresses')[3]]",
                             "privateIPAllocationMethod": "Static",
                             "subnet": {
                                 "id": "[variables('Test1SubnetRef')]"
@@ -390,7 +390,7 @@
                     {
                         "name": "ipconfig5",
                         "properties": {
-                            "privateIPAddress": "[variables('VirtualTestAppliance1Eth1IpAddresses')[4]]",
+                            "privateIPAddress": "[variables('CloudTestAppliance1Eth1IpAddresses')[4]]",
                             "privateIPAllocationMethod": "Static",
                             "subnet": {
                                 "id": "[variables('Test1SubnetRef')]"
@@ -402,7 +402,7 @@
                     {
                         "name": "ipconfig6",
                         "properties": {
-                            "privateIPAddress": "[variables('VirtualTestAppliance1Eth1IpAddresses')[5]]",
+                            "privateIPAddress": "[variables('CloudTestAppliance1Eth1IpAddresses')[5]]",
                             "privateIPAllocationMethod": "Static",
                             "subnet": {
                                 "id": "[variables('Test1SubnetRef')]"
@@ -414,7 +414,7 @@
                     {
                         "name": "ipconfig7",
                         "properties": {
-                            "privateIPAddress": "[variables('VirtualTestAppliance1Eth1IpAddresses')[6]]",
+                            "privateIPAddress": "[variables('CloudTestAppliance1Eth1IpAddresses')[6]]",
                             "privateIPAllocationMethod": "Static",
                             "subnet": {
                                 "id": "[variables('Test1SubnetRef')]"
@@ -426,7 +426,7 @@
                     {
                         "name": "ipconfig8",
                         "properties": {
-                            "privateIPAddress": "[variables('VirtualTestAppliance1Eth1IpAddresses')[7]]",
+                            "privateIPAddress": "[variables('CloudTestAppliance1Eth1IpAddresses')[7]]",
                             "privateIPAllocationMethod": "Static",
                             "subnet": {
                                 "id": "[variables('Test1SubnetRef')]"
@@ -438,7 +438,7 @@
                     {
                         "name": "ipconfig9",
                         "properties": {
-                            "privateIPAddress": "[variables('VirtualTestAppliance1Eth1IpAddresses')[8]]",
+                            "privateIPAddress": "[variables('CloudTestAppliance1Eth1IpAddresses')[8]]",
                             "privateIPAllocationMethod": "Static",
                             "subnet": {
                                 "id": "[variables('Test1SubnetRef')]"
@@ -450,7 +450,7 @@
                     {
                         "name": "ipconfigA",
                         "properties": {
-                            "privateIPAddress": "[variables('VirtualTestAppliance1Eth1IpAddresses')[9]]",
+                            "privateIPAddress": "[variables('CloudTestAppliance1Eth1IpAddresses')[9]]",
                             "privateIPAllocationMethod": "Static",
                             "subnet": {
                                 "id": "[variables('Test1SubnetRef')]"
@@ -465,7 +465,7 @@
                     "appliedDnsServers": []
                 },
                 "enableAcceleratedNetworking": "[variables('EnableAcceleratedNetworking')]",
-                "enableIPForwarding": "[variables('VirtualTestApplianceEnableIPForwarding')]",
+                "enableIPForwarding": "[variables('CloudTestApplianceEnableIPForwarding')]",
                 "networkSecurityGroup": {
                     "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('Test1NetworkSecurityGroupName'))]"
                 },
@@ -502,7 +502,7 @@
 
         {
             "type": "Microsoft.Network/publicIPAddresses",
-            "name": "[variables('VirtualTestAppliance1Eth0PublicIpAddressName')]",
+            "name": "[variables('CloudTestAppliance1Eth0PublicIpAddressName')]",
             "apiVersion": "[variables('apiVersion')]",
             "location": "[resourceGroup().location]",
             "scale": null,
@@ -517,8 +517,8 @@
                 "publicIPAllocationMethod": "Dynamic",
                 "idleTimeoutInMinutes": 4,
                 "dnsSettings": {
-                    "domainNameLabel": "[variables('VirtualTestAppliance1DnsLabel')]",
-                    "fqdn": "[concat(variables('VirtualTestAppliance1DnsLabel'),'.', resourceGroup().location,'.cloudapp.azure.com')]"
+                    "domainNameLabel": "[variables('CloudTestAppliance1DnsLabel')]",
+                    "fqdn": "[concat(variables('CloudTestAppliance1DnsLabel'),'.', resourceGroup().location,'.cloudapp.azure.com')]"
                 }
             },
             "dependsOn": []
@@ -584,7 +584,7 @@
 
         {
             "type": "Microsoft.Compute/virtualMachines",
-            "name": "[variables('VirtualTestAppliance1Name')]",
+            "name": "[variables('CloudTestAppliance1Name')]",
             "apiVersion": "[variables('apiVersion')]",
             "location": "[resourceGroup().location]",
 			"plan": {
@@ -601,7 +601,7 @@
 			},
             "properties": {
                 "hardwareProfile": {
-                    "vmSize": "[variables('VirtualTestApplianceVmSize')]"
+                    "vmSize": "[variables('CloudTestApplianceVmSize')]"
                 },
                 "storageProfile": {
 					"imageReference": {
@@ -612,32 +612,32 @@
 					},
                     "osDisk": {
                         "osType": "Linux",
-                        "name": "[concat('disk_', variables('VirtualTestAppliance1Name'))]",
+                        "name": "[concat('disk_', variables('CloudTestAppliance1Name'))]",
                         "createOption": "[variables('CreateOption')]",
                         "caching": "ReadWrite",
-                        "diskSizeGB": "[variables('VirtualTestApplianceDiskSizeGB')]"
+                        "diskSizeGB": "[variables('CloudTestApplianceDiskSizeGB')]"
                     },
                     "dataDisks": []
                 },
 				"osProfile": {
-					"computerName": "[variables('VirtualTestAppliance1Name')]",
-					"adminUsername": "[parameters('VirtualTestApplianceAdminUsername')]",
-					"adminPassword": "[parameters('VirtualTestApplianceAdminPassword')]",
+					"computerName": "[variables('CloudTestAppliance1Name')]",
+					"adminUsername": "[parameters('CloudTestApplianceAdminUsername')]",
+					"adminPassword": "[parameters('CloudTestApplianceAdminPassword')]",
 					"linuxConfiguration": {
-						"disablePasswordAuthentication": "[variables('VirtualTestApplianceDisablePasswordAuthentication')]",
-						"provisionVMAgent": "[variables('VirtualTestApplianceProvisionVMAgent')]"
+						"disablePasswordAuthentication": "[variables('CloudTestApplianceDisablePasswordAuthentication')]",
+						"provisionVMAgent": "[variables('CloudTestApplianceProvisionVMAgent')]"
 					}
 				},
                 "networkProfile": {
                     "networkInterfaces": [
                         {
-                            "id": "[resourceId('Microsoft.Network/networkInterfaces', variables('VirtualTestAppliance1Eth0Name'))]",
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', variables('CloudTestAppliance1Eth0Name'))]",
                             "properties": {
                                 "primary": true
                             }
                         },
                         {
-                            "id": "[resourceId('Microsoft.Network/networkInterfaces', variables('VirtualTestAppliance1Eth1Name'))]",
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', variables('CloudTestAppliance1Eth1Name'))]",
                             "properties": {
                                 "primary": false
                             }
@@ -646,8 +646,8 @@
                 }
             },
             "dependsOn": [
-                "[resourceId('Microsoft.Network/networkInterfaces', variables('VirtualTestAppliance1Eth0Name'))]",
-                "[resourceId('Microsoft.Network/networkInterfaces', variables('VirtualTestAppliance1Eth1Name'))]"
+                "[resourceId('Microsoft.Network/networkInterfaces', variables('CloudTestAppliance1Eth0Name'))]",
+                "[resourceId('Microsoft.Network/networkInterfaces', variables('CloudTestAppliance1Eth1Name'))]"
             ]
         }
     ]

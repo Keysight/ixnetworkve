@@ -185,7 +185,7 @@ resources:
       options: {{ properties["GCP_OPTIONS_TAG"].lower() }}
 #
 #
-- name: {{ properties["GCP_PROJECT_TAG"] }}-{{ properties["GCP_VTA1_IFACE_ETH0_PUBLIC_IP_ADDRESS_NAME"] }}
+- name: {{ properties["GCP_PROJECT_TAG"] }}-{{ properties["GCP_CTA1_IFACE_ETH0_PUBLIC_IP_ADDRESS_NAME"] }}
   type: compute.v1.address
   properties:
     region: {{ properties["GCP_REGION_NAME"] }}
@@ -197,11 +197,11 @@ resources:
       options: {{ properties["GCP_OPTIONS_TAG"].lower() }}
 #
 #
-- name: {{ properties["GCP_PROJECT_TAG"] }}-{{ properties["GCP_VTA1_INSTANCE_NAME"] }}
+- name: {{ properties["GCP_PROJECT_TAG"] }}-{{ properties["GCP_CTA1_INSTANCE_NAME"] }}
   type: compute.v1.instance
   properties:
     zone: {{ properties["GCP_ZONE_NAME"] }}
-    machineType: zones/{{ properties["GCP_ZONE_NAME"] }}/machineTypes/{{ properties["GCP_VTA_MACHINE_TYPE"] }}
+    machineType: zones/{{ properties["GCP_ZONE_NAME"] }}/machineTypes/{{ properties["GCP_CTA_MACHINE_TYPE"] }}
     disks:
     - deviceName: persistent-disk-0
       autoDelete: true
@@ -214,23 +214,23 @@ resources:
     networkInterfaces:
     - name: nic0
       network: $(ref.{{ properties["GCP_PROJECT_TAG"] }}-{{ properties["GCP_MGMT_VPC_NETWORK_NAME"] }}.selfLink)
-      networkIP: {{ properties["GCP_VTA1_IFACE_ETH0_PRIVATE_IP_ADDRESS"] }}
+      networkIP: {{ properties["GCP_CTA1_IFACE_ETH0_PRIVATE_IP_ADDRESS"] }}
       subnetwork: $(ref.{{ properties["GCP_PROJECT_TAG"] }}-{{ properties["GCP_MGMT_SUBNET_NAME"] }}.selfLink)
       accessConfigs:
       - name: external-nat
-        natIP: $(ref.{{ properties["GCP_PROJECT_TAG"] }}-{{ properties["GCP_VTA1_IFACE_ETH0_PUBLIC_IP_ADDRESS_NAME"] }}.address)
+        natIP: $(ref.{{ properties["GCP_PROJECT_TAG"] }}-{{ properties["GCP_CTA1_IFACE_ETH0_PUBLIC_IP_ADDRESS_NAME"] }}.address)
         networkTier: PREMIUM
         type: ONE_TO_ONE_NAT
     - name: nic1
       network: $(ref.{{ properties["GCP_PROJECT_TAG"] }}-{{ properties["GCP_TEST1_VPC_NETWORK_NAME"] }}.selfLink)
-      networkIP: {{ properties["GCP_VTA1_IFACE_ETH1_PRIVATE_IP_ADDRESS"] }}
+      networkIP: {{ properties["GCP_CTA1_IFACE_ETH1_PRIVATE_IP_ADDRESS"] }}
       subnetwork: $(ref.{{ properties["GCP_PROJECT_TAG"] }}-{{ properties["GCP_TEST1_SUBNET_NAME"] }}.selfLink)
       accessConfigs:
       - name: external-nat
         networkTier: PREMIUM
         type: ONE_TO_ONE_NAT
       aliasIpRanges:
-      - ipCidrRange: {{ properties["GCP_VTA1_IFACE_ETH1_PRIVATE_IP_ALIASES"] }}
+      - ipCidrRange: {{ properties["GCP_CTA1_IFACE_ETH1_PRIVATE_IP_ALIASES"] }}
     metadata:
       items:
       - key: Owner
@@ -240,9 +240,9 @@ resources:
       - key: Options
         value: {{ properties["GCP_OPTIONS_TAG"] }}
       - key: serial-port-enable
-        value: {{ properties["GCP_VTA_SERIAL_PORT_ENABLE"] }}
+        value: {{ properties["GCP_CTA_SERIAL_PORT_ENABLE"] }}
     tags:
-      items: {{ properties["GCP_VTA_NETWORK_TARGET_TAGS"] }}
+      items: {{ properties["GCP_CTA_NETWORK_TARGET_TAGS"] }}
     labels:
       owner: {{ properties["GCP_OWNER_TAG"].replace('.', '-').replace('@', '-') }}
       project: {{ properties["GCP_PROJECT_TAG"].lower() }}

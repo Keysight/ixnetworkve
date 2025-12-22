@@ -62,7 +62,7 @@ properties:
     type: array
     default:
     - ixnetwork-client
-    - ixnetwork-vta
+    - ixnetwork-cta
 
   GCP_MGMT_FIREWALL_RULE_SOURCE_IP_RANGES:
     type: array
@@ -90,7 +90,7 @@ properties:
     type: array
     default:
     - ixnetwork-client
-    - ixnetwork-vta
+    - ixnetwork-cta
 
   GCP_CONSOLE_FIREWALL_RULE_SOURCE_IP_RANGES:
     type: array
@@ -137,13 +137,13 @@ properties:
     type: array
     default:
     - ixnetwork-client
-    - ixnetwork-vta
+    - ixnetwork-cta
 
   GCP_CONTROL_FIREWALL_RULE_TARGET_TAGS:
     type: array
     default:
     - ixnetwork-client
-    - ixnetwork-vta
+    - ixnetwork-cta
     
   GCP_TEST1_VPC_NETWORK_NAME:
     type: string
@@ -182,12 +182,12 @@ properties:
   GCP_TEST1_FIREWALL_RULE_SOURCE_TAGS:
     type: array
     default:
-    - ixnetwork-vta
+    - ixnetwork-cta
 
   GCP_TEST1_FIREWALL_RULE_TARGET_TAGS:
     type: array
     default:
-    - ixnetwork-vta
+    - ixnetwork-cta
 
   GCP_CLIENT_INSTANCE_NAME:
     type: string
@@ -214,36 +214,36 @@ properties:
     default:
     - ixnetwork-client
 
-  GCP_VTA1_INSTANCE_NAME:
+  GCP_CTA1_INSTANCE_NAME:
     type: string
-    default: ixnetwork-vta-01
+    default: ixnetwork-cta-01
     
-  GCP_VTA_SERIAL_PORT_ENABLE:
+  GCP_CTA_SERIAL_PORT_ENABLE:
     type: string
     default: "'true'"
 
-  GCP_VTA_MACHINE_TYPE:
+  GCP_CTA_MACHINE_TYPE:
     type: string
     default: c2-standard-16
 
-  GCP_VTA1_IFACE_ETH0_PUBLIC_IP_ADDRESS_NAME:
+  GCP_CTA1_IFACE_ETH0_PUBLIC_IP_ADDRESS_NAME:
     type: string
-    default: ixnetwork-vta-01-eth0-ip-addr
+    default: ixnetwork-cta-01-eth0-ip-addr
 
-  GCP_VTA1_IFACE_ETH0_PRIVATE_IP_ADDRESS:
+  GCP_CTA1_IFACE_ETH0_PRIVATE_IP_ADDRESS:
     type: string
     default: 10.0.10.11
 
-  GCP_VTA1_IFACE_ETH1_PRIVATE_IP_ADDRESS:
+  GCP_CTA1_IFACE_ETH1_PRIVATE_IP_ADDRESS:
     type: string
     default: 10.0.2.15
 
-  GCP_VTA1_IFACE_ETH1_PRIVATE_IP_ALIASES:
+  GCP_CTA1_IFACE_ETH1_PRIVATE_IP_ALIASES:
     type: string
     default: /28
 
-  GCP_VTA_NETWORK_TARGET_TAGS:
+  GCP_CTA_NETWORK_TARGET_TAGS:
     type: array
     default:
-    - ixnetwork-vta
+    - ixnetwork-cta
 #eof
