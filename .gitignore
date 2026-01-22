@@ -4,4 +4,3 @@
 terraform.auto.tfvars
 backend.tf
 .sshkey.pem
-Makefile
