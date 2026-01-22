@@ -16,7 +16,7 @@ locals {
 	Private1SubnetAvailabilityZone = var.Private1SubnetAvailabilityZone
 	Private2SubnetAvailabilityZone = var.Private2SubnetAvailabilityZone
 	PublicSubnetAvailabilityZone = var.PublicSubnetAvailabilityZone
-	Region = data.aws_region.current.name
+	Region = data.aws_region.current.id
 	SshKeyAlgorithm = "RSA"
 	SshKeyName = "${local.Preamble}-ssh-key"
 	SshKeyRsaBits = "4096"

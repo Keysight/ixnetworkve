@@ -15,7 +15,7 @@ locals {
 	PrivateSubnetName = var.PrivateSubnetName
 	PublicSecurityGroupName = var.PublicSecurityGroupName
 	PublicSubnetName = var.PublicSubnetName
-	Region = data.aws_region.current.name
+	Region = data.aws_region.current.id
 	UserEmailTag = var.UserEmailTag == null ? data.aws_caller_identity.current.user_id : var.UserEmailTag
 	UserLoginTag = var.UserLoginTag == null ? "terraform" : var.UserLoginTag
 	UserProjectTag = var.UserProjectTag == null ? random_id.RandomId.id : var.UserProjectTag
