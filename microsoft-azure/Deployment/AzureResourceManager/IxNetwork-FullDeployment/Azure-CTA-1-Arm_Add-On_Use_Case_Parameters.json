@@ -23,16 +23,16 @@
     "IxNetworkClientPassword": {
       "value": "strongPassword1234*"
     },
-    "VirtualTestApplianceAdminUsername": {
+    "CloudTestApplianceAdminUsername": {
       "value": "ixia"
     },
-    "VirtualTestApplianceAdminPassword": {
+    "CloudTestApplianceAdminPassword": {
       "value": "strongPassword1234*"
     },
-    "VirtualTestAppliance1Eth0IpAddress": {
+    "CloudTestAppliance1Eth0IpAddress": {
       "value": "10.0.1.13"
     },
-    "VirtualTestAppliance1Eth1IpAddresses": {
+    "CloudTestAppliance1Eth1IpAddresses": {
       "value": [
         "10.0.10.32",
         "10.0.10.33",
@@ -46,7 +46,7 @@
         "10.0.10.41"
       ]
     },
-    "VirtualTestApplianceVmSize": {
+    "CloudTestApplianceVmSize": {
       "value": "Standard_F4s_v2"
     },
     "OptionalVMPrefix": {

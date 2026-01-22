@@ -14,13 +14,13 @@
     "IxNetworkClientPassword": {
       "value": "strongPassword1234*"
     },
-    "VirtualTestApplianceAdminUsername": {
+    "CloudTestApplianceAdminUsername": {
       "value": "ixia"
     },
-    "VirtualTestApplianceAdminPassword": {
+    "CloudTestApplianceAdminPassword": {
       "value": "strongPassword1234*"
     },
-    "VirtualTestApplianceVmSize": {
+    "CloudTestApplianceVmSize": {
       "value": "Standard_F4s_v2"
     },
     "OptionalVMPrefix": {

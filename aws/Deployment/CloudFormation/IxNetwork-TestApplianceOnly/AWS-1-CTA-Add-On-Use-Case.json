@@ -97,7 +97,7 @@
                 "INSTANCExEBSxDELETExONxTERMINATION": true,
                 "INSTANCExEBSxVOLUMExTYPE": "gp2",
                 "APPxTAG": "KEYSIGHT",
-                "APPxVERSION": "11.00"
+                "APPxVERSION": "26.0.0"
             }
         }
     },
@@ -776,7 +776,7 @@
                         "INSTANCExINSTANCExINITIATEDxSHUTDOWNxBEHAVIOR"
                     ]
                 },
-                "ImageId": "resolve:ssm:/aws/service/marketplace/prod-nqoib5holinoe/11.00",
+                "ImageId": "resolve:ssm:/aws/service/marketplace/prod-nqoib5holinoe/26.0.0",
                 "InstanceType": {
                     "Ref": "TestApplianceInstanceType"
                 },

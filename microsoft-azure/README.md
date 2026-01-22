@@ -6,7 +6,7 @@ This folder contains one IxNetwork VE configuration for your use cases.
 
 ### 🚀 Deployment
 
-Version **11.00** of IxNetwork Virtual Edition is available on the Microsoft Azure Marketplace here:
+Version **26.0.0** of IxNetwork Virtual Edition is available on the Microsoft Azure Marketplace here:
 
 - [Keysight IxNetwork Virtual Edition Marketplace](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/keysight-technologies-ixvm.keysight-ixnetwork-virtual-edition?tab=Overview)
 
