@@ -2,5 +2,5 @@
 *.tfstate*
 *.lock.hcl
 terraform.auto.tfvars
+backend.tf
 .sshkey.pem
-Makefile

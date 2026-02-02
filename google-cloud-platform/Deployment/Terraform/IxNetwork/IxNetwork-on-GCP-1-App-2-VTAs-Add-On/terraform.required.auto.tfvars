@@ -1,0 +1,5 @@
+# PrivateSubnetName = "terraform-example-test-01-subnet"
+# PrivateVpcNetworkName = "terraform-example-test-01-vpc-network"
+# ProjectId = "example"
+# PublicSubnetName = "terraform-example-management-subnet"
+# PublicVpcNetworkName = "terraform-example-management-vpc-network"

@@ -1,0 +1,20 @@
+locals {
+	AgentInstanceType = var.AgentInstanceType
+	Agent1InstanceId = "agent1"
+	ApiMaxRetries = var.ApiMaxRetries
+	AppInstanceType = var.AppInstanceType
+	AppTag = "ixnetwork"
+	AwsAccessCredentialsAccessKey = var.AwsAccessCredentialsAccessKey
+	AwsAccessCredentialsSecretKey = var.AwsAccessCredentialsSecretKey
+	InboundIPv4CidrBlocks = var.InboundIPv4CidrBlocks == null ? [ "${data.http.ip.response_body}/32" ] : var.InboundIPv4CidrBlocks
+	PlacementGroupName = "${local.Preamble}-placement-group-${local.Region}"
+	PlacementGroupStrategy = "cluster"
+	Preamble = "${local.UserLoginTag}-${local.UserProjectTag}-${local.AppTag}"
+	Private1SubnetAvailabilityZone = var.Private1SubnetAvailabilityZone
+	Private2SubnetAvailabilityZone = var.Private2SubnetAvailabilityZone
+	PublicSubnetAvailabilityZone = var.PublicSubnetAvailabilityZone
+	Region = data.aws_region.current.id
+	UserEmailTag = var.UserEmailTag == null ? data.aws_caller_identity.current.user_id : var.UserEmailTag
+	UserLoginTag = var.UserLoginTag == null ? "terraform" : var.UserLoginTag
+	UserProjectTag = var.UserProjectTag == null ? random_id.RandomId.id : var.UserProjectTag
+}

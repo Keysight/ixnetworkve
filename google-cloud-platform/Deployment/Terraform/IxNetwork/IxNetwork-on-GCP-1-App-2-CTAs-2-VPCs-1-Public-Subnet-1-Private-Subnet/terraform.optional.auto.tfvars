@@ -1,0 +1,10 @@
+# AgentMachineType = "c4-standard-8"
+# AgentTotalEgressBandwidthTier = "DEFAULT"
+# AppMachineType = "n1-standard-4"
+# PrivateVpcNetworkMtu = 1500
+# PublicFirewallRuleSourceIpRanges = [ "1.1.1.1/32" ]
+# RegionName = "us-central1"
+# UserEmailTag = "terraform@example.com"
+# UserLoginTag = "terraform"
+# UserProjectTag = "cloud-ist"
+# ZoneName = "us-central1-a"
