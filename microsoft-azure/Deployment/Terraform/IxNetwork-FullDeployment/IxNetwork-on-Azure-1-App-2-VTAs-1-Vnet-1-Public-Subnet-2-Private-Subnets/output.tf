@@ -1,5 +1,4 @@
 output "Agent1" {
-	description = "Instance resource associated with the virtual machine"
 	value = {
 		"admin_username" : module.Agent1.Instance.admin_username
 		"fqdn" : module.Agent1.Eth0PublicIpAddress.fqdn
