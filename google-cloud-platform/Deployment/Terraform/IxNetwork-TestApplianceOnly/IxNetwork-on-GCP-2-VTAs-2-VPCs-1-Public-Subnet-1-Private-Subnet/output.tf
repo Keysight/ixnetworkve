@@ -1,21 +1,77 @@
-output "AgentImage" {
+output "Agent1" {
 	value = {
-		"family" : module.Agent1.Image.family
-		"name" : module.Agent1.Image.name
-		"project" : module.Agent1.Image.project
+		architecture = module.Agent1.Instance.architecture 
+		can_ip_forward = module.Agent1.Instance.can_ip_forward
+		cpu_platform = module.Agent1.Instance.cpu_platform
+		current_status = module.Agent1.Instance.current_status
+		eth0 = {
+			public_ip_address = {
+				address = module.Agent1.Eth0PublicIpAddress.address
+				address_type = module.Agent1.Eth0PublicIpAddress.address_type
+			}
+		}
+		image = {
+			name = module.Agent1.Image.name
+			project = module.Agent1.Image.project
+		}
+		instance_id = module.Agent1.Instance.instance_id
+		machine = {
+			description = data.google_compute_machine_types.Agent.machine_types.0.description
+			guest_cpus = data.google_compute_machine_types.Agent.machine_types.0.guest_cpus
+			is_shared_cpus = data.google_compute_machine_types.Agent.machine_types.0.is_shared_cpus
+			machine_type = module.Agent1.Instance.machine_type
+			memory_mb = data.google_compute_machine_types.Agent.machine_types.0.memory_mb
+		}
+		name = module.Agent1.Instance.name
+		network_ip = module.Agent1.Instance.network_ip
+		project = module.Agent1.Instance.project
+		serial-port-enable = module.Agent1.Instance.serial-port-enable
+		zone = module.Agent1.Instance.zone
 	}
 }
 
-output "Agent1Eth0PublicIpAddress" {
+output "Agent2" {
 	value = {
-		"address" : module.Agent1.Eth0PublicIpAddress.address
-		"address_type" : module.Agent1.Eth0PublicIpAddress.address_type
+		architecture = module.Agent2.Instance.architecture 
+		can_ip_forward = module.Agent2.Instance.can_ip_forward
+		cpu_platform = module.Agent2.Instance.cpu_platform
+		current_status = module.Agent2.Instance.current_status
+		eth0 = {
+			public_ip_address = {
+				address = module.Agent2.Eth0PublicIpAddress.address
+				address_type = module.Agent2.Eth0PublicIpAddress.address_type
+			}
+		}
+		image = {
+			name = module.Agent2.Image.name
+			project = module.Agent2.Image.project
+		}
+		instance_id = module.Agent2.Instance.instance_id
+		machine = {
+			description = data.google_compute_machine_types.Agent.machine_types.0.description
+			guest_cpus = data.google_compute_machine_types.Agent.machine_types.0.guest_cpus
+			is_shared_cpus = data.google_compute_machine_types.Agent.machine_types.0.is_shared_cpus
+			machine_type = module.Agent2.Instance.machine_type
+			memory_mb = data.google_compute_machine_types.Agent.machine_types.0.memory_mb
+		}
+		name = module.Agent2.Instance.name
+		network_ip = module.Agent2.Instance.network_ip
+		project = module.Agent2.Instance.project
+		serial-port-enable = module.Agent2.Instance.serial-port-enable
+		zone = module.Agent2.Instance.zone
 	}
 }
 
-output "Agent2Eth0PublicIpAddress" {
+output "PrivateVpcNetwork" {
 	value = {
-		"address" : module.Agent2.Eth0PublicIpAddress.address
-		"address_type" : module.Agent2.Eth0PublicIpAddress.address_type
+		mtu = module.Vpc.PrivateVpcNetwork.mtu
+		name = module.Vpc.PrivateVpcNetwork.name
+	}
+}
+
+output "PublicVpcNetwork" {
+	value = {
+		mtu = module.Vpc.PublicVpcNetwork.mtu
+		name = module.Vpc.PublicVpcNetwork.name
 	}
 }
