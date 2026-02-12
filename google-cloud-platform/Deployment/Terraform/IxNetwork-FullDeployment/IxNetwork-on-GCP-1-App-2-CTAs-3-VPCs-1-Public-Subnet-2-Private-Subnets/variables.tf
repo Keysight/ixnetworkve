@@ -29,8 +29,11 @@ variable "AppMachineType" {
 	description = "Designation for set of resources available to App VM"
 	type = string
 	validation {
-		condition = can(regex("n1-standard-8", var.AppMachineType)) || can(regex("n1-standard-4", var.AppMachineType))
-		error_message = "AppMachineType must be one of (n1-standard-8 | n1-standard-4) types."
+		condition = contains([ "n1-standard-4", "n1-standard-8" ], var.AppMachineType)
+		error_message = <<EOF
+AppMachineType must be one of the following types:
+	n1-standard-4, n1-standard-8
+		EOF
 	}
 }
 
@@ -40,7 +43,10 @@ variable "Private1VpcNetworkMtu" {
 	type = number
 	validation {
 		condition = contains([1500, 8896], var.Private1VpcNetworkMtu)
-		error_message = "Private1VpcNetworkMtu must be one of (1500 | 8896) values."
+		error_message = <<EOF
+Private1VpcNetworkMtu must be one of the following values:
+	1500, 8896
+		EOF
 	}
 }
 
@@ -50,7 +56,10 @@ variable "Private2VpcNetworkMtu" {
 	type = number
 	validation {
 		condition = contains([1500, 8896], var.Private2VpcNetworkMtu)
-		error_message = "Private2VpcNetworkMtu must be one of (1500 | 8896) values."
+		error_message = <<EOF
+Private2VpcNetworkMtu must be one of the following values:
+	1500, 8896
+		EOF
 	}
 }
 

@@ -3,8 +3,11 @@ variable "AgentMachineType" {
 	description = "Designation for set of resources available to Agent VM"
 	type = string
 	validation {
-		condition = can(regex("c2-standard-16", var.AgentMachineType)) || can(regex("c2-standard-8", var.AgentMachineType)) || can(regex("c2-standard-4", var.AgentMachineType))
-		error_message = "AgentMachineType must be one of (c2-standard-16 | c2-standard-8 | c2-standard-4) types."
+		condition = contains([ "c2-standard-4", "c2-standard-8", "c2-standard-16" ], var.AgentMachineType)
+		error_message = <<EOF
+AgentMachineType must be one of the following types:
+	c2-standard-4, c2-standard-8, c2-standard-16
+		EOF
 	}
 }
 
@@ -15,6 +18,19 @@ variable "AppMachineType" {
 	validation {
 		condition = can(regex("n1-standard-8", var.AppMachineType)) || can(regex("n1-standard-4", var.AppMachineType))
 		error_message = "AppMachineType must be one of (n1-standard-8 | n1-standard-4) types."
+	}
+}
+
+variable "PrivateVpcNetworkMtu" {
+	default = 1460
+	description = "Maxium Transmission Unit associated with the first private vpc network"
+	type = number
+	validation {
+		condition = contains([1460, 1500, 8896], var.PrivateVpcNetworkMtu)
+		error_message = <<EOF
+PrivateVpcNetworkMtu must be one of the following values:
+	1460, 1500, 8896
+		EOF
 	}
 }
 
