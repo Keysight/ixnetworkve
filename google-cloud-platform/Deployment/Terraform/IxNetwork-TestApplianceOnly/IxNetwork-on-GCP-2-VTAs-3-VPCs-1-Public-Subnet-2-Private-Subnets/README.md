@@ -1,4 +1,4 @@
-# IxVM-on-GCP-2-VTAs-3-VPCs-1-Public-Subnet-2-Private-Subnets
+# IxNetwork-on-GCP-2-VTAs-3-VPCs-1-Public-Subnet-2-Private-Subnets
 
 ## Description
 This deployment creates a topology with three virtual private clouds, one having a single public facing subnet and the other two having a single private subnet each.
