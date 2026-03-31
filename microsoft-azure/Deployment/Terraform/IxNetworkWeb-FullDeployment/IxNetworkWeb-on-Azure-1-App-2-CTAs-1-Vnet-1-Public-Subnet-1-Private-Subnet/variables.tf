@@ -3,11 +3,10 @@ variable "AgentVmSize" {
 	description = "Category, series and instance specifications associated with the Agent VM"
 	type = string
 	validation {
-		condition = contains([	"Standard_F4s_v2",	"Standard_F8s_v2",	"Standard_F16s_v2"
-							], var.AgentVmSize)
+		condition = contains([ "Standard_F4s_v2", "Standard_F8s_v2", "Standard_F16s_v2", "Standard_F72s_v2", "Standard_E104i_v5" ], var.AgentVmSize)
 		error_message = <<EOF
 AgentVmSize must be one of the following sizes:
-	Standard_F4s_v2, Standard_F8s_v2, Standard_F16s_v2
+	Standard_F4s_v2, Standard_F8s_v2, Standard_F16s_v2, Standard_F72s_v2, Standard_E104i_v5
 		EOF
 	}
 }
