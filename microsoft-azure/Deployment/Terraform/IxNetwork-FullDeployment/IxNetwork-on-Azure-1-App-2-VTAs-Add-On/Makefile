@@ -14,7 +14,7 @@ init:
 
 validate:
 	time terraform validate
-	
+
 update:
 	time terraform get -update
 
