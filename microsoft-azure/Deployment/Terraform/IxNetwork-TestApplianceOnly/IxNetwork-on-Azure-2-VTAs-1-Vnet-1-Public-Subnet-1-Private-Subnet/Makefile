@@ -1,5 +1,7 @@
 SHELL := /bin/bash
 
+azure: all
+
 all: init apply ssh
 
 clean: state destroy
