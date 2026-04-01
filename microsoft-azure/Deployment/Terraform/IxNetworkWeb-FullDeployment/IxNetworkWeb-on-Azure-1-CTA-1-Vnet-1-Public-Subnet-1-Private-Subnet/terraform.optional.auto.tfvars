@@ -1,7 +1,7 @@
 # AgentVmSize = "Standard_F8s_v2"
 # AppAdminUserName = "azure"
 # AppVmSize = "Standard_F4s_v2"
-# PublicSecurityRuleSourceIpPrefixes = [ "1.1.1.1/32" ]
+# PublicSecurityRuleSourceIpPrefixes = [ "0.0.0.0/0" ]
 # ResourceGroupLocation = "East US"
 # ResourceGroupName = "azure-ixnetwork-1-agent"
 # UserEmailTag = "terraform@example.com"
