@@ -2,7 +2,7 @@ heat_template_version: 2013-05-23
 
 
 description: >
-  Version: 26.0.0 
+  Version: 26.3.0 
     This is the HEAT template used for Ixia Cloud Products deployment in OpenStack-based environments. It can be used with IxNetwork VE products with version 8.10 EA or newer.
     The template will create 1 Virtual Networks (named "Test Network") and for Management it will be using an existing user given network name.
     The template will create 1 Cloud Machine  (named "cCard-1").
