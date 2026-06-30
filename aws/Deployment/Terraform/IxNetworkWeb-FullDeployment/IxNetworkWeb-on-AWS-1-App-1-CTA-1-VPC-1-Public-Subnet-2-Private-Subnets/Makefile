@@ -1,4 +1,6 @@
 SHELL := /bin/bash
+TF_DATA_DIR := /tmp/tfdata-$(notdir $(CURDIR))
+export TF_DATA_DIR
 
 aws: install all
 
@@ -38,10 +40,6 @@ destroy:
 
 output:
 	time terraform output
-
-ena-express:
-	chmod +x ./CloudShell/aws-enable-ena-express.sh
-	./CloudShell/aws-enable-ena-express.sh $$(terraform output -json Agent1 | jq -r .id) $$(terraform output -json AvailabilityZones | jq -r .region)
 
 state:
 	time terraform state list
