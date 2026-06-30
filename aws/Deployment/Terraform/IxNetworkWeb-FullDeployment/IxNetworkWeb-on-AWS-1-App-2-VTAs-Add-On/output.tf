@@ -7,7 +7,7 @@ output "Agent1" {
 		}
 		availability_zone = module.Agent1.Instance.availability_zone
 		eth0 = {
-			eip = { 
+			eip = {
 				public_dns = module.Agent1.Eth0ElasticIp.public_dns
 				public_ip = module.Agent1.Eth0ElasticIp.public_ip
 			}
@@ -49,7 +49,7 @@ output "Agent2" {
 		}
 		availability_zone = module.Agent2.Instance.availability_zone
 		eth0 = {
-			eip = { 
+			eip = {
 				public_dns = module.Agent2.Eth0ElasticIp.public_dns
 				public_ip = module.Agent2.Eth0ElasticIp.public_ip
 			}
