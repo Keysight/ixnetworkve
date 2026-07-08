@@ -1,3 +1,4 @@
+**/.terragrunt-cache
 **/.terraform
 *.tfstate*
 *.lock.hcl
