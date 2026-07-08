@@ -14,6 +14,7 @@ module "Agent1" {
 	UserEmailTag = local.UserEmailTag
 	UserLoginTag = local.UserLoginTag
 	UserProjectTag = local.UserProjectTag
+	init_cli = data.cloudinit_config.init_cli.rendered
 	depends_on = [
 		aws_placement_group.PlacementGroup,
 		module.Vpc

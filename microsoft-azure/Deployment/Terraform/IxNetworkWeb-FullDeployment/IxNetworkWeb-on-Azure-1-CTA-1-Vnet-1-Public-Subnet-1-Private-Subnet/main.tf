@@ -1,5 +1,5 @@
 module "Agent1" {
-	source = "git::https://github.com/Keysight/terraform-azurerm-module-ixnetwork-cloud-agent.git?ref=26.0.0.spoke"
+	source = "git::https://github.com/Keysight/terraform-azurerm-module-ixnetwork-cloud-agent.git?ref=26.3.0.spoke"
 	Eth0SubnetId = module.Vnet.PublicSubnet.id
 	Eth1SubnetId = module.Vnet.PrivateSubnet.id
 	Eth2IpAddresses = local.Agent1Eth2IpAddresses
