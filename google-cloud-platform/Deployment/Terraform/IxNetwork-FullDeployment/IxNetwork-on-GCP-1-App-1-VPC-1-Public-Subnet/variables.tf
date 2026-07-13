@@ -3,8 +3,11 @@ variable "AppMachineType" {
 	description = "Designation for set of resources available to App VM"
 	type = string
 	validation {
-		condition = can(regex("n1-standard-8", var.AppMachineType)) || can(regex("n1-standard-4", var.AppMachineType))
-		error_message = "AppMachineType must be one of (n1-standard-8 | n1-standard-4) types."
+		condition = contains([ "n1-standard-4", "n1-standard-8" ], var.AppMachineType)
+		error_message = <<EOF
+AppMachineType must be one of the following types:
+	n1-standard-4, n1-standard-8
+EOF
 	}
 }
 
@@ -14,7 +17,7 @@ variable "ProjectId" {
 }
 
 variable "PublicFirewallRuleSourceIpRanges" {
-	default = null
+	default = [ "0.0.0.0/0" ]
 	description = "List of IP Addresses /32 or IP CIDR ranges connecting inbound to App"
 	type = list(string)
 }
