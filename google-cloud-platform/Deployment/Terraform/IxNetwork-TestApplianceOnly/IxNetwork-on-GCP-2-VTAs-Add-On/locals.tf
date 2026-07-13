@@ -1,9 +1,12 @@
 locals {
 	AgentMachineType = var.AgentMachineType
+	Agent1Eth0PrivateIpAddress = "10.0.10.13"
+	Agent1Eth1PrivateIpAddress = "10.0.2.136"
+	Agent1Eth1PrivateIpAliases = "/28"
 	Agent1InstanceId = "agent1"
-	Agent2Eth0PrivateIpAddress = "10.0.10.12"
+	Agent2Eth0PrivateIpAddress = "10.0.10.14"
 	Agent2Eth0PublicIpAddressName = "${local.Preamble}-eth0-ip-addr"
-	Agent2Eth1PrivateIpAddress = "10.0.2.116"
+	Agent2Eth1PrivateIpAddress = "10.0.2.146"
 	Agent2Eth1PrivateIpAliases = "/28"
 	Agent2InstanceId = "agent2"
 	Agent2InstanceName = "${local.Preamble}-instance"

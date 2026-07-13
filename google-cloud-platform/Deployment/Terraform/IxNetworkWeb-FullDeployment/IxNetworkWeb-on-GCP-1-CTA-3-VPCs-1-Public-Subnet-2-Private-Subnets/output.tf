@@ -1,43 +1,53 @@
-output "AppEth0PublicIpAddress" {
+output "Agent1" {
 	value = {
-		"address" : module.App.Eth0PublicIpAddress.address
-		"address_type" : module.App.Eth0PublicIpAddress.address_type
-	}
-}
-
-output "AppImage" {
-	value = {
-		"family" : module.App.Image.family
-		"name" : module.App.Image.name
-		"project" : module.App.Image.project
-	}
-}
-
-output "AppInstance" {
-	value = {
-		"machine_type" : module.App.Instance.machine_type
-		"name" : module.App.Instance.name
-		"total_egress_bandwidth_tier" : module.App.Instance.total_egress_bandwidth_tier
+		architecture = module.Agent1.Instance.architecture 
+		can_ip_forward = module.Agent1.Instance.can_ip_forward
+		cpu_platform = module.Agent1.Instance.cpu_platform
+		current_status = module.Agent1.Instance.current_status
+		eth0 = {
+			public_ip_address = {
+				address = module.Agent1.Eth0PublicIpAddress.address
+				address_type = module.Agent1.Eth0PublicIpAddress.address_type
+			}
+		}
+		image = {
+			name = module.Agent1.Image.name
+			project = module.Agent1.Image.project
+		}
+		instance_id = module.Agent1.Instance.instance_id
+		machine = {
+			description = data.google_compute_machine_types.Agent.machine_types.0.description
+			guest_cpus = data.google_compute_machine_types.Agent.machine_types.0.guest_cpus
+			is_shared_cpus = data.google_compute_machine_types.Agent.machine_types.0.is_shared_cpus
+			machine_type = module.Agent1.Instance.machine_type
+			memory_mb = data.google_compute_machine_types.Agent.machine_types.0.memory_mb
+		}
+		name = module.Agent1.Instance.name
+		network_ip = module.Agent1.Instance.network_ip
+		project = module.Agent1.Instance.project
+		serial-port-enable = module.Agent1.Instance.serial-port-enable
+		total_egress_bandwidth_tier = module.Agent1.Instance.total_egress_bandwidth_tier
+		zone = module.Agent1.Instance.zone
 	}
 }
 
 output "Private1VpcNetwork" {
 	value = {
-		"mtu" : module.Vpc.Private1VpcNetwork.mtu
-		"name" : module.Vpc.Private1VpcNetwork.name
+		mtu = module.Vpc.Private1VpcNetwork.mtu
+		name = module.Vpc.Private1VpcNetwork.name
 	}
 }
 
 output "Private2VpcNetwork" {
 	value = {
-		"mtu" : module.Vpc.Private2VpcNetwork.mtu
-		"name" : module.Vpc.Private2VpcNetwork.name
+		mtu = module.Vpc.Private2VpcNetwork.mtu
+		name = module.Vpc.Private2VpcNetwork.name
 	}
 }
 
 output "PublicVpcNetwork" {
 	value = {
-		"mtu" : module.Vpc.PublicVpcNetwork.mtu
-		"name" : module.Vpc.PublicVpcNetwork.name
+		mtu = module.Vpc.PublicVpcNetwork.mtu
+		name = module.Vpc.PublicVpcNetwork.name
 	}
 }
