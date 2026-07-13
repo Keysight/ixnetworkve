@@ -3,7 +3,7 @@
 # AppMachineType = "n1-standard-4"
 # Private1VpcNetworkMtu = 1500
 # Private2VpcNetworkMtu = 1500
-# PublicFirewallRuleSourceIpRanges = [ "1.1.1.1/32" ]
+# PublicFirewallRuleSourceIpRanges = [ "0.0.0.0/0" ]
 # RegionName = "us-central1"
 # UserEmailTag = "terraform@example.com"
 # UserLoginTag = "terraform"
