@@ -1,5 +1,5 @@
 module "Vpc" {
-	source = "git::https://github.com/armdupre/terraform-google-module-3-vpcs-1-public-subnet-2-private-subnets.git?ref=11.0.1"
+	source = "git::https://github.com/Keysight/terraform-google-module-3-vpcs-1-public-subnet-2-private-subnets.git?ref=26.3.0"
 	Private1VpcNetworkMtu = local.Private1VpcNetworkMtu
 	Private2VpcNetworkMtu = local.Private2VpcNetworkMtu
 	PublicFirewallRuleSourceIpRanges = local.PublicFirewallRuleSourceIpRanges
