@@ -1,7 +1,10 @@
 module "Agent1" {
-	source = "git::https://github.com/Keysight/terraform-google-module-ixnetwork-agent.git?ref=26.0.0"
+	source = "git::https://github.com/Keysight/terraform-google-module-ixnetwork-agent.git?ref=26.3.0"
+	Eth0PrivateIpAddress = local.Agent1Eth0PrivateIpAddress
 	Eth0SubnetName = data.google_compute_subnetwork.PublicSubnet.name
 	Eth0VpcNetworkName = data.google_compute_network.PublicVpcNetwork.name
+	Eth1PrivateIpAddress = local.Agent1Eth1PrivateIpAddress
+	Eth1PrivateIpAliases = local.Agent1Eth1PrivateIpAliases
 	Eth1SubnetName = data.google_compute_subnetwork.PrivateSubnet.name
 	Eth1VpcNetworkName = data.google_compute_network.PrivateVpcNetwork.name
 	InstanceId = local.Agent1InstanceId
@@ -14,7 +17,7 @@ module "Agent1" {
 }
 
 module "Agent2" {
-	source = "git::https://github.com/Keysight/terraform-google-module-ixnetwork-agent.git?ref=26.0.0"
+	source = "git::https://github.com/Keysight/terraform-google-module-ixnetwork-agent.git?ref=26.3.0"
 	Eth0PrivateIpAddress = local.Agent2Eth0PrivateIpAddress
 	Eth0SubnetName = data.google_compute_subnetwork.PublicSubnet.name
 	Eth0VpcNetworkName = data.google_compute_network.PublicVpcNetwork.name
