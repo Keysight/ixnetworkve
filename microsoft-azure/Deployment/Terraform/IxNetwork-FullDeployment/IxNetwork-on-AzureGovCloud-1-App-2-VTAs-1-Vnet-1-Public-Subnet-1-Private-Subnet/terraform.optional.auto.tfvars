@@ -2,7 +2,7 @@
 # AppAdminUserName = "azure"
 # AppVmSize = "Standard_F4s_v2"
 # Environment = "usgovernment"
-# PublicSecurityRuleSourceIpPrefixes = [ "1.1.1.1/32" ]
+# PublicSecurityRuleSourceIpPrefixes = [ "0.0.0.0/0" ]
 # ResourceGroupLocation = "USGov Texas"
 # ResourceGroupName = "azure-ixnetwork-1-app-2-agents"
 # UserEmailTag = "terraform@example.com"

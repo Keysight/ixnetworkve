@@ -1,5 +1,5 @@
 module "App" {
-	source = "git::https://github.com/Keysight/terraform-aws-module-ixnetwork-web-app.git?ref=26.0.0"
+	source = "git::https://github.com/Keysight/terraform-aws-module-ixnetwork-web-app.git?ref=26.3.0"
 	Eth0SecurityGroupId = module.Vpc.PublicSecurityGroup.id
 	Eth0SubnetId = module.Vpc.PublicSubnet.id
 	InstanceType = local.AppInstanceType
@@ -12,7 +12,7 @@ module "App" {
 }
 
 module "Agent1" {
-	source = "git::https://github.com/Keysight/terraform-aws-module-ixnetwork-cloud-agent.git?ref=26.0.0.spoke"
+	source = "git::https://github.com/Keysight/terraform-aws-module-ixnetwork-cloud-agent.git?ref=26.3.0.spoke"
 	Eth0SecurityGroupId = module.Vpc.PublicSecurityGroup.id
 	Eth0SubnetId = module.Vpc.PublicSubnet.id
 	Eth1SecurityGroupId = module.Vpc.PrivateSecurityGroup.id
@@ -20,6 +20,7 @@ module "Agent1" {
 	Eth2PrivateIpAddresses = local.Agent1Eth2PrivateIpAddresses
 	Eth2SecurityGroupId = module.Vpc.PrivateSecurityGroup.id
 	Eth2SubnetId = module.Vpc.PrivateSubnet.id
+	InstanceId = local.Agent1InstanceId
 	InstanceType = local.AgentInstanceType
 	PlacementGroupId = aws_placement_group.PlacementGroup.id
 	UserEmailTag = local.UserEmailTag

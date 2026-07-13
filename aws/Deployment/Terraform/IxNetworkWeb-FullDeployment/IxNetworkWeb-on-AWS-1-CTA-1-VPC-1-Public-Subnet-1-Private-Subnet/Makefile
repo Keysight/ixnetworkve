@@ -1,4 +1,11 @@
 SHELL := /bin/bash
+.SHELLFLAGS := -euo pipefail -c
+
+TF_DATA_DIR := /tmp/tfdata-$(notdir $(CURDIR))
+export TF_DATA_DIR
+
+TF := time terraform
+TF_FLAGS := -auto-approve
 
 aws: install all
 
@@ -16,28 +23,41 @@ endif
 endif
 
 version:
-	time terraform version
+	@echo "=== $(TF) version ==="
+	$(TF) version
 
 init:
-	time terraform init
+	@echo "=== $(TF) init ==="
+	$(TF) init
 
 validate:
-	time terraform validate
-	
+	@echo "=== $(TF) validate ==="
+	$(TF) validate
+
 update:
-	time terraform get -update
+	@echo "=== $(TF) update ==="
+	$(TF) get -update
 
 plan:
-	time terraform plan
+	@echo "=== $(TF) plan ==="
+	$(TF) plan
 
 apply:
-	time terraform apply -auto-approve
+	@echo "=== $(TF) apply ==="
+	$(TF) apply $(TF_FLAGS)
 
 destroy:
-	time terraform destroy -auto-approve
+	@echo "=== $(TF) destroy ==="
+	$(TF) destroy $(TF_FLAGS)
 
 output:
-	time terraform output AppEth0ElasticIp
+	@echo "=== $(TF) output ==="
+	$(TF) output
 
 state:
-	time terraform state list
+	@echo "=== $(TF) state ==="
+	$(TF) state list
+
+connect-agent1:
+	chmod +x ./CloudShell/connect.sh
+	./CloudShell/connect.sh -i $$(terraform output -json Agent1 | jq -r .eth0.eip.public_ip)

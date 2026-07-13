@@ -1,6 +1,8 @@
+**/.terragrunt-cache
 **/.terraform
 *.tfstate*
 *.lock.hcl
 terraform.auto.tfvars
 backend.tf
 .sshkey.pem
+terragrunt.hcl

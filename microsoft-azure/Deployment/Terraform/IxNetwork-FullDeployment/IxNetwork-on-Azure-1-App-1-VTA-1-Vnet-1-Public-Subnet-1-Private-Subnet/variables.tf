@@ -37,7 +37,7 @@ AppVmSize must be one of the following sizes:
 }
 
 variable "PublicSecurityRuleSourceIpPrefixes" {
-	default = null
+	default = [ "0.0.0.0/0" ]
 	description = "List of IP Addresses /32 or IP CIDR ranges connecting inbound to App"
 	type = list(string)
 }
@@ -58,12 +58,20 @@ variable "UserEmailTag" {
 	default = null
 	description = "Email address tag of user creating the deployment"
 	type = string
+	validation {
+		condition = var.UserEmailTag == null ? true : length(var.UserEmailTag) >= 14
+		error_message = "UserEmailTag minimum length must be >= 14."
+	}
 }
 
 variable "UserLoginTag" {
 	default = null
 	description = "Login ID tag of user creating the deployment"
 	type = string
+	validation {
+		condition = var.UserLoginTag == null ? true : length(var.UserLoginTag) >= 4
+		error_message = "UserLoginTag minimum length must be >= 4."
+	}
 }
 
 variable "UserProjectTag" {

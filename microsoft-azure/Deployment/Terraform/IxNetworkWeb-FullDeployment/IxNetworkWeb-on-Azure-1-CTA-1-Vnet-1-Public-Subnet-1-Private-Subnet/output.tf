@@ -9,17 +9,6 @@ output "Agent1" {
 	}
 }
 
-output "App" {
-	value = {
-		"admin_username" : module.App.Instance.admin_username
-		"fqdn" : module.App.Eth0PublicIpAddress.fqdn
-		"name" : module.App.Instance.name
-		"private_ip_address" : module.App.Instance.private_ip_address
-		"public_ip_address" : module.App.Eth0PublicIpAddress.ip_address
-		"size" : module.App.Instance.size
-	}
-}
-
 output "ResourceGroup" {
 	value = {
 		"location" : azurerm_resource_group.ResourceGroup.location

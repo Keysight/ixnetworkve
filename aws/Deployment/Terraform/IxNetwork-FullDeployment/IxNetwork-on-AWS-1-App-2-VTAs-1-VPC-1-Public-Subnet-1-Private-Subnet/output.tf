@@ -7,7 +7,7 @@ output "Agent1" {
 		}
 		availability_zone = module.Agent1.Instance.availability_zone
 		eth0 = {
-			eip = { 
+			eip = {
 				public_dns = module.Agent1.Eth0ElasticIp.public_dns
 				public_ip = module.Agent1.Eth0ElasticIp.public_ip
 			}
@@ -96,10 +96,10 @@ output "App" {
 				public_ip = module.App.Eth0ElasticIp.public_ip
 			}
 		}
-		id =  module.App.Instance.id
+		id = module.App.Instance.id
 		instance_type = {
 			current_generation = data.aws_ec2_instance_type.App.current_generation
-			dedicated_hosts_supported =  data.aws_ec2_instance_type.App.dedicated_hosts_supported
+			dedicated_hosts_supported = data.aws_ec2_instance_type.App.dedicated_hosts_supported
 			default_cores = data.aws_ec2_instance_type.App.default_cores
 			default_network_card_index = data.aws_ec2_instance_type.App.default_network_card_index
 			default_threads_per_core = data.aws_ec2_instance_type.App.default_threads_per_core

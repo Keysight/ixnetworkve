@@ -1,5 +1,5 @@
 module "Agent1" {
-	source = "git::https://github.com/Keysight/terraform-aws-module-ixnetwork-agent.git?ref=26.0.0"
+	source = "git::https://github.com/Keysight/terraform-aws-module-ixnetwork-agent.git?ref=26.3.0"
 	Eth0SecurityGroupId = module.Vpc.PublicSecurityGroup.id
 	Eth0SubnetId = module.Vpc.PublicSubnet.id
 	Eth1SecurityGroupId = module.Vpc.PrivateSecurityGroup.id

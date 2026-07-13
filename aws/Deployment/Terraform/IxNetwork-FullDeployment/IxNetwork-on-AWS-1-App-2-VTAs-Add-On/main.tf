@@ -1,5 +1,5 @@
 module "App" {
-	source = "git::https://github.com/Keysight/terraform-aws-module-ixnetwork-app.git?ref=26.0.0"
+	source = "git::https://github.com/Keysight/terraform-aws-module-ixnetwork-app.git?ref=26.3.0"
 	Eth0SecurityGroupId = data.aws_security_group.PublicSecurityGroup.id
 	Eth0SubnetId = data.aws_subnet.PublicSubnet.id
 	InstanceType = local.AppInstanceType
@@ -10,7 +10,7 @@ module "App" {
 }
 
 module "Agent1" {
-	source = "git::https://github.com/Keysight/terraform-aws-module-ixnetwork-agent.git?ref=26.0.0"
+	source = "git::https://github.com/Keysight/terraform-aws-module-ixnetwork-agent.git?ref=26.3.0"
 	Eth0PrivateIpAddress = local.Agent1Eth0PrivateIpAddress
 	Eth0SecurityGroupId = data.aws_security_group.PublicSecurityGroup.id
 	Eth0SubnetId = data.aws_subnet.PublicSubnet.id
@@ -29,7 +29,7 @@ module "Agent1" {
 }
 
 module "Agent2" {
-	source = "git::https://github.com/Keysight/terraform-aws-module-ixnetwork-agent.git?ref=26.0.0"
+	source = "git::https://github.com/Keysight/terraform-aws-module-ixnetwork-agent.git?ref=26.3.0"
 	Eth0PrivateIpAddress = local.Agent2Eth0PrivateIpAddress
 	Eth0SecurityGroupId = data.aws_security_group.PublicSecurityGroup.id
 	Eth0SubnetId = data.aws_subnet.PublicSubnet.id
