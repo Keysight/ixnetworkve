@@ -17,6 +17,7 @@ module "Agent1" {
 	Eth0SubnetId = module.Vpc.PublicSubnet.id
 	Eth1SecurityGroupId = module.Vpc.PrivateSecurityGroup.id
 	Eth1SubnetId = module.Vpc.Private1Subnet.id
+	InstanceId = local.Agent1InstanceId
 	Eth2SecurityGroupId = module.Vpc.PrivateSecurityGroup.id
 	Eth2SubnetId = module.Vpc.Private2Subnet.id
 	InstanceType = local.AgentInstanceType

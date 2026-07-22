@@ -1,5 +1,5 @@
 variable "AgentInstanceType" {
-	default = "c6in.xlarge"
+	default = "c5n.xlarge"
 	description = "Instance type of Agent VM"
 	type = string
 	validation {
@@ -49,6 +49,7 @@ variable "Private2SubnetAvailabilityZone" {
 
 variable "PublicSubnetAvailabilityZone" {
 	default = "us-east-1a"
+	description = "AZ id associated with the public subnet"
 	type = string
 }
 

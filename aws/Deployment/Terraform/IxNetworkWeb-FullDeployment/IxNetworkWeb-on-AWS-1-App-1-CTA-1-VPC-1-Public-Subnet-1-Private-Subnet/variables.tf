@@ -8,7 +8,7 @@ variable "AgentInstanceType" {
 		error_message = <<EOF
 AgentInstanceType must be one of the following types:
 	c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge,
-	c6in.xlarge, c6in.2xlarge, c6in.4xlarge, c6in.8xlarge, c6in.12xlarge, c6in.16xlarge, c6in.24xlarge, c6in.32xlarge,
+	c6in.xlarge, c6in.2xlarge, c6in.4xlarge, c6in.8xlarge, c6in.12xlarge, c6in.16xlarge, c6in.24xlarge, c6in.32xlarge
 		EOF
 	}
 }
@@ -44,6 +44,7 @@ variable "PrivateSubnetAvailabilityZone" {
 
 variable "PublicSubnetAvailabilityZone" {
 	default = "us-east-1a"
+	description = "AZ id associated with the public subnet"
 	type = string
 }
 

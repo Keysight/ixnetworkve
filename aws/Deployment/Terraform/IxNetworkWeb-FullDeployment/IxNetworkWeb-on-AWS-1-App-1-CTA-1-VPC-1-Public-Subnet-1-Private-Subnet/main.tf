@@ -20,6 +20,7 @@ module "Agent1" {
 	Eth2PrivateIpAddresses = local.Agent1Eth2PrivateIpAddresses
 	Eth2SecurityGroupId = module.Vpc.PrivateSecurityGroup.id
 	Eth2SubnetId = module.Vpc.PrivateSubnet.id
+	InstanceId = local.Agent1InstanceId
 	InstanceType = local.AgentInstanceType
 	PlacementGroupId = aws_placement_group.PlacementGroup.id
 	UserEmailTag = local.UserEmailTag

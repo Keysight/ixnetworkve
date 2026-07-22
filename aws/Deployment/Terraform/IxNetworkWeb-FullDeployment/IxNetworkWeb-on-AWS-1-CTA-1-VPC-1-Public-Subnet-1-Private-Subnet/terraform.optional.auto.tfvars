@@ -1,6 +1,6 @@
 # ApiMaxRetries = 1
-# AppInstanceType = "t3.xlarge"
-# InboundIPv4CidrBlocks = [ "1.1.1.1/32" ]
+# AppInstanceType = "c5n.2xlarge"
+# InboundIPv4CidrBlocks = [ "0.0.0.0/0" ]
 # PublicSubnetAvailabilityZone = "us-east-1a"
 # Region = "us-east-1"
 # UserEmailTag = "terraform@example.com"

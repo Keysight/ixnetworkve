@@ -1,8 +1,9 @@
 locals {
+	AgentVmSize = var.AgentVmSize
+	Agent1InstanceId = "agent1"
+	Agent1Eth2IpAddresses = [ "10.0.2.22", "10.0.2.23", "10.0.2.24", "10.0.2.25", "10.0.2.26", "10.0.2.27", "10.0.2.28", "10.0.2.29", "10.0.2.30", "10.0.2.31" ]
 	AppAdminUserName = var.AppAdminUserName
-	AppEth2IpAddresses = [ "10.0.2.22", "10.0.2.23", "10.0.2.24", "10.0.2.25", "10.0.2.26", "10.0.2.27", "10.0.2.28", "10.0.2.29", "10.0.2.30", "10.0.2.31" ]
 	AppTag = "ixnetwork"
-	AppVmSize = var.AppVmSize
 	Preamble = "${local.UserLoginTag}-${local.UserProjectTag}-${local.AppTag}"
 	PublicSecurityRuleSourceIpPrefixes = var.PublicSecurityRuleSourceIpPrefixes == null ? [ "${data.http.ip.response_body}/32" ] : var.PublicSecurityRuleSourceIpPrefixes
 	ResourceGroupLocation = var.ResourceGroupLocation
