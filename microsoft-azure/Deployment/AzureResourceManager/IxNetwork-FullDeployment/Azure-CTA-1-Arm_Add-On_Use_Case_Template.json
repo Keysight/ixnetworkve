@@ -49,7 +49,7 @@
 			"type": "Array"
 		},
 		"CloudTestApplianceVmSize": {
-			"defaultValue": "Standard_F4s_v2",
+			"defaultValue": "Standard_F8s_v2",
 			"type": "String",
 			"allowedValues": [
 				"Standard_F16s_v2",
@@ -530,7 +530,7 @@
             "apiVersion": "[variables('apiVersion')]",
             "location": "[resourceGroup().location]",
 			"plan": {
-				"name": "keysight-ixnetwork-virtual-edition-client-26-0-0",
+				"name": "keysight-ixnetwork-virtual-edition-client-26-3-0",
 				"product": "keysight-ixnetwork-virtual-edition",
 				"publisher": "keysight-technologies-ixvm"
 			},
@@ -554,8 +554,8 @@
 					"imageReference": {
 						"publisher": "keysight-technologies-ixvm",
 						"offer": "keysight-ixnetwork-virtual-edition",
-						"sku": "keysight-ixnetwork-virtual-edition-client-26-0-0",
-						"version": "26.0.6"
+						"sku": "keysight-ixnetwork-virtual-edition-client-26-3-0",
+						"version": "26.3.4"
 					},
 					"osDisk": {
                         "osType": "Windows",
@@ -588,7 +588,7 @@
             "apiVersion": "[variables('apiVersion')]",
             "location": "[resourceGroup().location]",
 			"plan": {
-				"name": "keysight-ixnetwork-cloud-test-appliance-26-0-0",
+				"name": "keysight-ixnetwork-cloud-test-appliance-26-3-0",
 				"product": "keysight-ixnetwork-virtual-edition",
 				"publisher": "keysight-technologies-ixvm"
 			},
@@ -607,8 +607,8 @@
 					"imageReference": {
 						"publisher": "keysight-technologies-ixvm",
 						"offer": "keysight-ixnetwork-virtual-edition",
-						"sku": "keysight-ixnetwork-cloud-test-appliance-26-0-0",
-						"version": "26.0.317"
+						"sku": "keysight-ixnetwork-cloud-test-appliance-26-3-0",
+						"version": "26.3.9"
 					},
                     "osDisk": {
                         "osType": "Linux",

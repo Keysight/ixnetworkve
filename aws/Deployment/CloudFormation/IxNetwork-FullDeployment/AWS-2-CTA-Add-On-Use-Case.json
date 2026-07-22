@@ -97,7 +97,7 @@
                 "INSTANCExEBSxDELETExONxTERMINATION": true,
                 "INSTANCExEBSxVOLUMExTYPE": "gp2",
                 "APPxTAG": "IXNETWORK",
-                "APPxVERSION": "26.0.0",
+                "APPxVERSION": "26.3.0",
                 "CLIENTxIMGxSIZE": "100"
             }
         }
@@ -1314,7 +1314,7 @@
                         "INSTANCExINSTANCExINITIATEDxSHUTDOWNxBEHAVIOR"
                     ]
                 },
-                "ImageId": "resolve:ssm:/aws/service/marketplace/prod-nqoib5holinoe/26.0",
+                "ImageId": "resolve:ssm:/aws/service/marketplace/prod-nqoib5holinoe/26.3.0",
                 "InstanceType": {
                     "Ref": "TestApplianceInstanceType"
                 },
@@ -1467,7 +1467,7 @@
                         "INSTANCExINSTANCExINITIATEDxSHUTDOWNxBEHAVIOR"
                     ]
                 },
-                "ImageId": "resolve:ssm:/aws/service/marketplace/prod-nqoib5holinoe/26.0.0",
+                "ImageId": "resolve:ssm:/aws/service/marketplace/prod-nqoib5holinoe/26.3.0",
                 "InstanceType": {
                     "Ref": "TestApplianceInstanceType"
                 },
@@ -1976,7 +1976,7 @@
         "IxClientAmiAlias": {
             "Description": "Ami Alias of Keysight Client VM",
             "Type": "String",
-            "Default": "/aws/service/marketplace/prod-v4qpodk5prgfg/26.0.0"
+            "Default": "/aws/service/marketplace/prod-v4qpodk5prgfg/26.3.0"
         },
         "VpcId": {
             "Description": "Virtual Private Cloud ID",

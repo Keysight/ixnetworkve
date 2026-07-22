@@ -10,7 +10,7 @@ We have 4 different folders:
 
 ### 🚀 Deployment
 
-Version **26.0.0** of IxNetwork Virtual Edition is available on the GCP Marketplace here:
+Version **26.3.0** of IxNetwork Virtual Edition is available on the GCP Marketplace here:
 
 - [Keysight IxNetwork Virtual Edition Marketplace](https://console.cloud.google.com/marketplace/product/keysight-public/keysight-ixnetwork-virtual-edition)
 

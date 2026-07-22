@@ -107,7 +107,7 @@
                 "INSTANCExEBSxDELETExONxTERMINATION": true,
                 "INSTANCExEBSxVOLUMExTYPE": "gp2",
                 "APPxTAG": "KEYSIGHT",
-                "APPxVERSION": "26.0.0",
+                "APPxVERSION": "26.3.0",
                 "TESTAPPLIANCE1xETH0xPRIVATExIPxADDRESS": "10.0.10.11",
                 "TESTAPPLIANCE1xETH1xPRIVATExIPxADDRESSES": "10.0.2.12|10.0.2.13|10.0.2.14|10.0.2.15|10.0.2.16|10.0.2.17|10.0.2.18|10.0.2.19|10.0.2.20|10.0.2.21",
                 "TESTAPPLIANCE2xETH0xPRIVATExIPxADDRESS": "10.0.10.12",
@@ -2665,7 +2665,7 @@
                         "INSTANCExINSTANCExINITIATEDxSHUTDOWNxBEHAVIOR"
                     ]
                 },
-                "ImageId": "resolve:ssm:/aws/service/marketplace/prod-nqoib5holinoe/26.0.0",
+                "ImageId": "resolve:ssm:/aws/service/marketplace/prod-nqoib5holinoe/26.3.0",
                 "InstanceType": {
                     "Ref": "TestApplianceInstanceType"
                 },
@@ -2818,7 +2818,7 @@
                         "INSTANCExINSTANCExINITIATEDxSHUTDOWNxBEHAVIOR"
                     ]
                 },
-                "ImageId": "resolve:ssm:/aws/service/marketplace/prod-nqoib5holinoe/26.0.0",
+                "ImageId": "resolve:ssm:/aws/service/marketplace/prod-nqoib5holinoe/26.3.0",
                 "InstanceType": {
                     "Ref": "TestApplianceInstanceType"
                 },

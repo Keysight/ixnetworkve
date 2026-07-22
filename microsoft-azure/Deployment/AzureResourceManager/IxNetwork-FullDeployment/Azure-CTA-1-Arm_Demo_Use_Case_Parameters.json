@@ -21,7 +21,7 @@
       "value": "strongPassword1234*"
     },
     "CloudTestApplianceVmSize": {
-      "value": "Standard_F4s_v2"
+      "value": "Standard_F8s_v2"
     },
     "OptionalVMPrefix": {
       "value": "VE"

@@ -576,7 +576,7 @@
             "apiVersion": "[variables('apiVersion')]",
             "location": "[resourceGroup().location]",
 			"plan": {
-				"name": "keysight-ixnetwork-virtual-edition-client-26-0-0",
+				"name": "keysight-ixnetwork-virtual-edition-client-26-3-0",
 				"product": "keysight-ixnetwork-virtual-edition",
 				"publisher": "keysight-technologies-ixvm"
 			},
@@ -600,8 +600,8 @@
 					"imageReference": {
 						"publisher": "keysight-technologies-ixvm",
 						"offer": "keysight-ixnetwork-virtual-edition",
-						"sku": "keysight-ixnetwork-virtual-edition-client-26-0-0",
-						"version": "26.0.6"
+						"sku": "keysight-ixnetwork-virtual-edition-client-26-3-0",
+						"version": "26.3.4"
 					},
 					"osDisk": {
                         "osType": "Windows",
@@ -634,7 +634,7 @@
             "apiVersion": "[variables('apiVersion')]",
             "location": "[resourceGroup().location]",
 			"plan": {
-				"name": "keysight-ixnetwork-virtual-test-appliance-26-0-0",
+				"name": "keysight-ixnetwork-virtual-test-appliance-26-3 -0",
 				"product": "keysight-ixnetwork-virtual-edition",
 				"publisher": "keysight-technologies-ixvm"
 			},
@@ -653,8 +653,8 @@
 					"imageReference": {
 						"publisher": "keysight-technologies-ixvm",
 						"offer": "keysight-ixnetwork-virtual-edition",
-						"sku": "keysight-ixnetwork-virtual-test-appliance-26-0-0",
-						"version": "26.0.317"
+						"sku": "keysight-ixnetwork-virtual-test-appliance-26-3-0",
+						"version": "26.3.512"
 					},
                     "osDisk": {
                         "osType": "Linux",

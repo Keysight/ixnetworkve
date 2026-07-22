@@ -1,32 +1,35 @@
-## <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Google_Cloud_logo.svg/1920px-Google_Cloud_logo.svg.png" alt="GCP Logo" width="150"/> Google Cloud Platform (GCP)
+## ![GCP Logo](https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Google_Cloud_logo.svg/1920px-Google_Cloud_logo.svg.png) Google Cloud Platform (GCP)
 
 ### 🚀 Deployment
 
-Version **26.0.0** of IxNetwork is available on the GCP Marketplace here:
+Version **26.3.0** of IxNetwork is available on the GCP Marketplace here:
 
 - [Keysight IxNetwork Virtual Edition Marketplace](https://console.cloud.google.com/marketplace/product/keysight-public/keysight-ixnetwork-virtual-edition)
 
-This product contains both the Virtual Client and Virtual / Cloud Test Appliance as part of the product subscription.
----
+## This product contains both the Virtual Client and Virtual / Cloud Test Appliance as part of the product subscription.
 
 #### 🔧 Prerequisites
 
 Before you begin, ensure you have the following:
+
 - **GCP Account**: An active GCP account with appropriate permissions.
 - **GCP CLI**: Installed and configured with your credentials. Install GCP CLI
 - **IxNetwork VE License**: Ensure you have a valid license for IxNetwork Virtual Edition.
+
 ---
 
 ### 📦 Deployment Manager Templates
 
 Located in `google-cloud-platform/Deployment/DeploymentManager/IxNetwork-FullDeployment` and `google-cloud-platform/Deployment/DeploymentManager/IxNetwork-TestApplianceOnly`, these JINJA templates are organized into:
 
-  - **Demo Use Case**: Full deployment including networking, security groups, etc.
+- **Demo Use Case**: Full deployment including networking, security groups, etc.
+
 ---
 
 #### 🧪 Example #1: Deploying a Demo Use Case Template with one IxNetwork VE Client and one Virtual / Cloud Test Appliance
 
 **Resources Created:**
+
 - 1x IxNetwork VE Client
 - 1x Virtual / Cloud Test Appliance
 - A dedicated VPC network
@@ -34,6 +37,7 @@ Located in `google-cloud-platform/Deployment/DeploymentManager/IxNetwork-FullDep
 - External IP address (optional)
 
 **Parameters (via schema):**
+
 - `project_id`: GCP project where resources will be deployed
 - `region`: GCP region for the deployment
 - `zone`: GCP zone for the VM instance
@@ -56,7 +60,7 @@ Located in `google-cloud-platform/Deployment/DeploymentManager/IxNetwork-FullDep
 gcloud deployment-manager deployments create GCP-1-VTA-Demo-Use-Case --template GCP-1-VTA-Demo-Use-Case.jinja
 ```
 
-or in case you'd like to use the **Cloud Test Appliance**: 
+or in case you'd like to use the **Cloud Test Appliance**:
 
 ```bash
 gcloud deployment-manager deployments create GCP-1-CTA-Demo-Use-Case --template GCP-1-CTA-Demo-Use-Case.jinja
@@ -65,6 +69,7 @@ gcloud deployment-manager deployments create GCP-1-CTA-Demo-Use-Case --template 
 #### 🧪 Example #2: Deploying a Demo Use Case Template with one IxNetwork VE Client and two Virtual / Cloud Test Appliances
 
 **Resources Created:**
+
 - 1x IxNetwork VE Client
 - 2x Virtual / Cloud Test Appliances
 - A dedicated VPC network
@@ -72,6 +77,7 @@ gcloud deployment-manager deployments create GCP-1-CTA-Demo-Use-Case --template 
 - External IP addresses (optional)
 
 **Parameters (via schema):**
+
 - `project_id`: GCP project where resources will be deployed
 - `region`: GCP region for the deployment
 - `zone`: GCP zone for the VM instances
@@ -96,7 +102,7 @@ gcloud deployment-manager deployments create GCP-1-CTA-Demo-Use-Case --template 
 gcloud deployment-manager deployments create GCP-2-VTA-Demo-Use-Case --template GCP-2-VTA-Demo-Use-Case.jinja
 ```
 
-or in case you'd like to use the **Cloud Test Appliance**: 
+or in case you'd like to use the **Cloud Test Appliance**:
 
 ```bash
 gcloud deployment-manager deployments create GCP-2-CTA-Demo-Use-Case --template GCP-2-CTA-Demo-Use-Case.jinja
@@ -105,12 +111,14 @@ gcloud deployment-manager deployments create GCP-2-CTA-Demo-Use-Case --template 
 #### 🧪 Example #3: Deploying a Demo Use Case Template with one Virtual / Cloud Test Appliance
 
 **Resources Created:**
+
 - 1x Virtual / Cloud Test Appliance
 - A dedicated VPC network
 - Subnet and firewall rules for SSH and test traffic
 - External IP address (optional)
 
 **Parameters (via schema):**
+
 - `project_id`: GCP project where resources will be deployed
 - `region`: GCP region for the deployment
 - `zone`: GCP zone for the VM instance
@@ -133,7 +141,7 @@ gcloud deployment-manager deployments create GCP-2-CTA-Demo-Use-Case --template 
 gcloud deployment-manager deployments create GCP-1-VTA-Demo-Use-Case --template GCP-1-VTA-Demo-Use-Case.jinja
 ```
 
-or in case you'd like to use the **Cloud Test Appliance**: 
+or in case you'd like to use the **Cloud Test Appliance**:
 
 ```bash
 gcloud deployment-manager deployments create GCP-1-CTA-Demo-Use-Case --template GCP-1-CTA-Demo-Use-Case.jinja
@@ -142,12 +150,14 @@ gcloud deployment-manager deployments create GCP-1-CTA-Demo-Use-Case --template 
 #### 🧪 Example #4: Deploying a Demo Use Case Template and two Virtual / Cloud Test Appliances
 
 **Resources Created:**
+
 - 2x Virtual / Cloud Test Appliances
 - A dedicated VPC network
 - Subnet and firewall rules for SSH and test traffic
 - External IP addresses (optional)
 
 **Parameters (via schema):**
+
 - `project_id`: GCP project where resources will be deployed
 - `region`: GCP region for the deployment
 - `zone`: GCP zone for the VM instances
@@ -171,7 +181,7 @@ gcloud deployment-manager deployments create GCP-1-CTA-Demo-Use-Case --template 
 gcloud deployment-manager deployments create GCP-2-VTA-Demo-Use-Case --template GCP-2-VTA-Demo-Use-Case.jinja
 ```
 
-or in case you'd like to use the **Cloud Test Appliance**: 
+or in case you'd like to use the **Cloud Test Appliance**:
 
 ```bash
 gcloud deployment-manager deployments create GCP-2-CTA-Demo-Use-Case --template GCP-2-CTA-Demo-Use-Case.jinja

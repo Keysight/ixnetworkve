@@ -97,7 +97,7 @@
                 "INSTANCExEBSxDELETExONxTERMINATION": true,
                 "INSTANCExEBSxVOLUMExTYPE": "gp2",
                 "APPxTAG": "KEYSIGHT",
-                "APPxVERSION": "26.0.0"
+                "APPxVERSION": "26.3.0"
             }
         }
     },
@@ -776,7 +776,7 @@
                         "INSTANCExINSTANCExINITIATEDxSHUTDOWNxBEHAVIOR"
                     ]
                 },
-                "ImageId": "resolve:ssm:/aws/service/marketplace/prod-7br5el7ykbm2g/26.0.0",
+                "ImageId": "resolve:ssm:/aws/service/marketplace/prod-7br5el7ykbm2g/26.3.0",
                 "InstanceType": {
                     "Ref": "TestApplianceInstanceType"
                 },
