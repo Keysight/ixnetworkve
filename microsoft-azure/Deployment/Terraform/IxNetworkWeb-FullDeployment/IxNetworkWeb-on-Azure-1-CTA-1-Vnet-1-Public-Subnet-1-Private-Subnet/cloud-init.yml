@@ -1,0 +1,6 @@
+#cloud-config
+runcmd:
+  - echo yes | sudo -u admin /opt/ixia/web/platform/cli/ixiash -c "install-ixnetworkweb"
+  - sudo -u admin /opt/ixia/web/platform/cli/ixiash -c "show welcome-screen"
+output:
+  all: "| tee -a /var/log/terraform-cloud-init-output.log"
