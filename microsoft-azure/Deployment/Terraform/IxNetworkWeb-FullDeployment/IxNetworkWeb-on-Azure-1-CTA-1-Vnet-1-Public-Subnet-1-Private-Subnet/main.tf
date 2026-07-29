@@ -7,11 +7,13 @@ module "Agent1" {
 	InstanceId = local.Agent1InstanceId
 	ResourceGroupLocation = azurerm_resource_group.ResourceGroup.location
 	ResourceGroupName = azurerm_resource_group.ResourceGroup.name
+	SleepDelay = local.SleepDelay
 	SshKeyName = azurerm_ssh_public_key.SshKey.name
 	UserEmailTag = local.UserEmailTag
 	UserLoginTag = local.UserLoginTag
 	UserProjectTag = local.UserProjectTag
 	VmSize = local.AgentVmSize
+	init_cli = data.cloudinit_config.init_cli.rendered
 	depends_on = [
 		azurerm_ssh_public_key.SshKey,
 		module.Vnet

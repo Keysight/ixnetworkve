@@ -9,7 +9,7 @@ TF_FLAGS := -auto-approve
 
 azure: all
 
-all: init apply ssh
+all: init apply ssh output
 
 clean: state destroy
 
@@ -53,3 +53,14 @@ ssh:
 state:
 	@echo "=== $(TF) state ==="
 	$(TF) state list
+
+connect: connect-app
+
+connect-app:
+	ssh -o StrictHostKeyChecking=no -i .sshkey.pem ixia@$$(terraform output -json App | jq -r .public_ip_address)
+
+connect-agent1:
+	ssh -o StrictHostKeyChecking=no -i .sshkey.pem ixia@$$(terraform output -json Agent1 | jq -r .public_ip_address)
+
+connect-agent2:
+	ssh -o StrictHostKeyChecking=no -i .sshkey.pem ixia@$$(terraform output -json Agent2 | jq -r .public_ip_address)
