@@ -9,7 +9,7 @@ TF_FLAGS := -auto-approve
 
 aws: install all
 
-all: init apply output
+all: apply output
 
 clean: state destroy
 
@@ -53,11 +53,6 @@ destroy:
 output:
 	@echo "=== $(TF) output ==="
 	$(TF) output
-
-ssh:
-	@echo "=== $(TF) ssh ==="
-	$(TF) output SshKey | tail -n +3 | head -n-3 | sed "s/^[ \t]*//" > .sshkey.pem
-	chmod 400 .sshkey.pem
 
 state:
 	@echo "=== $(TF) state ==="

@@ -9,7 +9,7 @@ TF_FLAGS := -auto-approve
 
 aws: install all
 
-all: init apply output
+all: apply output
 
 clean: state destroy
 
@@ -53,6 +53,7 @@ destroy:
 output:
 	@echo "=== $(TF) output ==="
 	$(TF) output
+
 state:
 	@echo "=== $(TF) state ==="
 	$(TF) state list

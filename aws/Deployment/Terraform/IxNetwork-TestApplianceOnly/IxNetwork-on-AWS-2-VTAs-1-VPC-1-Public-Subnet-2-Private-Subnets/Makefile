@@ -9,7 +9,7 @@ TF_FLAGS := -auto-approve
 
 aws: install all
 
-all: init apply output
+all: apply output
 
 clean: state destroy
 
