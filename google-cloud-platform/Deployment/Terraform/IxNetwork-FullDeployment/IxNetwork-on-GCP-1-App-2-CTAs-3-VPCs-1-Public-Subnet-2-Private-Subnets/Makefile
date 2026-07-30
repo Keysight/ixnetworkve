@@ -9,7 +9,7 @@ TF_FLAGS := -auto-approve
 
 gcp: all
 
-all: init apply output
+all: init apply
 
 clean: state destroy
 
@@ -48,3 +48,11 @@ output:
 state:
 	@echo "=== $(TF) state ==="
 	$(TF) state list
+
+connect-agent1:
+	chmod +x ./CloudShell/connect.sh
+	./CloudShell/connect.sh -n $$(terraform output -json Agent1 | jq -r .name) -z $$(terraform output -json Agent1 | jq -r .zone) -p $$(terraform output -json Agent1 | jq -r .project)
+
+connect-agent2:
+	chmod +x ./CloudShell/connect.sh
+	./CloudShell/connect.sh -n $$(terraform output -json Agent2 | jq -r .name) -z $$(terraform output -json Agent2 | jq -r .zone) -p $$(terraform output -json Agent2 | jq -r .project)

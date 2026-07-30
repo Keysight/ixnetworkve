@@ -9,7 +9,7 @@ TF_FLAGS := -auto-approve
 
 gcp: all
 
-all: init apply output
+all: init apply
 
 clean: state destroy
 

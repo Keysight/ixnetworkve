@@ -9,7 +9,7 @@ TF_FLAGS := -auto-approve
 
 gcp: all
 
-all: init apply output
+all: init apply
 
 clean: state destroy
 
@@ -45,17 +45,14 @@ output:
 	@echo "=== $(TF) output ==="
 	$(TF) output
 
-ssh:
-	@echo "=== $(TF) ssh ==="
-	$(TF) output SshKey | tail -n +3 | head -n-3 | sed "s/^[ \t]*//" > .sshkey.pem
-	chmod 400 .sshkey.pem
-
 state:
 	@echo "=== $(TF) state ==="
 	$(TF) state list
 
 connect-agent1:
-	ssh -o StrictHostKeyChecking=no -i .sshkey.pem ixia@$$(terraform output -json Agent1 | jq -r .public_ip_address)
+	chmod +x ./CloudShell/connect.sh
+	./CloudShell/connect.sh -n $$(terraform output -json Agent1 | jq -r .name) -z $$(terraform output -json Agent1 | jq -r .zone) -p $$(terraform output -json Agent1 | jq -r .project)
 
 connect-agent2:
-	ssh -o StrictHostKeyChecking=no -i .sshkey.pem ixia@$$(terraform output -json Agent2 | jq -r .public_ip_address)
+	chmod +x ./CloudShell/connect.sh
+	./CloudShell/connect.sh -n $$(terraform output -json Agent2 | jq -r .name) -z $$(terraform output -json Agent2 | jq -r .zone) -p $$(terraform output -json Agent2 | jq -r .project)
