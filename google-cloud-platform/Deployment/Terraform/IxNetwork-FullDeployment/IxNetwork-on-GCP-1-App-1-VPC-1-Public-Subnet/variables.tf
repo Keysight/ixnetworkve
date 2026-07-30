@@ -7,7 +7,7 @@ variable "AppMachineType" {
 		error_message = <<EOF
 AppMachineType must be one of the following types:
 	n1-standard-4, n1-standard-8
-EOF
+		EOF
 	}
 }
 
